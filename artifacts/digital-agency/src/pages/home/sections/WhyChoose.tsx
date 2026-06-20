@@ -6,18 +6,7 @@ export default function WhyChoose() {
     <section id="why-zystra" className="py-24 sm:py-32 bg-slate-50/50 relative">
       <div className="container mx-auto px-6 max-w-7xl relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 sm:gap-20 items-center">
-          {/* Left Column: Heading and Subtext */}
-          <div className="lg:col-span-4 flex flex-col items-start">
-            <h2 className="text-3xl sm:text-5xl font-serif font-black text-slate-900 mb-6 leading-tight tracking-tight">
-              Why Businesses <span className="bg-gradient-to-r from-brand-vibrant via-brand-medium to-[#33015a] bg-clip-text text-transparent">Everywhere</span> Choose Zystra
-            </h2>
-            
-            <p className="text-slate-600 text-base sm:text-[17px] leading-relaxed font-normal border-l-2 border-brand-vibrant/30 pl-4 py-1">
-              The digital landscape is crowded, noisy, and competitive. Most businesses struggle to stand out — not because their products are weak, but because their digital presence is. <span className="font-semibold text-slate-900">Zystra was built to solve exactly that problem.</span>
-            </p>
-          </div>
-
-          {/* Right Column: Creative Hanging Tags */}
+          {/* Left Column: Creative Hanging Tags */}
           <div className="lg:col-span-8 flex flex-col">
             <h3 className="text-xl sm:text-2xl font-serif font-extrabold text-slate-900 tracking-tight mb-2 select-none">
               Our Core Values <span className="bg-gradient-to-r from-brand-vibrant to-brand-medium bg-clip-text text-transparent">That Drive Every Campaign</span>
@@ -59,17 +48,17 @@ export default function WhyChoose() {
                       {/* Badge */}
                       <div className="my-2.5 px-4 py-1.5 bg-brand-vibrant text-white font-mono text-[10px] font-black rounded-md tracking-wider shadow-sm uppercase">
                         100% CLEAR
-                    </div>
+                      </div>
 
                       <p className="text-slate-600 text-[11px] sm:text-xs leading-relaxed font-sans mt-2">
                         You always know where your budget is going. We provide clear, jargon-free reporting that shows real metrics.
-                    </p>
+                      </p>
                     </div>
 
                     {/* Bottom bar */}
                     <div className="w-full bg-brand-medium text-white text-[9px] font-mono font-bold py-3 uppercase tracking-widest rounded-b-2xl">
                       [ NO VANITY METRICS ]
-                  </div>
+                    </div>
                   </div>
                 </div>
 
@@ -163,6 +152,17 @@ export default function WhyChoose() {
 
               </div>
             </div>
+          </div>
+
+          {/* Right Column: Heading and Subtext */}
+          <div className="lg:col-span-4 flex flex-col items-start">
+            <h2 className="text-3xl sm:text-5xl font-serif font-black text-slate-900 mb-6 leading-tight tracking-tight">
+              Why Businesses <span className="bg-gradient-to-r from-brand-vibrant via-brand-medium to-[#33015a] bg-clip-text text-transparent">Everywhere</span> Choose Zystra
+            </h2>
+            
+            <p className="text-slate-650 text-base sm:text-[17px] leading-relaxed font-normal border-l-2 border-brand-vibrant/30 pl-4 py-1">
+              The digital landscape is crowded, noisy, and competitive. Most businesses struggle to stand out — not because their products are weak, but because their digital presence is. <span className="font-semibold text-slate-900">Zystra was built to solve exactly that problem.</span>
+            </p>
           </div>
         </div>
       </div>
