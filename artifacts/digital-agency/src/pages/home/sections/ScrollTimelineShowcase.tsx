@@ -84,7 +84,7 @@ export default function ScrollTimelineShowcase() {
   // 3D Math for Carousel Cards
   const getCardTransform = (progress: number, index: number) => {
     const start = 0.50;
-    const end = 0.85;
+    const end = 0.92;
 
     // Normalized carousel rotation progress (0 to 1)
     let t = 0;
@@ -136,9 +136,9 @@ export default function ScrollTimelineShowcase() {
       // Fade in carousel as it slides into center frame
       const fadeInFactor = (progress - 0.40) / (start - 0.40);
       opacity = opacity * fadeInFactor;
-    } else if (progress > 0.85) {
-      // Fade out carousel completely from 0.85 to 0.92
-      const fadeOutFactor = Math.max(0, 1 - (progress - 0.85) / (0.92 - 0.85));
+    } else if (progress > 0.94) {
+      // Fade out carousel completely from 0.94 to 1.0
+      const fadeOutFactor = Math.max(0, 1 - (progress - 0.94) / (1.0 - 0.94));
       opacity = opacity * fadeOutFactor;
     }
 
@@ -174,17 +174,17 @@ export default function ScrollTimelineShowcase() {
 
   // Captions Transitions mapping to scrollProgress
   const captionOpacity0 = useTransform(smoothProgress, [0.0, 0.20, 0.40], [1, 0, 0]);
-  const captionOpacity1 = useTransform(smoothProgress, [0.45, 0.49, 0.55, 0.58], [0, 1, 1, 0]);
-  const captionOpacity2 = useTransform(smoothProgress, [0.58, 0.61, 0.67, 0.70], [0, 1, 1, 0]);
-  const captionOpacity3 = useTransform(smoothProgress, [0.70, 0.73, 0.79, 0.82], [0, 1, 1, 0]);
-  const captionOpacity4 = useTransform(smoothProgress, [0.82, 0.85, 0.91, 0.94], [0, 1, 1, 0]);
+  const captionOpacity1 = useTransform(smoothProgress, [0.45, 0.49, 0.58, 0.61], [0, 1, 1, 0]);
+  const captionOpacity2 = useTransform(smoothProgress, [0.58, 0.61, 0.72, 0.75], [0, 1, 1, 0]);
+  const captionOpacity3 = useTransform(smoothProgress, [0.72, 0.75, 0.86, 0.89], [0, 1, 1, 0]);
+  const captionOpacity4 = useTransform(smoothProgress, [0.86, 0.89, 0.99, 1.0], [0, 1, 1, 0]);
 
   // Metric updates tied to scroll
   const reachVal = useTransform(smoothProgress, [0.0, 0.32], [18450, 1400000]);
   const convVal = useTransform(smoothProgress, [0.0, 0.32], [1.4, 19.2]);
 
   return (
-    <section id="showcase" ref={containerRef} className="relative h-[450vh] bg-transparent">
+    <section id="showcase" ref={containerRef} className="relative h-[280vh] bg-transparent">
       <div className="sticky top-0 h-screen w-full flex flex-col justify-center items-center overflow-hidden">
         {/* Soft Radial Gradients */}
         <div className="absolute inset-0 opacity-40 pointer-events-none">

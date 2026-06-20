@@ -3,95 +3,136 @@ import { motion } from "framer-motion";
 import { Cpu, Award, Layers, Gift, Shield, MessageCircle } from "lucide-react";
 
 export default function WhatWeDo() {
+  const [isDesktop, setIsDesktop] = React.useState(false);
+  const [animatedCards, setAnimatedCards] = React.useState<Record<number, boolean>>({});
+
+  React.useEffect(() => {
+    const media = window.matchMedia("(min-width: 768px)");
+    setIsDesktop(media.matches);
+    const listener = (e: MediaQueryListEvent) => setIsDesktop(e.matches);
+    media.addEventListener("change", listener);
+    return () => media.removeEventListener("change", listener);
+  }, []);
+
   const differentiators = [
     {
       title: "AI-Powered Strategy",
       value: "24/7 AI-Powered Campaign Optimization",
-      icon: <Cpu className="w-5 h-5 text-rose-600" />,
+      icon: Cpu,
       desc: "We use artificial intelligence tools to analyse your market, track competitor moves, and optimise campaigns in real time — so every rupee you spend works harder.",
       logoText: "zystra ai",
       badges: ["AI ENGINE", "REAL-TIME"],
       bannerText: "OPTIMIZED 24/7",
-      bannerClass: "bg-rose-50 text-rose-600 border-t border-rose-100/50",
-      borderClass: "border-rose-100 hover:border-rose-300",
-      badgeClasses: "bg-rose-50/60 text-rose-600 border-rose-100",
-      rotation: "md:rotate-[-6deg]",
-      positionClass: "md:absolute md:top-[2%] md:left-[16%] md:w-[350px] z-30"
+      bgColor: "#ffffff",
+      titleColor: "text-slate-900",
+      valueColor: "text-slate-500",
+      textColor: "text-slate-800",
+      iconBg: "bg-slate-50 border-slate-100",
+      iconColor: "text-brand-vibrant",
+      badgeBg: "bg-brand-vibrant/10 text-brand-vibrant border-brand-vibrant/20",
+      footerColor: "text-brand-vibrant",
+      rotate: -2,
+      positionClass: "md:absolute md:top-[79px] md:left-[2%] md:w-[160px] md:h-[230px] z-10"
     },
     {
       title: "Local Insight, National Quality",
       value: "100% Eastern India Direct Market Insight",
-      icon: <Award className="w-5 h-5 text-amber-600" />,
+      icon: Award,
       desc: "We understand the Bihar and Eastern India market like no metro agency can. We combine that local insight with national-grade creative and technical execution.",
       logoText: "zystra east",
       badges: ["LOCAL MARKET", "EAST INDIA"],
       bannerText: "EAST INDIA REACH",
-      bannerClass: "bg-amber-50/70 text-amber-700 border-t border-amber-100/50",
-      borderClass: "border-amber-100 hover:border-amber-300",
-      badgeClasses: "bg-amber-50/60 text-amber-700 border-amber-100",
-      rotation: "md:rotate-[5deg]",
-      positionClass: "md:absolute md:top-[0%] md:left-[38%] md:w-[350px] z-10"
+      bgColor: "#33015a",
+      titleColor: "text-white",
+      valueColor: "text-white/80",
+      textColor: "text-white/90",
+      iconBg: "bg-white/10 border-white/10",
+      iconColor: "text-white",
+      badgeBg: "bg-white/10 text-white border-white/10",
+      footerColor: "text-white/90",
+      rotate: 1.5,
+      positionClass: "md:absolute md:top-[93px] md:left-[18%] md:w-[160px] md:h-[230px] z-10"
     },
     {
       title: "Full-Stack, One Roof",
       value: "Unified SEO, PPC, Web & Video Dev",
-      icon: <Layers className="w-5 h-5 text-purple-600" />,
+      icon: Layers,
       desc: "SEO, Meta Ads, Google PPC, Web Design, Video Production, Branding, App Development — everything under one agency. No juggling multiple vendors. No miscommunication.",
       logoText: "zystra dev",
       badges: ["SEO & ADS", "WEB & APPS"],
       bannerText: "100% UNIFIED",
-      bannerClass: "bg-purple-50 text-purple-600 border-t border-purple-100/50",
-      borderClass: "border-purple-100 hover:border-purple-300",
-      badgeClasses: "bg-purple-50/60 text-purple-600 border-purple-100",
-      rotation: "md:rotate-[-3deg]",
-      positionClass: "md:absolute md:top-[14%] md:left-[45%] md:w-[350px] z-20"
+      bgColor: "#6e019c",
+      titleColor: "text-white",
+      valueColor: "text-white/80",
+      textColor: "text-white/90",
+      iconBg: "bg-white/10 border-white/10",
+      iconColor: "text-white",
+      badgeBg: "bg-white/10 text-white border-white/10",
+      footerColor: "text-white/90",
+      rotate: -1,
+      positionClass: "md:absolute md:top-[102px] md:left-[34%] md:w-[160px] md:h-[230px] z-10"
     },
     {
       title: "Experience Before You Pay",
       value: "Free Initial Audit & Digital Review",
-      icon: <Gift className="w-5 h-5 text-sky-600" />,
+      icon: Gift,
       desc: "We believe in earning your trust first. That's why we offer a review of your current digital presence before you commit — completely free.",
       logoText: "zystra trust",
       badges: ["FREE AUDIT", "ZERO RISK"],
       bannerText: "TRUST FIRST",
-      bannerClass: "bg-sky-50 text-sky-600 border-t border-sky-100/50",
-      borderClass: "border-sky-100 hover:border-sky-300",
-      badgeClasses: "bg-sky-50/60 text-sky-600 border-sky-100",
-      rotation: "md:rotate-[4deg]",
-      positionClass: "md:absolute md:top-[28%] md:left-[24%] md:w-[350px] z-45"
+      bgColor: "#ffffff",
+      titleColor: "text-slate-900",
+      valueColor: "text-slate-500",
+      textColor: "text-slate-800",
+      iconBg: "bg-slate-50 border-slate-100",
+      iconColor: "text-brand-medium",
+      badgeBg: "bg-brand-medium/10 text-brand-medium border-brand-medium/20",
+      footerColor: "text-brand-medium",
+      rotate: 2,
+      positionClass: "md:absolute md:top-[105px] md:left-[50%] md:w-[160px] md:h-[230px] z-10"
     },
     {
       title: "Flexible Partnerships",
       value: "No Long-Term Contracts. Cancel Anytime.",
-      icon: <Shield className="w-5 h-5 text-emerald-600" />,
+      icon: Shield,
       desc: "We align with your business goals instead of locking you down. Enjoy flexibility with our simple month-to-month contracts and transparent performance reports.",
       logoText: "zystra flex",
       badges: ["NO LOCK-INS", "MONTHLY"],
       bannerText: "CLIENT-FIRST SYSTEM",
-      bannerClass: "bg-emerald-50 text-emerald-600 border-t border-emerald-100/50",
-      borderClass: "border-emerald-100 hover:border-emerald-300",
-      badgeClasses: "bg-emerald-50/60 text-emerald-655 border-emerald-100",
-      rotation: "md:rotate-[-5deg]",
-      positionClass: "md:absolute md:top-[42%] md:left-[10%] md:w-[350px] z-15"
+      bgColor: "#561d9a",
+      titleColor: "text-white",
+      valueColor: "text-white/80",
+      textColor: "text-white/90",
+      iconBg: "bg-white/10 border-white/10",
+      iconColor: "text-white",
+      badgeBg: "bg-white/10 text-white border-white/10",
+      footerColor: "text-white/90",
+      rotate: -1.5,
+      positionClass: "md:absolute md:top-[102px] md:left-[66%] md:w-[160px] md:h-[230px] z-10"
     },
     {
       title: "Direct Expert Access",
       value: "Zero Middlemen. Talk to Creators Directly.",
-      icon: <MessageCircle className="w-5 h-5 text-indigo-600" />,
+      icon: MessageCircle,
       desc: "No sales representatives or account managers getting in the way. Work directly with the developers, marketers, and designers executing your vision.",
       logoText: "zystra core",
       badges: ["DIRECT TALK", "EXPERT ONLY"],
       bannerText: "ZERO FRUSTRATION",
-      bannerClass: "bg-indigo-50 text-indigo-600 border-t border-indigo-100/50",
-      borderClass: "border-indigo-100 hover:border-indigo-300",
-      badgeClasses: "bg-indigo-50/60 text-indigo-600 border-indigo-100",
-      rotation: "md:rotate-[3deg]",
-      positionClass: "md:absolute md:top-[38%] md:left-[39%] md:w-[350px] z-25"
+      bgColor: "#000000",
+      titleColor: "text-white",
+      valueColor: "text-white/80",
+      textColor: "text-white/90",
+      iconBg: "bg-white/10 border-white/10",
+      iconColor: "text-white",
+      badgeBg: "bg-white/10 text-white border-white/10",
+      footerColor: "text-white/90",
+      rotate: 1,
+      positionClass: "md:absolute md:top-[93px] md:left-[82%] md:w-[160px] md:h-[230px] z-10"
     }
   ];
 
   return (
-    <section id="why-choose" className="py-28 sm:py-36 bg-white text-slate-900 relative overflow-hidden">
+    <section id="why-choose" className="pt-28 pb-12 sm:pt-36 sm:pb-16 bg-white text-slate-900 relative overflow-hidden">
       {/* Background Gradients & Glows */}
       <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-purple-50/40 rounded-full blur-[140px] pointer-events-none" />
       <div className="absolute bottom-0 right-1/4 w-[700px] h-[700px] bg-pink-50/35 rounded-full blur-[160px] pointer-events-none" />
@@ -151,7 +192,7 @@ export default function WhatWeDo() {
               <h2 className="text-4xl sm:text-5xl lg:text-[84px] lg:leading-[0.98] font-serif font-black text-slate-900 tracking-tight">
                 We Are Not <br />
                 Your Typical <br />
-                <span className="bg-gradient-to-r from-brand-vibrant via-[#8d00cb] to-brand-medium bg-clip-text text-transparent drop-shadow-xs">
+                <span className="bg-gradient-to-r from-brand-vibrant via-brand-medium to-brand-dark bg-clip-text text-transparent drop-shadow-xs">
                   Digital Marketing Agency
                 </span>
               </h2>
@@ -173,7 +214,7 @@ export default function WhatWeDo() {
               <div className="relative w-[42%] h-full bg-slate-50 flex items-center justify-center overflow-hidden border-r border-slate-100">
                 {/* Diagonal Purple/Vibrant background polygon */}
                 <div 
-                  className="absolute top-0 left-0 w-full h-[65%] bg-gradient-to-br from-[#8d00cb] to-brand-vibrant origin-top-left"
+                  className="absolute top-0 left-0 w-full h-[65%] bg-gradient-to-br from-brand-medium to-brand-vibrant origin-top-left"
                   style={{ clipPath: "polygon(0 0, 100% 0, 75% 100%, 0 75%)" }}
                 />
                 {/* Diagonal Accent Purple polygon */}
@@ -223,7 +264,7 @@ export default function WhatWeDo() {
               <div className="relative w-[42%] h-full bg-slate-50 flex flex-col justify-end p-5 overflow-hidden border-r border-slate-100">
                 {/* Diagonal Purple/Vibrant background polygon */}
                 <div 
-                  className="absolute top-0 left-0 w-full h-[55%] bg-gradient-to-br from-[#8d00cb] to-brand-vibrant origin-top-left"
+                  className="absolute top-0 left-0 w-full h-[55%] bg-gradient-to-br from-brand-medium to-brand-vibrant origin-top-left"
                   style={{ clipPath: "polygon(0 0, 80% 0, 100% 100%, 0 100%)" }}
                 />
                 {/* Diagonal Accent Dark Purple polygon */}
@@ -266,7 +307,7 @@ export default function WhatWeDo() {
               <path d="M -20 120 Q 90 140 180 90 T 360 160 T 540 115 T 640 145" stroke="white" strokeWidth="2" strokeLinecap="round" />
               
               {/* Brand-vibrant wave line on left */}
-              <path d="M 40 155 Q 65 145 90 155 T 140 155" stroke="#8d00cb" strokeWidth="2" strokeLinecap="round" />
+              <path d="M 40 155 Q 65 145 90 155 T 140 155" stroke="#6e019c" strokeWidth="2" strokeLinecap="round" />
               
               {/* Left arrowhead elements */}
               <path d="M 160 100 L 175 100 M 175 100 L 175 115" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -276,17 +317,17 @@ export default function WhatWeDo() {
               <path d="M 520 135 L 535 135 M 535 135 L 535 150" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
               <path d="M 535 135 L 510 160" stroke="white" strokeWidth="2" strokeLinecap="round" />
             </svg>
-
+ 
             {/* Left side purple/grey circle */}
             <div className="absolute left-[15%] bottom-[18%] w-11 h-11 rounded-full bg-slate-500/20 backdrop-blur-xs border border-white/10 z-0" />
             {/* Small brand-vibrant dot near it */}
-            <div className="absolute left-[11%] bottom-[24%] w-3 h-3 rounded-full bg-[#8d00cb] z-10" />
-
+            <div className="absolute left-[11%] bottom-[24%] w-3 h-3 rounded-full bg-[#6e019c] z-10" />
+ 
             {/* Right side thick brand-vibrant accent capsule */}
             <div className="absolute right-[12%] top-1/2 -translate-y-1/2 translate-x-1/2 w-[14px] h-[72px] bg-brand-vibrant rounded-full rotate-[12deg] z-20 shadow-md shadow-brand-vibrant/20" />
-
+ 
             {/* Bottom right overlapping purple circle */}
-            <div className="absolute right-[18%] bottom-[8%] translate-x-1/2 translate-y-1/2 w-14 h-14 rounded-full bg-[#8d00cb] border-2 border-white/30 z-20" />
+            <div className="absolute right-[18%] bottom-[8%] translate-x-1/2 translate-y-1/2 w-14 h-14 rounded-full bg-[#6e019c] border-2 border-white/30 z-20" />
 
             {/* Inner square box framing the text (no background fill) */}
             <div className="border-2 border-white/90 p-8 sm:p-10 rounded-none relative z-10 flex items-center justify-center min-h-[140px]">
@@ -298,58 +339,129 @@ export default function WhatWeDo() {
         </div>
 
         {/* Section 2: Differentiators (Mockup Stack Style) */}
-        <div className="p-8 sm:p-12 lg:p-16 rounded-[40px] bg-gradient-to-tr from-[#f0ebff] via-[#f5f3ff] to-[#eef2ff] border border-indigo-150/40 shadow-inner mt-24">
+        <div className="p-8 sm:p-12 lg:p-16 rounded-[40px] bg-brand-medium/[0.08] border border-brand-medium/10 shadow-[inset_0_4px_12px_rgba(0,0,0,0.03),_0_20px_40px_rgba(86,29,154,0.12)] mt-24 relative overflow-hidden">
           <div className="text-center mb-16 max-w-2xl mx-auto">
-            <h3 className="text-3xl sm:text-5xl font-sans font-black text-[#1e1b4b] tracking-tight mb-4">What Makes Zystra Different</h3>
-            <p className="text-slate-650 text-sm sm:text-base font-medium">We combine modern automation with hyper-local insight to deliver national-grade results.</p>
+            <h3 className="text-3xl sm:text-5xl font-sans font-black text-slate-950 tracking-tight mb-4">What Makes Zystra Different</h3>
+            <p className="text-slate-800/90 text-sm sm:text-base font-semibold">We combine modern automation with hyper-local insight to deliver national-grade results.</p>
           </div>
 
-          <div className="relative w-full max-w-[800px] mx-auto flex flex-col md:block gap-6 md:gap-0 min-h-0 md:min-h-[740px] mt-16">
+          <div className="relative w-full max-w-[1100px] mx-auto flex flex-col md:block gap-6 md:gap-0 min-h-0 md:h-[440px] md:min-h-[440px] mt-16">
+            {/* SVG Ropes/Strings behind cards on desktop */}
+            <svg className="absolute inset-0 w-full h-full pointer-events-none hidden md:block z-0" viewBox="0 0 1100 440" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
+              {/* Single Drooping Rope - Shadow */}
+              <path d="M 0,74 Q 550,129 1100,74" stroke="rgba(0,0,0,0.12)" strokeWidth="4" strokeLinecap="round" />
+              {/* Single Drooping Rope - Tan Braided Base */}
+              <path d="M 0,70 Q 550,125 1100,70" stroke="#dfbc90" strokeWidth="4" strokeLinecap="round" />
+              {/* Single Drooping Rope - Dark Brown Braid Pattern Overlay */}
+              <path d="M 0,70 Q 550,125 1100,70" stroke="#8c642c" strokeWidth="4" strokeDasharray="6,6" strokeLinecap="round" />
+              {/* Single Drooping Rope - Light Gold Accent Fiber */}
+              <path d="M 0,70 Q 550,125 1100,70" stroke="#fcf3e8" strokeWidth="1.5" strokeDasharray="3,9" strokeLinecap="round" />
+            </svg>
+
             {differentiators.map((diff, idx) => (
               <motion.div
                 key={idx}
-                initial={{ opacity: 0, y: 35 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 35, rotate: 0 }}
+                whileInView={{ 
+                  opacity: 1, 
+                  y: 0,
+                  rotate: isDesktop ? diff.rotate : 0
+                }}
                 viewport={{ once: true, margin: "-80px" }}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
-                whileHover={{ rotate: 0, scale: 1.03, y: -6, zIndex: 50 }}
-                className={"bg-white rounded-[24px] border shadow-[0_12px_28px_rgba(0,0,0,0.02)] overflow-hidden flex flex-col justify-between transition-all duration-300 w-full " + diff.borderClass + " " + diff.rotation + " " + diff.positionClass + " hover:shadow-2xl"}
+                onAnimationComplete={() => setAnimatedCards(prev => ({ ...prev, [idx]: true }))}
+                transition={
+                  animatedCards[idx]
+                    ? {
+                        type: "spring",
+                        stiffness: 220,
+                        damping: 18,
+                        mass: 0.6
+                      }
+                    : {
+                        duration: 0.5,
+                        delay: idx * 0.1,
+                        ease: "easeOut"
+                      }
+                }
+                whileHover={isDesktop ? { 
+                  rotate: 0,
+                  scale: 1.05, 
+                  y: -8, 
+                  zIndex: 50,
+                  boxShadow: "15px 25px 35px rgba(0, 0, 0, 0.22)",
+                  transition: {
+                    rotate: {
+                      type: "spring",
+                      stiffness: 160,
+                      damping: 9,
+                      mass: 0.6
+                    },
+                    scale: { type: "spring", stiffness: 250, damping: 18 },
+                    y: { type: "spring", stiffness: 250, damping: 18 },
+                    boxShadow: { duration: 0.15 }
+                  }
+                } : {
+                  scale: 1.02,
+                  boxShadow: "8px 15px 22px rgba(0, 0, 0, 0.18)",
+                  transition: { duration: 0.15 }
+                }}
+                style={{ 
+                  backgroundColor: diff.bgColor,
+                  transformOrigin: "top center",
+                  boxShadow: "8px 15px 22px rgba(0, 0, 0, 0.18)"
+                }}
+                className={"rounded-[12px] flex flex-col justify-between w-full relative border border-black/5 " + diff.positionClass}
               >
-                {/* White main card area */}
-                <div className="p-6 sm:p-7 flex-1 flex flex-col justify-between">
+                {/* Wooden Clothespin clip for desktop */}
+                <div className="absolute -top-[23px] left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center z-50 pointer-events-none select-none filter drop-shadow-[0_3px_3px_rgba(0,0,0,0.22)]">
+                  {/* Wood top peg handle */}
+                  <div className="w-[10px] h-[16px] bg-gradient-to-b from-[#e5c49f] to-[#cc9d6a] border border-[#9c754c] rounded-t-[4px]" />
+                  {/* Metal spring hoop */}
+                  <div className="w-[13px] h-[3px] bg-gradient-to-r from-slate-300 via-slate-400 to-slate-500 border border-slate-600 z-10 -my-[1px] rounded-3xs shadow-3xs" />
+                  {/* Wood bottom peg clamp */}
+                  <div className="w-[10px] h-[22px] bg-gradient-to-b from-[#cc9d6a] to-[#b28250] border border-[#855e37] rounded-b-[3px] relative">
+                    {/* Metal spring wire clamp loop */}
+                    <div className="absolute left-[3px] top-[4px] w-[4px] h-[10px] border border-slate-500 rounded-xs pointer-events-none" />
+                  </div>
+                  {/* Vertical slit texture shadow */}
+                  <div className="absolute left-[4.5px] top-0 w-[1px] h-full bg-black/10" />
+                </div>
+
+                {/* Main card area */}
+                <div className="p-4 flex-1 flex flex-col justify-between h-full">
                   {/* Card Header (Logo and category) */}
-                  <div className="flex items-center gap-2 mb-4">
+                  <div className="flex items-center gap-1.5 mb-2">
                     {/* Circle icon representing company logo */}
-                    <div className="w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center border border-slate-100/80 shadow-3xs shrink-0">
-                      {diff.icon}
+                    <div className={`w-7 h-7 rounded-full flex items-center justify-center border shadow-3xs shrink-0 ${diff.iconBg}`}>
+                      {React.createElement(diff.icon as React.ComponentType<any>, { className: `w-4 h-4 ${diff.iconColor}` })}
                     </div>
                     {/* Logo text */}
-                    <span className="text-xs font-sans font-bold tracking-tight text-slate-900 lowercase">{diff.logoText}</span>
+                    <span className={`text-[10px] font-sans font-bold tracking-tight lowercase ${diff.textColor}`}>{diff.logoText}</span>
                   </div>
 
                   {/* Title */}
-                  <h4 className="text-base sm:text-[17px] font-sans font-extrabold text-[#1e1b4b] tracking-tight leading-snug">
+                  <h4 className={`text-[13px] font-sans font-black tracking-tight leading-tight mb-1 ${diff.titleColor}`}>
                     {diff.title}
                   </h4>
 
                   {/* Value */}
-                  <p className="text-[11px] font-semibold text-slate-500 mt-1 mb-4">
+                  <p className={`text-[10.5px] leading-tight font-semibold mt-0.5 mb-2 ${diff.valueColor}`}>
                     {diff.value}
                   </p>
 
                   {/* Badges */}
-                  <div className="flex flex-wrap gap-1.5 mt-auto">
+                  <div className="flex flex-wrap gap-1 mt-auto mb-2">
                     {diff.badges.map((badge, bIdx) => (
-                      <span key={bIdx} className={"text-[9px] font-mono font-bold tracking-wider rounded-full px-2.5 py-0.5 uppercase border " + diff.badgeClasses}>
+                      <span key={bIdx} className={`text-[8.5px] font-mono font-bold tracking-normal rounded-full px-2 py-0.5 uppercase border ${diff.badgeBg}`}>
                         {badge}
                       </span>
                     ))}
                   </div>
-                </div>
 
-                {/* Bottom colored banner strip */}
-                <div className={"py-3 px-6 sm:px-7 text-center text-[10px] font-mono font-bold tracking-wider uppercase " + diff.bannerClass}>
-                  {diff.bannerText}
+                  {/* Bottom footer text */}
+                  <div className={`text-center text-[9px] font-mono font-bold tracking-wider uppercase pt-2 border-t border-black/5 ${diff.footerColor}`}>
+                    {diff.bannerText}
+                  </div>
                 </div>
               </motion.div>
             ))}
@@ -357,7 +469,7 @@ export default function WhatWeDo() {
         </div>
       </div>
 
-      <style dangerouslySetInnerHTML={{ __html: ".cube-wrap { perspective: 1000px; transform-style: preserve-3d; } .cube { width: 80px; height: 80px; position: relative; transform-style: preserve-3d; animation: rotateCube 15s infinite linear; } .cube-face { position: absolute; width: 80px; height: 80px; border: 1.5px solid rgba(110, 1, 156, 0.22); background: linear-gradient(135deg, rgba(110, 1, 156, 0.05), rgba(217, 70, 239, 0.02)); backdrop-filter: blur(5px); box-shadow: inset 0 0 10px rgba(110, 1, 156, 0.05); } .face-front { transform: translateZ(40px); } .face-back { transform: rotateY(180deg) translateZ(40px); } .face-right { transform: rotateY(90deg) translateZ(40px); } .face-left { transform: rotateY(-90deg) translateZ(40px); } .face-top { transform: rotateX(90deg) translateZ(40px); } .face-bottom { transform: rotateX(-90deg) translateZ(40px); } @keyframes rotateCube { 0% { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); } 100% { transform: rotateX(360deg) rotateY(360deg) rotateZ(180deg); } }" }} />
+      <style dangerouslySetInnerHTML={{ __html: ".cube-wrap { perspective: 1000px; transform-style: preserve-3d; } .cube { width: 80px; height: 80px; position: relative; transform-style: preserve-3d; animation: rotateCube 15s infinite linear; } .cube-face { position: absolute; width: 80px; height: 80px; border: 1.5px solid rgba(110, 1, 156, 0.22); background: linear-gradient(135deg, rgba(110, 1, 156, 0.05), rgba(86, 29, 154, 0.02)); backdrop-filter: blur(5px); box-shadow: inset 0 0 10px rgba(110, 1, 156, 0.05); } .face-front { transform: translateZ(40px); } .face-back { transform: rotateY(180deg) translateZ(40px); } .face-right { transform: rotateY(90deg) translateZ(40px); } .face-left { transform: rotateY(-90deg) translateZ(40px); } .face-top { transform: rotateX(90deg) translateZ(40px); } .face-bottom { transform: rotateX(-90deg) translateZ(40px); } @keyframes rotateCube { 0% { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); } 100% { transform: rotateX(360deg) rotateY(360deg) rotateZ(180deg); } }" }} />
     </section>
   );
 }
