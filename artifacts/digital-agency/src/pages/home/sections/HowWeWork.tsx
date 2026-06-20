@@ -73,12 +73,21 @@ export default function HowWeWork() {
 
       <div className="container mx-auto px-6 max-w-7xl relative z-10">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-24">
-          <h2 className="text-3xl sm:text-5xl font-serif font-black text-slate-900 mb-4 tracking-tight leading-tight">
-            Our Simple 4-Step Growth Process
+        <div className="text-center max-w-3xl mx-auto mb-24 relative">
+          {/* Subtle Glowing Aura behind Header */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-32 bg-brand-vibrant/5 rounded-full blur-[60px] pointer-events-none -z-10" />
+
+          {/* Minimalist Micro Badge */}
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-vibrant/5 text-brand-vibrant text-[10px] sm:text-xs font-mono font-bold tracking-widest mb-6 border border-brand-vibrant/10 uppercase select-none">
+            <span className="w-1.5 h-1.5 rounded-full bg-brand-vibrant animate-ping animate-duration-1000" />
+            Engineered For Scale
+          </div>
+
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-serif font-black text-slate-900 mb-6 tracking-tight leading-[1.1]">
+            Our Simple <span className="bg-gradient-to-r from-brand-vibrant via-brand-medium to-brand-dark bg-clip-text text-transparent">4-Step Growth</span> Process
           </h2>
-          <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-            From insights to intelligence, how we orchestrate digital scale.
+          <p className="text-slate-500 text-sm sm:text-lg leading-relaxed max-w-xl mx-auto font-normal">
+            From insights to intelligence, how we orchestrate <span className="text-slate-800 font-semibold border-b border-brand-vibrant/20 pb-0.5">digital scale</span>.
           </p>
         </div>
 
