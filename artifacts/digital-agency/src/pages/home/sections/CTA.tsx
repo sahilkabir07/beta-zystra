@@ -1,46 +1,88 @@
 import React from "react";
 import { Link } from "wouter";
-import { Phone } from "lucide-react";
+import { Phone, ArrowRight, ShieldCheck, MapPin, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
 
 export default function CTA() {
   return (
-    <section id="contact" className="py-24 sm:py-32 bg-white relative overflow-hidden">
-      {/* Background blobs inside CTA */}
-      <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-brand-vibrant/5 rounded-full blur-[100px] pointer-events-none -z-10" />
-      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-brand-medium/5 rounded-full blur-[100px] pointer-events-none -z-10" />
+    <section id="contact" className="py-28 sm:py-36 bg-[#fafbfc] relative overflow-hidden">
+      {/* Outer Section Glow Blobs */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-vibrant/5 rounded-full blur-[120px] pointer-events-none -z-10" />
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-brand-medium/5 rounded-full blur-[120px] pointer-events-none -z-10" />
 
       <div className="container mx-auto px-6 max-w-5xl relative z-10">
-        <div className="bg-slate-900 text-white p-10 sm:p-16 md:p-20 rounded-[40px] relative overflow-hidden shadow-2xl">
-          {/* Light flare inside card */}
-          <div className="absolute top-0 left-0 w-82 h-82 bg-brand-vibrant/20 rounded-full blur-[80px] -translate-x-1/3 -translate-y-1/3" />
+        {/* Asymmetrical Custom Liquid Card */}
+        <div className="w-full rounded-[3.5rem_9rem_3.5rem_9rem] bg-gradient-to-tr from-brand-dark via-brand-medium to-brand-vibrant text-white p-10 sm:p-16 md:p-20 relative overflow-hidden shadow-[0_25px_60px_rgba(110,1,156,0.22)] border-4 border-white select-none">
+          
+          {/* Internal Glowing Lighting Flares */}
+          <div className="absolute top-0 left-0 w-96 h-96 bg-white/10 rounded-full blur-[80px] -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
+          <div className="absolute bottom-0 right-0 w-96 h-96 bg-brand-vibrant/40 rounded-full blur-[90px] translate-x-1/3 translate-y-1/3 pointer-events-none" />
+          
+          {/* Animated Wavy Outline Path */}
+          <motion.div
+            className="absolute inset-2 border-2 border-dashed border-white/10 rounded-[3.1rem_8.6rem_3.1rem_8.6rem] pointer-events-none z-0 hidden sm:block"
+            animate={{ rotate: [0, 360] }}
+            transition={{ repeat: Infinity, duration: 60, ease: "linear" }}
+          />
 
           <div className="relative z-10 text-center max-w-3xl mx-auto">
-            <span className="inline-flex items-center gap-1 bg-brand-vibrant/20 text-brand-vibrant/80 border border-brand-vibrant/30 rounded-full px-4 py-1.5 text-xs font-semibold tracking-wider mb-6 uppercase">
+            {/* Pulsing micro-badge */}
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md text-white text-[10px] sm:text-xs font-mono font-bold tracking-widest mb-8 border border-white/10 uppercase select-none">
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
               Start Your Growth Today
-            </span>
-            <h2 className="text-3xl sm:text-5xl font-serif font-black text-white mb-6 tracking-tight leading-tight">
-              Ready to Escape the Digital Competition?
+            </div>
+
+            {/* Title with Gold-to-White gradient */}
+            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-serif font-black text-white mb-6 tracking-tight leading-[1.1] select-text">
+              Ready to Escape the <br />
+              <span className="bg-gradient-to-r from-amber-300 via-amber-100 to-white bg-clip-text text-transparent">Digital Competition?</span>
             </h2>
-            <p className="text-slate-350 text-base sm:text-lg mb-10 max-w-xl mx-auto leading-relaxed">
+
+            <p className="text-purple-100 text-sm sm:text-lg mb-10 max-w-xl mx-auto leading-relaxed font-normal select-text">
               Whether you are a local business looking to dominate your city or a startup ready to scale nationally — Zystra has the strategy, technology, and team to make it happen. Let's build something remarkable together.
             </p>
 
+            {/* Glowing Action Buttons */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md mx-auto">
               <Link href="/contact" className="w-full sm:w-auto">
-                <Button size="lg" className="w-full sm:w-auto rounded-full h-14 px-8 bg-white text-slate-950 hover:bg-slate-100 font-bold shadow-md hover:scale-105 transition-transform" data-testid="button-ignite">
+                <Button 
+                  size="lg" 
+                  className="w-full sm:w-auto rounded-full h-14 px-8 bg-white text-brand-dark font-black hover:bg-slate-50 shadow-[0_8px_20px_rgba(255,255,255,0.2)] hover:shadow-[0_12px_28px_rgba(255,255,255,0.35)] transition-all duration-300 hover:scale-105 active:scale-95 flex items-center justify-center gap-2 border border-white/10" 
+                  data-testid="button-ignite"
+                >
                   Get Your Free Digital Audit
+                  <ArrowRight className="w-4 h-4 text-brand-dark" />
                 </Button>
               </Link>
               <a href="tel:+916200048924" className="w-full sm:w-auto">
-                <Button size="lg" variant="outline" className="w-full sm:w-auto rounded-full h-14 px-8 border-slate-700 hover:border-white text-white hover:bg-slate-800 font-semibold gap-2">
-                  <Phone className="w-4 h-4" /> Call: +91 6200048924
+                <Button 
+                  size="lg" 
+                  variant="outline" 
+                  className="w-full sm:w-auto rounded-full h-14 px-8 border-white/20 hover:border-white text-white hover:bg-white/10 font-bold transition-all duration-300 hover:scale-105 active:scale-95 flex items-center justify-center gap-2"
+                >
+                  <Phone className="w-4 h-4" /> 
+                  Call: +91 6200048924
                 </Button>
               </a>
             </div>
 
-            <div className="mt-8 text-xs text-slate-450 font-mono tracking-wide">
-              Response within 24 hours · Based in Patna, Bihar · Serving clients across India
+            {/* Horizontal Trust Info Badges */}
+            <div className="mt-12 pt-8 border-t border-white/10 flex flex-wrap items-center justify-center gap-y-3 gap-x-6 sm:gap-x-8 text-[10px] sm:text-xs font-mono tracking-wider text-purple-200/90 select-none">
+              <span className="flex items-center gap-1.5">
+                <ShieldCheck className="w-3.5 h-3.5 text-amber-400" />
+                RESPONSE WITHIN 24 HOURS
+              </span>
+              <span className="hidden sm:inline text-white/30">•</span>
+              <span className="flex items-center gap-1.5">
+                <MapPin className="w-3.5 h-3.5 text-amber-400" />
+                BASED IN PATNA, BIHAR
+              </span>
+              <span className="hidden sm:inline text-white/30">•</span>
+              <span className="flex items-center gap-1.5">
+                <Zap className="w-3.5 h-3.5 text-amber-400" />
+                SERVING CLIENTS PAN-INDIA
+              </span>
             </div>
           </div>
         </div>
