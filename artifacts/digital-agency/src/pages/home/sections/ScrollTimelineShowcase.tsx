@@ -186,10 +186,16 @@ export default function ScrollTimelineShowcase() {
   return (
     <section id="showcase" ref={containerRef} className="relative h-[280vh] bg-transparent">
       <div className="sticky top-0 h-screen w-full flex flex-col justify-center items-center overflow-hidden">
-        {/* Soft Radial Gradients */}
-        <div className="absolute inset-0 opacity-40 pointer-events-none">
-          <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-brand-vibrant/10 rounded-full blur-[120px]" />
-          <div className="absolute bottom-1/4 right-1/4 w-[700px] h-[700px] bg-brand-medium/10 rounded-full blur-[140px]" />
+        {/* Soft Radial Gradients (Optimized with radial gradients, no filters) */}
+        <div className="absolute inset-0 opacity-45 pointer-events-none">
+          <div 
+            className="absolute top-1/4 left-1/4 w-[600px] h-[600px]" 
+            style={{ background: "radial-gradient(circle, rgba(110, 1, 156, 0.12) 0%, rgba(110, 1, 156, 0) 70%)" }}
+          />
+          <div 
+            className="absolute bottom-1/4 right-1/4 w-[700px] h-[700px]" 
+            style={{ background: "radial-gradient(circle, rgba(86, 29, 154, 0.12) 0%, rgba(86, 29, 154, 0) 70%)" }}
+          />
         </div>
 
         {/* Central Dashboard Showcase */}

@@ -119,8 +119,11 @@ export default function Services() {
         </defs>
       </svg>
 
-      {/* Background visual details */}
-      <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-brand-vibrant/5 rounded-full blur-[100px] pointer-events-none" />
+      {/* Background visual details (Optimized, no filter blurs) */}
+      <div 
+        className="absolute top-0 right-0 w-[400px] h-[400px] pointer-events-none" 
+        style={{ background: "radial-gradient(circle, rgba(110, 1, 156, 0.07) 0%, rgba(110, 1, 156, 0) 70%)" }}
+      />
 
       <div className="container mx-auto px-6 max-w-7xl relative z-10">
         <div className="mb-20 text-center max-w-4xl mx-auto">

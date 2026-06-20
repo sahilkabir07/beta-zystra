@@ -46,7 +46,10 @@ export default function Testimonials() {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-28 relative">
           {/* Subtle Glowing Aura behind Header */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-32 bg-brand-vibrant/5 rounded-full blur-[60px] pointer-events-none -z-10" />
+          <div 
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-32 pointer-events-none -z-10" 
+            style={{ background: "radial-gradient(circle, rgba(110, 1, 156, 0.08) 0%, rgba(110, 1, 156, 0) 70%)" }}
+          />
 
           <h2 className="text-3xl sm:text-5xl lg:text-6xl font-serif font-black text-slate-900 mb-6 tracking-tight leading-[1.15]">
             What Our Clients Say About <span className="bg-gradient-to-r from-brand-vibrant via-brand-medium to-brand-dark bg-clip-text text-transparent">Zystra</span>

@@ -113,16 +113,28 @@ export default function Industries() {
 
   return (
     <section className="py-24 bg-[#fafbfc] relative overflow-hidden">
-      {/* Decorative Radial Background Glows (themed around brand-vibrant purple) */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-brand-vibrant/5 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute -top-40 -left-40 w-96 h-96 bg-brand-medium/5 rounded-full blur-[100px] pointer-events-none" />
-      <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-brand-vibrant/5 rounded-full blur-[100px] pointer-events-none" />
+      {/* Decorative Radial Background Glows (themed around brand-vibrant purple) - Optimized */}
+      <div 
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] pointer-events-none" 
+        style={{ background: "radial-gradient(circle, rgba(110, 1, 156, 0.08) 0%, rgba(110, 1, 156, 0) 70%)" }}
+      />
+      <div 
+        className="absolute -top-40 -left-40 w-96 h-96 pointer-events-none" 
+        style={{ background: "radial-gradient(circle, rgba(86, 29, 154, 0.07) 0%, rgba(86, 29, 154, 0) 70%)" }}
+      />
+      <div 
+        className="absolute -bottom-40 -right-40 w-96 h-96 pointer-events-none" 
+        style={{ background: "radial-gradient(circle, rgba(110, 1, 156, 0.07) 0%, rgba(110, 1, 156, 0) 70%)" }}
+      />
 
       <div className="container mx-auto px-6 max-w-7xl relative z-10">
         {/* Header section */}
         <div className="text-center max-w-3xl mx-auto mb-20 relative">
           {/* Subtle Glowing Aura behind Header */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-32 bg-brand-vibrant/5 rounded-full blur-[60px] pointer-events-none -z-10" />
+          <div 
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-32 pointer-events-none -z-10" 
+            style={{ background: "radial-gradient(circle, rgba(110, 1, 156, 0.08) 0%, rgba(110, 1, 156, 0) 70%)" }}
+          />
 
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-black text-slate-900 mb-6 tracking-tight leading-[1.15]">
             We Grow Brands Across <span className="bg-gradient-to-r from-brand-vibrant via-brand-medium to-brand-dark bg-clip-text text-transparent">Every Industry</span>

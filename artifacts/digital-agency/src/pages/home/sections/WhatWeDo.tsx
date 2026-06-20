@@ -133,9 +133,15 @@ export default function WhatWeDo() {
 
   return (
     <section id="why-choose" className="pt-28 pb-12 sm:pt-36 sm:pb-16 bg-white text-slate-900 relative overflow-hidden">
-      {/* Background Gradients & Glows */}
-      <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-purple-50/40 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute bottom-0 right-1/4 w-[700px] h-[700px] bg-pink-50/35 rounded-full blur-[160px] pointer-events-none" />
+      {/* Background Gradients & Glows (Optimized, no filter blurs) */}
+      <div 
+        className="absolute top-0 left-1/4 w-[600px] h-[600px] pointer-events-none opacity-80" 
+        style={{ background: "radial-gradient(circle, rgba(168, 85, 247, 0.08) 0%, rgba(168, 85, 247, 0) 70%)" }}
+      />
+      <div 
+        className="absolute bottom-0 right-1/4 w-[700px] h-[700px] pointer-events-none opacity-80" 
+        style={{ background: "radial-gradient(circle, rgba(236, 72, 153, 0.07) 0%, rgba(236, 72, 153, 0) 70%)" }}
+      />
 
       {/* Grid pattern overlay */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(110,1,156,0.015)_1px,transparent_1px),linear-gradient(to_bottom,rgba(110,1,156,0.015)_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
@@ -201,8 +207,11 @@ export default function WhatWeDo() {
 
           {/* Right Side: Creative Geometric Overlapping Cards */}
           <div className="lg:col-span-6 flex flex-col gap-6 relative select-none">
-            {/* Ambient glows behind cards */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-brand-vibrant/5 to-brand-medium/5 blur-3xl rounded-full pointer-events-none -z-10" />
+            {/* Ambient glows behind cards (Optimized, no filter blurs) */}
+            <div 
+              className="absolute inset-0 pointer-events-none -z-10 opacity-60" 
+              style={{ background: "radial-gradient(circle, rgba(110, 1, 156, 0.08) 0%, rgba(86, 29, 154, 0.08) 50%, rgba(0,0,0,0) 70%)" }}
+            />
 
             {/* Card 1: Front / Identity - Housed with Paragraph 1 */}
             <motion.div

@@ -287,8 +287,11 @@ export default function Hero() {
               transition: "transform 0.45s cubic-bezier(0.25, 1, 0.5, 1)"
             }}
           >
-            {/* Soft Ambient Drop Shadow */}
-            <div className="absolute inset-0 bg-black/12 blur-[40px] rounded-3xl scale-[0.94] translate-y-16 translate-x-4 -z-10" />
+            {/* Soft Ambient Drop Shadow (Optimized, no filter blurs) */}
+            <div 
+              className="absolute inset-0 rounded-3xl scale-[0.94] translate-y-16 translate-x-4 -z-10" 
+              style={{ background: "radial-gradient(circle, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0) 75%)" }}
+            />
 
             {/* Laptop Screen Lid */}
             <div

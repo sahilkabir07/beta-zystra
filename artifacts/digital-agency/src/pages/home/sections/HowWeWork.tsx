@@ -75,7 +75,10 @@ export default function HowWeWork() {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-24 relative">
           {/* Subtle Glowing Aura behind Header */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-32 bg-brand-vibrant/5 rounded-full blur-[60px] pointer-events-none -z-10" />
+          <div 
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-32 pointer-events-none -z-10" 
+            style={{ background: "radial-gradient(circle, rgba(110, 1, 156, 0.08) 0%, rgba(110, 1, 156, 0) 70%)" }}
+          />
 
 
 
