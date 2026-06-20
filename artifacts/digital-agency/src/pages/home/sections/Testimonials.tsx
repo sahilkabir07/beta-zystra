@@ -52,7 +52,7 @@ export default function Testimonials() {
             What Our Clients Say About <span className="bg-gradient-to-r from-brand-vibrant via-brand-medium to-brand-dark bg-clip-text text-transparent">Zystra</span>
           </h2>
           <p className="text-slate-500 text-sm sm:text-lg leading-relaxed max-w-xl mx-auto font-normal">
-            Real feedback from brand owners who scaled their operations in <span className="text-slate-800 font-semibold border-b border-brand-vibrant/20 pb-0.5">Bihar & India</span>.
+            Real feedback from brand owners who <span className="text-slate-800 font-semibold border-b border-brand-vibrant/20 pb-0.5">scaled</span> their operations.
           </p>
         </div>
 
