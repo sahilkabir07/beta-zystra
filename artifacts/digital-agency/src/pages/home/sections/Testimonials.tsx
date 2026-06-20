@@ -71,9 +71,9 @@ export default function Testimonials() {
               <div className="absolute -top-6 -left-6 w-24 h-24 rounded-full bg-brand-vibrant border-4 border-white shadow-[0_8px_24px_rgba(110,1,156,0.18)] flex flex-col justify-center items-center text-center p-2 text-white z-20 select-none rotate-[-6deg]">
                 <span className="font-serif text-lg leading-none -mb-1 opacity-70">“</span>
                 <span className="font-serif font-black text-[9.5px] tracking-wider leading-tight uppercase px-1">
-                  TESTI-
+                  GROWTH
                   <br />
-                  MONIAL
+                  PROOF
                 </span>
                 <span className="font-serif text-lg leading-none -mt-1 opacity-70">”</span>
               </div>
