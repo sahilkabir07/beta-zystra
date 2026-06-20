@@ -77,11 +77,7 @@ export default function HowWeWork() {
           {/* Subtle Glowing Aura behind Header */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-32 bg-brand-vibrant/5 rounded-full blur-[60px] pointer-events-none -z-10" />
 
-          {/* Minimalist Micro Badge */}
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-vibrant/5 text-brand-vibrant text-[10px] sm:text-xs font-mono font-bold tracking-widest mb-6 border border-brand-vibrant/10 uppercase select-none">
-            <span className="w-1.5 h-1.5 rounded-full bg-brand-vibrant animate-ping animate-duration-1000" />
-            Engineered For Scale
-          </div>
+
 
           <h2 className="text-3xl sm:text-5xl lg:text-6xl font-serif font-black text-slate-900 mb-6 tracking-tight leading-[1.1]">
             Our Simple <span className="bg-gradient-to-r from-brand-vibrant via-brand-medium to-brand-dark bg-clip-text text-transparent">4-Step Growth</span> Process
