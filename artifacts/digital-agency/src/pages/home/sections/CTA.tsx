@@ -93,10 +93,10 @@ export default function CTA() {
           </motion.div>
 
           <div className="relative z-10 text-center max-w-3xl mx-auto">
-            {/* Title with Gold-to-White gradient */}
+            {/* Title with theme-aligned Purple/White gradient */}
             <h2 className="text-3xl sm:text-5xl lg:text-6xl font-serif font-black text-white mb-6 tracking-tight leading-[1.1] select-text">
               Ready to Escape the <br />
-              <span className="bg-gradient-to-r from-amber-300 via-amber-100 to-white bg-clip-text text-transparent">Digital Competition?</span>
+              <span className="bg-gradient-to-r from-purple-300 via-purple-100 to-white bg-clip-text text-transparent">Digital Competition?</span>
             </h2>
 
             <p className="text-purple-100 text-sm sm:text-lg mb-10 max-w-xl mx-auto leading-relaxed font-normal select-text">
@@ -130,17 +130,17 @@ export default function CTA() {
             {/* Horizontal Trust Info Badges */}
             <div className="mt-12 pt-8 border-t border-white/10 flex flex-wrap items-center justify-center gap-y-3 gap-x-6 sm:gap-x-8 text-[10px] sm:text-xs font-mono tracking-wider text-purple-200/90 select-none">
               <span className="flex items-center gap-1.5">
-                <ShieldCheck className="w-3.5 h-3.5 text-amber-400" />
+                <ShieldCheck className="w-3.5 h-3.5 text-purple-300" />
                 RESPONSE WITHIN 24 HOURS
               </span>
               <span className="hidden sm:inline text-white/30">•</span>
               <span className="flex items-center gap-1.5">
-                <MapPin className="w-3.5 h-3.5 text-amber-400" />
+                <MapPin className="w-3.5 h-3.5 text-purple-300" />
                 BASED IN PATNA, BIHAR
               </span>
               <span className="hidden sm:inline text-white/30">•</span>
               <span className="flex items-center gap-1.5">
-                <Zap className="w-3.5 h-3.5 text-amber-400" />
+                <Zap className="w-3.5 h-3.5 text-purple-300" />
                 SERVING CLIENTS PAN-INDIA
               </span>
             </div>
