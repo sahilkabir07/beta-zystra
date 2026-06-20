@@ -14,85 +14,70 @@ import {
   Send
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { motion } from "framer-motion";
 
 export default function CTA() {
-  // Configures soft vertical float paths
-  const floatAnimation = (yOffset = 8, duration = 4, delay = 0) => ({
-    y: [-yOffset, yOffset],
-    transition: {
-      repeat: Infinity,
-      repeatType: "reverse" as const,
-      ease: "easeInOut" as const,
-      duration: duration,
-      delay: delay
-    }
-  });
-
   return (
     <section id="contact" className="py-28 sm:py-36 bg-[#fafbfc] relative overflow-hidden">
-      {/* Outer Section Glow Blobs */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-vibrant/5 rounded-full blur-[120px] pointer-events-none -z-10" />
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-brand-medium/5 rounded-full blur-[120px] pointer-events-none -z-10" />
+      {styleBlock}
+
+      {/* Outer Section Glow Blobs (Optimized with radial gradients, no performance-heavy blur filters) */}
+      <div 
+        className="absolute top-0 right-0 w-[500px] h-[500px] pointer-events-none -z-10 opacity-85"
+        style={{
+          background: "radial-gradient(circle, rgba(110, 1, 156, 0.06) 0%, rgba(110, 1, 156, 0) 70%)"
+        }}
+      />
+      <div 
+        className="absolute bottom-0 left-0 w-[500px] h-[500px] pointer-events-none -z-10 opacity-85"
+        style={{
+          background: "radial-gradient(circle, rgba(86, 29, 154, 0.06) 0%, rgba(86, 29, 154, 0) 70%)"
+        }}
+      />
 
       <div className="container mx-auto px-6 max-w-5xl relative z-10">
-        {/* Asymmetrical Custom Liquid Card with minor lift on hover */}
-        <motion.div 
-          whileHover={{ y: -4 }}
-          transition={{ duration: 0.3 }}
-          className="w-full rounded-[3.5rem_9rem_3.5rem_9rem] bg-gradient-to-tr from-brand-dark via-brand-medium to-brand-vibrant text-white p-10 sm:p-16 md:p-20 relative overflow-hidden shadow-[0_25px_60px_rgba(110,1,156,0.22)] border-4 border-white select-none group"
+        {/* Asymmetrical Custom Liquid Card with native GPU hover transition (no JS Framer Motion runtime) */}
+        <div 
+          className="w-full rounded-[3.5rem_9rem_3.5rem_9rem] bg-gradient-to-tr from-brand-dark via-brand-medium to-brand-vibrant text-white p-10 sm:p-16 md:p-20 relative overflow-hidden shadow-[0_25px_60px_rgba(110,1,156,0.22)] border-4 border-white select-none group transition-transform duration-300 ease-out hover:-translate-y-1 will-change-transform"
         >
           
-          {/* Internal Glowing Lighting Flares */}
-          <div className="absolute top-0 left-0 w-96 h-96 bg-white/10 rounded-full blur-[80px] -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
-          <div className="absolute bottom-0 right-0 w-96 h-96 bg-brand-vibrant/40 rounded-full blur-[90px] translate-x-1/3 translate-y-1/3 pointer-events-none" />
+          {/* Internal Glowing Lighting Flares (Optimized with radial gradients, no filters) */}
+          <div 
+            className="absolute top-0 left-0 w-96 h-96 pointer-events-none"
+            style={{
+              background: "radial-gradient(circle, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0) 70%)",
+              transform: "translate(-50%, -50%)"
+            }}
+          />
+          <div 
+            className="absolute bottom-0 right-0 w-96 h-96 pointer-events-none"
+            style={{
+              background: "radial-gradient(circle, rgba(110, 1, 156, 0.45) 0%, rgba(110, 1, 156, 0) 70%)",
+              transform: "translate(33%, 33%)"
+            }}
+          />
           
           {/* High-performance Static Asymmetrical Outline Path */}
           <div className="absolute inset-2 border border-dashed border-white/10 rounded-[3.1rem_8.6rem_3.1rem_8.6rem] pointer-events-none z-0 hidden sm:block" />
 
-          {/* Floating Social Media & Marketing Background Elements with GPU Acceleration */}
-          <motion.div
-            className="absolute top-12 left-12 sm:left-16 text-white/5 group-hover:text-white/8 pointer-events-none z-0 rotate-[15deg] transition-colors duration-300"
-            animate={floatAnimation(10, 4.2, 0.1)}
-            style={{ willChange: "transform" }}
-          >
+          {/* Floating Social Media & Marketing Background Elements - Pure GPU CSS Animations */}
+          <div className="absolute top-12 left-12 sm:left-16 text-white/5 group-hover:text-white/8 pointer-events-none z-0 transition-colors duration-300 animate-float-instagram">
             <Instagram className="w-12 h-12 sm:w-16 sm:h-16" />
-          </motion.div>
-          <motion.div
-            className="absolute bottom-16 left-8 sm:left-12 text-white/5 group-hover:text-white/8 pointer-events-none z-0 rotate-[-12deg] transition-colors duration-300"
-            animate={floatAnimation(8, 3.8, 0.5)}
-            style={{ willChange: "transform" }}
-          >
+          </div>
+          <div className="absolute bottom-16 left-8 sm:left-12 text-white/5 group-hover:text-white/8 pointer-events-none z-0 transition-colors duration-300 animate-float-facebook">
             <Facebook className="w-10 h-10 sm:w-12 sm:h-12" />
-          </motion.div>
-          <motion.div
-            className="absolute top-16 right-12 sm:right-20 text-white/5 group-hover:text-white/8 pointer-events-none z-0 rotate-[-8deg] transition-colors duration-300"
-            animate={floatAnimation(12, 4.5, 0.2)}
-            style={{ willChange: "transform" }}
-          >
+          </div>
+          <div className="absolute top-16 right-12 sm:right-20 text-white/5 group-hover:text-white/8 pointer-events-none z-0 transition-colors duration-300 animate-float-linkedin">
             <Linkedin className="w-12 h-12 sm:w-16 sm:h-16" />
-          </motion.div>
-          <motion.div
-            className="absolute bottom-20 right-8 sm:right-16 text-white/5 group-hover:text-white/8 pointer-events-none z-0 rotate-[10deg] transition-colors duration-300"
-            animate={floatAnimation(9, 3.5, 0.7)}
-            style={{ willChange: "transform" }}
-          >
+          </div>
+          <div className="absolute bottom-20 right-8 sm:right-16 text-white/5 group-hover:text-white/8 pointer-events-none z-0 transition-colors duration-300 animate-float-youtube">
             <Youtube className="w-12 h-12 sm:w-14 sm:h-14" />
-          </motion.div>
-          <motion.div
-            className="absolute top-[35%] left-[25%] text-white/[0.03] pointer-events-none z-0 rotate-[-20deg] hidden md:block"
-            animate={floatAnimation(6, 4.0, 0.3)}
-            style={{ willChange: "transform" }}
-          >
+          </div>
+          <div className="absolute top-[35%] left-[25%] text-white/[0.03] pointer-events-none z-0 hidden md:block animate-float-megaphone">
             <Megaphone className="w-8 h-8" />
-          </motion.div>
-          <motion.div
-            className="absolute bottom-[30%] right-[25%] text-white/[0.03] pointer-events-none z-0 rotate-[18deg] hidden md:block"
-            animate={floatAnimation(7, 3.9, 0.9)}
-            style={{ willChange: "transform" }}
-          >
+          </div>
+          <div className="absolute bottom-[30%] right-[25%] text-white/[0.03] pointer-events-none z-0 hidden md:block animate-float-send">
             <Send className="w-8 h-8" />
-          </motion.div>
+          </div>
 
           <div className="relative z-10 text-center max-w-3xl mx-auto">
             {/* Title with theme-aligned Purple/White gradient */}
@@ -147,8 +132,64 @@ export default function CTA() {
               </span>
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
 }
+
+// Injected CSS declarations for absolute butter-smooth performance (Zero Framer Motion overhead)
+const styleBlock = (
+  <style dangerouslySetInnerHTML={{
+    __html: `
+      @keyframes floatInstagram {
+        0%, 100% { transform: translateY(-7px) rotate(15deg); }
+        50% { transform: translateY(7px) rotate(15deg); }
+      }
+      @keyframes floatFacebook {
+        0%, 100% { transform: translateY(-6px) rotate(-12deg); }
+        50% { transform: translateY(6px) rotate(-12deg); }
+      }
+      @keyframes floatLinkedin {
+        0%, 100% { transform: translateY(-8px) rotate(-8deg); }
+        50% { transform: translateY(8px) rotate(-8deg); }
+      }
+      @keyframes floatYoutube {
+        0%, 100% { transform: translateY(-7px) rotate(10deg); }
+        50% { transform: translateY(7px) rotate(10deg); }
+      }
+      @keyframes floatMegaphone {
+        0%, 100% { transform: translateY(-4px) rotate(-20deg); }
+        50% { transform: translateY(4px) rotate(-20deg); }
+      }
+      @keyframes floatSend {
+        0%, 100% { transform: translateY(-5px) rotate(18deg); }
+        50% { transform: translateY(5px) rotate(18deg); }
+      }
+      .animate-float-instagram {
+        animation: floatInstagram 5s ease-in-out infinite;
+        will-change: transform;
+      }
+      .animate-float-facebook {
+        animation: floatFacebook 4.2s ease-in-out infinite;
+        will-change: transform;
+      }
+      .animate-float-linkedin {
+        animation: floatLinkedin 5.5s ease-in-out infinite;
+        will-change: transform;
+      }
+      .animate-float-youtube {
+        animation: floatYoutube 4.6s ease-in-out infinite;
+        will-change: transform;
+      }
+      .animate-float-megaphone {
+        animation: floatMegaphone 5.2s ease-in-out infinite;
+        will-change: transform;
+      }
+      .animate-float-send {
+        animation: floatSend 4.8s ease-in-out infinite;
+        will-change: transform;
+      }
+    `
+  }} />
+);
