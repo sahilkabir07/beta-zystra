@@ -144,21 +144,20 @@ export default function HowWeWork() {
                       whileInView={{ opacity: 1, scale: 1 }}
                       viewport={{ once: true, margin: "-100px" }}
                       transition={{ duration: 0.5, delay: 0.1 }}
-                      className="relative w-full max-w-md aspect-video lg:aspect-[4/3]"
+                      className="relative w-full max-w-md aspect-video lg:aspect-[4/3] rounded-3xl border border-slate-100 shadow-[0_12px_35px_rgba(0,0,0,0.04)] bg-white group"
                     >
-                      {/* Inner Image wrapper to isolate overflow-hidden for zoom effects */}
-                      <div className="w-full h-full rounded-3xl overflow-hidden border border-slate-100 shadow-[0_12px_35px_rgba(0,0,0,0.04)] bg-slate-50 group relative">
-                        {/* Illustration Image */}
+                      {/* Image Wrapper to handle rounding and clipping */}
+                      <div className="w-full h-full rounded-3xl overflow-hidden relative bg-white flex items-center justify-center p-6">
+                        {/* 3D Illustration Image */}
                         <img
                           src={st.image}
                           alt={st.title}
-                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-103"
+                          className="max-w-full max-h-full object-contain transition-transform duration-500 group-hover:scale-103"
                         />
-                        {/* Overlay gradient shimmer */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/20 via-transparent to-transparent opacity-60 pointer-events-none" />
                       </div>
 
-                      {/* Number Circle Badge (Sits on center line timeline - outside overflow-hidden) */}
+                      {/* Number Circle Badge (Sits on center line timeline) */}
+                      {/* On desktop, absolute positioned at the inner side to lay over the central winding road */}
                       <div
                         className={`hidden lg:flex absolute top-1/2 -translate-y-1/2 w-14 h-14 rounded-full border-[5px] border-white shadow-[0_8px_20px_rgba(0,0,0,0.12)] bg-gradient-to-tr ${st.color} items-center justify-center font-bold text-white text-base font-mono z-20 select-none
                           ${isEven ? "right-0 translate-x-1/2" : "left-0 -translate-x-1/2"}
