@@ -120,16 +120,15 @@ export default function Industries() {
 
       <div className="container mx-auto px-6 max-w-7xl relative z-10">
         {/* Header section */}
-        <div className="text-center max-w-2xl mx-auto mb-20">
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-brand-vibrant/5 text-brand-vibrant text-xs font-bold uppercase tracking-wider mb-4 border border-brand-vibrant/15 shadow-2xs">
-            <Users className="w-3.5 h-3.5 text-brand-vibrant" />
-            Diverse Expertise
-          </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-black text-slate-900 mb-4 tracking-tight leading-tight">
-            We Grow Brands Across Every Industry
+        <div className="text-center max-w-3xl mx-auto mb-20 relative">
+          {/* Subtle Glowing Aura behind Header */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-32 bg-brand-vibrant/5 rounded-full blur-[60px] pointer-events-none -z-10" />
+
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-black text-slate-900 mb-6 tracking-tight leading-[1.15]">
+            We Grow Brands Across <span className="bg-gradient-to-r from-brand-vibrant via-brand-medium to-brand-dark bg-clip-text text-transparent">Every Industry</span>
           </h2>
-          <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-            From retail shops in Patna to startups targeting pan-India audiences — Zystra has helped businesses across diverse industries build their digital presence and outpace their competition.
+          <p className="text-slate-500 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
+            From retail shops in Patna to startups targeting pan-India audiences — <span className="text-slate-800 font-semibold border-b border-brand-vibrant/20 pb-0.5">Zystra</span> has helped businesses build their digital presence and outpace their competition.
           </p>
         </div>
 
