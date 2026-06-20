@@ -98,7 +98,7 @@ export default function HowWeWork() {
             >
               {/* Outer Thick Glow Path */}
               <path
-                d="M 50 0 C 50 40, 25 60, 25 100 C 25 200, 75 200, 75 300 C 75 400, 25 400, 25 500 C 25 600, 75 600, 75 700 C 75 750, 50 760, 50 800"
+                d="M 50 6 C 50 40, 25 60, 25 100 C 25 200, 75 200, 75 300 C 75 400, 25 400, 25 500 C 25 600, 75 600, 75 700 C 75 750, 50 760, 50 794"
                 fill="none"
                 stroke="rgba(110, 1, 156, 0.04)"
                 strokeWidth="20"
@@ -106,7 +106,7 @@ export default function HowWeWork() {
               />
               {/* Inner Track Path */}
               <path
-                d="M 50 0 C 50 40, 25 60, 25 100 C 25 200, 75 200, 75 300 C 75 400, 25 400, 25 500 C 25 600, 75 600, 75 700 C 75 750, 50 760, 50 800"
+                d="M 50 6 C 50 40, 25 60, 25 100 C 25 200, 75 200, 75 300 C 75 400, 25 400, 25 500 C 25 600, 75 600, 75 700 C 75 750, 50 760, 50 794"
                 fill="none"
                 stroke="rgba(110, 1, 156, 0.1)"
                 strokeWidth="10"
@@ -114,7 +114,7 @@ export default function HowWeWork() {
               />
               {/* Animated Center Dash flow */}
               <motion.path
-                d="M 50 0 C 50 40, 25 60, 25 100 C 25 200, 75 200, 75 300 C 75 400, 25 400, 25 500 C 25 600, 75 600, 75 700 C 75 750, 50 760, 50 800"
+                d="M 50 6 C 50 40, 25 60, 25 100 C 25 200, 75 200, 75 300 C 75 400, 25 400, 25 500 C 25 600, 75 600, 75 700 C 75 750, 50 760, 50 794"
                 fill="none"
                 stroke="#6e019c"
                 strokeWidth="3"
@@ -127,6 +127,14 @@ export default function HowWeWork() {
                   duration: 2.5
                 }}
               />
+
+              {/* Starting Knob */}
+              <circle cx="50" cy="6" r="6" fill="rgba(110, 1, 156, 0.25)" />
+              <circle cx="50" cy="6" r="3.5" fill="#6e019c" stroke="#ffffff" strokeWidth="1.5" />
+
+              {/* Ending Knob */}
+              <circle cx="50" cy="794" r="6" fill="rgba(110, 1, 156, 0.25)" />
+              <circle cx="50" cy="794" r="3.5" fill="#6e019c" stroke="#ffffff" strokeWidth="1.5" />
             </svg>
           </div>
 
