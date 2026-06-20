@@ -47,47 +47,49 @@ export default function CTA() {
           <div className="absolute top-0 left-0 w-96 h-96 bg-white/10 rounded-full blur-[80px] -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
           <div className="absolute bottom-0 right-0 w-96 h-96 bg-brand-vibrant/40 rounded-full blur-[90px] translate-x-1/3 translate-y-1/3 pointer-events-none" />
           
-          {/* Animated Wavy Outline Path */}
-          <motion.div
-            className="absolute inset-2 border-2 border-dashed border-white/10 rounded-[3.1rem_8.6rem_3.1rem_8.6rem] pointer-events-none z-0 hidden sm:block"
-            animate={{ rotate: [0, 360] }}
-            transition={{ repeat: Infinity, duration: 80, ease: "linear" }}
-          />
+          {/* High-performance Static Asymmetrical Outline Path */}
+          <div className="absolute inset-2 border border-dashed border-white/10 rounded-[3.1rem_8.6rem_3.1rem_8.6rem] pointer-events-none z-0 hidden sm:block" />
 
-          {/* Floating Social Media & Marketing Background Elements */}
+          {/* Floating Social Media & Marketing Background Elements with GPU Acceleration */}
           <motion.div
             className="absolute top-12 left-12 sm:left-16 text-white/5 group-hover:text-white/8 pointer-events-none z-0 rotate-[15deg] transition-colors duration-300"
             animate={floatAnimation(10, 4.2, 0.1)}
+            style={{ willChange: "transform" }}
           >
             <Instagram className="w-12 h-12 sm:w-16 sm:h-16" />
           </motion.div>
           <motion.div
             className="absolute bottom-16 left-8 sm:left-12 text-white/5 group-hover:text-white/8 pointer-events-none z-0 rotate-[-12deg] transition-colors duration-300"
             animate={floatAnimation(8, 3.8, 0.5)}
+            style={{ willChange: "transform" }}
           >
             <Facebook className="w-10 h-10 sm:w-12 sm:h-12" />
           </motion.div>
           <motion.div
             className="absolute top-16 right-12 sm:right-20 text-white/5 group-hover:text-white/8 pointer-events-none z-0 rotate-[-8deg] transition-colors duration-300"
             animate={floatAnimation(12, 4.5, 0.2)}
+            style={{ willChange: "transform" }}
           >
             <Linkedin className="w-12 h-12 sm:w-16 sm:h-16" />
           </motion.div>
           <motion.div
             className="absolute bottom-20 right-8 sm:right-16 text-white/5 group-hover:text-white/8 pointer-events-none z-0 rotate-[10deg] transition-colors duration-300"
             animate={floatAnimation(9, 3.5, 0.7)}
+            style={{ willChange: "transform" }}
           >
             <Youtube className="w-12 h-12 sm:w-14 sm:h-14" />
           </motion.div>
           <motion.div
             className="absolute top-[35%] left-[25%] text-white/[0.03] pointer-events-none z-0 rotate-[-20deg] hidden md:block"
             animate={floatAnimation(6, 4.0, 0.3)}
+            style={{ willChange: "transform" }}
           >
             <Megaphone className="w-8 h-8" />
           </motion.div>
           <motion.div
             className="absolute bottom-[30%] right-[25%] text-white/[0.03] pointer-events-none z-0 rotate-[18deg] hidden md:block"
             animate={floatAnimation(7, 3.9, 0.9)}
+            style={{ willChange: "transform" }}
           >
             <Send className="w-8 h-8" />
           </motion.div>
