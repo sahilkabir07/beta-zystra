@@ -30,10 +30,7 @@ export default function HowWeWork() {
     <section id="process" className="py-24 sm:py-32 bg-white relative overflow-hidden">
       <div className="container mx-auto px-6 max-w-7xl relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-20">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-vibrant/10 border border-brand-vibrant/20 text-brand-vibrant text-xs font-bold uppercase tracking-wider mb-4">
-            <Rocket className="w-3.5 h-3.5" />
-            Our Workflow
-          </div>
+
           <h2 className="text-3xl sm:text-5xl font-serif font-black text-slate-900 mb-4">
             Our Simple 4-Step Growth Process
           </h2>
