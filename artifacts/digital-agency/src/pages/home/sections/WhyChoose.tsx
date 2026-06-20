@@ -6,7 +6,18 @@ export default function WhyChoose() {
     <section id="why-zystra" className="py-24 sm:py-32 bg-slate-50/50 relative">
       <div className="container mx-auto px-6 max-w-7xl relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 sm:gap-20 items-center">
-          {/* Left Column: Creative Hanging Tags */}
+          {/* Left Column: Heading and Subtext */}
+          <div className="lg:col-span-4 flex flex-col items-start">
+            <h2 className="text-3xl sm:text-5xl font-serif font-black text-slate-900 mb-6 leading-tight tracking-tight">
+              Why Businesses <span className="bg-gradient-to-r from-brand-vibrant via-brand-medium to-[#33015a] bg-clip-text text-transparent">Everywhere</span> Choose Zystra
+            </h2>
+            
+            <p className="text-slate-600 text-base sm:text-[17px] leading-relaxed font-normal border-l-2 border-brand-vibrant/30 pl-4 py-1">
+              The digital landscape is crowded, noisy, and competitive. Most businesses struggle to stand out — not because their products are weak, but because their digital presence is. <span className="font-semibold text-slate-900">Zystra was built to solve exactly that problem.</span>
+            </p>
+          </div>
+
+          {/* Right Column: Creative Hanging Tags */}
           <div className="lg:col-span-8 flex flex-col">
             <h3 className="text-xl sm:text-2xl font-serif font-extrabold text-slate-900 tracking-tight mb-2 select-none">
               Our Core Values <span className="bg-gradient-to-r from-brand-vibrant to-brand-medium bg-clip-text text-transparent">That Drive Every Campaign</span>
@@ -48,16 +59,49 @@ export default function WhyChoose() {
                       {/* Badge */}
                       <div className="my-2.5 px-4 py-1.5 bg-brand-vibrant text-white font-mono text-[10px] font-black rounded-md tracking-wider shadow-sm uppercase">
                         100% CLEAR
-                      </div>
+                    </div>
 
                       <p className="text-slate-600 text-[11px] sm:text-xs leading-relaxed font-sans mt-2">
                         You always know where your budget is going. We provide clear, jargon-free reporting that shows real metrics.
-                      </p>
+                    </p>
                     </div>
 
                     {/* Bottom bar */}
                     <div className="w-full bg-brand-medium text-white text-[9px] font-mono font-bold py-3 uppercase tracking-widest rounded-b-2xl">
                       [ NO VANITY METRICS ]
+                  </div>
+                  </div>
+                </div>                {/* Tag 3 Wrapper (Circular Stamp Tag) */}
+                <div className="relative w-full max-w-[230px] flex flex-col items-center transition-all duration-300 hover:-translate-y-2 hover:rotate-[2deg] cursor-pointer group">
+                  {/* Hanging String (SVG Thread) */}
+                  <svg className="absolute -top-12 left-1/2 -translate-x-1/2 w-8 h-[58px] overflow-visible pointer-events-none hidden sm:block" viewBox="0 0 32 58">
+                    <path d="M16,0 C10,18 22,28 16,58" fill="none" stroke="#aa9c84" strokeWidth="1.5" strokeDasharray="3,2" />
+                  </svg>
+
+                  {/* Circular Tag Body */}
+                  <div
+                    className="relative p-1.5 w-full aspect-square rounded-full bg-brand-vibrant/10 shadow-[0_12px_30px_rgba(0,0,0,0.02)] border border-brand-vibrant/20 flex items-center justify-center"
+                  >
+                    {/* Grommet near top edge */}
+                    <div className="absolute top-2.5 left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-slate-100 border border-slate-400 flex items-center justify-center shadow-inner z-10">
+                      <div className="w-1.5 h-1.5 rounded-full bg-slate-700" />
+                    </div>
+
+                    <div className="relative w-full h-full bg-[#33015a] rounded-full p-6 flex flex-col justify-center items-center border-[1.5px] border-dashed border-white/30 text-white overflow-hidden text-center">
+                      <span className="text-[7.5px] font-mono tracking-widest uppercase opacity-70 mb-0.5">DATA + ART</span>
+                      
+                      <h4 className="text-base font-serif font-black uppercase tracking-tight text-white leading-tight">
+                        CREATIVE
+                      </h4>
+                      
+                      {/* Rotated banner */}
+                      <div className="w-[120%] bg-white text-brand-vibrant font-serif font-black text-[9.5px] py-1 uppercase tracking-widest my-2 rotate-[-6deg] shadow-md flex justify-center">
+                        CREATIVITY & DATA
+                      </div>
+                      
+                      <p className="text-white/85 text-[10px] leading-normal max-w-[90%] font-sans mb-1">
+                        Great marketing needs both art and science. We combine creative design with analytics on every campaign.
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -115,54 +159,8 @@ export default function WhyChoose() {
                   </div>
                 </div>
 
-                {/* Tag 3 Wrapper (Circular Stamp Tag) */}
-                <div className="relative w-full max-w-[230px] flex flex-col items-center transition-all duration-300 hover:-translate-y-2 hover:rotate-[2deg] cursor-pointer group">
-                  {/* Hanging String (SVG Thread) */}
-                  <svg className="absolute -top-12 left-1/2 -translate-x-1/2 w-8 h-[58px] overflow-visible pointer-events-none hidden sm:block" viewBox="0 0 32 58">
-                    <path d="M16,0 C10,18 22,28 16,58" fill="none" stroke="#aa9c84" strokeWidth="1.5" strokeDasharray="3,2" />
-                  </svg>
-
-                  {/* Circular Tag Body */}
-                  <div
-                    className="relative p-1.5 w-full aspect-square rounded-full bg-brand-vibrant/10 shadow-[0_12px_30px_rgba(0,0,0,0.02)] border border-brand-vibrant/20 flex items-center justify-center"
-                  >
-                    {/* Grommet near top edge */}
-                    <div className="absolute top-2.5 left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-slate-100 border border-slate-400 flex items-center justify-center shadow-inner z-10">
-                      <div className="w-1.5 h-1.5 rounded-full bg-slate-700" />
-                    </div>
-
-                    <div className="relative w-full h-full bg-[#33015a] rounded-full p-6 flex flex-col justify-center items-center border-[1.5px] border-dashed border-white/30 text-white overflow-hidden text-center">
-                      <span className="text-[7.5px] font-mono tracking-widest uppercase opacity-70 mb-0.5">DATA + ART</span>
-                      
-                      <h4 className="text-base font-serif font-black uppercase tracking-tight text-white leading-tight">
-                        CREATIVE
-                      </h4>
-                      
-                      {/* Rotated banner */}
-                      <div className="w-[120%] bg-white text-brand-vibrant font-serif font-black text-[9.5px] py-1 uppercase tracking-widest my-2 rotate-[-6deg] shadow-md flex justify-center">
-                        CREATIVITY & DATA
-                      </div>
-                      
-                      <p className="text-white/85 text-[10px] leading-normal max-w-[90%] font-sans mb-1">
-                        Great marketing needs both art and science. We combine creative design with analytics on every campaign.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
               </div>
             </div>
-          </div>
-
-          {/* Right Column: Heading and Subtext */}
-          <div className="lg:col-span-4 flex flex-col items-start">
-            <h2 className="text-3xl sm:text-5xl font-serif font-black text-slate-900 mb-6 leading-tight tracking-tight">
-              Why Businesses <span className="bg-gradient-to-r from-brand-vibrant via-brand-medium to-[#33015a] bg-clip-text text-transparent">Everywhere</span> Choose Zystra
-            </h2>
-            
-            <p className="text-slate-650 text-base sm:text-[17px] leading-relaxed font-normal border-l-2 border-brand-vibrant/30 pl-4 py-1">
-              The digital landscape is crowded, noisy, and competitive. Most businesses struggle to stand out — not because their products are weak, but because their digital presence is. <span className="font-semibold text-slate-900">Zystra was built to solve exactly that problem.</span>
-            </p>
           </div>
         </div>
       </div>
