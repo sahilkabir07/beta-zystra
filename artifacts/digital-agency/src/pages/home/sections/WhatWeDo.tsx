@@ -32,7 +32,7 @@ export default function WhatWeDo() {
       badgeBg: "bg-brand-vibrant/10 text-brand-vibrant border-brand-vibrant/20",
       footerColor: "text-brand-vibrant",
       rotate: -2,
-      positionClass: "md:absolute md:top-[79px] md:left-[2%] md:w-[160px] md:h-[230px] z-10"
+      positionClass: "md:absolute md:top-[70px] md:left-[4%] md:w-[160px] md:h-[250px] z-10"
     },
     {
       title: "Local Insight, National Quality",
@@ -51,7 +51,7 @@ export default function WhatWeDo() {
       badgeBg: "bg-white/10 text-white border-white/10",
       footerColor: "text-white/90",
       rotate: 1.5,
-      positionClass: "md:absolute md:top-[93px] md:left-[18%] md:w-[160px] md:h-[230px] z-10"
+      positionClass: "md:absolute md:top-[85px] md:left-[19.8%] md:w-[160px] md:h-[250px] z-10"
     },
     {
       title: "Full-Stack, One Roof",
@@ -70,7 +70,7 @@ export default function WhatWeDo() {
       badgeBg: "bg-white/10 text-white border-white/10",
       footerColor: "text-white/90",
       rotate: -1,
-      positionClass: "md:absolute md:top-[102px] md:left-[34%] md:w-[160px] md:h-[230px] z-10"
+      positionClass: "md:absolute md:top-[94px] md:left-[35.6%] md:w-[160px] md:h-[250px] z-10"
     },
     {
       title: "Experience Before You Pay",
@@ -89,7 +89,7 @@ export default function WhatWeDo() {
       badgeBg: "bg-brand-medium/10 text-brand-medium border-brand-medium/20",
       footerColor: "text-brand-medium",
       rotate: 2,
-      positionClass: "md:absolute md:top-[105px] md:left-[50%] md:w-[160px] md:h-[230px] z-10"
+      positionClass: "md:absolute md:top-[97px] md:left-[51.4%] md:w-[160px] md:h-[250px] z-10"
     },
     {
       title: "Flexible Partnerships",
@@ -108,7 +108,7 @@ export default function WhatWeDo() {
       badgeBg: "bg-white/10 text-white border-white/10",
       footerColor: "text-white/90",
       rotate: -1.5,
-      positionClass: "md:absolute md:top-[102px] md:left-[66%] md:w-[160px] md:h-[230px] z-10"
+      positionClass: "md:absolute md:top-[94px] md:left-[67.2%] md:w-[160px] md:h-[250px] z-10"
     },
     {
       title: "Direct Expert Access",
@@ -127,9 +127,166 @@ export default function WhatWeDo() {
       badgeBg: "bg-white/10 text-white border-white/10",
       footerColor: "text-white/90",
       rotate: 1,
-      positionClass: "md:absolute md:top-[93px] md:left-[82%] md:w-[160px] md:h-[230px] z-10"
+      positionClass: "md:absolute md:top-[85px] md:left-[83%] md:w-[160px] md:h-[250px] z-10"
     }
   ];
+
+  const renderCardGraphic = (idx: number, IconComponent: any, iconColor: string) => {
+    const iconClass = "w-5 h-5 " + iconColor;
+    switch (idx) {
+      case 0:
+        return (
+          <div className="absolute inset-0 flex flex-col items-center justify-center overflow-hidden bg-gradient-to-br from-white to-purple-50/50">
+            {/* Elegant grid background overlay */}
+            <div className="absolute inset-0 bg-[radial-gradient(#d8b4fe_1px,transparent_1px)] [background-size:8px_8px] opacity-35" />
+            
+            {/* Rising Trend Line (SEO/Ads growth) */}
+            <svg className="w-20 h-10 stroke-brand-vibrant fill-none z-10" viewBox="0 0 100 40">
+              <path d="M 5 35 Q 25 15 45 22 T 85 8 T 100 0" strokeWidth="2.5" strokeLinecap="round" />
+              <circle cx="85" cy="8" r="4" fill="#be5eff" className="animate-ping" />
+              <circle cx="85" cy="8" r="2.5" fill="#be5eff" />
+            </svg>
+            
+            {/* Small floating search magnifier badge */}
+            <div className="absolute top-3 left-3 w-6 h-6 rounded-lg bg-white shadow-sm flex items-center justify-center border border-purple-100 z-10">
+              <svg className="w-3.5 h-3.5 text-brand-vibrant" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </div>
+            
+            <span className="absolute bottom-3 text-[7px] font-mono font-bold tracking-[0.25em] text-brand-vibrant/60 uppercase z-10">AI SEO TREND</span>
+          </div>
+        );
+      case 1:
+        return (
+          <div className="absolute inset-0 flex flex-col items-center justify-center overflow-hidden bg-[#33015a]">
+            {/* Location map pin with radar waves representing Local SEO target */}
+            <div className="absolute w-20 h-20 rounded-full border border-white/5 flex items-center justify-center">
+              <div className="absolute w-12 h-12 rounded-full border border-white/10 flex items-center justify-center animate-ping" style={{ animationDuration: '3s' }} />
+              {/* Map pin */}
+              <svg className="w-7 h-7 text-[#ff7b54] z-10 filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+              </svg>
+            </div>
+            <span className="absolute bottom-3 text-[7px] font-mono font-bold tracking-[0.25em] text-white/40 uppercase z-10">LOCAL GEO-SEO</span>
+          </div>
+        );
+      case 2:
+        return (
+          <div className="absolute inset-0 flex flex-col items-center justify-center overflow-hidden bg-[#6e019c]">
+            {/* Search bar mockup */}
+            <div className="w-24 bg-white rounded-md p-1 shadow-md border border-white/20 flex items-center gap-1.5 mb-2 transform -rotate-[4deg] z-10">
+              <div className="w-1.5 h-1.5 rounded-full bg-brand-vibrant" />
+              <div className="w-10 h-1 bg-slate-200 rounded" />
+              <div className="ml-auto w-3.5 h-3.5 rounded bg-amber-400 flex items-center justify-center shadow-3xs">
+                <svg className="w-2 h-2 text-white" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+              </div>
+            </div>
+            
+            {/* Floating Social Media Icons */}
+            <div className="flex gap-2.5 mt-1 z-10">
+              {/* Instagram camera style icon */}
+              <div className="w-6 h-6 rounded bg-white/10 border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-colors">
+                <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+              </div>
+              {/* YouTube play style icon */}
+              <div className="w-6 h-6 rounded bg-white/10 border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-colors">
+                <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path>
+                  <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
+                </svg>
+              </div>
+            </div>
+            <span className="absolute bottom-3 text-[7px] font-mono font-bold tracking-[0.25em] text-white/40 uppercase z-10">SEO & SOCIAL</span>
+          </div>
+        );
+      case 3:
+        return (
+          <div className="absolute inset-0 flex flex-col items-center justify-center overflow-hidden bg-gradient-to-br from-white to-emerald-50/40">
+            <div className="absolute inset-0 bg-[radial-gradient(#a7f3d0_1px,transparent_1px)] [background-size:8px_8px] opacity-40" />
+            
+            {/* Audit Checklist Mockup representing Free SEO Audit */}
+            <div className="w-20 bg-white rounded-lg p-2 shadow-md border border-emerald-100 flex flex-col gap-1.5 transform rotate-[2deg] z-10">
+              <div className="flex items-center gap-1.5">
+                <svg className="w-2.5 h-2.5 text-emerald-500 shrink-0" fill="none" stroke="currentColor" strokeWidth="4" viewBox="0 0 24 24">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <div className="w-10 h-1 bg-slate-200 rounded" />
+              </div>
+              <div className="flex items-center gap-1.5">
+                <svg className="w-2.5 h-2.5 text-emerald-500 shrink-0" fill="none" stroke="currentColor" strokeWidth="4" viewBox="0 0 24 24">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <div className="w-8 h-1 bg-slate-200 rounded" />
+              </div>
+              <div className="flex items-center gap-1.5">
+                <svg className="w-2.5 h-2.5 text-emerald-500 shrink-0" fill="none" stroke="currentColor" strokeWidth="4" viewBox="0 0 24 24">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <div className="w-12 h-1 bg-slate-200 rounded" />
+              </div>
+            </div>
+            <span className="absolute bottom-3 text-[7px] font-mono font-bold tracking-[0.25em] text-emerald-600/60 uppercase z-10">SEO AUDIT REPORT</span>
+          </div>
+        );
+      case 4:
+        return (
+          <div className="absolute inset-0 flex flex-col items-center justify-center overflow-hidden bg-[#561d9a]">
+            {/* Mini Social Media Feed/Engagement card */}
+            <div className="w-[105px] bg-white rounded-lg p-1.5 shadow-lg border border-white/10 flex flex-col gap-1 transform -rotate-[3deg] z-10">
+              {/* User header */}
+              <div className="flex items-center gap-1">
+                <div className="w-3.5 h-3.5 rounded-full bg-purple-100 flex items-center justify-center">
+                  <div className="w-2 h-2 rounded-full bg-brand-vibrant" />
+                </div>
+                <div className="w-10 h-1 bg-slate-100 rounded" />
+              </div>
+              {/* Image box with pulsing pink heart representing social love */}
+              <div className="w-full h-11 bg-slate-50 rounded flex items-center justify-center relative border border-slate-100">
+                <svg className="w-4.5 h-4.5 text-rose-500 fill-rose-500 animate-pulse" viewBox="0 0 24 24">
+                  <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path>
+                </svg>
+              </div>
+              {/* Engagement line indicators */}
+              <div className="flex gap-2 items-center">
+                <div className="w-5 h-1 bg-slate-100 rounded" />
+                <div className="w-3 h-1 bg-slate-150 rounded ml-auto" />
+              </div>
+            </div>
+            <span className="absolute bottom-3 text-[7px] font-mono font-bold tracking-[0.25em] text-white/40 uppercase z-10">SOCIAL FEED</span>
+          </div>
+        );
+      case 5:
+        return (
+          <div className="absolute inset-0 flex flex-col items-center justify-center overflow-hidden bg-black">
+            {/* Overlapping chat/speech bubbles representing direct DM client communication */}
+            <div className="relative w-24 h-14 flex items-center justify-center z-10">
+              {/* Client Bubble */}
+              <div className="absolute left-1 top-1 w-14 bg-white/10 border border-white/20 rounded-xl rounded-bl-none p-1.5 flex flex-col gap-1 shadow-md">
+                <div className="w-8 h-1 bg-white/40 rounded" />
+                <div className="w-6 h-1 bg-white/20 rounded" />
+              </div>
+              {/* Expert Bubble */}
+              <div className="absolute right-1 bottom-1 w-14 bg-brand-vibrant border border-brand-vibrant/50 rounded-xl rounded-br-none p-1.5 flex flex-col gap-1 shadow-md">
+                <div className="w-8 h-1 bg-white rounded" />
+                <div className="w-5 h-1 bg-white/70 rounded" />
+              </div>
+            </div>
+            <span className="absolute bottom-3 text-[7px] font-mono font-bold tracking-[0.25em] text-white/40 uppercase z-10">DIRECT CHAT</span>
+          </div>
+        );
+      default:
+        return null;
+    }
+  };
 
   return (
     <section id="why-choose" className="pt-28 pb-12 sm:pt-36 sm:pb-16 bg-white text-slate-900 relative overflow-hidden">
@@ -306,7 +463,7 @@ export default function WhatWeDo() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             whileHover={{ scale: 1.015 }}
-            transition={{ type: "spring", stiffness: 100, damping: 15 }}
+            transition={{ type: "spring", stiffness: 220, damping: 20 }}
             className="relative w-full max-w-[620px] bg-[#33015a] border border-brand-medium/20 rounded-2xl p-8 sm:p-10 shadow-[0_25px_50px_rgba(51,1,90,0.3)] overflow-visible select-text"
           >
             {/* 3D and Abstract graphic elements mimicking the uploaded UI */}
@@ -348,7 +505,7 @@ export default function WhatWeDo() {
         </div>
 
         {/* Section 2: Differentiators (Mockup Stack Style) */}
-        <div className="p-8 sm:p-12 lg:p-16 rounded-[40px] bg-brand-medium/[0.08] border border-brand-medium/10 shadow-[inset_0_4px_12px_rgba(0,0,0,0.03),_0_20px_40px_rgba(86,29,154,0.12)] mt-24 relative overflow-hidden">
+        <div className="p-8 sm:p-12 lg:p-16 rounded-[40px] bg-white border border-slate-200/60 shadow-[0_20px_50px_rgba(0,0,0,0.03)] mt-24 relative overflow-hidden">
           <div className="text-center mb-16 max-w-2xl mx-auto">
             <h3 className="text-3xl sm:text-5xl font-sans font-black text-slate-950 tracking-tight mb-4">What Makes Zystra Different</h3>
             <p className="text-slate-800/90 text-sm sm:text-base font-semibold">We combine modern automation with hyper-local insight to deliver national-grade results.</p>
@@ -382,44 +539,45 @@ export default function WhatWeDo() {
                   animatedCards[idx]
                     ? {
                         type: "spring",
-                        stiffness: 220,
-                        damping: 18,
-                        mass: 0.6
+                        stiffness: 450,
+                        damping: 30,
+                        mass: 0.35
                       }
                     : {
-                        duration: 0.5,
-                        delay: idx * 0.1,
-                        ease: "easeOut"
+                        type: "spring",
+                        stiffness: 400,
+                        damping: 28,
+                        mass: 0.4,
+                        delay: idx * 0.03
                       }
                 }
                 whileHover={isDesktop ? { 
                   rotate: 0,
-                  scale: 1.05, 
-                  y: -8, 
+                  scale: 1.06, 
+                  y: -10, 
                   zIndex: 50,
-                  boxShadow: "15px 25px 35px rgba(0, 0, 0, 0.22)",
                   transition: {
-                    rotate: {
-                      type: "spring",
-                      stiffness: 160,
-                      damping: 9,
-                      mass: 0.6
-                    },
-                    scale: { type: "spring", stiffness: 250, damping: 18 },
-                    y: { type: "spring", stiffness: 250, damping: 18 },
-                    boxShadow: { duration: 0.15 }
+                    type: "spring",
+                    stiffness: 450,
+                    damping: 28,
+                    mass: 0.3
                   }
                 } : {
                   scale: 1.02,
-                  boxShadow: "8px 15px 22px rgba(0, 0, 0, 0.18)",
-                  transition: { duration: 0.15 }
+                  transition: { 
+                    type: "spring",
+                    stiffness: 350,
+                    damping: 24
+                  }
                 }}
                 style={{ 
-                  backgroundColor: diff.bgColor,
+                  backgroundColor: "#ffffff",
+                  padding: "5px",
+                  borderRadius: "14px",
                   transformOrigin: "top center",
-                  boxShadow: "8px 15px 22px rgba(0, 0, 0, 0.18)"
+                  willChange: "transform"
                 }}
-                className={"rounded-[12px] flex flex-col justify-between w-full relative border border-black/5 " + diff.positionClass}
+                className={"flex flex-col justify-between w-full max-w-[280px] mx-auto md:max-w-none md:mx-0 relative border border-slate-200/60 shadow-[0_8px_20px_-6px_rgba(0,0,0,0.05),0_4px_6px_-2px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_35px_-8px_rgba(0,0,0,0.12),0_10px_20px_-8px_rgba(0,0,0,0.08)] transition-shadow duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] " + diff.positionClass}
               >
                 {/* Wooden Clothespin clip for desktop */}
                 <div className="absolute -top-[23px] left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center z-50 pointer-events-none select-none filter drop-shadow-[0_3px_3px_rgba(0,0,0,0.22)]">
@@ -436,40 +594,33 @@ export default function WhatWeDo() {
                   <div className="absolute left-[4.5px] top-0 w-[1px] h-full bg-black/10" />
                 </div>
 
-                {/* Main card area */}
-                <div className="p-4 flex-1 flex flex-col justify-between h-full">
-                  {/* Card Header (Logo and category) */}
-                  <div className="flex items-center gap-1.5 mb-2">
-                    {/* Circle icon representing company logo */}
-                    <div className={`w-7 h-7 rounded-full flex items-center justify-center border shadow-3xs shrink-0 ${diff.iconBg}`}>
-                      {React.createElement(diff.icon as React.ComponentType<any>, { className: `w-4 h-4 ${diff.iconColor}` })}
-                    </div>
-                    {/* Logo text */}
-                    <span className={`text-[10px] font-sans font-bold tracking-tight lowercase ${diff.textColor}`}>{diff.logoText}</span>
+                {/* Main card area (Poster Style) */}
+                <div className="flex flex-col h-full w-full justify-between">
+                  {/* Graphic Poster Area */}
+                  <div 
+                    style={{ 
+                      backgroundColor: diff.bgColor,
+                      height: "155px",
+                      position: "relative"
+                    }}
+                    className="w-full rounded-lg overflow-hidden shadow-inner border border-black/5"
+                  >
+                    {renderCardGraphic(idx, diff.icon, diff.iconColor)}
                   </div>
 
-                  {/* Title */}
-                  <h4 className={`text-[13px] font-sans font-black tracking-tight leading-tight mb-1 ${diff.titleColor}`}>
-                    {diff.title}
-                  </h4>
-
-                  {/* Value */}
-                  <p className={`text-[10.5px] leading-tight font-semibold mt-0.5 mb-2 ${diff.valueColor}`}>
-                    {diff.value}
-                  </p>
-
-                  {/* Badges */}
-                  <div className="flex flex-wrap gap-1 mt-auto mb-2">
-                    {diff.badges.map((badge, bIdx) => (
-                      <span key={bIdx} className={`text-[8.5px] font-mono font-bold tracking-normal rounded-full px-2 py-0.5 uppercase border ${diff.badgeBg}`}>
-                        {badge}
+                  {/* Caption Area */}
+                  <div className="p-2 pt-2.5 flex-1 flex flex-col justify-between bg-white rounded-b-lg select-text">
+                    <div>
+                      <span className={`text-[7.5px] font-mono font-extrabold tracking-widest uppercase mb-1 block ${idx === 0 || idx === 3 ? 'text-brand-vibrant' : 'text-slate-400'}`}>
+                        {diff.bannerText}
                       </span>
-                    ))}
-                  </div>
-
-                  {/* Bottom footer text */}
-                  <div className={`text-center text-[9px] font-mono font-bold tracking-wider uppercase pt-2 border-t border-black/5 ${diff.footerColor}`}>
-                    {diff.bannerText}
+                      <h4 className="text-[11.5px] font-sans font-black text-slate-900 leading-tight mb-0.5">
+                        {diff.title}
+                      </h4>
+                    </div>
+                    <p className="text-[8.5px] leading-tight text-slate-500 font-semibold line-clamp-2 mt-auto">
+                      {diff.value}
+                    </p>
                   </div>
                 </div>
               </motion.div>

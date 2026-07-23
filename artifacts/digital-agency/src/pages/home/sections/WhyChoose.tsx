@@ -3,7 +3,7 @@ import { Shield } from "lucide-react";
 
 export default function WhyChoose() {
   return (
-    <section id="why-zystra" className="py-24 sm:py-32 bg-slate-50/50 relative">
+    <section id="why-zystra" className="py-24 sm:py-32 bg-white relative">
       <div className="container mx-auto px-6 max-w-7xl relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 sm:gap-20 items-center">
           {/* Left Column: Heading and Subtext */}

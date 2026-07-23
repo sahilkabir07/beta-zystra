@@ -16,11 +16,6 @@ import CTA from "./sections/CTA";
 import Footer from "@/components/layout/Footer";
 
 export default function Home() {
-  // Clear any existing dark class to enable light mode by default
-  useEffect(() => {
-    document.documentElement.classList.remove('dark');
-  }, []);
-
   // Initialize Lenis smooth scroll
   useEffect(() => {
     const lenis = new Lenis({
@@ -45,7 +40,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-white text-slate-900 selection:bg-indigo-500/20 selection:text-indigo-900 overflow-x-clip relative">
+    <div className="min-h-screen bg-white text-slate-900 selection:bg-purple-500/20 selection:text-purple-900 overflow-x-clip relative">
       {/* Content wrapper */}
       <div className="relative z-20">
         <Navbar />

@@ -112,7 +112,7 @@ export default function Industries() {
   const [isHubHovered, setIsHubHovered] = useState(false);
 
   return (
-    <section className="py-24 bg-[#fafbfc] relative overflow-hidden">
+    <section className="py-24 bg-white relative overflow-hidden">
       {/* Decorative Radial Background Glows (themed around brand-vibrant purple) - Optimized */}
       <div 
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] pointer-events-none" 
@@ -267,10 +267,10 @@ export default function Industries() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{
-                  duration: 0.5,
-                  delay: idx * 0.08,
                   type: "spring",
-                  stiffness: 100
+                  stiffness: 220,
+                  damping: 18,
+                  delay: idx * 0.04
                 }}
                 whileHover={{
                   scale: 1.07,
@@ -335,7 +335,7 @@ export default function Industries() {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: idx * 0.05 }}
+                transition={{ duration: 0.28, delay: idx * 0.03, ease: "easeOut" }}
                 onHoverStart={() => setLocalHover(true)}
                 onHoverEnd={() => setLocalHover(false)}
                 whileHover={{

@@ -159,7 +159,7 @@ export default function HowWeWork() {
                       initial={{ opacity: 0, scale: 0.92 }}
                       whileInView={{ opacity: 1, scale: 1 }}
                       viewport={{ once: true, margin: "-100px" }}
-                      transition={{ duration: 0.5, delay: 0.1 }}
+                      transition={{ duration: 0.35, delay: 0.05, ease: "easeOut" }}
                       className="relative w-full max-w-md aspect-video lg:aspect-[4/3] rounded-3xl border border-slate-100 shadow-[0_12px_35px_rgba(0,0,0,0.04)] bg-white group"
                     >
                       {/* Image Wrapper to handle rounding and clipping */}
@@ -197,7 +197,7 @@ export default function HowWeWork() {
                       initial={{ opacity: 0, x: isEven ? 35 : -35 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true, margin: "-100px" }}
-                      transition={{ duration: 0.5, delay: 0.15 }}
+                      transition={{ duration: 0.35, delay: 0.08, ease: "easeOut" }}
                       className="max-w-md mx-auto lg:mx-0"
                     >
                       <span className={`text-[10px] font-mono font-black tracking-widest ${st.textColor} uppercase mb-2 block`}>

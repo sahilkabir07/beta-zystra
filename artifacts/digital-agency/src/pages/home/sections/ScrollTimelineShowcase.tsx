@@ -56,12 +56,8 @@ export default function ScrollTimelineShowcase() {
 
   const dashMaxScale = isMobile ? 0.75 : isTablet ? 0.85 : isLaptop ? 0.88 : 1.0;
 
-  // Smooth scrollProgress slightly to filter mobile touch gestures and avoid jitters
-  const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 220,
-    damping: 34,
-    restDelta: 0.001
-  });
+  // Direct scrollYProgress for instant, silky 120 FPS Lenis scroll response
+  const smoothProgress = scrollYProgress;
 
   // Central Mockup Animations
   const scale = useTransform(smoothProgress,
@@ -84,7 +80,7 @@ export default function ScrollTimelineShowcase() {
   // 3D Math for Carousel Cards
   const getCardTransform = (progress: number, index: number) => {
     const start = 0.50;
-    const end = 0.92;
+    const end = 0.98;
 
     // Normalized carousel rotation progress (0 to 1)
     let t = 0;
@@ -115,10 +111,10 @@ export default function ScrollTimelineShowcase() {
     } else if (progress < 0.50) {
       const tCenter = (progress - 0.40) / (0.50 - 0.40);
       const startVal = isMobile ? 350 : 500;
-      const endVal = isMobile ? 100 : 150;
+      const endVal = isMobile ? 80 : 120;
       centerY = startVal + tCenter * (endVal - startVal);
     } else {
-      centerY = isMobile ? 100 : 150;
+      centerY = isMobile ? 80 : 120;
     }
     const y = centerY - tiltY * Math.cos(rad);
 
@@ -136,10 +132,6 @@ export default function ScrollTimelineShowcase() {
       // Fade in carousel as it slides into center frame
       const fadeInFactor = (progress - 0.40) / (start - 0.40);
       opacity = opacity * fadeInFactor;
-    } else if (progress > 0.94) {
-      // Fade out carousel completely from 0.94 to 1.0
-      const fadeOutFactor = Math.max(0, 1 - (progress - 0.94) / (1.0 - 0.94));
-      opacity = opacity * fadeOutFactor;
     }
 
     // Face direction: use sine function to create a 3D curves sway without mirroring
@@ -177,7 +169,7 @@ export default function ScrollTimelineShowcase() {
   const captionOpacity1 = useTransform(smoothProgress, [0.45, 0.49, 0.58, 0.61], [0, 1, 1, 0]);
   const captionOpacity2 = useTransform(smoothProgress, [0.58, 0.61, 0.72, 0.75], [0, 1, 1, 0]);
   const captionOpacity3 = useTransform(smoothProgress, [0.72, 0.75, 0.86, 0.89], [0, 1, 1, 0]);
-  const captionOpacity4 = useTransform(smoothProgress, [0.86, 0.89, 0.99, 1.0], [0, 1, 1, 0]);
+  const captionOpacity4 = useTransform(smoothProgress, [0.86, 0.89], [0, 1]);
 
   // Metric updates tied to scroll
   const reachVal = useTransform(smoothProgress, [0.0, 0.32], [18450, 1400000]);
@@ -214,6 +206,7 @@ export default function ScrollTimelineShowcase() {
           }}
           className="relative w-[90%] max-w-[850px] h-[370px] sm:h-[460px] md:h-[520px] rounded-3xl bg-white shadow-[0_30px_100px_rgba(0,0,0,0.08)] border border-slate-200 p-3 sm:p-5 flex flex-col transition-shadow duration-300 hover:shadow-[0_45px_120px_rgba(110,1,156,0.15)]"
         >
+
           {/* Mock Browser Topbar */}
           <div className="flex items-center gap-2 pb-3 sm:pb-4 border-b border-slate-100 mb-3 sm:mb-5">
             <div className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 rounded-full bg-red-400/80" />

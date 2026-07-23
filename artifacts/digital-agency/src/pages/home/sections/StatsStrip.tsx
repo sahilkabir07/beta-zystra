@@ -62,7 +62,7 @@ export default function StatsStrip() {
   };
 
   return (
-    <section className="py-24 lg:pt-56 lg:pb-40 border-y border-slate-100 bg-slate-50/50 relative">
+    <section className="py-24 lg:pt-56 lg:pb-40 border-y border-slate-100 bg-white relative">
       {/* Background abstract element to highlight the grid layout */}
       <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[radial-gradient(#6e019c_1px,transparent_1px)] [background-size:16px_16px]" />
 

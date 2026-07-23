@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Star } from "lucide-react";
+import { Star, Quote, ArrowUpRight } from "lucide-react";
 
 export default function Testimonials() {
   const testimonials = [
@@ -9,107 +9,145 @@ export default function Testimonials() {
       role: "Founder, Raj Retail",
       location: "Patna",
       initial: "R",
-      quote: "Zystra completely transformed our online presence. Within 3 months, our Google rankings jumped and we started getting 5–6 leads daily from our website."
+      metric: "5-6x",
+      metricLabel: "Daily Leads Boost",
+      quote: "Zystra completely transformed our online presence. Within 3 months, our Google rankings jumped and we started getting 5–6 leads daily from our website.",
+      tag: "SEO & Lead Gen",
+      glowColor: "rgba(168, 85, 247, 0.15)"
     },
     {
       name: "Sanjana Singh",
       role: "Marketing Head, Bihar D2C",
       location: "Bihar",
       initial: "S",
-      quote: "Their Meta Ads team is outstanding. Our Facebook ad cost-per-lead dropped by 60% in the first month of working with them."
+      metric: "2.5x",
+      metricLabel: "Meta Ads ROI Boost",
+      quote: "Their Meta Ads team is outstanding. Our Facebook ad cost-per-lead dropped by 60% in the first month of working with them.",
+      tag: "Paid Advertising",
+      glowColor: "rgba(236, 72, 153, 0.15)"
     },
     {
       name: "Dr. Vikas Prasad",
       role: "Director, Prasad Health",
       location: "Gola Road",
       initial: "V",
-      quote: "Finally a digital agency that understands the Bihar market. They don't just run ads — they think like our business partner."
+      metric: "+150%",
+      metricLabel: "Patient Enquiries",
+      quote: "Finally a digital agency that understands the Bihar market. They don't just run ads — they think like our business partner.",
+      tag: "Brand Scaling",
+      glowColor: "rgba(99, 102, 241, 0.15)"
     }
   ];
 
   return (
-    <section className="py-24 sm:py-32 bg-[#fafbfc] border-t border-slate-100 relative overflow-hidden">
-      {/* Hollow watermark text background (mirroring the reference image watermark style) */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none select-none -z-10 flex flex-col justify-between py-16 opacity-[0.03]">
-        <div className="text-[12rem] sm:text-[18rem] font-serif font-black text-brand-vibrant select-none uppercase tracking-widest leading-none translate-x-[-10%]">
-          REVIEW
-        </div>
-        <div className="text-[12rem] sm:text-[18rem] font-serif font-black text-brand-vibrant select-none uppercase tracking-widest leading-none translate-x-[40%]">
-          CLIENT
-        </div>
-        <div className="text-[12rem] sm:text-[18rem] font-serif font-black text-brand-vibrant select-none uppercase tracking-widest leading-none translate-x-[-5%]">
-          STORY
-        </div>
+    <section className="py-24 sm:py-32 bg-white border-t border-slate-100 relative overflow-hidden">
+      {/* Decorative background grids & blurred blobs */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none select-none -z-10">
+        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full bg-purple-200/20 blur-3xl" />
+        <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] rounded-full bg-indigo-100/30 blur-3xl" />
+        {/* Modern Dot Matrix Background */}
+        <div 
+          className="absolute inset-0 opacity-[0.4]" 
+          style={{ 
+            backgroundImage: "radial-gradient(#e2e8f0 1.5px, transparent 1.5px)", 
+            backgroundSize: "24px 24px" 
+          }} 
+        />
       </div>
 
       <div className="container mx-auto px-6 max-w-7xl relative z-10">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-28 relative">
-          {/* Subtle Glowing Aura behind Header */}
-          <div 
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-32 pointer-events-none -z-10" 
-            style={{ background: "radial-gradient(circle, rgba(110, 1, 156, 0.08) 0%, rgba(110, 1, 156, 0) 70%)" }}
-          />
+        <div className="text-center max-w-3xl mx-auto mb-20 relative">
 
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-serif font-black text-slate-900 mb-6 tracking-tight leading-[1.15]">
-            What Our Clients Say About <span className="bg-gradient-to-r from-brand-vibrant via-brand-medium to-brand-dark bg-clip-text text-transparent">Zystra</span>
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-black text-slate-900 mb-6 tracking-tight leading-[1.15]">
+            Where Strategy Meets <span className="bg-gradient-to-r from-brand-vibrant via-brand-medium to-brand-dark bg-clip-text text-transparent">Real Growth</span>
           </h2>
-          <p className="text-slate-500 text-sm sm:text-lg leading-relaxed max-w-xl mx-auto font-normal">
-            Real feedback from brand owners who <span className="text-slate-800 font-semibold border-b border-brand-vibrant/20 pb-0.5">scaled</span> their operations.
+          <p className="text-slate-500 text-base sm:text-lg leading-relaxed max-w-xl mx-auto font-normal">
+            We don't just deliver campaigns; we deliver business transformation. See how our clients scale their reach.
           </p>
         </div>
 
         {/* Testimonials Card Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-16 pt-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto pt-4">
           {testimonials.map((t, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 45 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.15 }}
-              className="relative select-text"
+              transition={{ duration: 0.35, delay: i * 0.08, ease: "easeOut" }}
+              whileHover={{ y: -8 }}
+              className="relative group cursor-pointer"
             >
+              {/* Dynamic Glow Background Effect on Hover */}
+              <div 
+                className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-2xl -z-10"
+                style={{ backgroundColor: t.glowColor }}
+              />
 
-
-              {/* Main Testimonial Card with custom Asymmetrical Blob border radius */}
-              <div className="w-full min-h-[380px] rounded-[3rem_8rem_3rem_6rem] bg-gradient-to-br from-brand-medium via-[#6e019c] to-brand-dark p-8 sm:p-10 text-white flex flex-col justify-between shadow-[0_20px_50px_rgba(110,1,156,0.16)] border-4 border-white hover:scale-[1.02] transition-transform duration-300 relative overflow-hidden group">
+              {/* Main Glassmorphic Testimonial Card */}
+              <div className="h-full bg-white/70 backdrop-blur-md rounded-3xl p-8 sm:p-10 border border-slate-200/80 shadow-[0_10px_30px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_40px_rgba(110,1,156,0.06)] hover:border-purple-200/80 transition-all duration-300 flex flex-col justify-between relative overflow-hidden">
                 
+                {/* Floating Metric Badge */}
+                <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/[0.03] rounded-bl-full -z-10 transition-all duration-500 group-hover:scale-110" />
+
                 {/* Top Section */}
                 <div>
-                  <div className="flex items-center justify-between gap-4 mb-6">
-                    <div className="flex gap-1 text-amber-300">
-                      {[...Array(5)].map((_, idx) => (
-                        <Star key={idx} className="w-4 h-4 fill-current" />
-                      ))}
+                  <div className="flex items-center justify-between mb-8">
+                    {/* Star Rating & Category Tag */}
+                    <div>
+                      <span className="inline-block px-2.5 py-1 rounded-md bg-slate-100 text-slate-600 text-[10px] font-mono font-bold tracking-wider uppercase mb-2">
+                        {t.tag}
+                      </span>
+                      <div className="flex gap-1 text-amber-400 mt-1">
+                        {[...Array(5)].map((_, idx) => (
+                          <Star key={idx} className="w-3.5 h-3.5 fill-current" />
+                        ))}
+                      </div>
                     </div>
 
-                    {/* Circular initial avatar */}
-                    <div className="w-11 h-11 rounded-full border-2 border-white/60 flex items-center justify-center text-white font-mono font-black text-base bg-white/10 shadow-inner select-none shrink-0">
-                      {t.initial}
-                    </div>
+                    {/* Quote Icon Accent */}
+                    <Quote className="w-8 h-8 text-purple-100 group-hover:text-purple-200/80 transition-colors duration-300" />
                   </div>
 
-                  <h3 className="font-serif font-black text-lg tracking-wider mb-1 uppercase select-text">
-                    {t.name}
-                  </h3>
-                  <div className="text-[10px] font-mono font-black tracking-widest text-purple-200 uppercase mb-4">
-                    REVIEW
+                  {/* Main Metric Callout */}
+                  <div className="mb-6">
+                    <span className="text-4xl sm:text-5xl font-mono font-black bg-gradient-to-r from-brand-vibrant to-purple-600 bg-clip-text text-transparent">
+                      {t.metric}
+                    </span>
+                    <span className="block text-xs font-mono font-bold text-slate-400 uppercase tracking-widest mt-1">
+                      {t.metricLabel}
+                    </span>
                   </div>
 
-                  <p className="font-serif text-white/95 text-sm sm:text-base leading-relaxed italic pr-2 select-text">
+                  {/* Client Quote */}
+                  <p className="font-sans text-slate-600 text-sm sm:text-[15px] leading-relaxed mb-8 relative z-10 italic">
                     "{t.quote}"
                   </p>
                 </div>
 
-                {/* Bottom Section */}
-                <div className="mt-8 pt-4 border-t border-white/10 flex items-center justify-between text-xs font-mono select-none">
-                  <span className="text-purple-200/90 font-bold uppercase tracking-wider">
-                    {t.role}
-                  </span>
-                  <span className="text-white font-black hover:text-amber-200 transition-colors cursor-pointer flex items-center gap-1">
-                    VERIFIED STORY ↗
-                  </span>
+                {/* Bottom Section: Client Details */}
+                <div className="pt-6 border-t border-slate-100 flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    {/* Avatar Initials with custom premium gradients */}
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-brand-vibrant to-purple-600 flex items-center justify-center text-white font-mono font-bold text-sm shadow-sm">
+                      {t.initial}
+                    </div>
+                    <div>
+                      <h4 className="font-sans font-bold text-slate-800 text-sm uppercase tracking-wide">
+                        {t.name}
+                      </h4>
+                      <p className="text-[11px] text-slate-400 font-mono">
+                        {t.role}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Verified Story Action Link */}
+                  <div className="flex items-center gap-0.5 text-purple-600 group-hover:text-purple-700 text-xs font-mono font-bold tracking-wider opacity-60 group-hover:opacity-100 transition-all duration-300">
+                    <span>CASE</span>
+                    <ArrowUpRight className="w-3.5 h-3.5" />
+                  </div>
                 </div>
               </div>
             </motion.div>

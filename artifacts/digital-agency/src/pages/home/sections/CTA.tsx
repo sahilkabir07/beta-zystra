@@ -17,7 +17,7 @@ import { Button } from "@/components/ui/button";
 
 export default function CTA() {
   return (
-    <section id="contact" className="py-28 sm:py-36 bg-[#fafbfc] relative overflow-hidden">
+    <section id="contact" className="py-28 sm:py-36 bg-white relative overflow-hidden">
       {styleBlock}
 
       {/* Outer Section Glow Blobs (Optimized with radial gradients, no performance-heavy blur filters) */}
