@@ -511,9 +511,9 @@ export default function WhatWeDo() {
             <p className="text-slate-800/90 text-sm sm:text-base font-semibold">We combine modern automation with hyper-local insight to deliver national-grade results.</p>
           </div>
 
-          <div className="relative w-full max-w-[1100px] mx-auto flex flex-col md:block gap-6 md:gap-0 min-h-0 md:h-[440px] md:min-h-[440px] mt-16">
-            {/* SVG Ropes/Strings behind cards on desktop */}
-            <svg className="absolute inset-0 w-full h-full pointer-events-none hidden md:block z-0" viewBox="0 0 1100 440" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <div className="relative w-full max-w-[1100px] mx-auto flex flex-col md:block gap-10 md:gap-0 min-h-0 md:h-[440px] md:min-h-[440px] mt-12 md:mt-16 pt-4 md:pt-0">
+            {/* SVG Ropes/Strings behind cards */}
+            <svg className="absolute inset-0 w-full h-full pointer-events-none block z-0 opacity-80 md:opacity-100" viewBox="0 0 1100 440" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
               {/* Single Drooping Rope - Shadow */}
               <path d="M 0,74 Q 550,129 1100,74" stroke="rgba(0,0,0,0.12)" strokeWidth="4" strokeLinecap="round" />
               {/* Single Drooping Rope - Tan Braided Base */}
@@ -531,7 +531,7 @@ export default function WhatWeDo() {
                 whileInView={{ 
                   opacity: 1, 
                   y: 0,
-                  rotate: isDesktop ? diff.rotate : 0
+                  rotate: diff.rotate
                 }}
                 viewport={{ once: true, margin: "-80px" }}
                 onAnimationComplete={() => setAnimatedCards(prev => ({ ...prev, [idx]: true }))}
@@ -577,10 +577,10 @@ export default function WhatWeDo() {
                   transformOrigin: "top center",
                   willChange: "transform"
                 }}
-                className={"flex flex-col justify-between w-full max-w-[280px] mx-auto md:max-w-none md:mx-0 relative border border-slate-200/60 shadow-[0_8px_20px_-6px_rgba(0,0,0,0.05),0_4px_6px_-2px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_35px_-8px_rgba(0,0,0,0.12),0_10px_20px_-8px_rgba(0,0,0,0.08)] transition-shadow duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] " + diff.positionClass}
+                className={"flex flex-col justify-between w-full max-w-[300px] mx-auto md:max-w-none md:mx-0 relative border border-slate-200/60 shadow-[0_12px_28px_-6px_rgba(0,0,0,0.08),0_4px_6px_-2px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_35px_-8px_rgba(0,0,0,0.12),0_10px_20px_-8px_rgba(0,0,0,0.08)] transition-shadow duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] " + diff.positionClass}
               >
-                {/* Wooden Clothespin clip for desktop */}
-                <div className="absolute -top-[23px] left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center z-50 pointer-events-none select-none filter drop-shadow-[0_3px_3px_rgba(0,0,0,0.22)]">
+                {/* Wooden Clothespin clip for all screens */}
+                <div className="absolute -top-[23px] left-1/2 -translate-x-1/2 flex flex-col items-center z-50 pointer-events-none select-none filter drop-shadow-[0_3px_3px_rgba(0,0,0,0.22)]">
                   {/* Wood top peg handle */}
                   <div className="w-[10px] h-[16px] bg-gradient-to-b from-[#e5c49f] to-[#cc9d6a] border border-[#9c754c] rounded-t-[4px]" />
                   {/* Metal spring hoop */}
