@@ -92,8 +92,8 @@ export default function HowWeWork() {
 
         {/* Winding Timeline Path Container */}
         <div className="relative max-w-5xl mx-auto">
-          {/* Vertical Winding SVG Road (visible on desktop) */}
-          <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-32 pointer-events-none hidden lg:block -z-10">
+          {/* Vertical Winding SVG Road (Visible on ALL screens) */}
+          <div className="absolute left-6 lg:left-1/2 -translate-x-1/2 top-0 bottom-0 w-8 lg:w-32 pointer-events-none -z-10">
             <svg
               viewBox="0 0 100 800"
               preserveAspectRatio="none"
@@ -101,23 +101,23 @@ export default function HowWeWork() {
             >
               {/* Outer Thick Glow Path */}
               <path
-                d="M 50 6 C 50 40, 25 60, 25 100 C 25 200, 75 200, 75 300 C 75 400, 25 400, 25 500 C 25 600, 75 600, 75 700 C 75 750, 50 760, 50 794"
+                d="M 50 6 C 50 40, 50 60, 50 100 C 50 200, 50 200, 50 300 C 50 400, 50 400, 50 500 C 50 600, 50 600, 50 700 C 50 750, 50 760, 50 794"
                 fill="none"
-                stroke="rgba(110, 1, 156, 0.04)"
+                stroke="rgba(110, 1, 156, 0.06)"
                 strokeWidth="20"
                 strokeLinecap="round"
               />
               {/* Inner Track Path */}
               <path
-                d="M 50 6 C 50 40, 25 60, 25 100 C 25 200, 75 200, 75 300 C 75 400, 25 400, 25 500 C 25 600, 75 600, 75 700 C 75 750, 50 760, 50 794"
+                d="M 50 6 C 50 40, 50 60, 50 100 C 50 200, 50 200, 50 300 C 50 400, 50 400, 50 500 C 50 600, 50 600, 50 700 C 50 750, 50 760, 50 794"
                 fill="none"
-                stroke="rgba(110, 1, 156, 0.1)"
+                stroke="rgba(110, 1, 156, 0.15)"
                 strokeWidth="10"
                 strokeLinecap="round"
               />
               {/* Animated Center Dash flow */}
               <motion.path
-                d="M 50 6 C 50 40, 25 60, 25 100 C 25 200, 75 200, 75 300 C 75 400, 25 400, 25 500 C 25 600, 75 600, 75 700 C 75 750, 50 760, 50 794"
+                d="M 50 6 C 50 40, 50 60, 50 100 C 50 200, 50 200, 50 300 C 50 400, 50 400, 50 500 C 50 600, 50 600, 50 700 C 50 750, 50 760, 50 794"
                 fill="none"
                 stroke="#6e019c"
                 strokeWidth="3"
@@ -142,28 +142,35 @@ export default function HowWeWork() {
           </div>
 
           {/* Steps List */}
-          <div className="space-y-24 lg:space-y-36">
+          <div className="space-y-16 lg:space-y-36 pl-10 lg:pl-0">
             {steps.map((st, idx) => {
               const isEven = idx % 2 === 0;
 
               return (
                 <div
                   key={idx}
-                  className={`flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-20 ${
+                  className={`relative flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-20 ${
                     !isEven ? "lg:flex-row-reverse" : ""
                   }`}
                 >
+                  {/* Step Number Badge directly connected on Timeline Path for Mobile */}
+                  <div
+                    className={`lg:hidden absolute -left-10 top-0 w-10 h-10 rounded-full border-2 border-white shadow-md bg-gradient-to-tr ${st.color} flex items-center justify-center font-bold text-white text-xs font-mono z-20 select-none`}
+                  >
+                    {st.step}
+                  </div>
+
                   {/* Left/Right Visual Illustration Card */}
                   <div className="w-full lg:w-1/2 flex justify-center">
                     <motion.div
                       initial={{ opacity: 0, scale: 0.92 }}
                       whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true, margin: "-100px" }}
+                      viewport={{ once: true, margin: "-80px" }}
                       transition={{ duration: 0.35, delay: 0.05, ease: "easeOut" }}
                       className="relative w-full max-w-md aspect-video lg:aspect-[4/3] rounded-3xl border border-slate-100 shadow-[0_12px_35px_rgba(0,0,0,0.04)] bg-white group"
                     >
                       {/* Image Wrapper to handle rounding and clipping */}
-                      <div className="w-full h-full rounded-3xl overflow-hidden relative bg-white flex items-center justify-center p-6">
+                      <div className="w-full h-full rounded-3xl overflow-hidden relative bg-white flex items-center justify-center p-5 lg:p-6">
                         {/* 3D Illustration Image */}
                         <img
                           src={st.image}
@@ -172,19 +179,11 @@ export default function HowWeWork() {
                         />
                       </div>
 
-                      {/* Number Circle Badge (Sits on center line timeline) */}
-                      {/* On desktop, absolute positioned at the inner side to lay over the central winding road */}
+                      {/* Number Circle Badge (Sits on center line timeline on desktop) */}
                       <div
                         className={`hidden lg:flex absolute top-1/2 -translate-y-1/2 w-14 h-14 rounded-full border-[5px] border-white shadow-[0_8px_20px_rgba(0,0,0,0.12)] bg-gradient-to-tr ${st.color} items-center justify-center font-bold text-white text-base font-mono z-20 select-none
                           ${isEven ? "right-0 translate-x-1/2" : "left-0 -translate-x-1/2"}
                         `}
-                      >
-                        {st.step}
-                      </div>
-
-                      {/* Number Circle Badge (Mobile absolute fallback) */}
-                      <div
-                        className={`lg:hidden absolute top-4 left-4 w-11 h-11 rounded-full border-4 border-white shadow-md bg-gradient-to-tr ${st.color} flex items-center justify-center font-bold text-white text-xs font-mono z-20 select-none`}
                       >
                         {st.step}
                       </div>
@@ -194,24 +193,24 @@ export default function HowWeWork() {
                   {/* Left/Right Description Card */}
                   <div className="w-full lg:w-1/2 select-text">
                     <motion.div
-                      initial={{ opacity: 0, x: isEven ? 35 : -35 }}
+                      initial={{ opacity: 0, x: isEven ? 25 : -25 }}
                       whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true, margin: "-100px" }}
+                      viewport={{ once: true, margin: "-80px" }}
                       transition={{ duration: 0.35, delay: 0.08, ease: "easeOut" }}
                       className="max-w-md mx-auto lg:mx-0"
                     >
                       <span className={`text-[10px] font-mono font-black tracking-widest ${st.textColor} uppercase mb-2 block`}>
                         {st.tagline}
                       </span>
-                      <h3 className="text-2xl sm:text-3xl font-serif font-black text-slate-900 mb-4 tracking-tight leading-tight">
+                      <h3 className="text-2xl sm:text-3xl font-serif font-black text-slate-900 mb-3 sm:mb-4 tracking-tight leading-tight">
                         {st.title}
                       </h3>
-                      <p className="text-slate-655 text-sm sm:text-base leading-relaxed mb-6">
+                      <p className="text-slate-655 text-sm sm:text-base leading-relaxed mb-5 sm:mb-6">
                         {st.desc}
                       </p>
 
                       {/* Detailed Checklist */}
-                      <ul className="space-y-3">
+                      <ul className="space-y-2.5 sm:space-y-3">
                         {st.points.map((pt, pIdx) => (
                           <li
                             key={pIdx}
