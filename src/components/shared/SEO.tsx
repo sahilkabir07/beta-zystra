@@ -8,7 +8,7 @@ interface SEOProps {
   ogDescription?: string;
   ogImage?: string;
   ogImageAlt?: string;
-  schema?: Record<string, any>;
+  schema?: any;
 }
 
 export default function SEO({
