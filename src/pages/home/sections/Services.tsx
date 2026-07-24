@@ -203,23 +203,23 @@ export default function Services() {
                   <motion.div
                     variants={curtainVariants}
                     style={{ clipPath: "url(#curtain-clip)" }}
-                    className="absolute inset-0 p-6 pt-10 bg-gradient-to-br from-[#4c1380] via-[#350260] to-[#1b0033] text-white flex flex-col justify-between z-10"
+                    className="absolute inset-0 p-6 sm:p-8 pt-8 sm:pt-10 bg-gradient-to-br from-[#4c1380] via-[#350260] to-[#1b0033] text-white flex flex-col justify-between z-10"
                   >
-                    <motion.div variants={contentVariants} className="max-w-[52%] flex flex-col gap-3">
-                      <span className="text-xs font-mono font-bold text-purple-300 uppercase tracking-widest">
+                    <motion.div variants={contentVariants} className="max-w-[70%] sm:max-w-[52%] flex flex-col gap-2 sm:gap-3">
+                      <span className="text-[10px] sm:text-xs font-mono font-bold text-purple-300 uppercase tracking-widest">
                         {s.num}. SERVICE
                       </span>
                       <h3 className="text-base sm:text-lg font-serif font-extrabold tracking-tight leading-tight text-white">
                         {s.title}
                       </h3>
-                      <p className="text-white/85 text-[11.5px] sm:text-xs md:text-[13px] leading-relaxed font-sans">
+                      <p className="text-white/85 text-[11px] sm:text-xs md:text-[13px] leading-relaxed font-sans line-clamp-4 sm:line-clamp-none">
                         {s.desc}
                       </p>
                     </motion.div>
 
                     {/* Explore Button */}
-                    <motion.div variants={contentVariants}>
-                      <span className="inline-flex items-center justify-center gap-2 bg-brand-vibrant hover:bg-brand-medium text-white px-4.5 py-2.5 rounded-full text-[11px] font-bold transition-all shadow-md w-fit cursor-pointer hover:scale-105 active:scale-95">
+                    <motion.div variants={contentVariants} className="pt-2">
+                      <span className="inline-flex items-center justify-center gap-2 bg-brand-vibrant hover:bg-brand-medium text-white px-4 sm:px-4.5 py-2 sm:py-2.5 rounded-full text-[11px] font-bold transition-all shadow-md w-fit cursor-pointer hover:scale-105 active:scale-95">
                         Explore Service <ArrowRight className="w-3.5 h-3.5" />
                       </span>
                     </motion.div>
