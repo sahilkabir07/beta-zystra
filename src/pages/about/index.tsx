@@ -350,7 +350,7 @@ function FadeUp({ children, delay = 0, className = "" }: { children: React.React
 
 function HexTile({ item }: { item: any }) {
   return (
-    <div className="group relative w-[105px] h-[120px] min-[390px]:w-[118px] min-[390px]:h-[135px] sm:w-64 sm:h-[300px] md:w-[280px] md:h-[325px] cursor-pointer transition-all duration-500 hover:scale-[1.06] hover:z-50 shrink-0">
+    <div className="group relative w-[98px] h-[112px] min-[380px]:w-[110px] min-[380px]:h-[126px] sm:w-64 sm:h-[300px] md:w-[280px] md:h-[325px] cursor-pointer transition-all duration-500 hover:scale-[1.06] hover:z-50 shrink-0">
       {/* Hexagon Clipped Wrapper */}
       <div
         className="absolute inset-0 w-full h-full overflow-hidden bg-[#0d0722] shadow-[0_15px_35px_rgba(0,0,0,0.8)]"
@@ -372,24 +372,24 @@ function HexTile({ item }: { item: any }) {
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2/3 h-1 bg-gradient-to-r from-purple-500 via-fuchsia-400 to-indigo-500 blur-[1px] opacity-70 group-hover:opacity-100 transition-opacity" />
 
         {/* Inner Content */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-2 sm:p-6 gap-0.5 sm:gap-2.5 z-10">
-          <div className="w-5 h-5 sm:w-8 sm:h-8 rounded-full bg-purple-500/20 border border-purple-400/30 flex items-center justify-center text-purple-300 mb-0.5 sm:mb-1 group-hover:scale-110 group-hover:bg-purple-500 group-hover:text-white transition-all duration-300 shadow-[0_0_15px_rgba(168,85,247,0.3)]">
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-1.5 sm:p-6 gap-0.5 sm:gap-2.5 z-10">
+          <div className="w-4 h-4 min-[380px]:w-5 min-[380px]:h-5 sm:w-8 sm:h-8 rounded-full bg-purple-500/20 border border-purple-400/30 flex items-center justify-center text-purple-300 mb-0.5 sm:mb-1 group-hover:scale-110 group-hover:bg-purple-500 group-hover:text-white transition-all duration-300 shadow-[0_0_15px_rgba(168,85,247,0.3)]">
             <ArrowUpRight className="w-2.5 h-2.5 sm:w-4 sm:h-4" />
           </div>
 
           <h3
-            className="text-[9px] min-[390px]:text-[10px] sm:text-lg font-black text-white tracking-wider sm:tracking-widest uppercase group-hover:text-purple-200 transition-colors duration-300 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] leading-tight"
+            className="text-[8.5px] min-[380px]:text-[9.5px] sm:text-lg font-black text-white tracking-wider sm:tracking-widest uppercase group-hover:text-purple-200 transition-colors duration-300 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] leading-tight"
             style={{ fontFamily: "'Bricolage Grotesque', sans-serif" }}
           >
             {item.title}
           </h3>
 
-          <p className="text-[7.5px] min-[390px]:text-[8.5px] sm:text-xs text-slate-300 opacity-80 group-hover:opacity-100 max-w-[95%] sm:max-w-[85%] transition-opacity duration-300 font-sans leading-tight line-clamp-2">
+          <p className="text-[7px] min-[380px]:text-[8px] sm:text-xs text-slate-300 opacity-80 group-hover:opacity-100 max-w-[95%] sm:max-w-[85%] transition-opacity duration-300 font-sans leading-tight line-clamp-2">
             {item.subtitle}
           </p>
 
           <Link href={item.link}>
-            <span className="mt-0.5 sm:mt-1.5 inline-flex items-center gap-1 px-2 py-0.5 sm:px-4 sm:py-1.5 rounded-full bg-purple-500/20 group-hover:bg-gradient-to-r group-hover:from-purple-600 group-hover:to-indigo-600 border border-purple-400/40 text-[7px] min-[390px]:text-[8px] sm:text-[10px] font-mono tracking-widest text-purple-200 group-hover:text-white uppercase transition-all duration-300 backdrop-blur-md shadow-lg group-hover:shadow-[0_0_20px_rgba(168,85,247,0.5)]">
+            <span className="mt-0.5 sm:mt-1.5 inline-flex items-center gap-1 px-1.5 py-0.5 sm:px-4 sm:py-1.5 rounded-full bg-purple-500/20 group-hover:bg-gradient-to-r group-hover:from-purple-600 group-hover:to-indigo-600 border border-purple-400/40 text-[6.5px] min-[380px]:text-[7.5px] sm:text-[10px] font-mono tracking-widest text-purple-200 group-hover:text-white uppercase transition-all duration-300 backdrop-blur-md shadow-lg group-hover:shadow-[0_0_20px_rgba(168,85,247,0.5)]">
               LEARN <ArrowRight className="w-2 h-2 sm:w-3 sm:h-3 group-hover:translate-x-0.5 transition-transform" />
             </span>
           </Link>
@@ -470,7 +470,7 @@ function HexagonHoneycombSection() {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[950px] h-[600px] bg-purple-600/15 blur-[160px] rounded-full pointer-events-none z-0" />
 
       {/* Center-Aligned Section Header (Watermark 02 Removed) */}
-      <div className="max-w-7xl mx-auto px-6 sm:px-[5vw] relative z-10 pt-24 sm:pt-36">
+      <div className="max-w-7xl mx-auto px-2 sm:px-[5vw] relative z-10 pt-24 sm:pt-36">
         <div className="mb-14 md:mb-20 text-center max-w-3xl mx-auto flex flex-col items-center">
           <FadeUp>
             <div className="inline-flex items-center gap-2.5 px-4.5 py-1.5 rounded-full border border-purple-500/30 bg-purple-500/10 text-purple-300 text-xs font-mono tracking-[0.2em] uppercase mb-4">
@@ -498,7 +498,7 @@ function HexagonHoneycombSection() {
         {/* Honeycomb Hexagon Matrix (Identical 3-2-1 Interlocked Layout on Mobile & Desktop) */}
         <div className="flex flex-col items-center justify-center relative my-6 pb-24 select-none w-full overflow-x-hidden">
           {/* Row 1: 3 Hexagons */}
-          <div className="flex items-center justify-center gap-1.5 min-[400px]:gap-3.5 sm:gap-8 md:gap-10 z-10 w-full">
+          <div className="flex items-center justify-center gap-1 min-[380px]:gap-2 sm:gap-8 md:gap-10 z-10 w-full">
             {hexItems.slice(0, 3).map((item, idx) => (
               <FadeUp key={idx} delay={idx * 0.1}>
                 <HexTile item={item} />
@@ -507,7 +507,7 @@ function HexagonHoneycombSection() {
           </div>
 
           {/* Row 2: 2 Hexagons (Interlocked into gaps) */}
-          <div className="flex items-center justify-center gap-1.5 min-[400px]:gap-3.5 sm:gap-8 md:gap-10 -mt-6 min-[400px]:-mt-8 sm:-mt-12 md:-mt-16 z-20 w-full">
+          <div className="flex items-center justify-center gap-1 min-[380px]:gap-2 sm:gap-8 md:gap-10 -mt-5 min-[380px]:-mt-7 sm:-mt-12 md:-mt-16 z-20 w-full">
             {hexItems.slice(3, 5).map((item, idx) => (
               <FadeUp key={idx} delay={0.3 + idx * 0.1}>
                 <HexTile item={item} />
@@ -516,7 +516,7 @@ function HexagonHoneycombSection() {
           </div>
 
           {/* Row 3: 1 Hexagon (Centered underneath) */}
-          <div className="flex items-center justify-center -mt-6 min-[400px]:-mt-8 sm:-mt-12 md:-mt-16 z-30 w-full">
+          <div className="flex items-center justify-center -mt-5 min-[380px]:-mt-7 sm:-mt-12 md:-mt-16 z-30 w-full">
             <FadeUp delay={0.5}>
               <HexTile item={hexItems[5]} />
             </FadeUp>
