@@ -67,8 +67,8 @@ export default function Testimonials() {
           </p>
         </div>
 
-        {/* Testimonials Card Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto pt-4">
+        {/* Testimonials Horizontal Carousel on Mobile / 3-Col Grid on Desktop */}
+        <div className="flex overflow-x-auto snap-x snap-mandatory gap-5 pb-8 px-2 scrollbar-none lg:grid lg:grid-cols-3 lg:gap-8 max-w-6xl mx-auto pt-4 lg:overflow-visible lg:px-0 lg:pb-0">
           {testimonials.map((t, i) => (
             <motion.div
               key={i}
@@ -77,7 +77,7 @@ export default function Testimonials() {
               viewport={{ once: true }}
               transition={{ duration: 0.35, delay: i * 0.08, ease: "easeOut" }}
               whileHover={{ y: -8 }}
-              className="relative group cursor-pointer"
+              className="snap-center min-w-[285px] max-w-[315px] sm:min-w-[340px] w-full flex-shrink-0 lg:min-w-0 lg:max-w-none lg:flex-shrink relative group cursor-pointer"
             >
               {/* Dynamic Glow Background Effect on Hover */}
               <div 
@@ -86,17 +86,17 @@ export default function Testimonials() {
               />
 
               {/* Main Glassmorphic Testimonial Card */}
-              <div className="h-full bg-white/70 backdrop-blur-md rounded-3xl p-8 sm:p-10 border border-slate-200/80 shadow-[0_10px_30px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_40px_rgba(110,1,156,0.06)] hover:border-purple-200/80 transition-all duration-300 flex flex-col justify-between relative overflow-hidden">
+              <div className="h-full bg-white/80 backdrop-blur-md rounded-3xl p-6 sm:p-10 border border-slate-200/80 shadow-[0_10px_30px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_40px_rgba(110,1,156,0.06)] hover:border-purple-200/80 transition-all duration-300 flex flex-col justify-between relative overflow-hidden">
                 
                 {/* Floating Metric Badge */}
                 <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/[0.03] rounded-bl-full -z-10 transition-all duration-500 group-hover:scale-110" />
 
                 {/* Top Section */}
                 <div>
-                  <div className="flex items-center justify-between mb-8">
+                  <div className="flex items-center justify-between mb-6 sm:mb-8">
                     {/* Star Rating & Category Tag */}
                     <div>
-                      <span className="inline-block px-2.5 py-1 rounded-md bg-slate-100 text-slate-600 text-[10px] font-mono font-bold tracking-wider uppercase mb-2">
+                      <span className="inline-block px-2.5 py-1 rounded-md bg-slate-100 text-slate-600 text-[10px] font-mono font-bold tracking-wider uppercase mb-1.5">
                         {t.tag}
                       </span>
                       <div className="flex gap-1 text-amber-400 mt-1">
@@ -107,37 +107,37 @@ export default function Testimonials() {
                     </div>
 
                     {/* Quote Icon Accent */}
-                    <Quote className="w-8 h-8 text-purple-100 group-hover:text-purple-200/80 transition-colors duration-300" />
+                    <Quote className="w-7 h-7 sm:w-8 sm:h-8 text-purple-100 group-hover:text-purple-200/80 transition-colors duration-300" />
                   </div>
 
                   {/* Main Metric Callout */}
-                  <div className="mb-6">
-                    <span className="text-4xl sm:text-5xl font-mono font-black bg-gradient-to-r from-brand-vibrant to-purple-600 bg-clip-text text-transparent">
+                  <div className="mb-5 sm:mb-6">
+                    <span className="text-3xl sm:text-5xl font-mono font-black bg-gradient-to-r from-brand-vibrant to-purple-600 bg-clip-text text-transparent">
                       {t.metric}
                     </span>
-                    <span className="block text-xs font-mono font-bold text-slate-400 uppercase tracking-widest mt-1">
+                    <span className="block text-[11px] sm:text-xs font-mono font-bold text-slate-400 uppercase tracking-widest mt-1">
                       {t.metricLabel}
                     </span>
                   </div>
 
                   {/* Client Quote */}
-                  <p className="font-sans text-slate-600 text-sm sm:text-[15px] leading-relaxed mb-8 relative z-10 italic">
+                  <p className="font-sans text-slate-600 text-xs sm:text-[15px] leading-relaxed mb-6 sm:mb-8 relative z-10 italic">
                     "{t.quote}"
                   </p>
                 </div>
 
                 {/* Bottom Section: Client Details */}
-                <div className="pt-6 border-t border-slate-100 flex items-center justify-between">
+                <div className="pt-5 border-t border-slate-100 flex items-center justify-between">
                   <div className="flex items-center gap-3">
                     {/* Avatar Initials with custom premium gradients */}
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-brand-vibrant to-purple-600 flex items-center justify-center text-white font-mono font-bold text-sm shadow-sm">
+                    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-gradient-to-tr from-brand-vibrant to-purple-600 flex items-center justify-center text-white font-mono font-bold text-xs sm:text-sm shadow-sm">
                       {t.initial}
                     </div>
                     <div>
-                      <h4 className="font-sans font-bold text-slate-800 text-sm uppercase tracking-wide">
+                      <h4 className="font-sans font-bold text-slate-800 text-xs sm:text-sm uppercase tracking-wide">
                         {t.name}
                       </h4>
-                      <p className="text-[11px] text-slate-400 font-mono">
+                      <p className="text-[10px] sm:text-[11px] text-slate-400 font-mono">
                         {t.role}
                       </p>
                     </div>
@@ -152,6 +152,13 @@ export default function Testimonials() {
               </div>
             </motion.div>
           ))}
+        </div>
+
+        {/* Mobile Swipe Hint Dots (visible only on screens smaller than lg) */}
+        <div className="flex lg:hidden items-center justify-center gap-2 mt-4">
+          <span className="w-6 h-1.5 rounded-full bg-brand-vibrant" />
+          <span className="w-1.5 h-1.5 rounded-full bg-purple-300" />
+          <span className="w-1.5 h-1.5 rounded-full bg-purple-300" />
         </div>
       </div>
     </section>
