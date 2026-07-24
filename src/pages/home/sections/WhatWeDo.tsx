@@ -362,19 +362,19 @@ export default function WhatWeDo() {
             </div>
           </div>
 
-          {/* Right Side: Creative Geometric Overlapping Cards (Clean Overlap with 100% Visible Text) */}
-          <div className="lg:col-span-6 flex flex-col items-center sm:items-start relative select-none pt-2 sm:pt-0">
+          {/* Right Side: Creative Geometric Tilted Overlapping Cards */}
+          <div className="lg:col-span-6 flex flex-col items-center sm:items-start relative select-none pt-4 sm:pt-0 pb-4">
             {/* Ambient glows behind cards */}
             <div 
               className="absolute inset-0 pointer-events-none -z-10 opacity-60" 
               style={{ background: "radial-gradient(circle, rgba(110, 1, 156, 0.08) 0%, rgba(86, 29, 154, 0.08) 50%, rgba(0,0,0,0) 70%)" }}
             />
 
-            {/* Card 1: Front / Identity */}
+            {/* Card 1: Front / Identity (Tilted Left) */}
             <motion.div
-              whileHover={{ y: -6, rotate: -1, scale: 1.01 }}
+              whileHover={{ y: -6, rotate: 0, scale: 1.02 }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              className="relative w-full max-w-[460px] rounded-2xl bg-white border border-slate-200/80 shadow-[0_15px_35px_rgba(0,0,0,0.06)] overflow-hidden flex z-0 self-start sm:self-auto"
+              className="relative w-full max-w-[460px] rounded-2xl bg-white border border-slate-200/80 shadow-[0_15px_35px_rgba(0,0,0,0.06)] overflow-hidden flex z-0 self-start sm:self-auto -rotate-[2.5deg] sm:-rotate-[3.5deg] origin-bottom-left transition-transform duration-300"
             >
               {/* Left Geometric graphic column */}
               <div className="relative w-[38%] sm:w-[42%] min-h-[160px] bg-slate-50 flex items-center justify-center overflow-hidden border-r border-slate-100 shrink-0">
@@ -410,7 +410,7 @@ export default function WhatWeDo() {
               </div>
               
               {/* Right text box - Paragraph 1 content */}
-              <div className="flex-1 flex flex-col justify-center p-4 sm:p-6 bg-white text-slate-800 select-text pb-8 sm:pb-6">
+              <div className="flex-1 flex flex-col justify-center p-4 sm:p-6 bg-white text-slate-800 select-text pb-6 sm:pb-6">
                 <div className="mb-1.5 sm:mb-2">
                   <span className="text-[9px] sm:text-[10px] font-mono font-bold tracking-[0.22em] text-brand-vibrant uppercase select-none">SYSTEMS VS PACKAGES</span>
                 </div>
@@ -420,11 +420,11 @@ export default function WhatWeDo() {
               </div>
             </motion.div>
 
-            {/* Card 2: Overlapping Back Card (Clean Overlap without covering text) */}
+            {/* Card 2: Overlapping Back Card (Tilted Right) */}
             <motion.div
-              whileHover={{ y: -6, rotate: 1, scale: 1.01 }}
+              whileHover={{ y: -6, rotate: 0, scale: 1.02 }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              className="relative w-full max-w-[460px] rounded-2xl bg-white border border-slate-200/80 shadow-[0_20px_45px_rgba(110,1,156,0.12)] overflow-hidden flex self-end -mt-6 sm:-mt-12 lg:-mt-16 z-10 hover:z-20 transition-all"
+              className="relative w-full max-w-[460px] rounded-2xl bg-white border border-slate-200/80 shadow-[0_20px_45px_rgba(110,1,156,0.14)] overflow-hidden flex self-end -mt-10 sm:-mt-14 lg:-mt-16 z-10 rotate-[2.5deg] sm:rotate-[3.5deg] origin-top-right hover:z-20 transition-transform duration-300"
             >
               {/* Left Geometric graphic column */}
               <div className="relative w-[38%] sm:w-[42%] min-h-[160px] bg-slate-50 flex flex-col justify-end p-4 sm:p-5 overflow-hidden border-r border-slate-100 shrink-0">
