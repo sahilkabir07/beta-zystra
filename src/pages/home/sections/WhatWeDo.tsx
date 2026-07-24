@@ -362,19 +362,19 @@ export default function WhatWeDo() {
             </div>
           </div>
 
-          {/* Right Side: Creative Geometric Overlapping Cards */}
-          <div className="lg:col-span-6 flex flex-col gap-6 relative select-none">
-            {/* Ambient glows behind cards (Optimized, no filter blurs) */}
+          {/* Right Side: Creative Geometric Overlapping Cards (Mobile & Desktop Overlap) */}
+          <div className="lg:col-span-6 flex flex-col items-center sm:items-start relative select-none pt-2 sm:pt-0">
+            {/* Ambient glows behind cards */}
             <div 
               className="absolute inset-0 pointer-events-none -z-10 opacity-60" 
               style={{ background: "radial-gradient(circle, rgba(110, 1, 156, 0.08) 0%, rgba(86, 29, 154, 0.08) 50%, rgba(0,0,0,0) 70%)" }}
             />
 
-            {/* Card 1: Front / Identity - Housed with Paragraph 1 */}
+            {/* Card 1: Front / Identity */}
             <motion.div
-              whileHover={{ y: -6, rotate: -1 }}
+              whileHover={{ y: -6, rotate: -1, scale: 1.01 }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              className="relative w-full max-w-[460px] aspect-[1.75/1] rounded-2xl bg-white border border-slate-200/80 shadow-[0_15px_35px_rgba(0,0,0,0.03)] overflow-hidden flex"
+              className="relative w-full max-w-[460px] aspect-[1.75/1] rounded-2xl bg-white border border-slate-200/80 shadow-[0_15px_35px_rgba(0,0,0,0.06)] overflow-hidden flex z-0 self-start sm:self-auto"
             >
               {/* Left Geometric graphic column */}
               <div className="relative w-[42%] h-full bg-slate-50 flex items-center justify-center overflow-hidden border-r border-slate-100">
@@ -410,24 +410,24 @@ export default function WhatWeDo() {
               </div>
               
               {/* Right text box - Paragraph 1 content */}
-              <div className="flex-1 h-full flex flex-col justify-center p-5 sm:p-6 bg-white text-slate-800 select-text">
-                <div className="mb-2">
-                  <span className="text-[10px] font-mono font-bold tracking-[0.22em] text-brand-vibrant uppercase select-none">SYSTEMS VS PACKAGES</span>
+              <div className="flex-1 h-full flex flex-col justify-center p-4 sm:p-6 bg-white text-slate-800 select-text">
+                <div className="mb-1.5 sm:mb-2">
+                  <span className="text-[9px] sm:text-[10px] font-mono font-bold tracking-[0.22em] text-brand-vibrant uppercase select-none">SYSTEMS VS PACKAGES</span>
                 </div>
-                <p className="text-[11px] sm:text-xs leading-relaxed text-slate-600 font-medium">
+                <p className="text-[10px] sm:text-xs leading-relaxed text-slate-600 font-medium">
                   Most agencies sell you packages. <strong className="text-slate-950 font-black bg-gradient-to-r from-brand-vibrant to-brand-medium bg-clip-text text-transparent">We build you systems.</strong> At Zystra, every strategy is custom-crafted using AI-driven insights, real-time data, and deep market understanding.
                 </p>
               </div>
             </motion.div>
 
-            {/* Card 2: Back / Details - Housed with Paragraph 3 */}
+            {/* Card 2: Overlapping Back Card (Overlaps Card 1 on Mobile & Desktop) */}
             <motion.div
-              whileHover={{ y: -6, rotate: 1 }}
+              whileHover={{ y: -6, rotate: 1, scale: 1.01 }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              className="relative w-full max-w-[460px] aspect-[1.75/1] rounded-2xl bg-white border border-slate-200/80 shadow-[0_15px_35px_rgba(0,0,0,0.03)] overflow-hidden flex self-end lg:mt-[-80px] z-10"
+              className="relative w-full max-w-[460px] aspect-[1.75/1] rounded-2xl bg-white border border-slate-200/80 shadow-[0_20px_45px_rgba(110,1,156,0.12)] overflow-hidden flex self-end -mt-14 sm:-mt-20 lg:-mt-20 z-10 hover:z-20 transition-all"
             >
               {/* Left Geometric graphic column */}
-              <div className="relative w-[42%] h-full bg-slate-50 flex flex-col justify-end p-5 overflow-hidden border-r border-slate-100">
+              <div className="relative w-[42%] h-full bg-slate-50 flex flex-col justify-end p-4 sm:p-5 overflow-hidden border-r border-slate-100">
                 {/* Diagonal Purple/Vibrant background polygon */}
                 <div 
                   className="absolute top-0 left-0 w-full h-[55%] bg-gradient-to-br from-brand-medium to-brand-vibrant origin-top-left"
@@ -439,16 +439,16 @@ export default function WhatWeDo() {
                   style={{ clipPath: "polygon(0 20%, 100% 0, 100% 100%, 0 100%)" }}
                 />
                 <div className="relative z-10 select-none">
-                  <span className="text-[11px] font-sans font-black tracking-widest text-white uppercase leading-none block">ZYSTRA</span>
+                  <span className="text-[10px] sm:text-[11px] font-sans font-black tracking-widest text-white uppercase leading-none block">ZYSTRA</span>
                 </div>
               </div>
               
               {/* Right side contact details - Paragraph 3 content */}
-              <div className="flex-1 h-full flex flex-col justify-center p-5 sm:p-6 bg-white text-slate-800 select-text">
-                <div className="mb-2">
-                  <span className="text-[10px] font-mono font-bold tracking-[0.22em] text-brand-medium uppercase select-none">FULL-STACK SOLUTIONS</span>
+              <div className="flex-1 h-full flex flex-col justify-center p-4 sm:p-6 bg-white text-slate-800 select-text">
+                <div className="mb-1.5 sm:mb-2">
+                  <span className="text-[9px] sm:text-[10px] font-mono font-bold tracking-[0.22em] text-brand-medium uppercase select-none">FULL-STACK SOLUTIONS</span>
                 </div>
-                <p className="text-[11px] sm:text-xs leading-relaxed text-slate-600 font-medium">
+                <p className="text-[10px] sm:text-xs leading-relaxed text-slate-600 font-medium">
                   We are a full-stack digital growth agency based in Bihar — offering SEO, ads, web design, branding, and apps. <span className="text-slate-900 font-semibold underline decoration-wavy decoration-brand-medium/60 decoration-1 underline-offset-4">One team. Every solution. Zero guesswork.</span>
                 </p>
               </div>
