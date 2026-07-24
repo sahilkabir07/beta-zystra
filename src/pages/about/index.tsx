@@ -1347,40 +1347,40 @@ export default function AboutUsPage() {
             </div>
 
             {/* Unified Outer Container Box Shell */}
-            <div className="max-w-5xl mx-auto relative rounded-[24px] sm:rounded-[36px] border border-purple-500/20 bg-[#070412]/80 p-2.5 sm:p-8 md:p-10 backdrop-blur-2xl shadow-2xl">
-              <div className="grid grid-cols-3 gap-1.5 sm:gap-6 md:gap-8 items-stretch">
+            <div className="max-w-5xl mx-auto relative rounded-[20px] sm:rounded-[36px] border border-purple-500/20 bg-[#070412]/80 p-2 min-[380px]:p-3.5 sm:p-8 md:p-10 backdrop-blur-2xl shadow-2xl">
+              <div className="grid grid-cols-3 gap-1 min-[380px]:gap-2 sm:gap-6 md:gap-8 items-stretch">
                 
                 {/* ── CARD 01 (LEFT - StatCard UI Styled) ── */}
                 <FadeUp delay={0.1} className="flex">
-                  <div className="group relative w-full rounded-2xl sm:rounded-3xl overflow-hidden border border-purple-500/25 bg-[#0a0618]/90 backdrop-blur-xl p-2.5 min-[390px]:p-3.5 sm:p-7 flex flex-col justify-between shadow-[0_15px_35px_rgba(0,0,0,0.6)] hover:border-purple-400/50 hover:shadow-[0_20px_40px_rgba(110,1,156,0.35)] transition-all duration-500">
+                  <div className="group relative w-full rounded-xl sm:rounded-3xl overflow-hidden border border-purple-500/25 bg-[#0a0618]/90 backdrop-blur-xl p-2 min-[380px]:p-3 sm:p-7 flex flex-col justify-between shadow-[0_15px_35px_rgba(0,0,0,0.6)] hover:border-purple-400/50 hover:shadow-[0_20px_40px_rgba(110,1,156,0.35)] transition-all duration-500">
                     {/* Glowing Bottom Light Bar */}
-                    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-4/5 h-2 bg-gradient-to-r from-purple-600 via-purple-300 to-indigo-500 blur-md opacity-80 group-hover:opacity-100 transition-opacity" />
+                    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-4/5 h-1.5 sm:h-2 bg-gradient-to-r from-purple-600 via-purple-300 to-indigo-500 blur-md opacity-80 group-hover:opacity-100 transition-opacity" />
                     <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-3/4 h-16 bg-purple-600/35 blur-2xl rounded-full pointer-events-none" />
 
                     <div>
                       {/* Top Header: Subtitle & Dropdown Pill */}
-                      <div className="flex items-center justify-between mb-2 sm:mb-6 text-[8px] min-[390px]:text-[9.5px] sm:text-[11px] font-mono text-slate-400">
-                        <span className="truncate pr-1 uppercase text-[8px] min-[390px]:text-[9.5px] sm:text-[11px]">01. Advantage</span>
-                        <div className="flex items-center gap-0.5 sm:gap-1.5 px-1.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-white/[0.06] border border-white/10 text-slate-300 shrink-0 text-[7.5px] min-[390px]:text-[9px] sm:text-xs">
+                      <div className="flex items-center justify-between mb-1.5 sm:mb-6 text-[7.5px] min-[380px]:text-[8.5px] sm:text-[11px] font-mono text-slate-400">
+                        <span className="truncate pr-0.5 uppercase">01. Advantage</span>
+                        <div className="flex items-center gap-0.5 sm:gap-1.5 px-1 py-0.5 sm:px-3 sm:py-1 rounded-full bg-white/[0.06] border border-white/10 text-slate-300 shrink-0 text-[6.5px] min-[380px]:text-[7.5px] sm:text-xs">
                           <span>National</span>
-                          <svg className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <svg className="w-2 h-2 sm:w-3 sm:h-3 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
                           </svg>
                         </div>
                       </div>
 
-                      <h4 className="text-[10px] min-[390px]:text-[11.5px] sm:text-2xl font-bold text-white mb-1.5 sm:mb-3 leading-tight group-hover:text-purple-300 transition-colors" style={{ fontFamily: "'Bricolage Grotesque', serif" }}>
+                      <h4 className="text-[9.5px] min-[380px]:text-[11px] sm:text-2xl font-bold text-white mb-1 sm:mb-3 leading-tight group-hover:text-purple-300 transition-colors" style={{ fontFamily: "'Bricolage Grotesque', serif" }}>
                         Industry Depth. National Execution.
                       </h4>
-                      <p className="text-slate-400 text-[8px] min-[390px]:text-[9.5px] sm:text-sm leading-tight sm:leading-relaxed font-sans">
-                        Deep experience across 10+ industries combined with tools and talent of a national-level agency.
+                      <p className="text-slate-400 text-[7.5px] min-[380px]:text-[8.5px] sm:text-sm leading-tight sm:leading-relaxed font-sans line-clamp-2 sm:line-clamp-none">
+                        Deep experience across 10+ industries combined with national-level tools.
                       </p>
                     </div>
 
-                    <div className="pt-2 sm:pt-6 mt-2 sm:mt-6 border-t border-white/10 z-10">
+                    <div className="pt-1.5 sm:pt-6 mt-1.5 sm:mt-6 border-t border-white/10 z-10">
                       <Link href="/services">
-                        <span className="inline-flex items-center gap-1 sm:gap-2 text-[7.5px] min-[390px]:text-[9px] sm:text-xs font-mono font-bold text-purple-400 hover:text-purple-300 uppercase tracking-widest cursor-pointer transition-colors">
-                          LEARN MORE <ArrowRight className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5" />
+                        <span className="inline-flex items-center gap-1 sm:gap-2 text-[6.5px] min-[380px]:text-[8px] sm:text-xs font-mono font-bold text-purple-400 hover:text-purple-300 uppercase tracking-widest cursor-pointer transition-colors">
+                          LEARN <ArrowRight className="w-2 h-2 sm:w-3.5 sm:h-3.5" />
                         </span>
                       </Link>
                     </div>
@@ -1389,35 +1389,35 @@ export default function AboutUsPage() {
 
                 {/* ── CARD 02 (CENTER POP-OUT - StatCard Dark UI Styled) ── */}
                 <FadeUp delay={0.2} className="flex">
-                  <div className="group relative z-30 -my-2 min-[390px]:-my-3 sm:-my-8 md:-my-14 w-full rounded-2xl sm:rounded-3xl overflow-hidden border border-purple-500/40 bg-[#0a0618]/95 backdrop-blur-xl p-2.5 min-[390px]:p-3.5 sm:p-7 flex flex-col justify-between shadow-[0_20px_45px_rgba(110,1,156,0.4)] hover:border-purple-400 transition-all duration-500 hover:scale-[1.03]">
+                  <div className="group relative z-30 -my-1.5 min-[380px]:-my-2.5 sm:-my-8 md:-my-14 w-full rounded-xl sm:rounded-3xl overflow-hidden border border-purple-500/40 bg-[#0a0618]/95 backdrop-blur-xl p-2 min-[380px]:p-3 sm:p-7 flex flex-col justify-between shadow-[0_20px_45px_rgba(110,1,156,0.4)] hover:border-purple-400 transition-all duration-500 hover:scale-[1.03]">
                     {/* Glowing Bottom Light Bar */}
-                    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-4/5 h-2 bg-gradient-to-r from-purple-600 via-purple-300 to-indigo-500 blur-md opacity-90 group-hover:opacity-100 transition-opacity" />
+                    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-4/5 h-1.5 sm:h-2 bg-gradient-to-r from-purple-600 via-purple-300 to-indigo-500 blur-md opacity-90 group-hover:opacity-100 transition-opacity" />
                     <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-3/4 h-16 bg-purple-600/40 blur-2xl rounded-full pointer-events-none" />
 
                     <div>
                       {/* Top Header: Subtitle & Dropdown Pill */}
-                      <div className="flex items-center justify-between mb-2 sm:mb-6 text-[8px] min-[390px]:text-[9.5px] sm:text-[11px] font-mono text-slate-400">
-                        <span className="truncate pr-1 uppercase text-[8px] min-[390px]:text-[9.5px] sm:text-[11px]">02. Featured</span>
-                        <div className="flex items-center gap-0.5 sm:gap-1.5 px-1.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-purple-500/15 border border-purple-500/30 text-purple-300 shrink-0 font-bold text-[7.5px] min-[390px]:text-[9px] sm:text-xs">
+                      <div className="flex items-center justify-between mb-1.5 sm:mb-6 text-[7.5px] min-[380px]:text-[8.5px] sm:text-[11px] font-mono text-slate-400">
+                        <span className="truncate pr-0.5 uppercase">02. Featured</span>
+                        <div className="flex items-center gap-0.5 sm:gap-1.5 px-1 py-0.5 sm:px-3 sm:py-1 rounded-full bg-purple-500/15 border border-purple-500/30 text-purple-300 shrink-0 font-bold text-[6.5px] min-[380px]:text-[7.5px] sm:text-xs">
                           <span>Popular</span>
-                          <svg className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-purple-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <svg className="w-2 h-2 sm:w-3 sm:h-3 text-purple-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
                           </svg>
                         </div>
                       </div>
 
-                      <h4 className="text-[10px] min-[390px]:text-[11.5px] sm:text-2xl font-bold text-white mb-1.5 sm:mb-3 leading-tight group-hover:text-purple-300 transition-colors" style={{ fontFamily: "'Bricolage Grotesque', serif" }}>
+                      <h4 className="text-[9.5px] min-[380px]:text-[11px] sm:text-2xl font-bold text-white mb-1 sm:mb-3 leading-tight group-hover:text-purple-300 transition-colors" style={{ fontFamily: "'Bricolage Grotesque', serif" }}>
                         Premium Strategy, Honest Pricing.
                       </h4>
-                      <p className="text-slate-400 text-[8px] min-[390px]:text-[9.5px] sm:text-sm leading-tight sm:leading-relaxed font-sans">
-                        World-class digital marketing built around real business value and complete transparency — no markups.
+                      <p className="text-slate-400 text-[7.5px] min-[380px]:text-[8.5px] sm:text-sm leading-tight sm:leading-relaxed font-sans line-clamp-2 sm:line-clamp-none">
+                        World-class digital marketing built around real business value.
                       </p>
                     </div>
 
-                    <div className="pt-2 sm:pt-6 mt-2 sm:mt-6 border-t border-white/10 z-10">
+                    <div className="pt-1.5 sm:pt-6 mt-1.5 sm:mt-6 border-t border-white/10 z-10">
                       <Link href="/services">
-                        <span className="inline-flex items-center gap-1 sm:gap-2 text-[7.5px] min-[390px]:text-[9px] sm:text-xs font-mono font-bold text-purple-400 hover:text-purple-300 uppercase tracking-widest cursor-pointer transition-colors">
-                          LEARN MORE <ArrowRight className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5" />
+                        <span className="inline-flex items-center gap-1 sm:gap-2 text-[6.5px] min-[380px]:text-[8px] sm:text-xs font-mono font-bold text-purple-400 hover:text-purple-300 uppercase tracking-widest cursor-pointer transition-colors">
+                          LEARN <ArrowRight className="w-2 h-2 sm:w-3.5 sm:h-3.5" />
                         </span>
                       </Link>
                     </div>
@@ -1426,35 +1426,35 @@ export default function AboutUsPage() {
 
                 {/* ── CARD 03 (RIGHT - StatCard UI Styled) ── */}
                 <FadeUp delay={0.3} className="flex">
-                  <div className="group relative w-full rounded-2xl sm:rounded-3xl overflow-hidden border border-purple-500/25 bg-[#0a0618]/90 backdrop-blur-xl p-2.5 min-[390px]:p-3.5 sm:p-7 flex flex-col justify-between shadow-[0_15px_35px_rgba(0,0,0,0.6)] hover:border-purple-400/50 hover:shadow-[0_20px_40px_rgba(110,1,156,0.35)] transition-all duration-500">
+                  <div className="group relative w-full rounded-xl sm:rounded-3xl overflow-hidden border border-purple-500/25 bg-[#0a0618]/90 backdrop-blur-xl p-2 min-[380px]:p-3 sm:p-7 flex flex-col justify-between shadow-[0_15px_35px_rgba(0,0,0,0.6)] hover:border-purple-400/50 hover:shadow-[0_20px_40px_rgba(110,1,156,0.35)] transition-all duration-500">
                     {/* Glowing Bottom Light Bar */}
-                    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-4/5 h-2 bg-gradient-to-r from-purple-600 via-purple-300 to-indigo-500 blur-md opacity-80 group-hover:opacity-100 transition-opacity" />
+                    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-4/5 h-1.5 sm:h-2 bg-gradient-to-r from-purple-600 via-purple-300 to-indigo-500 blur-md opacity-80 group-hover:opacity-100 transition-opacity" />
                     <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-3/4 h-16 bg-purple-600/35 blur-2xl rounded-full pointer-events-none" />
 
                     <div>
                       {/* Top Header: Subtitle & Dropdown Pill */}
-                      <div className="flex items-center justify-between mb-2 sm:mb-6 text-[8px] min-[390px]:text-[9.5px] sm:text-[11px] font-mono text-slate-400">
-                        <span className="truncate pr-1 uppercase text-[8px] min-[390px]:text-[9.5px] sm:text-[11px]">03. AI Tech</span>
-                        <div className="flex items-center gap-0.5 sm:gap-1.5 px-1.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-white/[0.06] border border-white/10 text-slate-300 shrink-0 text-[7.5px] min-[390px]:text-[9px] sm:text-xs">
+                      <div className="flex items-center justify-between mb-1.5 sm:mb-6 text-[7.5px] min-[380px]:text-[8.5px] sm:text-[11px] font-mono text-slate-400">
+                        <span className="truncate pr-0.5 uppercase">03. AI Tech</span>
+                        <div className="flex items-center gap-0.5 sm:gap-1.5 px-1 py-0.5 sm:px-3 sm:py-1 rounded-full bg-white/[0.06] border border-white/10 text-slate-300 shrink-0 text-[6.5px] min-[380px]:text-[7.5px] sm:text-xs">
                           <span>Active</span>
-                          <svg className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <svg className="w-2 h-2 sm:w-3 sm:h-3 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
                           </svg>
                         </div>
                       </div>
 
-                      <h4 className="text-[10px] min-[390px]:text-[11.5px] sm:text-2xl font-bold text-white mb-1.5 sm:mb-3 leading-tight group-hover:text-purple-300 transition-colors" style={{ fontFamily: "'Bricolage Grotesque', serif" }}>
+                      <h4 className="text-[9.5px] min-[380px]:text-[11px] sm:text-2xl font-bold text-white mb-1 sm:mb-3 leading-tight group-hover:text-purple-300 transition-colors" style={{ fontFamily: "'Bricolage Grotesque', serif" }}>
                         AI Tools + Human Creativity.
                       </h4>
-                      <p className="text-slate-400 text-[8px] min-[390px]:text-[9.5px] sm:text-sm leading-tight sm:leading-relaxed font-sans">
-                        We leverage cutting-edge AI for research & analysis, driven by human creative strategy for ROI.
+                      <p className="text-slate-400 text-[7.5px] min-[380px]:text-[8.5px] sm:text-sm leading-tight sm:leading-relaxed font-sans line-clamp-2 sm:line-clamp-none">
+                        Cutting-edge AI research driven by human creative strategy for ROI.
                       </p>
                     </div>
 
-                    <div className="pt-2 sm:pt-6 mt-2 sm:mt-6 border-t border-white/10 z-10">
+                    <div className="pt-1.5 sm:pt-6 mt-1.5 sm:mt-6 border-t border-white/10 z-10">
                       <Link href="/services">
-                        <span className="inline-flex items-center gap-1 sm:gap-2 text-[7.5px] min-[390px]:text-[9px] sm:text-xs font-mono font-bold text-purple-400 hover:text-purple-300 uppercase tracking-widest cursor-pointer transition-colors">
-                          LEARN MORE <ArrowRight className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5" />
+                        <span className="inline-flex items-center gap-1 sm:gap-2 text-[6.5px] min-[380px]:text-[8px] sm:text-xs font-mono font-bold text-purple-400 hover:text-purple-300 uppercase tracking-widest cursor-pointer transition-colors">
+                          LEARN <ArrowRight className="w-2 h-2 sm:w-3.5 sm:h-3.5" />
                         </span>
                       </Link>
                     </div>
