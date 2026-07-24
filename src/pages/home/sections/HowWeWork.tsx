@@ -92,8 +92,8 @@ export default function HowWeWork() {
 
         {/* Winding Timeline Path Container */}
         <div className="relative max-w-5xl mx-auto">
-          {/* Vertical Winding SVG Road (Visible on ALL screens) */}
-          <div className="absolute left-6 lg:left-1/2 -translate-x-1/2 top-0 bottom-0 w-8 lg:w-32 pointer-events-none -z-10">
+          {/* Vertical Winding SVG Road (Center aligned on ALL screens) */}
+          <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-24 lg:w-32 pointer-events-none -z-10 block">
             <svg
               viewBox="0 0 100 800"
               preserveAspectRatio="none"
@@ -101,23 +101,23 @@ export default function HowWeWork() {
             >
               {/* Outer Thick Glow Path */}
               <path
-                d="M 50 6 C 50 40, 50 60, 50 100 C 50 200, 50 200, 50 300 C 50 400, 50 400, 50 500 C 50 600, 50 600, 50 700 C 50 750, 50 760, 50 794"
+                d="M 50 6 C 50 40, 25 60, 25 100 C 25 200, 75 200, 75 300 C 75 400, 25 400, 25 500 C 25 600, 75 600, 75 700 C 75 750, 50 760, 50 794"
                 fill="none"
-                stroke="rgba(110, 1, 156, 0.06)"
+                stroke="rgba(110, 1, 156, 0.05)"
                 strokeWidth="20"
                 strokeLinecap="round"
               />
               {/* Inner Track Path */}
               <path
-                d="M 50 6 C 50 40, 50 60, 50 100 C 50 200, 50 200, 50 300 C 50 400, 50 400, 50 500 C 50 600, 50 600, 50 700 C 50 750, 50 760, 50 794"
+                d="M 50 6 C 50 40, 25 60, 25 100 C 25 200, 75 200, 75 300 C 75 400, 25 400, 25 500 C 25 600, 75 600, 75 700 C 75 750, 50 760, 50 794"
                 fill="none"
-                stroke="rgba(110, 1, 156, 0.15)"
+                stroke="rgba(110, 1, 156, 0.12)"
                 strokeWidth="10"
                 strokeLinecap="round"
               />
               {/* Animated Center Dash flow */}
               <motion.path
-                d="M 50 6 C 50 40, 50 60, 50 100 C 50 200, 50 200, 50 300 C 50 400, 50 400, 50 500 C 50 600, 50 600, 50 700 C 50 750, 50 760, 50 794"
+                d="M 50 6 C 50 40, 25 60, 25 100 C 25 200, 75 200, 75 300 C 75 400, 25 400, 25 500 C 25 600, 75 600, 75 700 C 75 750, 50 760, 50 794"
                 fill="none"
                 stroke="#6e019c"
                 strokeWidth="3"
@@ -142,7 +142,7 @@ export default function HowWeWork() {
           </div>
 
           {/* Steps List */}
-          <div className="space-y-16 lg:space-y-36 pl-10 lg:pl-0">
+          <div className="space-y-20 lg:space-y-36">
             {steps.map((st, idx) => {
               const isEven = idx % 2 === 0;
 
@@ -153,13 +153,6 @@ export default function HowWeWork() {
                     !isEven ? "lg:flex-row-reverse" : ""
                   }`}
                 >
-                  {/* Step Number Badge directly connected on Timeline Path for Mobile */}
-                  <div
-                    className={`lg:hidden absolute -left-10 top-0 w-10 h-10 rounded-full border-2 border-white shadow-md bg-gradient-to-tr ${st.color} flex items-center justify-center font-bold text-white text-xs font-mono z-20 select-none`}
-                  >
-                    {st.step}
-                  </div>
-
                   {/* Left/Right Visual Illustration Card */}
                   <div className="w-full lg:w-1/2 flex justify-center">
                     <motion.div
@@ -179,7 +172,7 @@ export default function HowWeWork() {
                         />
                       </div>
 
-                      {/* Number Circle Badge (Sits on center line timeline on desktop) */}
+                      {/* Step Number Circle Badge (Sits on center winding timeline road) */}
                       <div
                         className={`hidden lg:flex absolute top-1/2 -translate-y-1/2 w-14 h-14 rounded-full border-[5px] border-white shadow-[0_8px_20px_rgba(0,0,0,0.12)] bg-gradient-to-tr ${st.color} items-center justify-center font-bold text-white text-base font-mono z-20 select-none
                           ${isEven ? "right-0 translate-x-1/2" : "left-0 -translate-x-1/2"}
@@ -187,11 +180,18 @@ export default function HowWeWork() {
                       >
                         {st.step}
                       </div>
+
+                      {/* Step Number Badge for Mobile (Centered directly over central timeline road) */}
+                      <div
+                        className={`lg:hidden absolute -top-5 left-1/2 -translate-x-1/2 w-11 h-11 rounded-full border-4 border-white shadow-md bg-gradient-to-tr ${st.color} flex items-center justify-center font-bold text-white text-xs font-mono z-20 select-none`}
+                      >
+                        {st.step}
+                      </div>
                     </motion.div>
                   </div>
 
                   {/* Left/Right Description Card */}
-                  <div className="w-full lg:w-1/2 select-text">
+                  <div className="w-full lg:w-1/2 select-text text-center lg:text-left">
                     <motion.div
                       initial={{ opacity: 0, x: isEven ? 25 : -25 }}
                       whileInView={{ opacity: 1, x: 0 }}
@@ -210,7 +210,7 @@ export default function HowWeWork() {
                       </p>
 
                       {/* Detailed Checklist */}
-                      <ul className="space-y-2.5 sm:space-y-3">
+                      <ul className="space-y-2.5 sm:space-y-3 inline-block text-left">
                         {st.points.map((pt, pIdx) => (
                           <li
                             key={pIdx}
