@@ -127,7 +127,7 @@ export default function Hero() {
         {/* 
           STARBURST "LET'S TALK!" STICKER Positioned High Up
         */}
-        <div className="relative w-full max-w-5xl flex justify-end -mt-16 sm:-mt-24 lg:-mt-28 -mb-6 z-30 pointer-events-none pr-2 sm:pr-8">
+        <div className="relative w-full max-w-5xl flex justify-end mt-2 sm:-mt-20 lg:-mt-28 mb-0 sm:-mb-6 z-30 pointer-events-none pr-2 sm:pr-8">
           <motion.a
             href="/contact"
             initial={{ scale: 0.8, rotate: 12 }}
@@ -136,7 +136,7 @@ export default function Hero() {
             className="pointer-events-auto cursor-pointer group"
           >
             {/* Starburst Badge in Zystra Vibrant Purple (#6E019C) */}
-            <div className="relative w-32 h-32 sm:w-40 sm:h-40 flex items-center justify-center filter drop-shadow-2xl group-hover:scale-110 transition-transform duration-300">
+            <div className="relative w-28 h-28 sm:w-40 sm:h-40 flex items-center justify-center filter drop-shadow-2xl group-hover:scale-110 transition-transform duration-300">
               <svg className="absolute inset-0 w-full h-full text-[#6e019c] fill-current" viewBox="0 0 100 100">
                 <path d="M50 0 L61 11 L75 4 L80 18 L94 18 L93 33 L100 44 L93 56 L94 70 L80 71 L75 85 L61 78 L50 90 L39 78 L25 85 L20 71 L6 70 L7 56 L0 44 L7 33 L6 18 L20 18 L25 4 L39 11 Z" />
               </svg>
