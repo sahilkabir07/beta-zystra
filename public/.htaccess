@@ -1,15 +1,39 @@
-# 1. Enable Rewrite Engine for SPA routing (React / Wouter)
+# 1. MIME Types for Images & Web Assets
+<IfModule mod_mime.c>
+  AddType image/webp .webp
+  AddType image/png .png
+  AddType image/jpeg .jpg .jpeg .JPG .JPEG
+  AddType image/svg+xml .svg
+  AddType application/javascript .js
+  AddType text/css .css
+</IfModule>
+
+# 2. Allow Direct Access to Static Assets (Images, CSS, JS, WebP)
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
+
+  # Do not rewrite existing files or directories
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # Don't rewrite image/asset requests to index.html
+  RewriteRule ^.+\.(png|jpg|jpeg|gif|webp|svg|css|js|ico|woff|woff2|ttf|eot)$ - [L]
+
+  # Route all other SPA page requests to index.html
   RewriteRule ^index\.html$ - [L]
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_FILENAME} !-d
   RewriteRule . /index.html [L]
 </IfModule>
 
-# 2. Hostinger LiteSpeed Fallback Resource
+# 3. Hostinger Fallbacks
 FallbackResource /index.html
-
-# 3. Hostinger Custom 404 Error Document Fallback
 ErrorDocument 404 /index.html
+
+# 4. Enable CORS and Caching for Images
+<IfModule mod_headers.c>
+  <FilesMatch "\.(png|jpg|jpeg|webp|svg|ico)$">
+    Header set Access-Control-Allow-Origin "*"
+    Header set Cache-Control "max-age=2592000, public"
+  </FilesMatch>
+</IfModule>
