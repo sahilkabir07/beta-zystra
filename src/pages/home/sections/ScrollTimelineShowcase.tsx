@@ -164,12 +164,18 @@ export default function ScrollTimelineShowcase() {
   const card2 = useCardTransform(2);
   const card3 = useCardTransform(3);
 
-  // Captions Transitions mapping to scrollProgress
-  const captionOpacity0 = useTransform(smoothProgress, [0.0, 0.20, 0.40], [1, 0, 0]);
-  const captionOpacity1 = useTransform(smoothProgress, [0.45, 0.49, 0.58, 0.61], [0, 1, 1, 0]);
-  const captionOpacity2 = useTransform(smoothProgress, [0.58, 0.61, 0.72, 0.75], [0, 1, 1, 0]);
-  const captionOpacity3 = useTransform(smoothProgress, [0.72, 0.75, 0.86, 0.89], [0, 1, 1, 0]);
-  const captionOpacity4 = useTransform(smoothProgress, [0.86, 0.89], [0, 1]);
+  // Captions Transitions mapping to scrollProgress (strictly non-overlapping thresholds)
+  const captionOpacity0 = useTransform(smoothProgress, [0.0, 0.25, 0.35], [1, 1, 0]);
+  const captionOpacity1 = useTransform(smoothProgress, [0.40, 0.44, 0.52, 0.56], [0, 1, 1, 0]);
+  const captionOpacity2 = useTransform(smoothProgress, [0.58, 0.62, 0.69, 0.73], [0, 1, 1, 0]);
+  const captionOpacity3 = useTransform(smoothProgress, [0.75, 0.79, 0.86, 0.90], [0, 1, 1, 0]);
+  const captionOpacity4 = useTransform(smoothProgress, [0.92, 0.96], [0, 1]);
+
+  const captionY0 = useTransform(captionOpacity0, [0, 1], [15, 0]);
+  const captionY1 = useTransform(captionOpacity1, [0, 1], [15, 0]);
+  const captionY2 = useTransform(captionOpacity2, [0, 1], [15, 0]);
+  const captionY3 = useTransform(captionOpacity3, [0, 1], [15, 0]);
+  const captionY4 = useTransform(captionOpacity4, [0, 1], [15, 0]);
 
   // Metric updates tied to scroll
   const reachVal = useTransform(smoothProgress, [0.0, 0.32], [18450, 1400000]);
@@ -559,38 +565,38 @@ export default function ScrollTimelineShowcase() {
         </div>
 
         {/* Text Captions Overlay pinned in center-top */}
-        <div className="absolute top-24 sm:top-28 left-0 w-full text-center z-40 pointer-events-none px-6">
-          <motion.div style={{ opacity: captionOpacity0 }} className="absolute w-full left-0">
-            <h3 className="text-2xl md:text-3xl font-serif font-black text-slate-900 tracking-tight">LIVE ANALYTICS ENGINE</h3>
-            <p className="text-slate-500 max-w-md mx-auto mt-2 text-sm leading-relaxed">
+        <div className="absolute top-20 sm:top-28 left-0 w-full text-center z-40 pointer-events-none px-4 sm:px-6">
+          <motion.div style={{ opacity: captionOpacity0, y: captionY0 }} className="absolute w-full left-0 top-0">
+            <h3 className="text-xl sm:text-2xl md:text-3xl font-serif font-black text-slate-900 tracking-tight">LIVE ANALYTICS ENGINE</h3>
+            <p className="text-slate-500 max-w-md mx-auto mt-1.5 sm:mt-2 text-xs sm:text-sm leading-relaxed px-2">
               Explore how we integrate brand strategy and interactive design to create high-conversion digital ecosystems.
             </p>
           </motion.div>
 
-          <motion.div style={{ opacity: captionOpacity1 }} className="absolute w-full left-0">
-            <h3 className="text-2xl md:text-3xl font-serif font-black text-slate-900 tracking-tight">01 / DYNAMIC SOCIAL FEED</h3>
-            <p className="text-slate-500 max-w-md mx-auto mt-2 text-sm leading-relaxed">
+          <motion.div style={{ opacity: captionOpacity1, y: captionY1 }} className="absolute w-full left-0 top-0">
+            <h3 className="text-xl sm:text-2xl md:text-3xl font-serif font-black text-slate-900 tracking-tight">01 / DYNAMIC SOCIAL FEED</h3>
+            <p className="text-slate-500 max-w-md mx-auto mt-1.5 sm:mt-2 text-xs sm:text-sm leading-relaxed px-2">
               We design campaigns that stop scroll-fatigued feeds and demand complete attention across platforms.
             </p>
           </motion.div>
 
-          <motion.div style={{ opacity: captionOpacity2 }} className="absolute w-full left-0">
-            <h3 className="text-2xl md:text-3xl font-serif font-black text-slate-900 tracking-tight">02 / METRIC-DRIVEN ASSETS</h3>
-            <p className="text-slate-500 max-w-md mx-auto mt-2 text-sm leading-relaxed">
+          <motion.div style={{ opacity: captionOpacity2, y: captionY2 }} className="absolute w-full left-0 top-0">
+            <h3 className="text-xl sm:text-2xl md:text-3xl font-serif font-black text-slate-900 tracking-tight">02 / METRIC-DRIVEN ASSETS</h3>
+            <p className="text-slate-500 max-w-md mx-auto mt-1.5 sm:mt-2 text-xs sm:text-sm leading-relaxed px-2">
               Every visual asset and branding detail is built to elevate business conversions and analytics.
             </p>
           </motion.div>
 
-          <motion.div style={{ opacity: captionOpacity3 }} className="absolute w-full left-0">
-            <h3 className="text-2xl md:text-3xl font-serif font-black text-slate-900 tracking-tight">03 / ORGANIC AUDIENCE REACH</h3>
-            <p className="text-slate-500 max-w-md mx-auto mt-2 text-sm leading-relaxed">
+          <motion.div style={{ opacity: captionOpacity3, y: captionY3 }} className="absolute w-full left-0 top-0">
+            <h3 className="text-xl sm:text-2xl md:text-3xl font-serif font-black text-slate-900 tracking-tight">03 / ORGANIC AUDIENCE REACH</h3>
+            <p className="text-slate-500 max-w-md mx-auto mt-1.5 sm:mt-2 text-xs sm:text-sm leading-relaxed px-2">
               Scale traffic organic metrics directly with clean immersive UX that plays like a cinematic showcase.
             </p>
           </motion.div>
 
-          <motion.div style={{ opacity: captionOpacity4 }} className="absolute w-full left-0">
-            <h3 className="text-2xl md:text-3xl font-serif font-black text-slate-900 tracking-tight">04 / AMPLIFIED ENGAGEMENT</h3>
-            <p className="text-slate-500 max-w-md mx-auto mt-2 text-sm leading-relaxed">
+          <motion.div style={{ opacity: captionOpacity4, y: captionY4 }} className="absolute w-full left-0 top-0">
+            <h3 className="text-xl sm:text-2xl md:text-3xl font-serif font-black text-slate-900 tracking-tight">04 / AMPLIFIED ENGAGEMENT</h3>
+            <p className="text-slate-500 max-w-md mx-auto mt-1.5 sm:mt-2 text-xs sm:text-sm leading-relaxed px-2">
               Harness community building and viral structures to establish brand authority and conversion.
             </p>
           </motion.div>
