@@ -144,8 +144,8 @@ export default function Industries() {
           </p>
         </div>
 
-        {/* Desktop Interactive Mind Map (visible only on lg screens) */}
-        <div className="relative w-full aspect-[4/3] max-w-4xl mx-auto hidden lg:block">
+        {/* Interactive Mind Map (Responsive for ALL screen sizes) */}
+        <div className="relative w-full aspect-square max-w-[350px] sm:max-w-xl lg:max-w-4xl mx-auto block">
           {/* Connecting Lines SVG Layer */}
           <svg
             viewBox="0 0 1000 750"
@@ -182,12 +182,12 @@ export default function Industries() {
                         ? "rgba(110, 1, 156, 1)"
                         : isHubHovered
                         ? "rgba(110, 1, 156, 0.45)"
-                        : "rgba(110, 1, 156, 0.16)"
+                        : "rgba(110, 1, 156, 0.2)"
                     }
-                    strokeWidth={isHovered ? "3.5" : "2.5"}
-                    strokeDasharray="8 8"
+                    strokeWidth={isHovered ? "3.5" : "2"}
+                    strokeDasharray="6 6"
                     animate={{
-                      strokeDashoffset: isFlowing ? [0, -32] : [0, 0]
+                      strokeDashoffset: isFlowing ? [0, -24] : [0, 0]
                     }}
                     transition={{
                       repeat: Infinity,
@@ -208,43 +208,30 @@ export default function Industries() {
               scale: 1.04,
               boxShadow: "0 0 50px rgba(110, 1, 156, 0.45)"
             }}
-            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-52 h-52 rounded-full border-[6px] border-white shadow-[0_15px_45px_rgba(110,1,156,0.22)] bg-gradient-to-tr from-brand-dark via-brand-medium to-brand-vibrant flex flex-col items-center justify-center text-center p-6 text-white z-20 cursor-pointer select-none"
+            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 sm:w-40 sm:h-40 lg:w-52 lg:h-52 rounded-full border-[3px] sm:border-[5px] lg:border-[6px] border-white shadow-[0_10px_35px_rgba(110,1,156,0.22)] bg-gradient-to-tr from-brand-dark via-brand-medium to-brand-vibrant flex flex-col items-center justify-center text-center p-2 sm:p-5 lg:p-6 text-white z-20 cursor-pointer select-none"
           >
             {/* Animated Ripples */}
             <motion.div
-              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-56 h-56 rounded-full bg-brand-vibrant/5 -z-10"
+              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-28 h-28 sm:w-44 sm:h-44 lg:w-56 lg:h-56 rounded-full bg-brand-vibrant/5 -z-10"
               animate={{
                 scale: [1, 1.35],
                 opacity: [0.5, 0]
               }}
               transition={{
                 duration: 3,
-                repeat: Infinity,
-                ease: "easeOut"
-              }}
-            />
-            <motion.div
-              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-56 h-56 rounded-full bg-brand-medium/5 -z-10"
-              animate={{
-                scale: [1, 1.35],
-                opacity: [0.5, 0]
-              }}
-              transition={{
-                duration: 3,
-                delay: 1.5,
                 repeat: Infinity,
                 ease: "easeOut"
               }}
             />
 
-            <Network className="w-8 h-8 mb-2.5 text-white/95 animate-pulse" />
-            <span className="text-[10px] font-mono font-black tracking-[0.25em] text-purple-200 uppercase mb-1">
+            <Network className="w-4 h-4 sm:w-6 sm:h-6 lg:w-8 lg:h-8 mb-0.5 sm:mb-2 text-white/95 animate-pulse" />
+            <span className="text-[6px] sm:text-[9px] lg:text-[10px] font-mono font-black tracking-[0.2em] text-purple-200 uppercase mb-0.5">
               INDUSTRIES
             </span>
-            <h3 className="text-lg font-serif font-black leading-tight text-white px-2">
+            <h3 className="text-[10px] sm:text-base lg:text-lg font-serif font-black leading-tight text-white px-1">
               We Grow
             </h3>
-            <span className="text-xs font-mono font-medium text-purple-200 mt-1">
+            <span className="text-[6px] sm:text-[10px] lg:text-xs font-mono font-medium text-purple-200 mt-0.5">
               8 Core Areas
             </span>
           </motion.div>
@@ -270,17 +257,18 @@ export default function Industries() {
                   type: "spring",
                   stiffness: 220,
                   damping: 18,
-                  delay: idx * 0.04
+                  delay: idx * 0.03
                 }}
                 whileHover={{
                   scale: 1.07,
                   boxShadow: "0 20px 45px rgba(110, 1, 156, 0.25)",
                   zIndex: 30
                 }}
-                className={`absolute -translate-x-1/2 -translate-y-1/2 w-44 h-44 rounded-full border-[5px] transition-all duration-300 flex flex-col items-center justify-center text-center p-4 z-10 cursor-pointer select-none overflow-hidden
+                whileTap={{ scale: 1.05 }}
+                className={`absolute -translate-x-1/2 -translate-y-1/2 w-20 h-20 sm:w-36 sm:h-36 lg:w-44 lg:h-44 rounded-full border-[2.5px] sm:border-[4px] lg:border-[5px] transition-all duration-300 flex flex-col items-center justify-center text-center p-1 sm:p-3 lg:p-4 z-10 cursor-pointer select-none overflow-hidden
                   ${isHovered 
-                    ? "border-white shadow-[0_20px_45px_rgba(110,1,156,0.25)]" 
-                    : "bg-[#faf9fc] border-brand-medium/15 shadow-[0_12px_30px_rgba(0,0,0,0.035)]"
+                    ? "border-white shadow-[0_15px_35px_rgba(110,1,156,0.25)]" 
+                    : "bg-[#faf9fc] border-brand-medium/15 shadow-[0_8px_20px_rgba(0,0,0,0.035)]"
                   }
                 `}
               >
@@ -293,91 +281,27 @@ export default function Industries() {
                 {/* Content elements wrapped in relative to stack above the hover gradient */}
                 <div className="relative z-10 flex flex-col items-center justify-center">
                   {/* Number Badge */}
-                  <span className={`text-[9.5px] font-mono font-bold tracking-wider px-2 py-0.5 rounded-full mb-1.5 backdrop-blur-xs transition-colors duration-300
+                  <span className={`text-[5.5px] sm:text-[8px] lg:text-[9.5px] font-mono font-bold tracking-wider px-1 sm:px-2 py-0.2 sm:py-0.5 rounded-full mb-0.5 sm:mb-1.5 backdrop-blur-xs transition-colors duration-300
                     ${isHovered ? "bg-white/20 text-white" : "bg-brand-vibrant/10 text-brand-vibrant"}
                   `}>
                     {card.num}
                   </span>
 
                   {/* Industry Icon */}
-                  <Icon className={`w-5 h-5 mb-1.5 transition-colors duration-300 group-hover:scale-110
+                  <Icon className={`w-3.5 h-3.5 sm:w-4.5 sm:h-4.5 lg:w-5 lg:h-5 mb-0.5 sm:mb-1.5 transition-colors duration-300
                     ${isHovered ? "text-white" : "text-brand-vibrant"}
                   `} />
 
                   {/* Industry Name */}
-                  <h4 className={`text-xs sm:text-[13px] font-bold font-serif leading-tight mb-1 transition-colors duration-300
+                  <h4 className={`text-[7.5px] sm:text-xs lg:text-[13px] font-bold font-serif leading-tight mb-0.5 transition-colors duration-300 px-0.5
                     ${isHovered ? "text-white" : "text-brand-dark"}
                   `}>
                     {card.name}
                   </h4>
 
                   {/* Industry Desc */}
-                  <p className={`text-[9.5px] leading-snug font-normal px-1 line-clamp-3 transition-colors duration-300
+                  <p className={`hidden sm:block text-[8.5px] lg:text-[9.5px] leading-snug font-normal px-1 line-clamp-2 transition-colors duration-300
                     ${isHovered ? "text-white/85" : "text-slate-600"}
-                  `}>
-                    {card.desc}
-                  </p>
-                </div>
-              </motion.div>
-            );
-          })}
-        </div>
-
-        {/* Mobile/Tablet Circle Grid (visible only on screens smaller than lg) */}
-        <div className="lg:hidden mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 justify-center">
-          {industriesData.map((card, idx) => {
-            const Icon = card.icon;
-            const [localHover, setLocalHover] = useState(false);
-
-            return (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.28, delay: idx * 0.03, ease: "easeOut" }}
-                onHoverStart={() => setLocalHover(true)}
-                onHoverEnd={() => setLocalHover(false)}
-                whileHover={{
-                  scale: 1.04,
-                  boxShadow: "0 15px 35px rgba(110, 1, 156, 0.22)"
-                }}
-                className={`w-48 h-48 sm:w-52 sm:h-52 mx-auto rounded-full border-[5px] flex flex-col items-center justify-center text-center p-5 relative overflow-hidden transition-all duration-300 cursor-pointer select-none
-                  ${localHover 
-                    ? "border-white shadow-[0_15px_35px_rgba(110, 1, 156, 0.22)]" 
-                    : "bg-[#faf9fc] border-brand-medium/15 shadow-[0_12px_30px_rgba(0,0,0,0.035)]"
-                  }
-                `}
-              >
-                {/* Smooth hover gradient transition overlay */}
-                <div
-                  className="absolute inset-0 bg-gradient-to-br from-brand-medium to-brand-vibrant transition-opacity duration-300 z-0"
-                  style={{ opacity: localHover ? 1 : 0 }}
-                />
-
-                <div className="relative z-10 flex flex-col items-center justify-center">
-                  {/* Number Badge */}
-                  <span className={`text-[9.5px] font-mono font-bold tracking-wider px-2 py-0.5 rounded-full mb-2 backdrop-blur-xs transition-colors duration-300
-                    ${localHover ? "bg-white/20 text-white" : "bg-brand-vibrant/10 text-brand-vibrant"}
-                  `}>
-                    {card.num}
-                  </span>
-
-                  {/* Industry Icon */}
-                  <Icon className={`w-6 h-6 mb-2 transition-colors duration-300
-                    ${localHover ? "text-white" : "text-brand-vibrant"}
-                  `} />
-
-                  {/* Industry Name */}
-                  <h4 className={`text-xs sm:text-sm font-bold font-serif leading-tight mb-1 px-1 transition-colors duration-300
-                    ${localHover ? "text-white" : "text-brand-dark"}
-                  `}>
-                    {card.name}
-                  </h4>
-
-                  {/* Industry Desc */}
-                  <p className={`text-[10px] leading-snug font-normal px-2 line-clamp-3 transition-colors duration-300
-                    ${localHover ? "text-white/85" : "text-slate-600"}
                   `}>
                     {card.desc}
                   </p>
