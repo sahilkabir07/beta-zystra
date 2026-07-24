@@ -257,25 +257,25 @@ function StatCard({ stat, index }: { stat: any; index: number }) {
   return (
     <div
       onMouseEnter={handleMouseEnter}
-      className="group relative rounded-3xl overflow-hidden border border-purple-500/25 bg-[#0a0618]/90 backdrop-blur-xl p-6 sm:p-7 flex flex-col justify-between min-h-[350px] shadow-[0_15px_35px_rgba(0,0,0,0.6)] hover:border-purple-400/50 hover:shadow-[0_20px_40px_rgba(110,1,156,0.35)] transition-all duration-500 cursor-pointer"
+      className="group relative rounded-2xl sm:rounded-3xl overflow-hidden border border-purple-500/25 bg-[#0a0618]/90 backdrop-blur-xl p-3.5 sm:p-7 flex flex-col justify-between min-h-[250px] sm:min-h-[350px] shadow-[0_15px_35px_rgba(0,0,0,0.6)] hover:border-purple-400/50 hover:shadow-[0_20px_40px_rgba(110,1,156,0.35)] transition-all duration-500 cursor-pointer"
     >
       {/* Glowing Bottom Light Bar */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-4/5 h-2 bg-gradient-to-r from-purple-600 via-purple-300 to-indigo-500 blur-md opacity-80 group-hover:opacity-100 transition-opacity" />
       <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-3/4 h-16 bg-purple-600/35 blur-2xl rounded-full pointer-events-none" />
 
       {/* Card Header: Timestamp & Filter Pill */}
-      <div className="flex items-center justify-between z-10 text-[11px] font-mono text-slate-400">
-        <span className="truncate pr-2">{stat.timeframe}</span>
-        <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/[0.06] border border-white/10 text-slate-300 shrink-0">
+      <div className="flex items-center justify-between z-10 text-[9px] sm:text-[11px] font-mono text-slate-400">
+        <span className="truncate pr-1 font-sans font-medium text-[10px] sm:text-xs text-slate-300">{stat.timeframe}</span>
+        <div className="flex items-center gap-1 px-2 py-0.5 sm:px-3 sm:py-1 rounded-full bg-white/[0.06] border border-white/10 text-slate-300 shrink-0 text-[9px] sm:text-xs">
           <span>{stat.filter}</span>
-          <svg className="w-3 h-3 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
           </svg>
         </div>
       </div>
 
       {/* Chart Graphic Area with Grid & Dynamic Custom Graph */}
-      <div className="relative w-full h-32 my-3 flex items-center justify-center overflow-hidden">
+      <div className="relative w-full h-20 sm:h-32 my-1 sm:my-3 flex items-center justify-center overflow-hidden">
         {/* SVG Grid Overlay */}
         <svg className="absolute inset-0 w-full h-full opacity-15" viewBox="0 0 280 100">
           <pattern id={`grid-stat-${index}`} width="20" height="20" patternUnits="userSpaceOnUse">
@@ -289,24 +289,24 @@ function StatCard({ stat, index }: { stat: any; index: number }) {
       </div>
 
       {/* Metrics & Subtitles */}
-      <div className="relative z-10 flex flex-col items-center text-center gap-1.5 pt-1">
-        <span className="text-xs font-mono tracking-widest text-slate-400 uppercase" style={{ fontFamily: "MONO" }}>
+      <div className="relative z-10 flex flex-col items-center text-center gap-1 pt-0.5 sm:pt-1">
+        <span className="text-[9px] sm:text-xs font-mono tracking-widest text-slate-400 uppercase" style={{ fontFamily: "MONO" }}>
           {stat.label}
         </span>
 
-        <div className="flex items-baseline justify-center gap-1.5">
+        <div className="flex items-baseline justify-center gap-1">
           <span
             className="font-black text-white leading-none tracking-tight"
-            style={{ fontFamily: "'Bricolage Grotesque', sans-serif", fontSize: "clamp(34px, 4.5vw, 48px)" }}
+            style={{ fontFamily: "'Bricolage Grotesque', sans-serif", fontSize: "clamp(24px, 5.5vw, 48px)" }}
           >
             <AnimatedStatNumber key={`num-${animKey}`} value={stat.value} triggerKey={animKey} />
           </span>
-          <svg className="w-4 h-4 text-emerald-400 self-center group-hover:-translate-y-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400 self-center group-hover:-translate-y-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M5 10l7-7m0 0l7 7m-7-7v18" />
           </svg>
         </div>
 
-        <span className="text-[11px] font-mono text-slate-400/80 tracking-wide" style={{ fontFamily: "MONO" }}>
+        <span className="text-[9px] sm:text-[11px] font-mono text-slate-400/80 tracking-wide leading-tight truncate max-w-full" style={{ fontFamily: "MONO" }}>
           {stat.subtitle}
         </span>
       </div>
@@ -350,7 +350,7 @@ function FadeUp({ children, delay = 0, className = "" }: { children: React.React
 
 function HexTile({ item }: { item: any }) {
   return (
-    <div className="group relative w-56 h-[260px] sm:w-64 sm:h-[300px] md:w-[280px] md:h-[325px] cursor-pointer transition-all duration-500 hover:scale-[1.06] hover:z-50">
+    <div className="group relative w-[105px] h-[120px] min-[390px]:w-[118px] min-[390px]:h-[135px] sm:w-64 sm:h-[300px] md:w-[280px] md:h-[325px] cursor-pointer transition-all duration-500 hover:scale-[1.06] hover:z-50 shrink-0">
       {/* Hexagon Clipped Wrapper */}
       <div
         className="absolute inset-0 w-full h-full overflow-hidden bg-[#0d0722] shadow-[0_15px_35px_rgba(0,0,0,0.8)]"
@@ -372,25 +372,25 @@ function HexTile({ item }: { item: any }) {
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2/3 h-1 bg-gradient-to-r from-purple-500 via-fuchsia-400 to-indigo-500 blur-[1px] opacity-70 group-hover:opacity-100 transition-opacity" />
 
         {/* Inner Content */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6 gap-2.5 z-10">
-          <div className="w-8 h-8 rounded-full bg-purple-500/20 border border-purple-400/30 flex items-center justify-center text-purple-300 mb-1 group-hover:scale-110 group-hover:bg-purple-500 group-hover:text-white transition-all duration-300 shadow-[0_0_15px_rgba(168,85,247,0.3)]">
-            <ArrowUpRight className="w-4 h-4" />
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-2 sm:p-6 gap-0.5 sm:gap-2.5 z-10">
+          <div className="w-5 h-5 sm:w-8 sm:h-8 rounded-full bg-purple-500/20 border border-purple-400/30 flex items-center justify-center text-purple-300 mb-0.5 sm:mb-1 group-hover:scale-110 group-hover:bg-purple-500 group-hover:text-white transition-all duration-300 shadow-[0_0_15px_rgba(168,85,247,0.3)]">
+            <ArrowUpRight className="w-2.5 h-2.5 sm:w-4 sm:h-4" />
           </div>
 
           <h3
-            className="text-base sm:text-lg font-black text-white tracking-widest uppercase group-hover:text-purple-200 transition-colors duration-300 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]"
+            className="text-[9px] min-[390px]:text-[10px] sm:text-lg font-black text-white tracking-wider sm:tracking-widest uppercase group-hover:text-purple-200 transition-colors duration-300 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] leading-tight"
             style={{ fontFamily: "'Bricolage Grotesque', sans-serif" }}
           >
             {item.title}
           </h3>
 
-          <p className="text-xs text-slate-300 opacity-80 group-hover:opacity-100 max-w-[85%] transition-opacity duration-300 font-sans leading-relaxed">
+          <p className="text-[7.5px] min-[390px]:text-[8.5px] sm:text-xs text-slate-300 opacity-80 group-hover:opacity-100 max-w-[95%] sm:max-w-[85%] transition-opacity duration-300 font-sans leading-tight line-clamp-2">
             {item.subtitle}
           </p>
 
           <Link href={item.link}>
-            <span className="mt-1.5 inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-purple-500/20 group-hover:bg-gradient-to-r group-hover:from-purple-600 group-hover:to-indigo-600 border border-purple-400/40 text-[10px] font-mono tracking-widest text-purple-200 group-hover:text-white uppercase transition-all duration-300 backdrop-blur-md shadow-lg group-hover:shadow-[0_0_20px_rgba(168,85,247,0.5)]">
-              LEARN MORE <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+            <span className="mt-0.5 sm:mt-1.5 inline-flex items-center gap-1 px-2 py-0.5 sm:px-4 sm:py-1.5 rounded-full bg-purple-500/20 group-hover:bg-gradient-to-r group-hover:from-purple-600 group-hover:to-indigo-600 border border-purple-400/40 text-[7px] min-[390px]:text-[8px] sm:text-[10px] font-mono tracking-widest text-purple-200 group-hover:text-white uppercase transition-all duration-300 backdrop-blur-md shadow-lg group-hover:shadow-[0_0_20px_rgba(168,85,247,0.5)]">
+              LEARN <ArrowRight className="w-2 h-2 sm:w-3 sm:h-3 group-hover:translate-x-0.5 transition-transform" />
             </span>
           </Link>
         </div>
@@ -495,10 +495,10 @@ function HexagonHoneycombSection() {
           </FadeUp>
         </div>
 
-        {/* Honeycomb Hexagon Matrix */}
-        <div className="flex flex-col items-center justify-center relative my-6 pb-24 select-none">
+        {/* Honeycomb Hexagon Matrix (Identical 3-2-1 Interlocked Layout on Mobile & Desktop) */}
+        <div className="flex flex-col items-center justify-center relative my-6 pb-24 select-none w-full overflow-x-hidden">
           {/* Row 1: 3 Hexagons */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:flex md:items-center md:justify-center gap-6 sm:gap-8 md:gap-10 z-10">
+          <div className="flex items-center justify-center gap-1.5 min-[400px]:gap-3.5 sm:gap-8 md:gap-10 z-10 w-full">
             {hexItems.slice(0, 3).map((item, idx) => (
               <FadeUp key={idx} delay={idx * 0.1}>
                 <HexTile item={item} />
@@ -506,8 +506,8 @@ function HexagonHoneycombSection() {
             ))}
           </div>
 
-          {/* Row 2: 2 Hexagons (Interlocked into gaps on desktop) */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:flex md:items-center md:justify-center gap-6 sm:gap-8 md:gap-10 mt-6 md:-mt-16 z-20">
+          {/* Row 2: 2 Hexagons (Interlocked into gaps) */}
+          <div className="flex items-center justify-center gap-1.5 min-[400px]:gap-3.5 sm:gap-8 md:gap-10 -mt-6 min-[400px]:-mt-8 sm:-mt-12 md:-mt-16 z-20 w-full">
             {hexItems.slice(3, 5).map((item, idx) => (
               <FadeUp key={idx} delay={0.3 + idx * 0.1}>
                 <HexTile item={item} />
@@ -515,8 +515,8 @@ function HexagonHoneycombSection() {
             ))}
           </div>
 
-          {/* Row 3: 1 Hexagon (Centered underneath on desktop) */}
-          <div className="flex items-center justify-center mt-6 md:-mt-16 z-30">
+          {/* Row 3: 1 Hexagon (Centered underneath) */}
+          <div className="flex items-center justify-center -mt-6 min-[400px]:-mt-8 sm:-mt-12 md:-mt-16 z-30 w-full">
             <FadeUp delay={0.5}>
               <HexTile item={hexItems[5]} />
             </FadeUp>
@@ -1216,8 +1216,8 @@ export default function AboutUsPage() {
         {/* Background glow effects */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[300px] bg-purple-600/10 blur-[140px] rounded-full pointer-events-none" />
 
-        <div className="max-w-7xl mx-auto px-6 sm:px-[5vw] relative z-10">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-[5vw] relative z-10">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-6 lg:gap-8">
             {[
               {
                 value: "50+",
