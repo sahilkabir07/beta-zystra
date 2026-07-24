@@ -1,6 +1,29 @@
 import React, { useEffect, useState, useRef } from "react";
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring, useMotionValueEvent, AnimatePresence } from "framer-motion";
 import { TrendingUp, Heart, MessageCircle } from "lucide-react";
+
+const CAPTIONS = [
+  {
+    title: "LIVE ANALYTICS ENGINE",
+    desc: "Explore how we integrate brand strategy and interactive design to create high-conversion digital ecosystems."
+  },
+  {
+    title: "01 / DYNAMIC SOCIAL FEED",
+    desc: "We design campaigns that stop scroll-fatigued feeds and demand complete attention across platforms."
+  },
+  {
+    title: "02 / METRIC-DRIVEN ASSETS",
+    desc: "Every visual asset and branding detail is built to elevate business conversions and analytics."
+  },
+  {
+    title: "03 / ORGANIC AUDIENCE REACH",
+    desc: "Scale traffic organic metrics directly with clean immersive UX that plays like a cinematic showcase."
+  },
+  {
+    title: "04 / AMPLIFIED ENGAGEMENT",
+    desc: "Harness community building and viral structures to establish brand authority and conversion."
+  }
+];
 
 const reachFormatter = (v: number) => {
   const rounded = Math.floor(v);
@@ -58,6 +81,19 @@ export default function ScrollTimelineShowcase() {
 
   // Direct scrollYProgress for instant, silky 120 FPS Lenis scroll response
   const smoothProgress = scrollYProgress;
+
+  const [currentStep, setCurrentStep] = useState(0);
+
+  useMotionValueEvent(smoothProgress, "change", (p: number) => {
+    let step = 0;
+    if (p < 0.38) step = 0;
+    else if (p < 0.56) step = 1;
+    else if (p < 0.73) step = 2;
+    else if (p < 0.89) step = 3;
+    else step = 4;
+
+    setCurrentStep(step);
+  });
 
   // Central Mockup Animations
   const scale = useTransform(smoothProgress,
@@ -564,42 +600,25 @@ export default function ScrollTimelineShowcase() {
           </motion.div>
         </div>
 
-        {/* Text Captions Overlay pinned in center-top */}
-        <div className="absolute top-20 sm:top-28 left-0 w-full text-center z-40 pointer-events-none px-4 sm:px-6">
-          <motion.div style={{ opacity: captionOpacity0, y: captionY0 }} className="absolute w-full left-0 top-0">
-            <h3 className="text-xl sm:text-2xl md:text-3xl font-serif font-black text-slate-900 tracking-tight">LIVE ANALYTICS ENGINE</h3>
-            <p className="text-slate-500 max-w-md mx-auto mt-1.5 sm:mt-2 text-xs sm:text-sm leading-relaxed px-2">
-              Explore how we integrate brand strategy and interactive design to create high-conversion digital ecosystems.
-            </p>
-          </motion.div>
-
-          <motion.div style={{ opacity: captionOpacity1, y: captionY1 }} className="absolute w-full left-0 top-0">
-            <h3 className="text-xl sm:text-2xl md:text-3xl font-serif font-black text-slate-900 tracking-tight">01 / DYNAMIC SOCIAL FEED</h3>
-            <p className="text-slate-500 max-w-md mx-auto mt-1.5 sm:mt-2 text-xs sm:text-sm leading-relaxed px-2">
-              We design campaigns that stop scroll-fatigued feeds and demand complete attention across platforms.
-            </p>
-          </motion.div>
-
-          <motion.div style={{ opacity: captionOpacity2, y: captionY2 }} className="absolute w-full left-0 top-0">
-            <h3 className="text-xl sm:text-2xl md:text-3xl font-serif font-black text-slate-900 tracking-tight">02 / METRIC-DRIVEN ASSETS</h3>
-            <p className="text-slate-500 max-w-md mx-auto mt-1.5 sm:mt-2 text-xs sm:text-sm leading-relaxed px-2">
-              Every visual asset and branding detail is built to elevate business conversions and analytics.
-            </p>
-          </motion.div>
-
-          <motion.div style={{ opacity: captionOpacity3, y: captionY3 }} className="absolute w-full left-0 top-0">
-            <h3 className="text-xl sm:text-2xl md:text-3xl font-serif font-black text-slate-900 tracking-tight">03 / ORGANIC AUDIENCE REACH</h3>
-            <p className="text-slate-500 max-w-md mx-auto mt-1.5 sm:mt-2 text-xs sm:text-sm leading-relaxed px-2">
-              Scale traffic organic metrics directly with clean immersive UX that plays like a cinematic showcase.
-            </p>
-          </motion.div>
-
-          <motion.div style={{ opacity: captionOpacity4, y: captionY4 }} className="absolute w-full left-0 top-0">
-            <h3 className="text-xl sm:text-2xl md:text-3xl font-serif font-black text-slate-900 tracking-tight">04 / AMPLIFIED ENGAGEMENT</h3>
-            <p className="text-slate-500 max-w-md mx-auto mt-1.5 sm:mt-2 text-xs sm:text-sm leading-relaxed px-2">
-              Harness community building and viral structures to establish brand authority and conversion.
-            </p>
-          </motion.div>
+        {/* Single Active Caption Overlay - Zero Overlapping Guaranteed */}
+        <div className="absolute top-20 sm:top-28 left-0 w-full text-center z-40 pointer-events-none px-4 sm:px-6 flex justify-center">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentStep}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.22, ease: "easeOut" }}
+              className="w-full max-w-md"
+            >
+              <h3 className="text-xl sm:text-2xl md:text-3xl font-serif font-black text-slate-900 tracking-tight">
+                {CAPTIONS[currentStep].title}
+              </h3>
+              <p className="text-slate-500 max-w-md mx-auto mt-1.5 sm:mt-2 text-xs sm:text-sm leading-relaxed px-2">
+                {CAPTIONS[currentStep].desc}
+              </p>
+            </motion.div>
+          </AnimatePresence>
         </div>
       </div>
     </section>
