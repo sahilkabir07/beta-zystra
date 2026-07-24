@@ -1542,8 +1542,8 @@ export default function AboutUsPage() {
             </FadeUp>
           </div>
 
-          {/* Bento Box Grid - Compact, Tight & Sleek Layout */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5 items-stretch">
+          {/* Bento Box Grid - Asymmetric Bento UI Layout on Mobile & Desktop */}
+          <div className="grid grid-cols-3 gap-2.5 sm:gap-5 items-stretch">
             {[
               {
                 num: "01",
@@ -1551,14 +1551,14 @@ export default function AboutUsPage() {
                 href: "/services/seo-optimization",
                 desc: "Organic visibility from the ground up. Local SEO, content marketing, and GBP management.",
                 image: "/services/seo.png",
-                colSpan: "md:col-span-1",
+                colSpan: "col-span-1",
                 mockup: (
-                  <div className="my-2.5 p-3 rounded-xl bg-purple-950/40 border border-purple-500/20 backdrop-blur-md">
-                    <div className="flex items-center justify-between text-[10px] font-mono text-purple-300 mb-1.5">
-                      <span>SERP Rank</span>
-                      <span className="text-emerald-400 font-bold">+340% ROAS ↑</span>
+                  <div className="my-1.5 sm:my-2.5 p-1.5 sm:p-3 rounded-lg sm:rounded-xl bg-purple-950/40 border border-purple-500/20 backdrop-blur-md">
+                    <div className="flex items-center justify-between text-[7.5px] min-[390px]:text-[9px] sm:text-[10px] font-mono text-purple-300 mb-1">
+                      <span className="truncate pr-1">SERP Rank</span>
+                      <span className="text-emerald-400 font-bold shrink-0">+340% ROAS</span>
                     </div>
-                    <div className="h-1.5 w-full bg-purple-950 rounded-full overflow-hidden">
+                    <div className="h-1 sm:h-1.5 w-full bg-purple-950 rounded-full overflow-hidden">
                       <div className="h-full w-4/5 bg-gradient-to-r from-purple-500 to-emerald-400" />
                     </div>
                   </div>
@@ -1570,18 +1570,15 @@ export default function AboutUsPage() {
                 href: "/services/social-media-marketing",
                 desc: "Meta Ads and Google Ads campaigns engineered for maximum ROAS — every rupee tracked.",
                 image: "/service-poster-1.png",
-                colSpan: "md:col-span-2",
+                colSpan: "col-span-2",
                 mockup: (
-                  <div className="my-2.5 flex flex-wrap gap-2">
-                    <div className="px-3 py-1 rounded-full bg-purple-500/15 border border-purple-400/30 text-purple-200 text-[11px] font-mono flex items-center gap-1.5">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                  <div className="my-1.5 sm:my-2.5 flex flex-wrap gap-1 sm:gap-2">
+                    <div className="px-1.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-purple-500/15 border border-purple-400/30 text-purple-200 text-[7.5px] min-[390px]:text-[9px] sm:text-[11px] font-mono flex items-center gap-1">
+                      <span className="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                       Meta Ads Active
                     </div>
-                    <div className="px-3 py-1 rounded-full bg-indigo-500/15 border border-indigo-400/30 text-indigo-200 text-[11px] font-mono">
+                    <div className="px-1.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-indigo-500/15 border border-indigo-400/30 text-indigo-200 text-[7.5px] min-[390px]:text-[9px] sm:text-[11px] font-mono">
                       Google ROAS 4.8x
-                    </div>
-                    <div className="px-3 py-1 rounded-full bg-fuchsia-500/15 border border-fuchsia-400/30 text-fuchsia-200 text-[11px] font-mono">
-                      Smart Target AI
                     </div>
                   </div>
                 ),
@@ -1592,13 +1589,13 @@ export default function AboutUsPage() {
                 href: "/services/web-development",
                 desc: "Modern, fast, mobile-first websites and custom mobile applications built to scale.",
                 image: "/services/web-dev.png",
-                colSpan: "md:col-span-2",
+                colSpan: "col-span-2",
                 mockup: (
-                  <div className="my-2.5 p-3 rounded-xl bg-white/[0.04] border border-white/10 backdrop-blur-md">
-                    <div className="flex items-center gap-2.5 text-[11px] font-mono text-slate-300">
-                      <span className="px-2.5 py-0.5 rounded-md bg-purple-600/40 text-purple-200 font-bold border border-purple-400/30">Mobile</span>
-                      <span className="px-2.5 py-0.5 rounded-md bg-white/5 text-slate-400">Tablet</span>
-                      <span className="px-2.5 py-0.5 rounded-md bg-white/5 text-slate-400">Web</span>
+                  <div className="my-1.5 sm:my-2.5 p-1.5 sm:p-3 rounded-lg sm:rounded-xl bg-white/[0.04] border border-white/10 backdrop-blur-md">
+                    <div className="flex items-center gap-1.5 sm:gap-2.5 text-[7.5px] min-[390px]:text-[9px] sm:text-[11px] font-mono text-slate-300">
+                      <span className="px-1.5 py-0.5 sm:px-2.5 sm:py-0.5 rounded bg-purple-600/40 text-purple-200 font-bold border border-purple-400/30">Mobile</span>
+                      <span className="px-1.5 py-0.5 sm:px-2.5 sm:py-0.5 rounded bg-white/5 text-slate-400">Tablet</span>
+                      <span className="px-1.5 py-0.5 sm:px-2.5 sm:py-0.5 rounded bg-white/5 text-slate-400">Web</span>
                     </div>
                   </div>
                 ),
@@ -1607,18 +1604,14 @@ export default function AboutUsPage() {
                 num: "04",
                 label: "Performance Marketing",
                 href: "/services",
-                desc: "Data-driven campaigns with clear KPIs, real-time reporting, and obsessive optimisation.",
+                desc: "Data-driven campaigns with clear KPIs and real-time reporting.",
                 image: "/services/performance-marketing.png",
-                colSpan: "md:col-span-1",
+                colSpan: "col-span-1",
                 mockup: (
-                  <div className="my-2.5 space-y-1.5">
-                    <div className="px-2.5 py-1 rounded-lg bg-purple-950/60 border border-purple-500/30 text-[10px] font-mono text-purple-300 flex items-center justify-between">
-                      <span>STEP 1</span>
-                      <span className="font-bold text-white">AI Research</span>
-                    </div>
-                    <div className="px-2.5 py-1 rounded-lg bg-indigo-950/60 border border-indigo-500/30 text-[10px] font-mono text-indigo-300 flex items-center justify-between">
-                      <span>STEP 2</span>
-                      <span className="font-bold text-white">Scale Growth</span>
+                  <div className="my-1.5 sm:my-2.5 space-y-1">
+                    <div className="px-1.5 py-0.5 sm:px-2.5 sm:py-1 rounded bg-purple-950/60 border border-purple-500/30 text-[7px] min-[390px]:text-[8.5px] sm:text-[10px] font-mono text-purple-300 flex items-center justify-between">
+                      <span className="truncate pr-0.5">AI Research</span>
+                      <span className="font-bold text-white shrink-0">STEP 1</span>
                     </div>
                   </div>
                 ),
@@ -1627,15 +1620,14 @@ export default function AboutUsPage() {
                 num: "05",
                 label: "Branding & Creative",
                 href: "/services/logo-designing",
-                desc: "Logo design, brand identity, video production, and social content that feels premium.",
+                desc: "Logo design, brand identity, and video production.",
                 image: "/service-poster-2.png",
-                colSpan: "md:col-span-1",
+                colSpan: "col-span-1",
                 mockup: (
-                  <div className="my-2.5 flex items-center gap-1.5">
-                    <div className="w-5 h-5 rounded-full bg-purple-500 border border-purple-300 shadow-md" />
-                    <div className="w-5 h-5 rounded-full bg-fuchsia-500 border border-fuchsia-300 shadow-md" />
-                    <div className="w-5 h-5 rounded-full bg-indigo-500 border border-indigo-300 shadow-md" />
-                    <span className="text-[10px] font-mono text-purple-300 ml-1.5">Brand Palette</span>
+                  <div className="my-1.5 sm:my-2.5 flex items-center gap-1 sm:gap-1.5">
+                    <div className="w-3 h-3 sm:w-5 sm:h-5 rounded-full bg-purple-500 border border-purple-300 shadow-md" />
+                    <div className="w-3 h-3 sm:w-5 sm:h-5 rounded-full bg-fuchsia-500 border border-fuchsia-300 shadow-md" />
+                    <div className="w-3 h-3 sm:w-5 sm:h-5 rounded-full bg-indigo-500 border border-indigo-300 shadow-md" />
                   </div>
                 ),
               },
@@ -1643,20 +1635,20 @@ export default function AboutUsPage() {
                 num: "06",
                 label: "RevOps Solutions",
                 href: "/services/rev-ops-solutions",
-                desc: "Revenue operations consulting to align your marketing, sales, and customer success.",
+                desc: "Revenue operations consulting to align marketing, sales, and customer success.",
                 image: "/facebook_post.png",
-                colSpan: "md:col-span-2",
+                colSpan: "col-span-2",
                 mockup: (
-                  <div className="my-2.5 p-3 rounded-xl bg-purple-950/30 border border-purple-500/20 backdrop-blur-md flex items-center justify-between">
-                    <div className="text-[11px] font-mono text-slate-300">Unified Sales & Marketing Pipeline</div>
-                    <span className="px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[9px] font-bold font-mono uppercase">Connected</span>
+                  <div className="my-1.5 sm:my-2.5 p-1.5 sm:p-3 rounded-lg sm:rounded-xl bg-purple-950/30 border border-purple-500/20 backdrop-blur-md flex items-center justify-between">
+                    <div className="text-[7.5px] min-[390px]:text-[9px] sm:text-[11px] font-mono text-slate-300 truncate pr-1">Unified Sales & Marketing</div>
+                    <span className="px-1.5 py-0.5 sm:px-2.5 sm:py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[7px] min-[390px]:text-[8.5px] sm:text-[9px] font-bold font-mono uppercase shrink-0">Connected</span>
                   </div>
                 ),
               },
             ].map((s, i) => (
               <FadeUp key={i} delay={i * 0.06} className={`flex ${s.colSpan}`}>
                 <Link href={s.href} className="w-full">
-                  <div className="group relative w-full h-full rounded-2xl sm:rounded-3xl overflow-hidden border border-purple-500/20 bg-[#0d0722]/90 backdrop-blur-2xl p-5 sm:p-6 shadow-xl flex flex-col justify-between transition-all duration-400 hover:border-purple-400/60 hover:shadow-[0_15px_40px_rgba(168,85,247,0.3)] cursor-pointer min-h-[260px]">
+                  <div className="group relative w-full h-full rounded-xl sm:rounded-3xl overflow-hidden border border-purple-500/20 bg-[#0d0722]/90 backdrop-blur-2xl p-3 sm:p-6 shadow-xl flex flex-col justify-between transition-all duration-400 hover:border-purple-400/60 hover:shadow-[0_15px_40px_rgba(168,85,247,0.3)] cursor-pointer min-h-[170px] sm:min-h-[260px]">
                     
                     {/* Glowing Bottom Accent Bar */}
                     <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-1 bg-gradient-to-r from-purple-600 via-fuchsia-400 to-indigo-500 blur-sm opacity-60 group-hover:opacity-100 transition-opacity duration-400" />
@@ -1664,20 +1656,20 @@ export default function AboutUsPage() {
                     {/* ── CARD DEFAULT CONTENT (Compact Bento UI) ── */}
                     <div className="relative z-10 flex flex-col justify-between h-full">
                       <div>
-                        <div className="flex items-center justify-between mb-3">
-                          <span className="text-[11px] font-mono font-black text-purple-400 tracking-wider uppercase">
+                        <div className="flex items-center justify-between mb-1.5 sm:mb-3">
+                          <span className="text-[9px] min-[390px]:text-[10px] sm:text-[11px] font-mono font-black text-purple-400 tracking-wider uppercase">
                             0{i + 1}. SERVICE
                           </span>
-                          <div className="w-7 h-7 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-purple-500 group-hover:border-purple-400 transition-all duration-300">
-                            <ArrowUpRight className="w-3.5 h-3.5 text-purple-300 group-hover:text-white transition-colors" />
+                          <div className="w-5 h-5 sm:w-7 sm:h-7 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-purple-500 group-hover:border-purple-400 transition-all duration-300">
+                            <ArrowUpRight className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 text-purple-300 group-hover:text-white transition-colors" />
                           </div>
                         </div>
 
-                        <h3 className="text-lg sm:text-xl font-bold text-white mb-2 leading-snug group-hover:text-purple-300 transition-colors" style={{ fontFamily: "'Bricolage Grotesque', serif" }}>
+                        <h3 className="text-xs min-[390px]:text-sm sm:text-xl font-bold text-white mb-1 sm:mb-2 leading-tight group-hover:text-purple-300 transition-colors" style={{ fontFamily: "'Bricolage Grotesque', serif" }}>
                           {s.label}
                         </h3>
 
-                        <p className="text-slate-400 text-xs sm:text-sm leading-relaxed mb-2">
+                        <p className="text-slate-400 text-[8px] min-[390px]:text-[9.5px] sm:text-sm leading-tight sm:leading-relaxed mb-1 sm:mb-2 line-clamp-2">
                           {s.desc}
                         </p>
 
@@ -1685,9 +1677,9 @@ export default function AboutUsPage() {
                         {s.mockup}
                       </div>
 
-                      <div className="pt-3 border-t border-white/10">
-                        <span className="inline-flex items-center gap-1.5 text-[11px] font-mono font-bold text-purple-400 group-hover:text-purple-300 uppercase tracking-wider">
-                          EXPLORE SERVICE <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                      <div className="pt-1.5 sm:pt-3 border-t border-white/10">
+                        <span className="inline-flex items-center gap-1 sm:gap-1.5 text-[8px] min-[390px]:text-[9.5px] sm:text-[11px] font-mono font-bold text-purple-400 group-hover:text-purple-300 uppercase tracking-wider">
+                          EXPLORE <ArrowRight className="w-2.5 h-2.5 sm:w-3 sm:h-3 group-hover:translate-x-1 transition-transform" />
                         </span>
                       </div>
                     </div>
@@ -1703,28 +1695,28 @@ export default function AboutUsPage() {
                       <div className="absolute inset-0 bg-gradient-to-t from-[#070412] via-[#070412]/85 to-purple-950/60" />
 
                       {/* Content rendered on top of the sliding poster image */}
-                      <div className="absolute inset-0 p-5 sm:p-6 flex flex-col justify-between z-30">
+                      <div className="absolute inset-0 p-3 sm:p-6 flex flex-col justify-between z-30">
                         <div className="flex items-center justify-between">
-                          <span className="text-[11px] font-mono font-black text-purple-300 tracking-wider uppercase">
+                          <span className="text-[9px] min-[390px]:text-[10px] sm:text-[11px] font-mono font-black text-purple-300 tracking-wider uppercase">
                             0{i + 1}. SERVICE
                           </span>
-                          <div className="w-7 h-7 rounded-full bg-purple-600 text-white flex items-center justify-center shadow-lg">
-                            <ArrowUpRight className="w-3.5 h-3.5" />
+                          <div className="w-5 h-5 sm:w-7 sm:h-7 rounded-full bg-purple-600 text-white flex items-center justify-center shadow-lg">
+                            <ArrowUpRight className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5" />
                           </div>
                         </div>
 
                         <div>
-                          <h3 className="text-xl sm:text-2xl font-black text-white mb-1.5 leading-tight" style={{ fontFamily: "'Bricolage Grotesque', serif" }}>
+                          <h3 className="text-sm sm:text-2xl font-black text-white mb-1 leading-tight" style={{ fontFamily: "'Bricolage Grotesque', serif" }}>
                             {s.label}
                           </h3>
-                          <p className="text-purple-100/90 text-xs sm:text-sm leading-relaxed max-w-md">
+                          <p className="text-purple-100/90 text-[8.5px] sm:text-sm leading-tight max-w-md line-clamp-2">
                             {s.desc}
                           </p>
                         </div>
 
-                        <div className="pt-3 border-t border-white/20">
-                          <span className="inline-flex items-center gap-1.5 text-[11px] font-mono font-black text-white uppercase tracking-wider">
-                            VIEW SERVICE DETAILS <ArrowRight className="w-3.5 h-3.5 text-purple-300" />
+                        <div className="pt-1.5 sm:pt-3 border-t border-white/20">
+                          <span className="inline-flex items-center gap-1 text-[8px] sm:text-[11px] font-mono font-black text-white uppercase tracking-wider">
+                            VIEW DETAILS <ArrowRight className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 text-purple-300" />
                           </span>
                         </div>
                       </div>
