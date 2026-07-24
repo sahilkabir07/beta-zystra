@@ -4,6 +4,10 @@ import { TrendingUp, Heart, MessageCircle } from "lucide-react";
 
 const CAPTIONS = [
   {
+    title: "LIVE ANALYTICS ENGINE",
+    desc: "Explore how we integrate brand strategy and interactive design to create high-conversion digital ecosystems."
+  },
+  {
     title: "01 / DYNAMIC SOCIAL FEED",
     desc: "We design campaigns that stop scroll-fatigued feeds and demand complete attention across platforms."
   },
@@ -82,11 +86,12 @@ export default function ScrollTimelineShowcase() {
 
   useMotionValueEvent(smoothProgress, "change", (p: number) => {
     let step = -1;
-    if (p < 0.42) step = -1; // Hide title until carousel section locks in frame properly!
-    else if (p < 0.58) step = 0; // 01 / DYNAMIC SOCIAL FEED
-    else if (p < 0.74) step = 1; // 02 / METRIC-DRIVEN ASSETS
-    else if (p < 0.89) step = 2; // 03 / ORGANIC AUDIENCE REACH
-    else step = 3; // 04 / AMPLIFIED ENGAGEMENT
+    if (p < 0.18) step = -1; // Hide title until section is pinned in view
+    else if (p < 0.45) step = 0; // LIVE ANALYTICS ENGINE (Dashboard phase)
+    else if (p < 0.62) step = 1; // 01 / DYNAMIC SOCIAL FEED
+    else if (p < 0.76) step = 2; // 02 / METRIC-DRIVEN ASSETS
+    else if (p < 0.88) step = 3; // 03 / ORGANIC AUDIENCE REACH
+    else step = 4; // 04 / AMPLIFIED ENGAGEMENT
 
     setCurrentStep(step);
   });
@@ -125,8 +130,8 @@ export default function ScrollTimelineShowcase() {
     const cardAngle = baseRotation + index * 90;
     const rad = (cardAngle * Math.PI) / 180;
 
-    // Responsive radii - slightly narrowed to keep cards away from edges
-    const radiusX = isMobile ? 85 : isTablet ? 170 : 300;
+    // Responsive radii - calibrated for maximum card size on mobile without screen overflow
+    const radiusX = isMobile ? 105 : isTablet ? 170 : 300;
     const radiusZ = isMobile ? 35 : isTablet ? 70 : 130;
 
     // Tilt the circle slightly towards the camera for premium look
@@ -153,8 +158,8 @@ export default function ScrollTimelineShowcase() {
     const cosVal = Math.cos(rad); // 1 is front, -1 is back
     const normDepth = (cosVal + 1) / 2; // 0 to 1
 
-    // Style mappings
-    const scale = (isMobile ? 0.48 : 0.62) + (isMobile ? 0.28 : 0.35) * normDepth;
+    // Style mappings - prominent mobile scale
+    const scale = (isMobile ? 0.68 : 0.62) + (isMobile ? 0.30 : 0.35) * normDepth;
 
     // Opacity transitions
     let opacity = 0.15 + 0.85 * normDepth;
@@ -343,25 +348,25 @@ export default function ScrollTimelineShowcase() {
               willChange: "transform, opacity"
             }}
             whileHover={{ scale: 1.05 }}
-            className="absolute w-[160px] sm:w-[190px] md:w-[210px] rounded-[20px] bg-white border border-slate-100 p-2.5 shadow-[0_20px_50px_rgba(0,0,0,0.06)] pointer-events-auto transition-[border-color,box-shadow] duration-300 cursor-pointer flex flex-col gap-2"
+            className="absolute w-[230px] sm:w-[250px] md:w-[260px] min-h-[290px] sm:min-h-[320px] rounded-[22px] bg-white border border-slate-100 p-3.5 sm:p-4 shadow-[0_20px_50px_rgba(0,0,0,0.06)] pointer-events-auto transition-[border-color,box-shadow] duration-300 cursor-pointer flex flex-col justify-between gap-2.5"
           >
             {/* Instagram Header */}
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-1.5">
-                <img src="/zystra-logo.jpg" alt="Zystra Logo" className="w-6 h-6 rounded-full object-cover border border-slate-100" />
+              <div className="flex items-center gap-2">
+                <img src="/zystra-logo.jpg" alt="Zystra Logo" className="w-7 h-7 rounded-full object-cover border border-slate-100" />
                 <div className="leading-none">
-                  <div className="text-[9px] font-bold text-slate-900 flex items-center gap-0.5">
+                  <div className="text-[10px] font-bold text-slate-900 flex items-center gap-0.5">
                     zystra_webtech
-                    <span className="w-2 h-2 bg-blue-500 rounded-full flex items-center justify-center text-[5px] text-white">✓</span>
+                    <span className="w-2.5 h-2.5 bg-blue-500 rounded-full flex items-center justify-center text-[6px] text-white">✓</span>
                   </div>
-                  <span className="text-[7px] text-slate-400 font-medium">Patna, India</span>
+                  <span className="text-[8px] text-slate-400 font-medium">Patna, India</span>
                 </div>
               </div>
               <span className="text-slate-400 text-xs font-bold leading-none -mt-1">···</span>
             </div>
 
             {/* Post Image */}
-            <div className="w-full aspect-square rounded-[10px] overflow-hidden border border-slate-100">
+            <div className="w-full h-[135px] sm:h-[155px] rounded-xl overflow-hidden border border-slate-100">
               <img
                 src="/insta_post.jpeg"
                 alt="Zystra Webtech Instagram Post"
@@ -371,24 +376,24 @@ export default function ScrollTimelineShowcase() {
 
             {/* Engagement Icons */}
             <div className="flex items-center justify-between text-slate-700 mt-0.5">
-              <div className="flex gap-2">
-                <Heart className="w-3.5 h-3.5 hover:text-rose-500 transition-colors animate-pulse" />
-                <MessageCircle className="w-3.5 h-3.5 hover:text-brand-vibrant transition-colors" />
+              <div className="flex gap-2.5">
+                <Heart className="w-4 h-4 hover:text-rose-500 transition-colors animate-pulse" />
+                <MessageCircle className="w-4 h-4 hover:text-brand-vibrant transition-colors" />
                 {/* Send/Share Icon */}
-                <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 fill-none stroke-current stroke-2">
+                <svg viewBox="0 0 24 24" className="w-4 h-4 fill-none stroke-current stroke-2">
                   <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
                 </svg>
               </div>
               {/* Bookmark Icon */}
-              <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 fill-none stroke-current stroke-2">
+              <svg viewBox="0 0 24 24" className="w-4 h-4 fill-none stroke-current stroke-2">
                 <path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z" />
               </svg>
             </div>
 
             {/* Likes & Caption */}
             <div className="leading-tight">
-              <div className="text-[8px] font-bold text-slate-900">1,204 likes</div>
-              <p className="text-[8px] text-slate-700 mt-0.5 truncate">
+              <div className="text-[9px] font-bold text-slate-900">1,204 likes</div>
+              <p className="text-[8.5px] text-slate-700 mt-0.5 truncate">
                 <span className="font-bold mr-1">zystra_webtech</span>We design interactive digital movements...
               </p>
             </div>
@@ -409,18 +414,18 @@ export default function ScrollTimelineShowcase() {
               willChange: "transform, opacity"
             }}
             whileHover={{ scale: 1.05 }}
-            className="absolute w-[160px] sm:w-[190px] md:w-[210px] rounded-[20px] bg-white border border-slate-100 p-2.5 shadow-[0_20px_50px_rgba(0,0,0,0.06)] pointer-events-auto transition-[border-color,box-shadow] duration-300 cursor-pointer flex flex-col gap-2"
+            className="absolute w-[230px] sm:w-[250px] md:w-[260px] min-h-[290px] sm:min-h-[320px] rounded-[22px] bg-white border border-slate-100 p-3.5 sm:p-4 shadow-[0_20px_50px_rgba(0,0,0,0.06)] pointer-events-auto transition-[border-color,box-shadow] duration-300 cursor-pointer flex flex-col justify-between gap-2.5"
           >
             {/* Facebook Header */}
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-1.5">
-                <img src="/zystra-logo.jpg" alt="Zystra Logo" className="w-6 h-6 rounded-full object-cover border border-slate-100" />
+              <div className="flex items-center gap-2">
+                <img src="/zystra-logo.jpg" alt="Zystra Logo" className="w-7 h-7 rounded-full object-cover border border-slate-100" />
                 <div className="leading-tight">
-                  <div className="text-[9px] font-bold text-slate-900 flex items-center gap-0.5">
+                  <div className="text-[10px] font-bold text-slate-900 flex items-center gap-0.5">
                     Zystra Webtech
-                    <span className="w-2.5 h-2.5 bg-[#1877f2] rounded-full flex items-center justify-center text-[5px] text-white">✓</span>
+                    <span className="w-2.5 h-2.5 bg-[#1877f2] rounded-full flex items-center justify-center text-[6px] text-white">✓</span>
                   </div>
-                  <div className="text-[7px] text-slate-400 font-medium flex items-center gap-0.5">
+                  <div className="text-[8px] text-slate-400 font-medium flex items-center gap-0.5">
                     1d · <span className="inline-block w-1.5 h-1.5 bg-slate-400 rounded-full scale-[0.6]" /> 🌐
                   </div>
                 </div>
@@ -429,12 +434,12 @@ export default function ScrollTimelineShowcase() {
             </div>
 
             {/* Post Caption */}
-            <p className="text-[8px] text-slate-800 leading-normal">
+            <p className="text-[8.5px] text-slate-800 leading-normal">
               High-fidelity interactions designed for modern conversion systems. Let's build your brand's digital presence.
             </p>
 
             {/* Post Image */}
-            <div className="w-full aspect-video rounded-[10px] overflow-hidden border border-slate-100">
+            <div className="w-full h-[135px] sm:h-[155px] rounded-xl overflow-hidden border border-slate-100">
               <img
                 src="/facebook_post.png"
                 alt="Zystra Webtech Facebook Post"
@@ -443,7 +448,7 @@ export default function ScrollTimelineShowcase() {
             </div>
 
             {/* Reaction Metrics */}
-            <div className="flex items-center justify-between text-[7px] text-slate-500 border-b border-slate-100 pb-1.5">
+            <div className="flex items-center justify-between text-[7.5px] text-slate-500 border-b border-slate-100 pb-1.5">
               <div className="flex items-center gap-1">
                 <span className="flex items-center">
                   <span className="w-3.5 h-3.5 rounded-full bg-[#1877f2] flex items-center justify-center text-[7px] text-white shadow-sm ring-1 ring-white">👍</span>
@@ -455,7 +460,7 @@ export default function ScrollTimelineShowcase() {
             </div>
 
             {/* Facebook Action Buttons */}
-            <div className="flex justify-between items-center text-[8px] font-bold text-slate-500 pt-0.5 px-2">
+            <div className="flex justify-between items-center text-[8.5px] font-bold text-slate-500 pt-0.5 px-2">
               <span className="flex items-center gap-1 hover:text-[#1877f2] transition-colors">👍 Like</span>
               <span className="flex items-center gap-1 hover:text-brand-vibrant transition-colors">💬 Comment</span>
               <span className="flex items-center gap-1 hover:text-green-600 transition-colors">↪ Share</span>
@@ -477,19 +482,19 @@ export default function ScrollTimelineShowcase() {
               willChange: "transform, opacity"
             }}
             whileHover={{ scale: 1.05 }}
-            className="absolute w-[160px] sm:w-[190px] md:w-[210px] rounded-[20px] bg-white border border-slate-100 p-2.5 shadow-[0_20px_50px_rgba(0,0,0,0.06)] pointer-events-auto transition-[border-color,box-shadow] duration-300 cursor-pointer flex flex-col gap-2"
+            className="absolute w-[230px] sm:w-[250px] md:w-[260px] min-h-[290px] sm:min-h-[320px] rounded-[22px] bg-white border border-slate-100 p-3.5 sm:p-4 shadow-[0_20px_50px_rgba(0,0,0,0.06)] pointer-events-auto transition-[border-color,box-shadow] duration-300 cursor-pointer flex flex-col justify-between gap-2.5"
           >
             {/* LinkedIn Header */}
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-1.5">
-                <img src="/zystra-logo.jpg" alt="Zystra Logo" className="w-6 h-6 rounded-full object-cover border border-slate-100" />
+              <div className="flex items-center gap-2">
+                <img src="/zystra-logo.jpg" alt="Zystra Logo" className="w-7 h-7 rounded-full object-cover border border-slate-100" />
                 <div className="leading-tight">
-                  <div className="text-[8px] font-bold text-slate-900 flex items-center gap-0.5">
+                  <div className="text-[9px] font-bold text-slate-900 flex items-center gap-0.5">
                     Zystra Webtech
-                    <span className="text-[6px] text-slate-400 font-normal">· 1st</span>
+                    <span className="text-[7px] text-slate-400 font-normal">· 1st</span>
                   </div>
-                  <div className="text-[6px] text-slate-500 truncate max-w-[110px]">Empowering Brands through Interactive Design</div>
-                  <div className="text-[6px] text-slate-400 font-medium flex items-center gap-0.5">
+                  <div className="text-[7px] text-slate-500 truncate max-w-[130px]">Empowering Brands through Interactive Design</div>
+                  <div className="text-[7px] text-slate-400 font-medium flex items-center gap-0.5">
                     3h · <span className="inline-block w-1.5 h-1.5 bg-slate-400 rounded-full scale-[0.6]" /> 🌐
                   </div>
                 </div>
@@ -498,12 +503,12 @@ export default function ScrollTimelineShowcase() {
             </div>
 
             {/* LinkedIn Caption */}
-            <p className="text-[7.5px] text-slate-700 leading-normal">
+            <p className="text-[8px] text-slate-700 leading-normal">
               Proud to showcase our latest digital conversion architecture. High-fidelity layouts built on modern stacks. 📈🚀
             </p>
 
             {/* Post Image */}
-            <div className="w-full aspect-video rounded-[10px] overflow-hidden border border-slate-100">
+            <div className="w-full h-[135px] sm:h-[155px] rounded-xl overflow-hidden border border-slate-100">
               <img
                 src="/linkedin_post.jpeg"
                 alt="Zystra Webtech LinkedIn Post"
@@ -512,11 +517,11 @@ export default function ScrollTimelineShowcase() {
             </div>
 
             {/* Reactions and Comments */}
-            <div className="flex justify-between items-center text-[6.5px] text-slate-500 border-b border-slate-100 pb-1.5">
-              <div className="flex items-center gap-0.5">
+            <div className="flex justify-between items-center text-[7.5px] text-slate-500 border-b border-slate-100 pb-1.5">
+              <div className="flex items-center gap-1">
                 <span className="flex items-center">
-                  <span className="w-3 h-3 rounded-full bg-[#0a66c2] flex items-center justify-center text-[5px] text-white">👍</span>
-                  <span className="w-3 h-3 rounded-full bg-emerald-500 flex items-center justify-center text-[5px] text-white -ml-0.5">💡</span>
+                  <span className="w-3.5 h-3.5 rounded-full bg-[#0a66c2] flex items-center justify-center text-[6px] text-white">👍</span>
+                  <span className="w-3.5 h-3.5 rounded-full bg-emerald-500 flex items-center justify-center text-[6px] text-white -ml-0.5">💡</span>
                 </span>
                 <span>85 reactions</span>
               </div>
@@ -524,10 +529,10 @@ export default function ScrollTimelineShowcase() {
             </div>
 
             {/* LinkedIn Actions */}
-            <div className="flex justify-between items-center text-[7.5px] font-bold text-slate-500 pt-0.5">
-              <span className="flex items-center gap-0.5 hover:text-[#0a66c2] transition-colors">👍 Like</span>
-              <span className="flex items-center gap-0.5 hover:text-brand-vibrant transition-colors">💬 Comment</span>
-              <span className="flex items-center gap-0.5 hover:text-green-600 transition-colors">🔁 Repost</span>
+            <div className="flex justify-between items-center text-[8.5px] font-bold text-slate-500 pt-0.5">
+              <span className="flex items-center gap-1 hover:text-[#0a66c2] transition-colors">👍 Like</span>
+              <span className="flex items-center gap-1 hover:text-brand-vibrant transition-colors">💬 Comment</span>
+              <span className="flex items-center gap-1 hover:text-green-600 transition-colors">🔁 Repost</span>
             </div>
           </motion.div>
 
@@ -546,18 +551,18 @@ export default function ScrollTimelineShowcase() {
               willChange: "transform, opacity"
             }}
             whileHover={{ scale: 1.05 }}
-            className="absolute w-[160px] sm:w-[190px] md:w-[210px] rounded-[20px] bg-white border border-slate-100 p-2.5 shadow-[0_20px_50px_rgba(0,0,0,0.06)] pointer-events-auto transition-[border-color,box-shadow] duration-300 cursor-pointer flex flex-col justify-between"
+            className="absolute w-[230px] sm:w-[250px] md:w-[260px] min-h-[290px] sm:min-h-[320px] rounded-[22px] bg-white border border-slate-100 p-3.5 sm:p-4 shadow-[0_20px_50px_rgba(0,0,0,0.06)] pointer-events-auto transition-[border-color,box-shadow] duration-300 cursor-pointer flex flex-col justify-between gap-2.5"
           >
             <div>
               {/* Tweet Header */}
               <div className="flex items-start justify-between mb-2">
-                <div className="flex items-center gap-1.5">
+                <div className="flex items-center gap-2">
                   <img src="/zystra-logo.jpg" alt="Zystra Logo" className="w-7 h-7 rounded-full object-cover border border-slate-100" />
                   <div className="leading-tight">
                     <div className="text-[10px] font-bold text-slate-900 flex items-center gap-0.5">
                       Zystra Webtech
                       <span className="inline-block text-[#1d9bf0]">
-                        <svg viewBox="0 0 24 24" className="w-2.5 h-2.5 fill-current">
+                        <svg viewBox="0 0 24 24" className="w-3 h-3 fill-current">
                           <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" />
                         </svg>
                       </span>
@@ -566,18 +571,18 @@ export default function ScrollTimelineShowcase() {
                   </div>
                 </div>
                 {/* X Logo */}
-                <svg viewBox="0 0 24 24" className="w-2.5 h-2.5 text-slate-950 fill-current">
+                <svg viewBox="0 0 24 24" className="w-3 h-3 text-slate-950 fill-current">
                   <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                 </svg>
               </div>
 
               {/* Tweet Content */}
-              <p className="text-[9px] text-slate-800 leading-normal font-sans font-medium mb-2">
+              <p className="text-[9.5px] text-slate-800 leading-normal font-sans font-medium mb-2">
                 Creating digital activations that move culture. We build the future of web design. 💻🚀
               </p>
 
               {/* Tweet Image */}
-              <div className="w-full h-[90px] sm:h-[110px] rounded-[10px] overflow-hidden border border-slate-100 mb-2">
+              <div className="w-full h-[135px] sm:h-[155px] rounded-xl overflow-hidden border border-slate-100 mb-2">
                 <img
                   src="/zystra-logo.jpg"
                   alt="Zystra Webtech Post Image"
@@ -587,11 +592,11 @@ export default function ScrollTimelineShowcase() {
             </div>
 
             {/* Engagement Metrics */}
-            <div className="border-t border-slate-100 pt-1.5 flex justify-between text-[8px] font-semibold text-slate-400">
-              <span className="flex items-center gap-0.5 hover:text-sky-500 transition-colors">💬 24</span>
-              <span className="flex items-center gap-0.5 hover:text-emerald-500 transition-colors">🔁 153</span>
-              <span className="flex items-center gap-0.5 hover:text-rose-500 transition-colors">❤️ 842</span>
-              <span className="flex items-center gap-0.5 hover:text-sky-500 transition-colors">📊 12K</span>
+            <div className="border-t border-slate-100 pt-1.5 flex justify-between text-[8.5px] font-semibold text-slate-400">
+              <span className="flex items-center gap-1 hover:text-sky-500 transition-colors">💬 24</span>
+              <span className="flex items-center gap-1 hover:text-emerald-500 transition-colors">🔁 153</span>
+              <span className="flex items-center gap-1 hover:text-rose-500 transition-colors">❤️ 842</span>
+              <span className="flex items-center gap-1 hover:text-sky-500 transition-colors">📊 12K</span>
             </div>
           </motion.div>
         </div>
