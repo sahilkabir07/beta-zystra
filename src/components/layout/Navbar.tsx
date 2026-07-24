@@ -117,18 +117,14 @@ export default function Navbar() {
               </nav>
 
               <div className="flex items-center gap-4">
-                {/* Mobile menu trigger */}
+                {/* Mobile menu trigger button (High-contrast, 100% visible on all backgrounds) */}
                 <button
                   onClick={() => setMobileMenuOpen(true)}
-                  className={`md:hidden p-2 focus:outline-none rounded-full ${
-                    (scrolled || !isHomePage)
-                      ? "text-slate-700 hover:text-slate-900 bg-white border border-slate-200"
-                      : "text-white hover:text-white/80 bg-white/15 border border-white/25"
-                  }`}
+                  className="md:hidden p-2.5 focus:outline-none rounded-full bg-slate-900 text-white hover:bg-[#6e019c] border border-purple-500/30 shadow-md transition-all duration-200 active:scale-95 flex items-center justify-center cursor-pointer"
                   aria-label="Toggle Menu"
                 >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M4 6h16M4 12h16m-7 6h7" />
+                  <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M4 6h16M4 12h16M4 18h16" />
                   </svg>
                 </button>
               </div>
