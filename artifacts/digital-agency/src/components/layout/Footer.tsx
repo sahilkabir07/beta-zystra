@@ -20,7 +20,7 @@ export default function Footer() {
   const socialLinks = [
     {
       icon: Instagram,
-      href: "https://www.instagram.com/zystra_web_tech/",
+      href: "https://www.instagram.com/zystratechnologies?igsh=eDh1OTJlYjljdWI5",
       label: "Instagram",
       glowClass: "hover:border-pink-500/60 hover:text-pink-400 hover:shadow-[0_0_15px_rgba(236,72,153,0.4)]"
     },

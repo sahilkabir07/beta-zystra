@@ -10,19 +10,21 @@ export default function Navbar() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const isHomePage = location === "/";
-  const [visible, setVisible] = useState(!isHomePage);
+  const [visible, setVisible] = useState(true);
 
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-      if (location === "/") {
-        setVisible(window.scrollY > 500);
-      } else {
-        setVisible(true);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setScrolled(window.scrollY > 40);
+          ticking = false;
+        });
+        ticking = true;
       }
     };
     handleScroll();
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, [location]);
 
@@ -37,28 +39,18 @@ export default function Navbar() {
 
   return (
     <>
-      <AnimatePresence>
-        {visible && (
-          <motion.header
-            initial={{ y: -80, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: -80, opacity: 0 }}
-            transition={{ type: "spring", stiffness: 200, damping: 24 }}
-            className="fixed top-0 left-0 right-0 z-50 pointer-events-none w-full flex justify-center"
-          >
-            <motion.div
-              layout
-              transition={{ type: "spring", stiffness: 200, damping: 24 }}
-              className={`flex items-center justify-between pointer-events-auto w-full ${
-                scrolled
-                  ? "bg-white/95 backdrop-blur-xl border-x border-b border-slate-200/60 shadow-lg shadow-brand-vibrant/5 rounded-b-2xl px-8 py-3 max-w-4xl"
-                  : "bg-transparent py-6 border-b border-transparent px-6 md:px-12 w-full max-w-7xl"
-              }`}
-              data-scrolled={scrolled}
-            >
-              <Link href="/" className="flex items-center gap-2" data-testid="link-logo">
-                <img src="/zystra-logo.jpg" alt="Zystra Logo" className="h-8 w-auto rounded shadow-sm border border-slate-100" />
-              </Link>
+      <header className="fixed top-0 left-0 right-0 z-50 pointer-events-none w-full flex justify-center transform-gpu">
+        <div
+          className={`flex items-center justify-between pointer-events-auto w-full transition-all duration-300 ease-out transform-gpu ${
+            scrolled
+              ? "bg-[#080414]/90 backdrop-blur-xl border-x border-b border-purple-500/20 shadow-xl shadow-purple-950/40 rounded-b-2xl px-8 py-3 max-w-4xl"
+              : "bg-transparent py-5 border-b border-transparent px-6 md:px-12 w-full max-w-7xl"
+          }`}
+          data-scrolled={scrolled}
+        >
+          <Link href="/" className="flex items-center gap-2" data-testid="link-logo">
+            <img src="/zystra-logo.jpg" alt="Zystra Logo" className="h-8 w-auto rounded shadow-sm border border-purple-500/30" />
+          </Link>
 
               {/* Desktop Nav Items */}
               <nav
@@ -125,30 +117,6 @@ export default function Navbar() {
               </nav>
 
               <div className="flex items-center gap-4">
-                {isHomePage ? (
-                  <a href="#contact">
-                    <Button
-                      className={`hidden sm:inline-flex rounded-full px-6 shadow-md transition-all hover:scale-105 ${
-                        scrolled
-                          ? "bg-slate-900 hover:bg-slate-800 text-white"
-                          : "bg-white/15 hover:bg-white/25 text-white border border-white/30"
-                      }`}
-                      data-testid="button-start-project"
-                    >
-                      Get Free Audit
-                    </Button>
-                  </a>
-                ) : (
-                  <Link href="/#contact">
-                    <Button
-                      className="hidden sm:inline-flex rounded-full bg-slate-900 hover:bg-slate-800 text-white px-6 shadow-md transition-all hover:scale-105"
-                      data-testid="button-start-project"
-                    >
-                      Get Free Audit
-                    </Button>
-                  </Link>
-                )}
-
                 {/* Mobile menu trigger */}
                 <button
                   onClick={() => setMobileMenuOpen(true)}
@@ -164,10 +132,8 @@ export default function Navbar() {
                   </svg>
                 </button>
               </div>
-            </motion.div>
-          </motion.header>
-        )}
-      </AnimatePresence>
+            </div>
+          </header>
 
       {/* Mobile Menu Drawer Overlay */}
       <AnimatePresence>
@@ -256,21 +222,6 @@ export default function Navbar() {
                 </nav>
               </div>
 
-              <div className="mt-8">
-                {isHomePage ? (
-                  <a href="#contact" onClick={() => setMobileMenuOpen(false)}>
-                    <Button className="w-full rounded-full bg-slate-900 hover:bg-slate-800 text-white py-6 text-base shadow-md">
-                      Get Free Audit
-                    </Button>
-                  </a>
-                ) : (
-                  <Link href="/#contact" onClick={() => setMobileMenuOpen(false)}>
-                    <Button className="w-full rounded-full bg-slate-900 hover:bg-slate-800 text-white py-6 text-base shadow-md">
-                      Get Free Audit
-                    </Button>
-                  </Link>
-                )}
-              </div>
             </motion.div>
           </motion.div>
         )}
