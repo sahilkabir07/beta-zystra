@@ -75,10 +75,10 @@ export default function StatsStrip() {
           className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 lg:gap-4 items-stretch"
         >
           {/* Card 1: Conversions (Mint Lavender) */}
-          <div className="translate-y-[10px] lg:translate-y-[15px] flex">
+          <div className="translate-y-0 lg:translate-y-[15px] flex">
             <motion.div 
               variants={cardVariants}
-              className="relative p-3.5 sm:p-5 rounded-2xl bg-gradient-to-br from-[#f3e8ff] via-[#f3e8ff] to-[#e9d5ff] border border-purple-200/50 shadow-[0_15px_30px_rgba(147,51,234,0.04)] hover:shadow-[0_20px_40px_rgba(147,51,234,0.08)] hover:-translate-y-1 transition-all duration-300 w-full flex flex-col justify-between min-h-[155px] sm:min-h-[185px] overflow-hidden group"
+              className="relative p-4 sm:p-5 rounded-2xl bg-gradient-to-br from-[#f3e8ff] via-[#f3e8ff] to-[#e9d5ff] border border-purple-200/50 shadow-[0_15px_30px_rgba(147,51,234,0.04)] hover:shadow-[0_20px_40px_rgba(147,51,234,0.08)] hover:-translate-y-1 transition-all duration-300 w-full flex flex-col justify-between min-h-[160px] sm:min-h-[185px] overflow-hidden group"
             >
               {/* Natural glossy shine overlay */}
               <div className="absolute inset-0 pointer-events-none bg-gradient-to-tr from-transparent via-white/[0.25] to-transparent opacity-85" />
@@ -100,10 +100,10 @@ export default function StatsStrip() {
           </div>
 
           {/* Card 2: New Orders (Matte Black with Purple Accent) */}
-          <div className="translate-y-[35px] lg:translate-y-[65px] flex">
+          <div className="translate-y-5 lg:translate-y-[65px] flex">
             <motion.div 
               variants={cardVariants}
-              className="relative p-3.5 sm:p-5 rounded-2xl bg-gradient-to-br from-[#1c1c20] via-[#121214] to-[#0b0b0d] border border-zinc-800/80 shadow-[0_15px_30px_rgba(0,0,0,0.15)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.25)] hover:-translate-y-1 transition-all duration-300 w-full flex flex-col justify-between min-h-[155px] sm:min-h-[185px] overflow-hidden group"
+              className="relative p-4 sm:p-5 rounded-2xl bg-gradient-to-br from-[#1c1c20] via-[#121214] to-[#0b0b0d] border border-zinc-800/80 shadow-[0_15px_30px_rgba(0,0,0,0.15)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.25)] hover:-translate-y-1 transition-all duration-300 w-full flex flex-col justify-between min-h-[160px] sm:min-h-[185px] overflow-hidden group"
             >
               {/* Natural glossy shine overlay */}
               <div className="absolute inset-0 pointer-events-none bg-gradient-to-tr from-transparent via-white/[0.04] to-transparent" />
@@ -127,10 +127,10 @@ export default function StatsStrip() {
           </div>
 
           {/* Card 3: Bounce Rate (Glossy Black with Purple Accent) */}
-          <div className="translate-y-[10px] lg:translate-y-[15px] flex">
+          <div className="translate-y-0 lg:translate-y-[15px] flex">
             <motion.div 
               variants={cardVariants}
-              className="relative p-3.5 sm:p-5 rounded-2xl bg-gradient-to-br from-[#1c1c20] via-[#121214] to-[#0b0b0d] border border-zinc-800/80 shadow-[0_15px_30px_rgba(0,0,0,0.15)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.25)] hover:-translate-y-1 transition-all duration-300 w-full flex flex-col justify-between min-h-[155px] sm:min-h-[185px] overflow-hidden group"
+              className="relative p-4 sm:p-5 rounded-2xl bg-gradient-to-br from-[#1c1c20] via-[#121214] to-[#0b0b0d] border border-zinc-800/80 shadow-[0_15px_30px_rgba(0,0,0,0.15)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.25)] hover:-translate-y-1 transition-all duration-300 w-full flex flex-col justify-between min-h-[160px] sm:min-h-[185px] overflow-hidden group"
             >
               {/* Natural glossy shine overlay */}
               <div className="absolute inset-0 pointer-events-none bg-gradient-to-tr from-transparent via-white/[0.05] to-transparent" />
@@ -154,10 +154,10 @@ export default function StatsStrip() {
           </div>
 
           {/* Card 4: Subscriptions (Glossy Black with Purple Accent) */}
-          <div className="-translate-y-[15px] lg:-translate-y-[35px] flex">
+          <div className="translate-y-5 lg:-translate-y-[35px] flex">
             <motion.div 
               variants={cardVariants}
-              className="relative p-3.5 sm:p-5 rounded-2xl bg-gradient-to-br from-[#1c1c20] via-[#121214] to-[#0b0b0d] border border-zinc-800/80 shadow-[0_15px_30px_rgba(0,0,0,0.15)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.25)] hover:-translate-y-1 transition-all duration-300 w-full flex flex-col justify-between min-h-[155px] sm:min-h-[185px] overflow-hidden group"
+              className="relative p-4 sm:p-5 rounded-2xl bg-gradient-to-br from-[#1c1c20] via-[#121214] to-[#0b0b0d] border border-zinc-800/80 shadow-[0_15px_30px_rgba(0,0,0,0.15)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.25)] hover:-translate-y-1 transition-all duration-300 w-full flex flex-col justify-between min-h-[160px] sm:min-h-[185px] overflow-hidden group"
             >
               {/* Natural glossy shine overlay */}
               <div className="absolute inset-0 pointer-events-none bg-gradient-to-tr from-transparent via-white/[0.05] to-transparent" />
@@ -181,10 +181,10 @@ export default function StatsStrip() {
           </div>
 
           {/* Card 5: New Users (Vibrant Purple Brand Gradient) */}
-          <div className="-translate-y-[35px] lg:-translate-y-[85px] flex">
+          <div className="translate-y-0 lg:-translate-y-[85px] flex">
             <motion.div 
               variants={cardVariants}
-              className="relative p-3.5 sm:p-5 rounded-2xl bg-gradient-to-br from-[#8d00cb] via-[#7e02b2] to-[#6e019c] border border-purple-450/30 shadow-[0_15px_30px_rgba(110,1,156,0.06)] hover:shadow-[0_20px_40px_rgba(110,1,156,0.12)] hover:-translate-y-1 transition-all duration-300 w-full flex flex-col justify-between min-h-[155px] sm:min-h-[185px] overflow-hidden group text-white"
+              className="relative p-4 sm:p-5 rounded-2xl bg-gradient-to-br from-[#8d00cb] via-[#7e02b2] to-[#6e019c] border border-purple-450/30 shadow-[0_15px_30px_rgba(110,1,156,0.06)] hover:shadow-[0_20px_40px_rgba(110,1,156,0.12)] hover:-translate-y-1 transition-all duration-300 w-full flex flex-col justify-between min-h-[160px] sm:min-h-[185px] overflow-hidden group text-white"
             >
               {/* Natural glossy shine overlay */}
               <div className="absolute inset-0 pointer-events-none bg-gradient-to-tr from-transparent via-white/[0.18] to-transparent opacity-85" />
@@ -208,10 +208,10 @@ export default function StatsStrip() {
           </div>
 
           {/* Card 6: AI-Based (Premium White) */}
-          <div className="-translate-y-[55px] lg:-translate-y-[135px] flex">
+          <div className="translate-y-5 lg:-translate-y-[135px] flex">
             <motion.div 
               variants={cardVariants}
-              className="relative p-3.5 sm:p-5 rounded-2xl bg-gradient-to-br from-white via-white to-slate-50 border border-slate-200 shadow-[0_15px_30px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-300 w-full flex flex-col justify-between min-h-[155px] sm:min-h-[185px] overflow-hidden group"
+              className="relative p-4 sm:p-5 rounded-2xl bg-gradient-to-br from-white via-white to-slate-50 border border-slate-200 shadow-[0_15px_30px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-300 w-full flex flex-col justify-between min-h-[160px] sm:min-h-[185px] overflow-hidden group"
             >
               {/* Natural glossy shine overlay */}
               <div className="absolute inset-0 pointer-events-none bg-gradient-to-tr from-transparent via-white/50 to-transparent" />
