@@ -4,10 +4,6 @@ import { TrendingUp, Heart, MessageCircle } from "lucide-react";
 
 const CAPTIONS = [
   {
-    title: "LIVE ANALYTICS ENGINE",
-    desc: "Explore how we integrate brand strategy and interactive design to create high-conversion digital ecosystems."
-  },
-  {
     title: "01 / DYNAMIC SOCIAL FEED",
     desc: "We design campaigns that stop scroll-fatigued feeds and demand complete attention across platforms."
   },
@@ -82,15 +78,15 @@ export default function ScrollTimelineShowcase() {
   // Direct scrollYProgress for instant, silky 120 FPS Lenis scroll response
   const smoothProgress = scrollYProgress;
 
-  const [currentStep, setCurrentStep] = useState(0);
+  const [currentStep, setCurrentStep] = useState(-1);
 
   useMotionValueEvent(smoothProgress, "change", (p: number) => {
-    let step = 0;
-    if (p < 0.38) step = 0;
-    else if (p < 0.56) step = 1;
-    else if (p < 0.73) step = 2;
-    else if (p < 0.89) step = 3;
-    else step = 4;
+    let step = -1;
+    if (p < 0.42) step = -1; // Hide title until carousel section locks in frame properly!
+    else if (p < 0.58) step = 0; // 01 / DYNAMIC SOCIAL FEED
+    else if (p < 0.74) step = 1; // 02 / METRIC-DRIVEN ASSETS
+    else if (p < 0.89) step = 2; // 03 / ORGANIC AUDIENCE REACH
+    else step = 3; // 04 / AMPLIFIED ENGAGEMENT
 
     setCurrentStep(step);
   });
@@ -603,21 +599,23 @@ export default function ScrollTimelineShowcase() {
         {/* Single Active Caption Overlay - Zero Overlapping Guaranteed */}
         <div className="absolute top-20 sm:top-28 left-0 w-full text-center z-40 pointer-events-none px-4 sm:px-6 flex justify-center">
           <AnimatePresence mode="wait">
-            <motion.div
-              key={currentStep}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.22, ease: "easeOut" }}
-              className="w-full max-w-md"
-            >
-              <h3 className="text-xl sm:text-2xl md:text-3xl font-serif font-black text-slate-900 tracking-tight">
-                {CAPTIONS[currentStep].title}
-              </h3>
-              <p className="text-slate-500 max-w-md mx-auto mt-1.5 sm:mt-2 text-xs sm:text-sm leading-relaxed px-2">
-                {CAPTIONS[currentStep].desc}
-              </p>
-            </motion.div>
+            {currentStep >= 0 && (
+              <motion.div
+                key={currentStep}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.22, ease: "easeOut" }}
+                className="w-full max-w-md"
+              >
+                <h3 className="text-xl sm:text-2xl md:text-3xl font-serif font-black text-slate-900 tracking-tight">
+                  {CAPTIONS[currentStep].title}
+                </h3>
+                <p className="text-slate-500 max-w-md mx-auto mt-1.5 sm:mt-2 text-xs sm:text-sm leading-relaxed px-2">
+                  {CAPTIONS[currentStep].desc}
+                </p>
+              </motion.div>
+            )}
           </AnimatePresence>
         </div>
       </div>
