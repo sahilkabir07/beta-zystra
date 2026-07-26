@@ -46,7 +46,7 @@ export default function Hero() {
               <motion.div
                 animate={{ y: [-6, 6, -6], rotate: [-6, -2, -6] }}
                 transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut" }}
-                className="inline-flex items-center justify-center w-[0.9em] h-[0.9em] hover:scale-125 transition-transform duration-300"
+                className="inline-flex items-center justify-center w-[0.95em] h-[0.95em] shrink-0 hover:scale-125 transition-transform duration-300"
               >
                 <img src="/heroBgImg/insta.png" alt="Instagram 3D" className="w-full h-full object-contain" />
               </motion.div>
@@ -57,7 +57,7 @@ export default function Hero() {
               <motion.div
                 animate={{ y: [6, -6, 6], rotate: [6, 10, 6] }}
                 transition={{ duration: 3.6, repeat: Infinity, ease: "easeInOut", delay: 0.3 }}
-                className="inline-flex items-center justify-center w-[0.85em] h-[0.85em] hover:scale-125 transition-transform duration-300"
+                className="inline-flex items-center justify-center w-[0.95em] h-[0.95em] shrink-0 hover:scale-125 transition-transform duration-300"
               >
                 <img src="/heroBgImg/meta.png" alt="Meta 3D" className="w-full h-full object-contain" />
               </motion.div>
@@ -69,7 +69,7 @@ export default function Hero() {
               <motion.div
                 animate={{ y: [-7, 7, -7], rotate: [-12, -8, -12] }}
                 transition={{ duration: 3.8, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}
-                className="inline-flex items-center justify-center w-[0.85em] h-[0.85em] hover:scale-125 transition-transform duration-300"
+                className="inline-flex items-center justify-center w-[0.95em] h-[0.95em] shrink-0 hover:scale-125 transition-transform duration-300"
               >
                 <img src="/heroBgImg/youtube.png" alt="YouTube 3D" className="w-full h-full object-contain" />
               </motion.div>
@@ -86,7 +86,7 @@ export default function Hero() {
               <motion.div
                 animate={{ y: [7, -7, 7], rotate: [12, 16, 12] }}
                 transition={{ duration: 3.4, repeat: Infinity, ease: "easeInOut", delay: 0.2 }}
-                className="inline-flex items-center justify-center w-[0.85em] h-[0.85em] hover:scale-125 transition-transform duration-300"
+                className="inline-flex items-center justify-center w-[0.95em] h-[0.95em] shrink-0 hover:scale-125 transition-transform duration-300"
               >
                 <img src="/heroBgImg/linkedIn.png" alt="LinkedIn 3D" className="w-full h-full object-contain" />
               </motion.div>
@@ -100,7 +100,7 @@ export default function Hero() {
               <motion.div
                 animate={{ y: [-6, 6, -6], rotate: [6, 2, 6] }}
                 transition={{ duration: 4.0, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}
-                className="inline-flex items-center justify-center w-[0.8em] h-[0.8em] hover:scale-125 transition-transform duration-300"
+                className="inline-flex items-center justify-center w-[0.95em] h-[0.95em] shrink-0 hover:scale-125 transition-transform duration-300"
               >
                 <img src="/heroBgImg/twitter.png" alt="Twitter 3D" className="w-full h-full object-contain" />
               </motion.div>
@@ -111,7 +111,7 @@ export default function Hero() {
               <motion.div
                 animate={{ y: [6, -6, 6], rotate: [-6, -10, -6] }}
                 transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 0.4 }}
-                className="inline-flex items-center justify-center w-[0.85em] h-[0.85em] hover:scale-125 transition-transform duration-300"
+                className="inline-flex items-center justify-center w-[0.95em] h-[0.95em] shrink-0 hover:scale-125 transition-transform duration-300"
               >
                 <img src="/heroBgImg/googleAdds.png" alt="Google Ads 3D" className="w-full h-full object-contain" />
               </motion.div>
@@ -123,7 +123,7 @@ export default function Hero() {
               <motion.div
                 animate={{ y: [-7, 7, -7], rotate: [12, 8, 12] }}
                 transition={{ duration: 3.9, repeat: Infinity, ease: "easeInOut", delay: 0.7 }}
-                className="inline-flex items-center justify-center w-[0.75em] h-[0.75em] hover:scale-125 transition-transform duration-300"
+                className="inline-flex items-center justify-center w-[0.95em] h-[0.95em] shrink-0 hover:scale-125 transition-transform duration-300"
               >
                 <img src="/heroBgImg/google.png" alt="Google 3D" className="w-full h-full object-contain" />
               </motion.div>
@@ -134,28 +134,36 @@ export default function Hero() {
         </div>
 
         {/* 
-          STARBURST "LET'S TALK!" STICKER Positioned High Up
+          STARBURST "LET'S TALK!" STICKER (Continuous Zoom In / Zoom Out Pulse)
         */}
         <div className="relative w-full max-w-5xl flex justify-end mt-2 sm:-mt-20 lg:-mt-28 mb-0 sm:-mb-6 z-30 pointer-events-none pr-2 sm:pr-8">
-          <motion.a
+          <a
             href="/contact"
-            initial={{ scale: 0.8, rotate: 12 }}
-            animate={{ scale: 1, rotate: [8, 14, 8] }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            onClick={(e) => handleScrollTo(e, "#contact")}
             className="pointer-events-auto cursor-pointer group"
           >
-            {/* Starburst Badge in Zystra Vibrant Purple (#6E019C) */}
-            <div className="relative w-28 h-28 sm:w-40 sm:h-40 flex items-center justify-center filter drop-shadow-md group-hover:scale-110 transition-transform duration-300">
-              <svg className="absolute inset-0 w-full h-full text-[#6e019c] fill-current" viewBox="0 0 100 100">
+            {/* Starburst Badge in Zystra Vibrant Purple (#6E019C) with Zoom In / Zoom Out animation */}
+            <motion.div
+              animate={{ scale: [0.92, 1.1, 0.92] }}
+              transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
+              className="relative w-28 h-28 sm:w-40 sm:h-40 flex items-center justify-center filter drop-shadow-md group-hover:scale-115 transition-transform duration-300"
+            >
+              {/* Starburst SVG Background (Fixed angled stance) */}
+              <svg
+                className="absolute inset-0 w-full h-full text-[#6e019c] fill-current transform rotate-12"
+                viewBox="0 0 100 100"
+              >
                 <path d="M50 0 L61 11 L75 4 L80 18 L94 18 L93 33 L100 44 L93 56 L94 70 L80 71 L75 85 L61 78 L50 90 L39 78 L25 85 L20 71 L6 70 L7 56 L0 44 L7 33 L6 18 L20 18 L25 4 L39 11 Z" />
               </svg>
-              <div className="relative z-10 text-center font-sans font-black text-white text-base sm:text-xl leading-tight uppercase tracking-wider px-2 flex flex-col items-center justify-center">
+
+              {/* Text & Icon Content inside Starburst */}
+              <div className="relative z-10 text-center font-sans font-black text-white text-base sm:text-xl leading-tight uppercase tracking-wider px-2 flex flex-col items-center justify-center transform rotate-12">
                 <span>LET'S</span>
                 <span>TALK!</span>
                 <ArrowUpRight className="w-4 h-4 stroke-[3] mt-0.5 text-white" />
               </div>
-            </div>
-          </motion.a>
+            </motion.div>
+          </a>
         </div>
 
         {/* BOTTOM STATEMENT CARD */}

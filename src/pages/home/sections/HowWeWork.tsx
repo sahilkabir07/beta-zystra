@@ -92,8 +92,8 @@ export default function HowWeWork() {
 
         {/* Winding Timeline Path Container */}
         <div className="relative max-w-5xl mx-auto">
-          {/* Vertical Winding SVG Road (Center aligned on ALL screens) */}
-          <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-24 lg:w-32 pointer-events-none -z-10 block">
+          {/* Vertical Winding SVG Road (Center aligned & 100% Visible on ALL screens) */}
+          <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-16 sm:w-28 lg:w-32 pointer-events-none z-10 block">
             <svg
               viewBox="0 0 100 800"
               preserveAspectRatio="none"
@@ -103,67 +103,67 @@ export default function HowWeWork() {
               <path
                 d="M 50 6 C 50 40, 25 60, 25 100 C 25 200, 75 200, 75 300 C 75 400, 25 400, 25 500 C 25 600, 75 600, 75 700 C 75 750, 50 760, 50 794"
                 fill="none"
-                stroke="rgba(110, 1, 156, 0.05)"
-                strokeWidth="20"
+                stroke="rgba(124, 58, 237, 0.15)"
+                strokeWidth="18"
                 strokeLinecap="round"
               />
               {/* Inner Track Path */}
               <path
                 d="M 50 6 C 50 40, 25 60, 25 100 C 25 200, 75 200, 75 300 C 75 400, 25 400, 25 500 C 25 600, 75 600, 75 700 C 75 750, 50 760, 50 794"
                 fill="none"
-                stroke="rgba(110, 1, 156, 0.12)"
-                strokeWidth="10"
+                stroke="rgba(124, 58, 237, 0.3)"
+                strokeWidth="8"
                 strokeLinecap="round"
               />
               {/* Animated Center Dash flow */}
               <motion.path
                 d="M 50 6 C 50 40, 25 60, 25 100 C 25 200, 75 200, 75 300 C 75 400, 25 400, 25 500 C 25 600, 75 600, 75 700 C 75 750, 50 760, 50 794"
                 fill="none"
-                stroke="#6e019c"
-                strokeWidth="3"
+                stroke="#7c3aed"
+                strokeWidth="3.5"
                 strokeDasharray="8 8"
                 strokeLinecap="round"
                 animate={{ strokeDashoffset: [0, -32] }}
                 transition={{
                   repeat: Infinity,
                   ease: "linear",
-                  duration: 2.5
+                  duration: 2.2
                 }}
               />
 
               {/* Starting Knob */}
-              <circle cx="50" cy="6" r="6" fill="rgba(110, 1, 156, 0.25)" />
-              <circle cx="50" cy="6" r="3.5" fill="#6e019c" stroke="#ffffff" strokeWidth="1.5" />
+              <circle cx="50" cy="6" r="6" fill="rgba(124, 58, 237, 0.3)" />
+              <circle cx="50" cy="6" r="3.5" fill="#7c3aed" stroke="#ffffff" strokeWidth="1.5" />
 
               {/* Ending Knob */}
-              <circle cx="50" cy="794" r="6" fill="rgba(110, 1, 156, 0.25)" />
-              <circle cx="50" cy="794" r="3.5" fill="#6e019c" stroke="#ffffff" strokeWidth="1.5" />
+              <circle cx="50" cy="794" r="6" fill="rgba(124, 58, 237, 0.3)" />
+              <circle cx="50" cy="794" r="3.5" fill="#7c3aed" stroke="#ffffff" strokeWidth="1.5" />
             </svg>
           </div>
 
-          {/* Steps List */}
-          <div className="space-y-20 lg:space-y-36">
+          {/* Steps List (Side-by-Side Alternating Rows on ALL Screens) */}
+          <div className="space-y-12 sm:space-y-24 lg:space-y-36">
             {steps.map((st, idx) => {
               const isEven = idx % 2 === 0;
 
               return (
                 <div
                   key={idx}
-                  className={`relative flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-20 ${
-                    !isEven ? "lg:flex-row-reverse" : ""
+                  className={`relative flex flex-row items-center justify-between gap-3 sm:gap-10 lg:gap-20 ${
+                    !isEven ? "flex-row-reverse" : ""
                   }`}
                 >
                   {/* Left/Right Visual Illustration Card */}
-                  <div className="w-full lg:w-1/2 flex justify-center">
+                  <div className="w-1/2 flex justify-center">
                     <motion.div
                       initial={{ opacity: 0, scale: 0.92 }}
                       whileInView={{ opacity: 1, scale: 1 }}
                       viewport={{ once: true, margin: "-80px" }}
                       transition={{ duration: 0.35, delay: 0.05, ease: "easeOut" }}
-                      className="relative w-full max-w-md aspect-video lg:aspect-[4/3] rounded-3xl border border-slate-100 shadow-[0_12px_35px_rgba(0,0,0,0.04)] bg-white group"
+                      className="relative w-full max-w-md aspect-square sm:aspect-video lg:aspect-[4/3] rounded-2xl sm:rounded-3xl border border-slate-100 shadow-[0_8px_25px_rgba(0,0,0,0.04)] bg-white group"
                     >
-                      {/* Image Wrapper to handle rounding and clipping */}
-                      <div className="w-full h-full rounded-3xl overflow-hidden relative bg-white flex items-center justify-center p-5 lg:p-6">
+                      {/* Image Wrapper */}
+                      <div className="w-full h-full rounded-2xl sm:rounded-3xl overflow-hidden relative bg-white flex items-center justify-center p-2.5 sm:p-5 lg:p-6">
                         {/* 3D Illustration Image */}
                         <img
                           src={st.image}
@@ -172,18 +172,11 @@ export default function HowWeWork() {
                         />
                       </div>
 
-                      {/* Step Number Circle Badge (Sits on center winding timeline road) */}
+                      {/* Step Number Circle Badge (Centered directly over central timeline road on ALL screens) */}
                       <div
-                        className={`hidden lg:flex absolute top-1/2 -translate-y-1/2 w-14 h-14 rounded-full border-[5px] border-white shadow-[0_8px_20px_rgba(0,0,0,0.12)] bg-gradient-to-tr ${st.color} items-center justify-center font-bold text-white text-base font-mono z-20 select-none
+                        className={`absolute top-1/2 -translate-y-1/2 w-8 h-8 sm:w-11 sm:h-11 lg:w-14 lg:h-14 rounded-full border-2 sm:border-4 lg:border-[5px] border-white shadow-[0_6px_15px_rgba(0,0,0,0.12)] bg-gradient-to-tr ${st.color} flex items-center justify-center font-bold text-white text-[10px] sm:text-xs lg:text-base font-mono z-20 select-none
                           ${isEven ? "right-0 translate-x-1/2" : "left-0 -translate-x-1/2"}
                         `}
-                      >
-                        {st.step}
-                      </div>
-
-                      {/* Step Number Badge for Mobile (Centered directly over central timeline road) */}
-                      <div
-                        className={`lg:hidden absolute -top-5 left-1/2 -translate-x-1/2 w-11 h-11 rounded-full border-4 border-white shadow-md bg-gradient-to-tr ${st.color} flex items-center justify-center font-bold text-white text-xs font-mono z-20 select-none`}
                       >
                         {st.step}
                       </div>
@@ -191,39 +184,39 @@ export default function HowWeWork() {
                   </div>
 
                   {/* Left/Right Description Card */}
-                  <div className="w-full lg:w-1/2 select-text text-center lg:text-left">
+                  <div className="w-1/2 select-text text-left">
                     <motion.div
-                      initial={{ opacity: 0, x: isEven ? 25 : -25 }}
+                      initial={{ opacity: 0, x: isEven ? 20 : -20 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true, margin: "-80px" }}
                       transition={{ duration: 0.35, delay: 0.08, ease: "easeOut" }}
                       className="max-w-md mx-auto lg:mx-0"
                     >
-                      <span className={`text-[10px] font-mono font-black tracking-widest ${st.textColor} uppercase mb-2 block`}>
+                      <span className={`text-[7px] sm:text-[10px] font-mono font-black tracking-wider ${st.textColor} uppercase mb-1 block`}>
                         {st.tagline}
                       </span>
-                      <h3 className="text-2xl sm:text-3xl font-serif font-black text-slate-900 mb-3 sm:mb-4 tracking-tight leading-tight">
+                      <h3 className="text-xs sm:text-2xl lg:text-3xl font-serif font-black text-slate-900 mb-1 sm:mb-3 leading-tight tracking-tight">
                         {st.title}
                       </h3>
-                      <p className="text-slate-655 text-sm sm:text-base leading-relaxed mb-5 sm:mb-6">
+                      <p className="text-slate-655 text-[8.5px] sm:text-sm lg:text-base leading-snug sm:leading-relaxed mb-2 sm:mb-5 line-clamp-2 sm:line-clamp-none">
                         {st.desc}
                       </p>
 
                       {/* Detailed Checklist */}
-                      <ul className="space-y-2.5 sm:space-y-3 inline-block text-left">
+                      <ul className="space-y-1 sm:space-y-2.5">
                         {st.points.map((pt, pIdx) => (
                           <li
                             key={pIdx}
-                            className="flex items-start gap-3 text-xs sm:text-sm text-slate-600 font-medium"
+                            className="flex items-start gap-1.5 sm:gap-3 text-[8px] sm:text-xs lg:text-sm text-slate-600 font-medium leading-tight"
                           >
                             <span
-                              className={`mt-0.5 w-4 h-4 rounded-full flex items-center justify-center shrink-0 text-white font-black text-[9px] select-none shadow-xs
+                              className={`mt-0.5 w-3 h-3 sm:w-4 sm:h-4 rounded-full flex items-center justify-center shrink-0 text-white font-black text-[7px] sm:text-[9px] select-none shadow-xs
                                 ${isEven ? "bg-cyan-500 shadow-cyan-500/10" : "bg-brand-vibrant shadow-brand-vibrant/10"}
                               `}
                             >
                               ✓
                             </span>
-                            {pt}
+                            <span>{pt}</span>
                           </li>
                         ))}
                       </ul>

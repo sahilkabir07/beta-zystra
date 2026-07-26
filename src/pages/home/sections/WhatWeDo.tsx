@@ -363,7 +363,7 @@ export default function WhatWeDo() {
           </div>
 
           {/* Right Side: Creative Geometric Tilted Overlapping Cards (Adjusted Clean Overlap) */}
-          <div className="lg:col-span-6 flex flex-col items-center sm:items-start relative select-none pt-2 sm:pt-0 pb-4">
+          <div className="lg:col-span-6 flex flex-col items-center sm:items-start lg:items-end relative select-none pt-2 sm:pt-0 pb-4">
             {/* Ambient glows behind cards */}
             <div 
               className="absolute inset-0 pointer-events-none -z-10 opacity-60" 
@@ -374,10 +374,10 @@ export default function WhatWeDo() {
             <motion.div
               whileHover={{ y: -6, rotate: 0, scale: 1.02 }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              className="relative w-full max-w-[460px] rounded-2xl bg-white border border-slate-200/80 shadow-[0_15px_35px_rgba(0,0,0,0.06)] overflow-hidden flex z-0 self-start sm:self-auto rotate-[2deg] sm:rotate-[2.5deg] origin-bottom-right mb-2 sm:mb-4 transition-transform duration-300"
+              className="relative w-full max-w-[560px] lg:max-w-[580px] min-h-[240px] sm:min-h-[260px] lg:min-h-[275px] rounded-2xl sm:rounded-3xl bg-white border border-slate-200/80 shadow-[0_20px_45px_rgba(0,0,0,0.07)] overflow-hidden flex z-0 self-start sm:self-auto rotate-[2deg] sm:rotate-[2.5deg] origin-bottom-right mb-2 sm:mb-4 transition-transform duration-300"
             >
               {/* Left Geometric graphic column */}
-              <div className="relative w-[36%] sm:w-[40%] min-h-[160px] bg-slate-50 flex items-center justify-center overflow-hidden border-r border-slate-100 shrink-0">
+              <div className="relative w-[34%] sm:w-[38%] bg-slate-50 flex items-center justify-center overflow-hidden border-r border-slate-100 shrink-0 self-stretch">
                 {/* Diagonal Purple/Vibrant background polygon */}
                 <div 
                   className="absolute top-0 left-0 w-full h-[65%] bg-gradient-to-br from-brand-medium to-brand-vibrant origin-top-left"
@@ -390,31 +390,31 @@ export default function WhatWeDo() {
                 />
                 
                 {/* Concentric targets circles */}
-                <div className="absolute bottom-3 left-3 w-9 h-9 rounded-full border border-white/20 flex items-center justify-center">
-                  <div className="w-6 h-6 rounded-full border border-white/30 flex items-center justify-center">
-                    <div className="w-3.5 h-3.5 rounded-full border border-white/40 flex items-center justify-center">
-                      <div className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+                <div className="absolute bottom-6 left-6 w-12 h-12 rounded-full border border-white/20 flex items-center justify-center">
+                  <div className="w-8 h-8 rounded-full border border-white/30 flex items-center justify-center">
+                    <div className="w-5 h-5 rounded-full border border-white/40 flex items-center justify-center">
+                      <div className="w-2.5 h-2.5 rounded-full bg-white animate-pulse" />
                     </div>
                   </div>
                 </div>
                 
                 {/* Floating yellow accent dot */}
-                <div className="absolute top-[40%] right-[20%] w-2.5 h-2.5 rounded-full bg-amber-400 shadow-md" />
+                <div className="absolute top-[42%] right-[22%] w-3.5 h-3.5 rounded-full bg-amber-400 shadow-md" />
                 
                 {/* Abstract lines */}
-                <div className="absolute top-4 left-4 flex flex-col gap-1 opacity-25">
-                  <div className="w-4 h-[1.5px] bg-white" />
+                <div className="absolute top-6 left-6 flex flex-col gap-1.5 opacity-25">
                   <div className="w-6 h-[1.5px] bg-white" />
-                  <div className="w-3 h-[1.5px] bg-white" />
+                  <div className="w-8 h-[1.5px] bg-white" />
+                  <div className="w-5 h-[1.5px] bg-white" />
                 </div>
               </div>
               
               {/* Right text box - Paragraph 1 content */}
-              <div className="flex-1 flex flex-col justify-center p-4 sm:p-5 bg-white text-slate-800 select-text pb-6 sm:pb-6">
-                <div className="mb-1.5">
-                  <span className="text-[9px] sm:text-[10px] font-mono font-bold tracking-[0.22em] text-brand-vibrant uppercase select-none">SYSTEMS VS PACKAGES</span>
+              <div className="flex-1 flex flex-col justify-center p-6 sm:p-8 lg:p-9 bg-white text-slate-800 select-text">
+                <div className="mb-3">
+                  <span className="text-[10.5px] sm:text-[11.5px] font-mono font-bold tracking-[0.22em] text-brand-vibrant uppercase select-none">SYSTEMS VS PACKAGES</span>
                 </div>
-                <p className="text-[11px] sm:text-xs leading-relaxed text-slate-600 font-medium">
+                <p className="text-xs sm:text-sm lg:text-[14.5px] leading-relaxed text-slate-600 font-medium">
                   Most agencies sell you packages. <strong className="text-slate-950 font-black bg-gradient-to-r from-brand-vibrant to-brand-medium bg-clip-text text-transparent">We build you systems.</strong> At Zystra, every strategy is custom-crafted using AI-driven insights, real-time data, and deep market understanding.
                 </p>
               </div>
@@ -424,10 +424,10 @@ export default function WhatWeDo() {
             <motion.div
               whileHover={{ y: -6, rotate: 0, scale: 1.02 }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              className="relative w-full max-w-[460px] rounded-2xl bg-white border border-slate-200/80 shadow-[0_20px_45px_rgba(110,1,156,0.14)] overflow-hidden flex self-end -mt-4 sm:-mt-8 lg:-mt-12 z-10 -rotate-[2deg] sm:-rotate-[2.5deg] origin-top-left hover:z-20 transition-transform duration-300"
+              className="relative w-full max-w-[560px] lg:max-w-[580px] min-h-[240px] sm:min-h-[260px] lg:min-h-[275px] rounded-2xl sm:rounded-3xl bg-white border border-slate-200/80 shadow-[0_25px_50px_rgba(110,1,156,0.15)] overflow-hidden flex self-end -mt-10 sm:-mt-16 lg:-mt-20 z-10 -rotate-[2deg] sm:-rotate-[2.5deg] origin-top-left hover:z-20 transition-transform duration-300"
             >
               {/* Left Geometric graphic column */}
-              <div className="relative w-[36%] sm:w-[40%] min-h-[160px] bg-slate-50 flex flex-col justify-end p-4 sm:p-5 overflow-hidden border-r border-slate-100 shrink-0">
+              <div className="relative w-[34%] sm:w-[38%] bg-slate-50 flex flex-col justify-end p-6 overflow-hidden border-r border-slate-100 shrink-0 self-stretch">
                 {/* Diagonal Purple/Vibrant background polygon */}
                 <div 
                   className="absolute top-0 left-0 w-full h-[55%] bg-gradient-to-br from-brand-medium to-brand-vibrant origin-top-left"
@@ -439,16 +439,16 @@ export default function WhatWeDo() {
                   style={{ clipPath: "polygon(0 20%, 100% 0, 100% 100%, 0 100%)" }}
                 />
                 <div className="relative z-10 select-none">
-                  <span className="text-[10px] sm:text-[11px] font-sans font-black tracking-widest text-white uppercase leading-none block">ZYSTRA</span>
+                  <span className="text-xs sm:text-sm font-sans font-black tracking-widest text-white uppercase leading-none block">ZYSTRA</span>
                 </div>
               </div>
               
               {/* Right side contact details - Paragraph 3 content */}
-              <div className="flex-1 flex flex-col justify-center p-4 sm:p-5 bg-white text-slate-800 select-text">
-                <div className="mb-1.5">
-                  <span className="text-[9px] sm:text-[10px] font-mono font-bold tracking-[0.22em] text-brand-medium uppercase select-none">FULL-STACK SOLUTIONS</span>
+              <div className="flex-1 flex flex-col justify-center p-6 sm:p-8 lg:p-9 bg-white text-slate-800 select-text">
+                <div className="mb-3">
+                  <span className="text-[10.5px] sm:text-[11.5px] font-mono font-bold tracking-[0.22em] text-brand-medium uppercase select-none">FULL-STACK SOLUTIONS</span>
                 </div>
-                <p className="text-[11px] sm:text-xs leading-relaxed text-slate-600 font-medium">
+                <p className="text-xs sm:text-sm lg:text-[14.5px] leading-relaxed text-slate-600 font-medium">
                   We are a full-stack digital growth agency based in Bihar — offering SEO, ads, web design, branding, and apps. <span className="text-slate-900 font-semibold underline decoration-wavy decoration-brand-medium/60 decoration-1 underline-offset-4">One team. Every solution. Zero guesswork.</span>
                 </p>
               </div>

@@ -174,8 +174,12 @@ export default function UnifiedEcosystem() {
       
       {/* MAIN SECTION TITLE OUTSIDE ABOVE KEYBOARD */}
       <div className="text-center max-w-3xl mx-auto mb-8">
-        <h2 className="text-3xl sm:text-5xl font-serif font-black text-white tracking-tight">
-          Why a Full-Stack Agency Beats a Patchwork of Vendors
+        <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
+          Why a{" "}
+          <span className="bg-gradient-to-r from-[#7059f6] via-[#a855f7] to-[#ffffff] bg-clip-text text-transparent">
+            Full-Stack Agency
+          </span>{" "}
+          Beats a Patchwork of Vendors
         </h2>
       </div>
 

@@ -25,134 +25,134 @@ export default function WhyChoose() {
 
             {/* Hanging rod for the tags */}
             <div className="relative w-full">
-              {/* The Rod */}
-              <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-slate-300 to-transparent pointer-events-none hidden sm:block" />
+              {/* The Rod (Visible on all screens) */}
+              <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-slate-300 to-transparent pointer-events-none block" />
               
-              {/* Tags Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-6 pt-12 items-start justify-items-center">
+              {/* 3-Column Single Row Container on ALL Screens (No Horizontal Scroll Needed) */}
+              <div className="grid grid-cols-3 gap-1.5 sm:gap-6 pt-10 sm:pt-12 items-start justify-items-center w-full">
                 
                 {/* Tag 1 Wrapper (Arched Price Tag) */}
                 <div className="relative w-full max-w-[230px] flex flex-col items-center transition-all duration-300 hover:-translate-y-2 hover:rotate-[1deg] cursor-pointer group">
                   {/* Hanging String (SVG Thread) */}
-                  <svg className="absolute -top-12 left-1/2 -translate-x-1/2 w-8 h-[62px] overflow-visible pointer-events-none hidden sm:block" viewBox="0 0 32 62">
+                  <svg className="absolute -top-10 sm:-top-12 left-1/2 -translate-x-1/2 w-6 sm:w-8 h-[48px] sm:h-[62px] overflow-visible pointer-events-none block" viewBox="0 0 32 62">
                     <path d="M16,0 C12,18 20,28 16,62" fill="none" stroke="#aa9c84" strokeWidth="1.5" strokeDasharray="3,2" />
                   </svg>
 
                   {/* Arched Tag Body */}
                   <div
-                    className="relative pt-12 pb-0 w-full rounded-t-[100px] rounded-b-2xl shadow-[0_12px_30px_rgba(0,0,0,0.02)] border border-brand-medium/15 bg-[#faf9fc] flex flex-col items-center text-center justify-between"
-                    style={{ minHeight: "360px" }}
+                    className="relative pt-7 sm:pt-12 pb-0 w-full rounded-t-[40px] sm:rounded-t-[100px] rounded-b-lg sm:rounded-b-2xl shadow-sm border border-brand-medium/15 bg-[#faf9fc] flex flex-col items-center text-center justify-between min-h-[250px] sm:min-h-[360px]"
                   >
                     {/* Metal Grommet */}
-                    <div className="absolute top-3.5 left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-slate-100 border border-slate-400 flex items-center justify-center shadow-inner z-10">
-                      <div className="w-1.5 h-1.5 rounded-full bg-slate-700" />
+                    <div className="absolute top-2 sm:top-3.5 left-1/2 -translate-x-1/2 w-3 sm:w-4 h-3 sm:h-4 rounded-full bg-slate-100 border border-slate-400 flex items-center justify-center shadow-inner z-10">
+                      <div className="w-1 sm:w-1.5 h-1 sm:h-1.5 rounded-full bg-slate-700" />
                     </div>
 
-                    <div className="px-5 flex flex-col items-center flex-1 justify-center">
-                      <span className="text-[7.5px] font-mono tracking-widest text-brand-medium uppercase font-bold mb-1">AGENCY ETHOS</span>
+                    <div className="px-1.5 sm:px-5 flex flex-col items-center flex-1 justify-center">
+                      <span className="text-[6px] sm:text-[7.5px] font-mono tracking-wider text-brand-medium uppercase font-bold mb-0.5 sm:mb-1">ETHOS</span>
                       
-                      <h4 className="text-xl font-serif font-black tracking-tight text-brand-medium leading-none uppercase">
+                      <h4 className="text-[11px] sm:text-xl font-serif font-black tracking-tight text-brand-medium leading-none uppercase">
                         TRANSPARENCY
                       </h4>
-                      <span className="text-xs font-serif italic text-slate-555 mb-1">First</span>
+                      <span className="text-[9px] sm:text-xs font-serif italic text-slate-500 mb-0.5 sm:mb-1">First</span>
 
                       {/* Badge */}
-                      <div className="my-2.5 px-4 py-1.5 bg-brand-vibrant text-white font-mono text-[10px] font-black rounded-md tracking-wider shadow-sm uppercase">
+                      <div className="my-1 sm:my-2.5 px-1.5 sm:px-4 py-0.5 sm:py-1.5 bg-brand-vibrant text-white font-mono text-[7px] sm:text-[10px] font-black rounded tracking-wider shadow-xs uppercase">
                         100% CLEAR
-                    </div>
+                      </div>
 
-                      <p className="text-slate-600 text-[11px] sm:text-xs leading-relaxed font-sans mt-2">
-                        You always know where your budget is going. We provide clear, jargon-free reporting that shows real metrics.
-                    </p>
+                      <p className="text-slate-600 text-[8px] sm:text-xs leading-tight sm:leading-relaxed font-sans mt-0.5 sm:mt-2">
+                        Clear, jargon-free reporting showing real metrics.
+                      </p>
                     </div>
 
                     {/* Bottom bar */}
-                    <div className="w-full bg-brand-medium text-white text-[9px] font-mono font-bold py-3 uppercase tracking-widest rounded-b-2xl">
+                    <div className="w-full bg-brand-medium text-white text-[6.5px] sm:text-[9px] font-mono font-bold py-1.5 sm:py-3 uppercase tracking-wider rounded-b-lg sm:rounded-b-2xl truncate px-0.5">
                       [ NO VANITY METRICS ]
+                    </div>
                   </div>
-                  </div>
-                </div>                {/* Tag 3 Wrapper (Circular Stamp Tag) */}
+                </div>
+
+                {/* Tag 2 Wrapper (Circular Stamp Tag) */}
                 <div className="relative w-full max-w-[230px] flex flex-col items-center transition-all duration-300 hover:-translate-y-2 hover:rotate-[2deg] cursor-pointer group">
                   {/* Hanging String (SVG Thread) */}
-                  <svg className="absolute -top-12 left-1/2 -translate-x-1/2 w-8 h-[58px] overflow-visible pointer-events-none hidden sm:block" viewBox="0 0 32 58">
+                  <svg className="absolute -top-10 sm:-top-12 left-1/2 -translate-x-1/2 w-6 sm:w-8 h-[44px] sm:h-[58px] overflow-visible pointer-events-none block" viewBox="0 0 32 58">
                     <path d="M16,0 C10,18 22,28 16,58" fill="none" stroke="#aa9c84" strokeWidth="1.5" strokeDasharray="3,2" />
                   </svg>
 
                   {/* Circular Tag Body */}
                   <div
-                    className="relative p-1.5 w-full aspect-square rounded-full bg-brand-vibrant/10 shadow-[0_12px_30px_rgba(0,0,0,0.02)] border border-brand-vibrant/20 flex items-center justify-center"
+                    className="relative p-1 sm:p-1.5 w-full aspect-square rounded-full bg-brand-vibrant/10 shadow-sm border border-brand-vibrant/20 flex items-center justify-center"
                   >
                     {/* Grommet near top edge */}
-                    <div className="absolute top-2.5 left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-slate-100 border border-slate-400 flex items-center justify-center shadow-inner z-10">
-                      <div className="w-1.5 h-1.5 rounded-full bg-slate-700" />
+                    <div className="absolute top-1.5 sm:top-2.5 left-1/2 -translate-x-1/2 w-3 sm:w-4 h-3 sm:h-4 rounded-full bg-slate-100 border border-slate-400 flex items-center justify-center shadow-inner z-10">
+                      <div className="w-1 sm:w-1.5 h-1 sm:h-1.5 rounded-full bg-slate-700" />
                     </div>
 
-                    <div className="relative w-full h-full bg-[#33015a] rounded-full p-6 flex flex-col justify-center items-center border-[1.5px] border-dashed border-white/30 text-white overflow-hidden text-center">
-                      <span className="text-[7.5px] font-mono tracking-widest uppercase opacity-70 mb-0.5">DATA + ART</span>
+                    <div className="relative w-full h-full bg-[#33015a] rounded-full p-2 sm:p-6 flex flex-col justify-center items-center border-[1px] sm:border-[1.5px] border-dashed border-white/30 text-white overflow-hidden text-center">
+                      <span className="text-[6px] sm:text-[7.5px] font-mono tracking-widest uppercase opacity-70 mb-0.5">DATA + ART</span>
                       
-                      <h4 className="text-base font-serif font-black uppercase tracking-tight text-white leading-tight">
+                      <h4 className="text-[10px] sm:text-base font-serif font-black uppercase tracking-tight text-white leading-tight">
                         CREATIVE
                       </h4>
                       
                       {/* Rotated banner */}
-                      <div className="w-[120%] bg-white text-brand-vibrant font-serif font-black text-[9.5px] py-1 uppercase tracking-widest my-2 rotate-[-6deg] shadow-md flex justify-center">
+                      <div className="w-[125%] bg-white text-brand-vibrant font-serif font-black text-[6.5px] sm:text-[9.5px] py-0.5 sm:py-1 uppercase tracking-wider my-1 sm:my-2 rotate-[-6deg] shadow-sm flex justify-center">
                         CREATIVITY & DATA
                       </div>
                       
-                      <p className="text-white/85 text-[10px] leading-normal max-w-[90%] font-sans mb-1">
-                        Great marketing needs both art and science. We combine creative design with analytics on every campaign.
+                      <p className="text-white/85 text-[7px] sm:text-[10px] leading-tight max-w-[95%] font-sans">
+                        Creative design with analytics on every campaign.
                       </p>
                     </div>
                   </div>
                 </div>
 
-                {/* Tag 2 Wrapper (Clipped Price Tag) */}
+                {/* Tag 3 Wrapper (Clipped Price Tag) */}
                 <div className="relative w-full max-w-[230px] flex flex-col items-center transition-all duration-300 hover:-translate-y-2 hover:rotate-[-1.5deg] cursor-pointer group">
-                  {/* Hanging String (SVG Thread) - outside the clipped card */}
-                  <svg className="absolute -top-12 left-1/2 -translate-x-1/2 w-8 h-[62px] overflow-visible pointer-events-none hidden sm:block" viewBox="0 0 32 62">
+                  {/* Hanging String (SVG Thread) */}
+                  <svg className="absolute -top-10 sm:-top-12 left-1/2 -translate-x-1/2 w-6 sm:w-8 h-[48px] sm:h-[62px] overflow-visible pointer-events-none block" viewBox="0 0 32 62">
                     <path d="M16,0 C20,18 12,28 16,62" fill="none" stroke="#aa9c84" strokeWidth="1.5" strokeDasharray="3,2" />
                   </svg>
 
                   {/* Clipped Tag Body */}
                   <div
-                    className="relative p-[1.2px] w-full bg-brand-vibrant/20 rounded-b-sm"
+                    className="relative p-[1px] sm:p-[1.2px] w-full bg-brand-vibrant/20 rounded-b-sm"
                     style={{
-                      minHeight: "360px",
-                      clipPath: "polygon(24px 0, calc(100% - 24px) 0, 100% 24px, 100% 100%, 0 100%, 0 24px)"
+                      minHeight: "250px",
+                      clipPath: "polygon(14px 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%, 0 14px)"
                     }}
                   >
                     <div
-                      className="w-full h-full pt-12 pb-0 bg-[#fdfcff] flex flex-col items-center text-center justify-between"
+                      className="w-full h-full pt-7 sm:pt-12 pb-0 bg-[#fdfcff] flex flex-col items-center text-center justify-between min-h-[248px] sm:min-h-[357.6px]"
                       style={{
-                        minHeight: "357.6px",
-                        clipPath: "polygon(23.2px 0, calc(100% - 23.2px) 0, 100% 23.2px, 100% 100%, 0 100%, 0 23.2px)"
+                        clipPath: "polygon(13.2px 0, calc(100% - 13.2px) 0, 100% 13.2px, 100% 100%, 0 100%, 0 13.2px)"
                       }}
                     >
                       {/* Metal Grommet */}
-                      <div className="absolute top-3.5 left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-slate-100 border border-slate-400 flex items-center justify-center shadow-inner z-10">
-                        <div className="w-1.5 h-1.5 rounded-full bg-slate-700" />
+                      <div className="absolute top-2 sm:top-3.5 left-1/2 -translate-x-1/2 w-3 sm:w-4 h-3 sm:h-4 rounded-full bg-slate-100 border border-slate-400 flex items-center justify-center shadow-inner z-10">
+                        <div className="w-1 sm:w-1.5 h-1 sm:h-1.5 rounded-full bg-slate-700" />
                       </div>
 
-                      <div className="px-4 flex flex-col items-center flex-1 justify-center">
-                        <span className="text-[7.5px] font-mono tracking-widest text-brand-vibrant uppercase font-bold mb-1">TRACKED GROWTH</span>
+                      <div className="px-1.5 sm:px-4 flex flex-col items-center flex-1 justify-center">
+                        <span className="text-[6px] sm:text-[7.5px] font-mono tracking-wider text-brand-vibrant uppercase font-bold mb-0.5 sm:mb-1">GROWTH</span>
                         
-                        <h4 className="text-xl font-serif font-black tracking-tight text-brand-vibrant leading-none uppercase">
+                        <h4 className="text-[11px] sm:text-xl font-serif font-black tracking-tight text-brand-vibrant leading-none uppercase">
                           PERFORMANCE
                         </h4>
-                        <span className="text-[10px] font-serif italic text-slate-500 mb-1">Unbelievable!</span>
+                        <span className="text-[8px] sm:text-[10px] font-serif italic text-slate-500 mb-0.5 sm:mb-1">ROI Driven</span>
 
                         {/* Percentage Badge */}
-                        <div className="my-2 text-slate-900 font-serif font-black text-2xl tracking-tighter">
+                        <div className="my-1 sm:my-2 text-slate-900 font-serif font-black text-xs sm:text-2xl tracking-tight">
                           ROI <span className="text-brand-vibrant font-sans font-light">DRIVEN</span>
                         </div>
 
-                        <p className="text-slate-600 text-[11px] sm:text-xs leading-relaxed font-sans">
-                          We measure success by your growth. Our team sets measurable KPIs and optimises relentlessly.
+                        <p className="text-slate-600 text-[8px] sm:text-xs leading-tight sm:leading-relaxed font-sans">
+                          Optimised KPIs for real business growth.
                         </p>
                       </div>
 
                       {/* Bottom bar */}
-                      <div className="w-full bg-brand-vibrant text-white text-[10px] font-mono font-bold py-3.5 uppercase tracking-widest">
+                      <div className="w-full bg-brand-vibrant text-white text-[6.5px] sm:text-[10px] font-mono font-bold py-1.5 sm:py-3.5 uppercase tracking-wider truncate px-0.5">
                         70% OFF SPEND WASTE
                       </div>
                     </div>

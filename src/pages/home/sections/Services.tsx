@@ -11,7 +11,7 @@ export default function Services() {
       desc: "Rank higher on Google with data-backed SEO strategies tailored to your industry and location. On-page, off-page, and technical SEO — built for long-term growth.",
       link: "/services/seo",
       badge: "Best SEO Agency Bihar",
-      image: "/services/seo.png",
+      image: "/heroBgImg/SEO.webp",
       bgColor: "bg-[#e8f0fe]"
     },
     {
@@ -20,7 +20,7 @@ export default function Services() {
       desc: "Hyper-targeted paid social campaigns that reach your exact audience. Scroll-stopping creative ads that convert viewers into active customers.",
       link: "/services/meta-ads",
       badge: "Meta Ads India",
-      image: "/services/meta-ads.png",
+      image: "/heroBgImg/meta.webp",
       bgColor: "bg-[#f0e6fe]"
     },
     {
@@ -29,7 +29,7 @@ export default function Services() {
       desc: "High-intent traffic, delivered instantly. Our Google Ads specialists build precision PPC campaigns that maximize your ROI and minimize wasted spend.",
       link: "/services/google-ads",
       badge: "Google Ads Bihar",
-      image: "/services/google-ads.png",
+      image: "/heroBgImg/Google.webp",
       bgColor: "bg-[#e2f0ea]"
     },
     {
@@ -38,7 +38,7 @@ export default function Services() {
       desc: "Your website is your 24/7 salesperson. We design fast, mobile-first, conversion-optimized websites that look world-class and perform even better.",
       link: "/services/website-designing",
       badge: "Web Development Patna",
-      image: "/services/web-dev.png",
+      image: "/heroBgImg/web-dev.webp",
       bgColor: "bg-[#fce8e6]"
     },
     {
@@ -47,7 +47,7 @@ export default function Services() {
       desc: "Dominate 'near me' searches and appear at the top of Google Maps. We fully optimize and manage your Google Business Profile so local customers find you first.",
       link: "/services/gbp-local-seo",
       badge: "Local SEO Bihar",
-      image: "/services/local-seo.png",
+      image: "/heroBgImg/local-seo.webp",
       bgColor: "bg-[#e2f0ea]"
     },
     {
@@ -56,7 +56,7 @@ export default function Services() {
       desc: "We go beyond impressions and clicks. Our performance marketing approach tracks every conversion, lead, and rupee — so you only pay for real results.",
       link: "/services/performance-marketing",
       badge: "Performance Marketing India",
-      image: "/services/performance-marketing.png",
+      image: "/heroBgImg/performance.webp",
       bgColor: "bg-[#f0ece9]"
     }
   ];
@@ -148,8 +148,8 @@ export default function Services() {
           </p>
         </div>
 
-        {/* Services 3D Curtain Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+        {/* Services 3D Curtain Grid (Horizontal Swipe Carousel on Mobile, 3-Col Grid on Desktop) */}
+        <div className="flex overflow-x-auto snap-x snap-mandatory gap-5 pb-8 px-2 scrollbar-none md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-8 md:overflow-visible mb-12 md:mb-16">
           {services.map((s, i) => (
             <motion.div
               key={i}
@@ -157,11 +157,13 @@ export default function Services() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.4, delay: i * 0.06 }}
+              className="snap-center min-w-[265px] max-w-[285px] w-full flex-shrink-0 md:min-w-0 md:max-w-none md:flex-shrink"
             >
               <Link href={s.link} className="w-full block">
                 <motion.div
                   initial="initial"
                   whileHover="hover"
+                  whileTap="hover"
                   className="relative overflow-hidden w-full aspect-[4/5] rounded-[32px] border border-slate-200/60 shadow-[0_15px_30px_rgba(0,0,0,0.03)] cursor-pointer bg-white"
                 >
                   {/* COVER LAYER (Normal State) */}
@@ -203,23 +205,23 @@ export default function Services() {
                   <motion.div
                     variants={curtainVariants}
                     style={{ clipPath: "url(#curtain-clip)" }}
-                    className="absolute inset-0 p-6 sm:p-8 pt-8 sm:pt-10 bg-gradient-to-br from-[#4c1380] via-[#350260] to-[#1b0033] text-white flex flex-col justify-between z-10"
+                    className="absolute inset-0 p-6 pt-10 bg-gradient-to-br from-[#4c1380] via-[#350260] to-[#1b0033] text-white flex flex-col justify-between z-10"
                   >
-                    <motion.div variants={contentVariants} className="max-w-[70%] sm:max-w-[52%] flex flex-col gap-2 sm:gap-3">
-                      <span className="text-[10px] sm:text-xs font-mono font-bold text-purple-300 uppercase tracking-widest">
+                    <motion.div variants={contentVariants} className="max-w-[52%] flex flex-col gap-3">
+                      <span className="text-xs font-mono font-bold text-purple-300 uppercase tracking-widest">
                         {s.num}. SERVICE
                       </span>
                       <h3 className="text-base sm:text-lg font-serif font-extrabold tracking-tight leading-tight text-white">
                         {s.title}
                       </h3>
-                      <p className="text-white/85 text-[11px] sm:text-xs md:text-[13px] leading-relaxed font-sans line-clamp-4 sm:line-clamp-none">
+                      <p className="text-white/85 text-[11.5px] sm:text-xs md:text-[13px] leading-relaxed font-sans">
                         {s.desc}
                       </p>
                     </motion.div>
 
                     {/* Explore Button */}
-                    <motion.div variants={contentVariants} className="pt-2">
-                      <span className="inline-flex items-center justify-center gap-2 bg-brand-vibrant hover:bg-brand-medium text-white px-4 sm:px-4.5 py-2 sm:py-2.5 rounded-full text-[11px] font-bold transition-all shadow-md w-fit cursor-pointer hover:scale-105 active:scale-95">
+                    <motion.div variants={contentVariants}>
+                      <span className="inline-flex items-center justify-center gap-2 bg-brand-vibrant hover:bg-brand-medium text-white px-4.5 py-2.5 rounded-full text-[11px] font-bold transition-all shadow-md w-fit cursor-pointer hover:scale-105 active:scale-95">
                         Explore Service <ArrowRight className="w-3.5 h-3.5" />
                       </span>
                     </motion.div>
