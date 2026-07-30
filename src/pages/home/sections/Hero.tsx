@@ -18,10 +18,10 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative w-full min-h-screen bg-white text-slate-900 overflow-hidden flex flex-col justify-between select-none pt-24 sm:pt-28 pb-0 font-sans">
+    <section className="relative w-full min-h-screen bg-white text-slate-900 overflow-hidden flex flex-col justify-between select-none pt-24 sm:pt-20 pb-0 font-sans">
       
       {/* Main Center Content: Huge Stacked Typography in Zystra Brand Fonts */}
-      <div className="relative z-20 container mx-auto px-4 sm:px-8 max-w-7xl my-auto py-8 sm:py-12 flex flex-col items-center justify-center text-center">
+      <div className="relative z-20 container mx-auto px-4 sm:px-8 max-w-7xl mt-0 sm:mt-2 mb-auto py-3 sm:py-6 flex flex-col items-center justify-center text-center">
         
         {/* Top Decorative Graphic Badges */}
         <div className="w-full relative flex flex-col items-center">

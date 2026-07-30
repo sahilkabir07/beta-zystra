@@ -5,7 +5,6 @@ import { Link } from "wouter";
 import {
   ArrowRight,
   Phone,
-  Activity,
 } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -14,6 +13,8 @@ import { Button } from "@/components/ui/button";
 import ServicesHero from "./components/ServicesHero";
 import UnifiedEcosystem from "./components/UnifiedEcosystem";
 import ServicesCarousel from "./components/ServicesCarousel";
+import GrowthSystemSpiral from "./components/GrowthSystemSpiral";
+import LightRays from "@/components/ui/LightRays";
 
 
 
@@ -110,100 +111,180 @@ export default function ServicesPage() {
         {/* SECTION 3 — ALL 11 SERVICES CAROUSEL */}
         <ServicesCarousel />
 
-        {/* SECTION 4 — HOW SERVICES WORK TOGETHER */}
-        <section className="container mx-auto px-6 sm:px-12 max-w-7xl mb-28">
-          <div className="relative rounded-3xl border border-slate-800 bg-slate-900/40 backdrop-blur-xl p-8 sm:p-12 overflow-hidden shadow-2xl">
-            <div className="absolute top-0 left-0 w-80 h-80 bg-brand-vibrant/5 rounded-full blur-[90px] pointer-events-none" />
+        {/* SECTION 4 — HOW SERVICES WORK TOGETHER (3D HELICAL GROWTH SYSTEM) */}
+        <GrowthSystemSpiral />
+
+        {/* SECTION 5 — INDUSTRIES THIS WORKS FOR (ONE SINGLE FRAME CONTAINER WITH DUAL SPINNING CIRCULAR TEXT RINGS) */}
+        <section className="container mx-auto px-4 sm:px-8 max-w-7xl mb-24 select-none">
+          <div className="relative rounded-[36px] overflow-hidden bg-gradient-to-b from-[#0d0620]/95 via-[#070314]/98 to-[#04010a] border border-purple-500/20 p-6 sm:p-10 lg:p-12 shadow-[0_30px_100px_rgba(112,89,246,0.15)] flex flex-col items-center justify-between text-center min-h-[540px] sm:min-h-[600px]">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-[#7059f6]/15 rounded-full blur-[160px] pointer-events-none" />
+
+            {/* Main Interactive Canvas with Dual Spinning Circular Text Rings */}
+            <div className="relative w-full max-w-5xl flex-1 flex items-center justify-between gap-4 px-2 sm:px-6">
+
+              {/* ── LEFT SPINNING CIRCULAR TEXT-PATH RING WITH "WE HAVE" IN CENTER ── */}
+              <div className="relative z-30 hidden md:flex items-center justify-center">
+                <motion.div
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
+                  className="w-56 h-56 lg:w-72 lg:h-72 flex items-center justify-center transform-gpu"
+                >
+                  <svg className="w-full h-full drop-shadow-[0_0_18px_rgba(168,85,247,0.45)]" viewBox="0 0 200 200">
+                    <path
+                      id="circleLeftPath"
+                      d="M 100,100 m -75,0 a 75,75 0 1,1 150,0 a 75,75 0 1,1 -150,0"
+                      fill="none"
+                      stroke="rgba(196,168,255,0.4)"
+                      strokeWidth="1.5"
+                    />
+                    <text className="fill-purple-200 font-mono text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.25em]">
+                      <textPath href="#circleLeftPath" startOffset="0%">
+                        HEALTHCARE  ✦  BEAUTY  ✦  SALONS  ✦  SOLAR  ✦  AYURVEDA  ✦  
+                      </textPath>
+                    </text>
+                  </svg>
+                </motion.div>
+                {/* Static Glowing Center Title (Bigger Stacked 2 Lines) */}
+                <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none leading-tight gap-0.5">
+                  <span className="text-2xl sm:text-3xl lg:text-4xl font-sans font-[900] uppercase tracking-[0.15em] text-white drop-shadow-[0_0_25px_rgba(168,85,247,1)]">
+                    WE
+                  </span>
+                  <span className="text-2xl sm:text-3xl lg:text-4xl font-sans font-[900] uppercase tracking-[0.15em] text-white drop-shadow-[0_0_25px_rgba(168,85,247,1)]">
+                    HAVE
+                  </span>
+                </div>
+              </div>
+
+              {/* CENTER 3D SHARPENER IMAGE GRAPHIC */}
+              <motion.div
+                animate={{ y: [0, -8, 0] }}
+                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                className="relative z-20 flex-1 max-w-[380px] sm:max-w-[440px] lg:max-w-[480px] flex justify-center mx-auto"
+              >
+                <img
+                  src="/services-bottom-image.webp"
+                  alt="Built for Every Industry — Proven Across Many"
+                  className="w-full h-auto max-h-[440px] sm:max-h-[500px] object-contain filter drop-shadow-[0_30px_70px_rgba(112,89,246,0.55)] transform-gpu rounded-3xl"
+                />
+              </motion.div>
+
+              {/* ── RIGHT SPINNING CIRCULAR TEXT-PATH RING WITH "WORKED WITH" IN CENTER ── */}
+              <div className="relative z-30 hidden md:flex items-center justify-center">
+                <motion.div
+                  animate={{ rotate: -360 }}
+                  transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
+                  className="w-56 h-56 lg:w-72 lg:h-72 flex items-center justify-center transform-gpu"
+                >
+                  <svg className="w-full h-full drop-shadow-[0_0_18px_rgba(168,85,247,0.45)]" viewBox="0 0 200 200">
+                    <path
+                      id="circleRightPath"
+                      d="M 100,100 m -75,0 a 75,75 0 1,1 150,0 a 75,75 0 1,1 -150,0"
+                      fill="none"
+                      stroke="rgba(196,168,255,0.4)"
+                      strokeWidth="1.5"
+                    />
+                    <text className="fill-purple-200 font-mono text-[9px] lg:text-[9.8px] font-bold uppercase tracking-[0.17em]">
+                      <textPath href="#circleRightPath" startOffset="0%">
+                        EDUCATION  ✦  INTERIOR  ✦  DESIGN  ✦  EVENTS  ✦  TRAVEL  ✦  TECHNOLOGY  ✦  
+                      </textPath>
+                    </text>
+                  </svg>
+                </motion.div>
+                {/* Static Glowing Center Title (Bigger Stacked 2 Lines) */}
+                <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none leading-tight gap-0.5">
+                  <span className="text-xl sm:text-2xl lg:text-3xl font-sans font-[900] uppercase tracking-[0.15em] text-white drop-shadow-[0_0_25px_rgba(168,85,247,1)]">
+                    WORKED
+                  </span>
+                  <span className="text-xl sm:text-2xl lg:text-3xl font-sans font-[900] uppercase tracking-[0.15em] text-white drop-shadow-[0_0_25px_rgba(168,85,247,1)]">
+                    WITH
+                  </span>
+                </div>
+              </div>
+
+            </div>
+
+            {/* Bottom Subtitle Note */}
+            <p className="text-xs sm:text-sm font-mono text-slate-300 tracking-wide font-medium italic max-w-xl mt-2 relative z-20">
+              "Whatever your industry, our process adapts — the strategy is built around your business, not a generic playbook."
+            </p>
+
+          </div>
+        </section>
+
+        {/* SECTION 6 — CINEMATIC WEBGL LIGHT RAYS SPOTLIGHT HERO CTA */}
+        <section className="container mx-auto px-4 sm:px-8 max-w-7xl mb-24 select-none">
+          <div className="relative rounded-[36px] overflow-hidden bg-[#070314] border border-purple-500/40 p-10 sm:p-16 lg:p-20 shadow-[0_30px_100px_rgba(112,89,246,0.35)] flex flex-col items-center justify-center text-center min-h-[480px] sm:min-h-[540px]">
             
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start select-text">
-              <div className="lg:col-span-5 flex flex-col gap-4">
-                <span className="text-xs font-mono font-bold tracking-widest text-brand-vibrant uppercase">
-                  Growth System
-                </span>
-                <h2 className="text-3xl sm:text-4xl font-serif font-black text-white leading-tight">
-                  How We Combine Services Into One Growth System
-                </h2>
-                <p className="text-sm sm:text-base text-slate-350 leading-relaxed font-medium mt-2">
-                  A website without traffic is invisible. Traffic without conversion is wasted. Conversion without retention is short-lived growth. That's why Zystra never sells services in isolation — we build them to work together.
-                </p>
-              </div>
-
-              <div className="lg:col-span-7 bg-slate-950/40 p-6 sm:p-8 rounded-2xl border border-slate-900 flex flex-col gap-6">
-                <h3 className="text-xl sm:text-2xl font-serif font-bold text-white flex items-center gap-2.5">
-                  <Activity className="w-5 h-5 text-brand-vibrant shrink-0" />
-                  Example: A Complete Brand Launch
-                </h3>
-                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-medium">
-                  Logo and brand identity define how you look. A high-converting website defines how you're experienced. SEO and Local SEO bring in organic discovery. Meta Ads and Google Ads bring in immediate demand. Video content fuels both your ads and your social presence. Performance Marketing ties every channel's data together — so we know exactly what's working and what to scale.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* SECTION 5 — INDUSTRIES THIS WORKS FOR */}
-        <section className="container mx-auto px-6 sm:px-12 max-w-7xl mb-24">
-          <div className="relative rounded-3xl overflow-hidden bg-slate-900/10 border border-slate-800 p-8 sm:p-12 text-center select-text">
-            <div className="max-w-3xl mx-auto flex flex-col gap-4 items-center">
-              <span className="text-xs font-mono font-bold tracking-widest text-brand-vibrant uppercase">
-                Industry Versatility
-              </span>
-              <h2 className="text-2xl sm:text-3xl font-serif font-bold text-white">
-                Built for Every Industry. Proven Across Many.
-              </h2>
-              <p className="text-xs sm:text-sm text-slate-350 leading-relaxed font-medium max-w-xl">
-                These services have been tested and refined across healthcare, Ayurveda, beauty and salons, solar energy, education, interior design, events, travel, and technology. Whatever your industry, our process adapts — the strategy is built around your business, not a generic playbook.
-              </p>
-              
-              <div className="w-full h-[1px] bg-slate-800/80 my-4" />
-              
-              <p className="text-xs sm:text-sm font-mono text-purple-300 tracking-wide font-medium italic">
-                "Trusted by businesses across healthcare, beauty, solar energy, education, interior design, events, travel, and technology."
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* SECTION 6 — FINAL CTA */}
-        <section className="container mx-auto px-6 sm:px-12 max-w-7xl">
-          <div className="relative rounded-3xl overflow-hidden bg-gradient-to-tr from-brand-dark via-brand-medium to-brand-vibrant p-10 sm:p-16 text-center flex flex-col items-center gap-6 shadow-xl shadow-brand-dark/20">
-            <div className="absolute inset-0 opacity-[0.08] mix-blend-overlay"
-              style={{
-                backgroundImage: "radial-gradient(white 1.5px, transparent 1.5px)",
-                backgroundSize: "24px 24px"
-              }}
+            {/* React Bits WebGL LightRays Component Background (Enhanced Visibility & Brightness) */}
+            <LightRays
+              raysOrigin="top-center"
+              raysColor="#c084fc"
+              raysSpeed={1.3}
+              lightSpread={1.2}
+              rayLength={2.2}
+              pulsating={true}
+              fadeDistance={1.4}
+              saturation={1.0}
+              followMouse={true}
+              mouseInfluence={0.25}
+              noiseAmount={0.03}
+              distortion={0.02}
             />
-            <div className="absolute inset-0 bg-radial-gradient from-transparent to-black/40" />
 
-            <div className="relative z-10 max-w-2xl flex flex-col items-center gap-6">
-              <span className="text-xs font-mono font-bold uppercase tracking-widest text-purple-200 bg-white/10 px-3.5 py-1.5 rounded-full border border-white/20">
-                Custom Systems Setup
-              </span>
-              <h2 className="text-3xl sm:text-5xl font-serif font-black leading-tight text-white">
-                Not Sure Which Service You Need? Let's Figure It Out Together.
-              </h2>
-              <p className="text-slate-200 text-sm sm:text-base leading-relaxed font-medium max-w-lg">
-                Every brand's growth path looks different. Tell us where you are today and where you want to be — we'll recommend the exact mix of services to get you there, starting with a free audit of your current digital presence.
-              </p>
+            {/* Top Light Source Lens Flare */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-16 bg-purple-400/60 blur-2xl rounded-full pointer-events-none z-10" />
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-28 h-5 bg-white blur-md rounded-full pointer-events-none z-10" />
+
+            {/* Stage Ground Reflection Pool */}
+            <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-[480px] sm:w-[620px] h-[50px] bg-gradient-to-r from-purple-500/35 via-purple-300/50 to-purple-500/35 blur-2xl rounded-full pointer-events-none z-0" />
+            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[360px] sm:w-[460px] h-[18px] bg-white/40 blur-lg rounded-full pointer-events-none z-0" />
+
+            {/* Illuminated Center Content under WebGL Light Rays */}
+            <div className="relative z-20 max-w-3xl flex flex-col items-center gap-6">
               
-              <div className="flex flex-col sm:flex-row gap-4 mt-2">
-                <Link href="/#contact">
-                  <Button className="rounded-full bg-white text-slate-950 hover:bg-slate-50 font-bold px-8 py-6 shadow-lg flex items-center gap-2 group cursor-pointer">
-                    Get Your Free Digital Audit
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </Button>
-                </Link>
+              {/* Glowing Eyebrow Pill */}
+              <div className="px-4 py-1.5 rounded-full bg-purple-500/15 border border-purple-400/30 text-purple-200 text-xs font-mono font-bold uppercase tracking-widest flex items-center gap-2 backdrop-blur-md">
+                <span className="w-2 h-2 rounded-full bg-purple-400 animate-pulse shadow-[0_0_10px_rgba(168,85,247,0.9)]" />
+                Tailored Growth Systems Setup
+              </div>
+
+              {/* Creative Multi-Line Heading */}
+              <h2 className="text-3xl sm:text-5xl lg:text-6xl font-sans font-[900] tracking-tight leading-[1.12]">
+                <span className="text-slate-300 font-extrabold text-xl sm:text-3xl lg:text-4xl block mb-2 opacity-90">
+                  Not Sure Which Service You Need?
+                </span>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-purple-100 to-purple-300 drop-shadow-[0_0_35px_rgba(168,85,247,0.6)]">
+                  Let's Figure It Out Together.
+                </span>
+              </h2>
+
+              {/* Creative Paragraph & Micro Value Pills */}
+              <div className="flex flex-col items-center gap-4">
+                <p className="text-slate-200 text-sm sm:text-base lg:text-lg leading-relaxed font-normal max-w-2xl drop-shadow-md">
+                  Every brand's growth path looks different. Tell us where you are today and where you want to be — we'll recommend the <span className="text-white font-bold underline decoration-purple-400/70 decoration-2 underline-offset-4">exact mix of services</span> to get you there.
+                </p>
+
+                {/* Micro Value Chips */}
+                <div className="flex flex-wrap items-center justify-center gap-2.5 pt-1">
+                  <span className="px-3.5 py-1 rounded-full bg-purple-500/10 border border-purple-400/20 text-xs font-mono text-purple-200 backdrop-blur-sm shadow-sm">
+                    ✦ Custom Growth Playbook
+                  </span>
+                  <span className="px-3.5 py-1 rounded-full bg-purple-500/10 border border-purple-400/20 text-xs font-mono text-purple-200 backdrop-blur-sm shadow-sm">
+                    ✦ Zero Commitment
+                  </span>
+                </div>
+              </div>
+
+              {/* Clean Solid High-Contrast CTA Button */}
+              <div className="mt-2">
                 <a href="tel:+916200048924">
-                  <Button className="rounded-full bg-white/10 hover:bg-white/15 text-white border border-white/20 font-bold px-8 py-6 flex items-center gap-2 cursor-pointer">
-                    <Phone className="w-4 h-4 text-purple-300" />
+                  <Button className="rounded-full bg-white hover:bg-purple-50 text-slate-950 font-bold text-sm sm:text-base px-9 py-6 shadow-[0_0_30px_rgba(255,255,255,0.5)] flex items-center justify-center gap-3 transition-all duration-300 cursor-pointer border border-white transform-gpu hover:scale-105">
+                    <Phone className="w-5 h-5 text-purple-600" />
                     Call Us: +91 6200048924
                   </Button>
                 </a>
               </div>
-              
-              <span className="text-xs text-purple-200 font-mono uppercase tracking-wider mt-2 block">
-                No commitment required · Response within 24 hours
-              </span>
+
             </div>
           </div>
         </section>

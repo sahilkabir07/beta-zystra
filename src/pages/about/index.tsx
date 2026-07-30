@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Lenis from "lenis";
 import { motion, useScroll, useTransform, useInView, useMotionValue, useSpring } from "framer-motion";
 import { Link } from "wouter";
-import { ArrowRight, ArrowUpRight, Phone } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Phone, Sparkles, Rocket, Globe, Award, MessageSquare } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import SEO from "@/components/shared/SEO";
@@ -348,130 +348,188 @@ function FadeUp({ children, delay = 0, className = "" }: { children: React.React
   );
 }
 
-function HexTile({ item }: { item: any }) {
+function IdentityCard({ card }: { card: any }) {
   return (
-    <div className="group relative w-[98px] h-[112px] min-[380px]:w-[110px] min-[380px]:h-[126px] sm:w-64 sm:h-[300px] md:w-[280px] md:h-[325px] cursor-pointer transition-all duration-500 hover:scale-[1.06] hover:z-50 shrink-0">
-      {/* Hexagon Clipped Wrapper */}
-      <div
-        className="absolute inset-0 w-full h-full overflow-hidden bg-[#0d0722] shadow-[0_15px_35px_rgba(0,0,0,0.8)]"
-        style={{
-          clipPath: "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)",
-        }}
-      >
-        {/* Background Image */}
-        <img
-          src={item.image}
-          alt={item.title}
-          className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700 ease-out opacity-60 group-hover:opacity-80 brightness-90 group-hover:brightness-100"
-        />
+    <div
+      className={`group relative bg-gradient-to-b from-[#140c33]/95 via-[#0d0722]/95 to-[#080510] text-white p-3.5 sm:p-4 pb-5 sm:pb-6 rounded-[24px] sm:rounded-[28px] shadow-[0_25px_60px_rgba(0,0,0,0.85)] border border-purple-500/30 transition-all duration-500 hover:scale-[1.04] hover:z-30 hover:border-fuchsia-400 hover:shadow-[0_30px_70px_rgba(168,85,247,0.45)] cursor-pointer select-none flex flex-col justify-between h-full min-h-[460px] sm:min-h-[490px] ${card.rotation}`}
+    >
+      {/* Top Purple/Fuchsia Sticker Badge glued onto card frame */}
+      <div className="absolute -top-3.5 right-4 z-30 bg-gradient-to-r from-purple-600 to-fuchsia-600 text-white font-black text-[11px] font-mono tracking-widest uppercase px-3 py-1 rounded-sm shadow-[0_4px_14px_rgba(168,85,247,0.5)] border border-purple-300/40 transform rotate-3 group-hover:scale-110 group-hover:rotate-0 transition-all">
+        {card.badge}
+      </div>
 
-        {/* Ambient Dark Purple Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#070412] via-[#070412]/80 to-purple-950/40 group-hover:from-[#070412]/90 group-hover:via-purple-950/50 transition-colors duration-500" />
+      {/* Top Left Margin Camera Spec Notches */}
+      <div className="absolute top-2.5 left-4 text-[9px] font-mono font-extrabold text-purple-300/80 tracking-widest uppercase pointer-events-none z-10">
+        + HUD // {card.code}
+      </div>
 
-        {/* Top Glowing Ambient Light Bar Inside Hexagon */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2/3 h-1 bg-gradient-to-r from-purple-500 via-fuchsia-400 to-indigo-500 blur-[1px] opacity-70 group-hover:opacity-100 transition-opacity" />
+      {/* Camera Corner HUD Alignment Marks */}
+      <div className="absolute top-2.5 right-12 w-2 h-2 border-r border-t border-purple-400/40 pointer-events-none" />
+      <div className="absolute bottom-3 left-3 w-2 h-2 border-l border-b border-purple-400/40 pointer-events-none" />
+      <div className="absolute bottom-3 right-3 w-2 h-2 border-r border-b border-purple-400/40 pointer-events-none" />
 
-        {/* Inner Content */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-1.5 sm:p-6 gap-0.5 sm:gap-2.5 z-10">
-          <div className="w-4 h-4 min-[380px]:w-5 min-[380px]:h-5 sm:w-8 sm:h-8 rounded-full bg-purple-500/20 border border-purple-400/30 flex items-center justify-center text-purple-300 mb-0.5 sm:mb-1 group-hover:scale-110 group-hover:bg-purple-500 group-hover:text-white transition-all duration-300 shadow-[0_0_15px_rgba(168,85,247,0.3)]">
-            <ArrowUpRight className="w-2.5 h-2.5 sm:w-4 sm:h-4" />
+      {/* Zystra Deep Purple Inner Screen Box for Social Media Images */}
+      <div className="relative w-full h-[245px] sm:h-[265px] rounded-[18px] overflow-hidden bg-gradient-to-b from-[#1c103f] via-[#10082b] to-[#070414] p-3 flex flex-col justify-between border border-purple-500/30 shadow-inner group-hover:border-fuchsia-400/60 group-hover:brightness-110 transition-all mt-3">
+        {/* Background Radial Glow & Mesh */}
+        <div className="absolute inset-0 opacity-20 pointer-events-none" style={{ backgroundImage: "radial-gradient(circle at 50% 50%, rgba(168, 85, 247, 0.4) 1px, transparent 1px)", backgroundSize: "14px 14px" }} />
+        <div className="absolute inset-0 bg-gradient-to-t from-purple-950/60 via-transparent to-transparent pointer-events-none" />
+
+        {/* HUD Crosshairs in corner */}
+        <div className="relative z-10 flex justify-between items-center text-[10px] font-mono font-bold text-purple-200 uppercase">
+          <span className="bg-purple-950/80 px-2 py-0.5 rounded-full border border-purple-400/40 text-[9px] text-purple-200 font-extrabold backdrop-blur-md">
+            [ ISO 800 ]
+          </span>
+          <span className="bg-purple-900/80 text-fuchsia-300 px-2 py-0.5 rounded-md border border-fuchsia-400/40 text-[9px] backdrop-blur-md">
+            4K RAW
+          </span>
+        </div>
+
+        {/* Social Media Image Asset */}
+        <div className="relative z-10 flex-1 flex items-center justify-center my-1">
+          <img
+            src={card.image}
+            alt={card.title}
+            className="max-h-[185px] sm:max-h-[205px] w-auto object-contain filter drop-shadow-[0_20px_35px_rgba(124,58,237,0.5)] group-hover:scale-105 group-hover:-translate-y-1 transition-transform duration-500"
+          />
+        </div>
+
+        {/* Inner Glued Sticker Tag at Bottom Right */}
+        <div className="relative z-10 flex justify-end">
+          <div className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-extrabold text-[10px] font-mono px-2.5 py-0.5 rounded-sm border border-purple-300/40 shadow-md uppercase transform -rotate-2">
+            1. {card.sticker}
+          </div>
+        </div>
+      </div>
+
+      {/* Polaroid Bottom Title & Description Section (Zystra Brand Theme & Bricolage Font) */}
+      <div className="pt-4 pb-0.5 px-1 flex flex-col justify-between flex-1">
+        <div>
+          <div className="flex items-center justify-between mb-1">
+            <span className="text-[10px] font-mono font-extrabold text-purple-300 tracking-widest uppercase">
+              {card.tag}
+            </span>
+            <ArrowUpRight className="w-4 h-4 text-purple-400 group-hover:text-fuchsia-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
           </div>
 
           <h3
-            className="text-[8.5px] min-[380px]:text-[9.5px] sm:text-lg font-black text-white tracking-wider sm:tracking-widest uppercase group-hover:text-purple-200 transition-colors duration-300 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] leading-tight"
+            className="text-2xl sm:text-3xl font-black text-white uppercase tracking-tight mb-1"
             style={{ fontFamily: "'Bricolage Grotesque', sans-serif" }}
           >
-            {item.title}
+            {card.title}
           </h3>
 
-          <p className="text-[7px] min-[380px]:text-[8px] sm:text-xs text-slate-300 opacity-80 group-hover:opacity-100 max-w-[95%] sm:max-w-[85%] transition-opacity duration-300 font-sans leading-tight line-clamp-2">
-            {item.subtitle}
+          <p className="text-slate-300 text-xs sm:text-sm font-sans line-clamp-2 leading-relaxed mb-4 font-normal">
+            {card.subtitle}
           </p>
+        </div>
 
-          <Link href={item.link}>
-            <span className="mt-0.5 sm:mt-1.5 inline-flex items-center gap-1 px-1.5 py-0.5 sm:px-4 sm:py-1.5 rounded-full bg-purple-500/20 group-hover:bg-gradient-to-r group-hover:from-purple-600 group-hover:to-indigo-600 border border-purple-400/40 text-[6.5px] min-[380px]:text-[7.5px] sm:text-[10px] font-mono tracking-widest text-purple-200 group-hover:text-white uppercase transition-all duration-300 backdrop-blur-md shadow-lg group-hover:shadow-[0_0_20px_rgba(168,85,247,0.5)]">
-              LEARN <ArrowRight className="w-2 h-2 sm:w-3 sm:h-3 group-hover:translate-x-0.5 transition-transform" />
+        <div>
+          <Link href={card.link}>
+            <span className="inline-flex items-center justify-between w-full px-4 py-2.5 rounded-xl bg-purple-500/20 group-hover:bg-gradient-to-r group-hover:from-purple-600 group-hover:to-fuchsia-600 text-purple-200 group-hover:text-white text-xs font-mono font-extrabold tracking-wider uppercase transition-all duration-300 border border-purple-400/30 group-hover:border-fuchsia-400 shadow-md group-hover:shadow-[0_0_20px_rgba(168,85,247,0.5)]">
+              <span>EXPLORE</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </span>
           </Link>
         </div>
       </div>
-
-      {/* SVG Hexagon Glowing Neon Outline Overlay */}
-      <svg
-        className="absolute inset-0 w-full h-full pointer-events-none z-20 overflow-visible"
-        viewBox="0 0 100 115"
-        preserveAspectRatio="none"
-      >
-        <polygon
-          points="50 0, 100 28.75, 100 86.25, 50 115, 0 86.25, 0 28.75"
-          fill="none"
-          stroke="rgba(168, 85, 247, 0.4)"
-          strokeWidth="2.5"
-          className="group-hover:stroke-purple-300 transition-all duration-500 drop-shadow-[0_0_15px_rgba(168,85,247,0.7)]"
-        />
-      </svg>
     </div>
   );
 }
 
 function HexagonHoneycombSection() {
-  const hexItems = [
+  const cardsData = [
     {
+      id: "ai-strategy",
+      code: "AI-01",
+      badge: "1. ZYSTRA AI",
+      sticker: "ZYSTRA",
+      tag: "AI & PREDICTIVE ANALYTICS",
       title: "AI STRATEGY",
-      subtitle: "AI-Powered Market Intelligence",
-      image: "/hex/strategy.png",
+      subtitle: "AI-Powered Market Intelligence & Predictive Consumer Analytics",
+      image: "/social-media/Zystra.png",
       link: "/services",
+      rotation: "transform -rotate-3 hover:rotate-0",
     },
     {
+      id: "performance",
+      code: "ADS-02",
+      badge: "1. GOOGLE ADS",
+      sticker: "GROWTH",
+      tag: "PAID ADS & SCALING",
       title: "PERFORMANCE",
-      subtitle: "ROI-Focused Paid Ads & Growth",
-      image: "/hex/marketing.png",
+      subtitle: "10x ROI-Focused Paid Ads & High-Converting Campaign Scaling",
+      image: "/social-media/googleAdds.png",
       link: "/services",
+      rotation: "transform rotate-3 hover:rotate-0",
     },
     {
-      title: "SOCIAL MEDIA",
-      subtitle: "Viral Content & Brand Engagement",
-      image: "/services/meta-ads.png",
-      link: "/services",
-    },
-    {
+      id: "web-tech",
+      code: "DEV-03",
+      badge: "1. META ADS",
+      sticker: "SYSTEMS",
+      tag: "WEB & APP ARCHITECTURE",
       title: "WEB & TECH",
-      subtitle: "Next-Gen Web & App Development",
-      image: "/hex/web.png",
+      subtitle: "Ultra-Fast Modern Web Apps, Mobile Systems & AI Platforms",
+      image: "/social-media/meta.png",
       link: "/services",
+      rotation: "transform -rotate-2 hover:rotate-0",
     },
     {
+      id: "organic-seo",
+      code: "SEO-04",
+      badge: "1. SEARCH",
+      sticker: "DOMINANCE",
+      tag: "PAN-INDIA & GLOBAL SEO",
       title: "ORGANIC SEO",
-      subtitle: "Pan-India & Global Dominance",
-      image: "/hex/seo.png",
+      subtitle: "Dominate Google Search with High-Authority organic rankings",
+      image: "/social-media/google.png",
       link: "/services",
+      rotation: "transform rotate-4 hover:rotate-0",
     },
     {
-      title: "COMPANY",
-      subtitle: "The Minds Behind Zystra",
-      image: "/about-story-behind.webp",
-      link: "/about",
+      id: "social-media",
+      code: "SOC-05",
+      badge: "1. INSTAGRAM",
+      sticker: "VIRAL",
+      tag: "VIRAL CONTENT & ENGAGEMENT",
+      title: "SOCIAL MEDIA",
+      subtitle: "Viral Content Strategy & High-Engagement Brand Storytelling",
+      image: "/social-media/insta.png",
+      link: "/services",
+      rotation: "transform -rotate-3 hover:rotate-0",
+    },
+    {
+      id: "video-growth",
+      code: "VID-06",
+      badge: "1. YOUTUBE",
+      sticker: "REACH",
+      tag: "VIDEO & CHANNEL GROWTH",
+      title: "YOUTUBE & REELS",
+      subtitle: "High-Impact Video Creative, Shorts & Brand Amplification",
+      image: "/social-media/youtube.png",
+      link: "/services",
+      rotation: "transform rotate-3 hover:rotate-0",
     },
   ];
 
   return (
-    <section className="relative overflow-hidden" style={{ background: "#080510" }}>
-      {/* Full Section Atmospheric Landscape Background Image */}
-      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        <img
-          src="/hex/landscape-bg.png"
-          alt="Atmospheric Landscape Background"
-          className="w-full h-full object-cover object-top opacity-35 mix-blend-luminosity"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#080510]/50 via-[#080510]/80 to-[#080510]" />
+    <section className="relative py-24 sm:py-36 overflow-hidden" style={{ background: "#080510" }}>
+      {/* Background Ambient Radial Glows */}
+      <div className="absolute inset-0 pointer-events-none opacity-20" style={{ backgroundImage: "radial-gradient(circle at 50% 50%, rgba(168, 85, 247, 0.15) 1px, transparent 1px)", backgroundSize: "32px 32px" }} />
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[850px] h-[550px] bg-purple-600/15 blur-[160px] rounded-full pointer-events-none z-0" />
+      <div className="absolute bottom-10 right-10 w-[500px] h-[500px] bg-purple-600/15 blur-[150px] rounded-full pointer-events-none z-0" />
+
+      {/* Large Watermark Text Background */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden opacity-[0.03]">
+        <span className="text-[25vw] font-black text-white tracking-tighter uppercase font-mono">
+          ZYSTRA
+        </span>
       </div>
 
-      {/* Background Purple Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[950px] h-[600px] bg-purple-600/15 blur-[160px] rounded-full pointer-events-none z-0" />
-
-      {/* Center-Aligned Section Header (Watermark 02 Removed) */}
-      <div className="max-w-7xl mx-auto px-2 sm:px-[5vw] relative z-10 pt-24 sm:pt-36">
-        <div className="mb-14 md:mb-20 text-center max-w-3xl mx-auto flex flex-col items-center">
+      <div className="max-w-7xl mx-auto px-4 sm:px-[5vw] relative z-10">
+        
+        {/* Section Header */}
+        <div className="mb-14 sm:mb-20 text-center max-w-3xl mx-auto flex flex-col items-center">
           <FadeUp>
             <div className="inline-flex items-center gap-2.5 px-4.5 py-1.5 rounded-full border border-purple-500/30 bg-purple-500/10 text-purple-300 text-xs font-mono tracking-[0.2em] uppercase mb-4">
               <span className="w-2 h-2 rounded-full bg-purple-400 animate-pulse" />
@@ -480,47 +538,28 @@ function HexagonHoneycombSection() {
           </FadeUp>
 
           <LineReveal delay={0.1}>
-            <h3
-              className="font-black text-white leading-[0.95] tracking-tight mb-4"
-              style={{ fontSize: "clamp(46px, 7.5vw, 96px)", fontFamily: "'Bricolage Grotesque', serif" }}
+            <h2
+              className="font-black text-white leading-[0.98] tracking-tight mb-5 text-4xl sm:text-6xl md:text-7xl"
+              style={{ fontFamily: "'Bricolage Grotesque', serif" }}
             >
               Who <span className="bg-gradient-to-r from-purple-400 via-fuchsia-300 to-indigo-300 bg-clip-text text-transparent">We Are</span>
-            </h3>
+            </h2>
           </LineReveal>
 
-          <FadeUp delay={0.2} className="max-w-xl">
-            <p className="text-slate-300 text-base sm:text-lg leading-relaxed font-normal">
+          <FadeUp delay={0.2} className="max-w-2xl">
+            <p className="text-slate-300 text-base sm:text-xl leading-relaxed font-normal">
               A high-performance team of growth engineers, creative designers, and marketing strategists dedicated to scaling market leaders.
             </p>
           </FadeUp>
         </div>
 
-        {/* Honeycomb Hexagon Matrix (Identical 3-2-1 Interlocked Layout on Mobile & Desktop) */}
-        <div className="flex flex-col items-center justify-center relative my-6 pb-24 select-none w-full overflow-x-hidden">
-          {/* Row 1: 3 Hexagons */}
-          <div className="flex items-center justify-center gap-1 min-[380px]:gap-2 sm:gap-8 md:gap-10 z-10 w-full">
-            {hexItems.slice(0, 3).map((item, idx) => (
-              <FadeUp key={idx} delay={idx * 0.1}>
-                <HexTile item={item} />
-              </FadeUp>
-            ))}
-          </div>
-
-          {/* Row 2: 2 Hexagons (Interlocked into gaps) */}
-          <div className="flex items-center justify-center gap-1 min-[380px]:gap-2 sm:gap-8 md:gap-10 -mt-5 min-[380px]:-mt-7 sm:-mt-12 md:-mt-16 z-20 w-full">
-            {hexItems.slice(3, 5).map((item, idx) => (
-              <FadeUp key={idx} delay={0.3 + idx * 0.1}>
-                <HexTile item={item} />
-              </FadeUp>
-            ))}
-          </div>
-
-          {/* Row 3: 1 Hexagon (Centered underneath) */}
-          <div className="flex items-center justify-center -mt-5 min-[380px]:-mt-7 sm:-mt-12 md:-mt-16 z-30 w-full">
-            <FadeUp delay={0.5}>
-              <HexTile item={hexItems[5]} />
+        {/* 3x2 Bento Grid - Replicating Polaroid/HUD Card UI with Zystra Purple Theme */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 pt-4">
+          {cardsData.map((card, idx) => (
+            <FadeUp key={card.id} delay={idx * 0.08} className="h-full">
+              <IdentityCard card={card} />
             </FadeUp>
-          </div>
+          ))}
         </div>
       </div>
     </section>
@@ -1509,7 +1548,7 @@ export default function AboutUsPage() {
         </div>
       </section>
 
-      {/* SERVICES BENTO GRID */}
+      {/* SERVICES BENTO GRID - EVERYTHING UNDER ONE ROOF */}
       <section className="py-24 md:py-36 border-t border-white/[0.06]" style={{ background: "#080510" }}>
         <div className="max-w-7xl mx-auto px-6 sm:px-[5vw]">
           {/* Center-Aligned Header */}
@@ -1542,190 +1581,199 @@ export default function AboutUsPage() {
             </FadeUp>
           </div>
 
-          {/* Bento Box Grid - Asymmetric Bento UI Layout on Mobile & Desktop */}
-          <div className="grid grid-cols-3 gap-2.5 sm:gap-5 items-stretch">
-            {[
-              {
-                num: "01",
-                label: "Digital Marketing & SEO",
-                href: "/services/seo-optimization",
-                desc: "Organic visibility from the ground up. Local SEO, content marketing, and GBP management.",
-                image: "/services/seo.png",
-                colSpan: "col-span-1",
-                mockup: (
-                  <div className="my-1.5 sm:my-2.5 p-1.5 sm:p-3 rounded-lg sm:rounded-xl bg-purple-950/40 border border-purple-500/20 backdrop-blur-md">
-                    <div className="flex items-center justify-between text-[7.5px] min-[390px]:text-[9px] sm:text-[10px] font-mono text-purple-300 mb-1">
-                      <span className="truncate pr-1">SERP Rank</span>
-                      <span className="text-emerald-400 font-bold shrink-0">+340% ROAS</span>
-                    </div>
-                    <div className="h-1 sm:h-1.5 w-full bg-purple-950 rounded-full overflow-hidden">
-                      <div className="h-full w-4/5 bg-gradient-to-r from-purple-500 to-emerald-400" />
-                    </div>
-                  </div>
-                ),
-              },
-              {
-                num: "02",
-                label: "Paid Advertising",
-                href: "/services/social-media-marketing",
-                desc: "Meta Ads and Google Ads campaigns engineered for maximum ROAS — every rupee tracked.",
-                image: "/service-poster-1.png",
-                colSpan: "col-span-2",
-                mockup: (
-                  <div className="my-1.5 sm:my-2.5 flex flex-wrap gap-1 sm:gap-2">
-                    <div className="px-1.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-purple-500/15 border border-purple-400/30 text-purple-200 text-[7.5px] min-[390px]:text-[9px] sm:text-[11px] font-mono flex items-center gap-1">
-                      <span className="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                      Meta Ads Active
-                    </div>
-                    <div className="px-1.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-indigo-500/15 border border-indigo-400/30 text-indigo-200 text-[7.5px] min-[390px]:text-[9px] sm:text-[11px] font-mono">
-                      Google ROAS 4.8x
-                    </div>
-                  </div>
-                ),
-              },
-              {
-                num: "03",
-                label: "Web & App Development",
-                href: "/services/web-development",
-                desc: "Modern, fast, mobile-first websites and custom mobile applications built to scale.",
-                image: "/services/web-dev.png",
-                colSpan: "col-span-2",
-                mockup: (
-                  <div className="my-1.5 sm:my-2.5 p-1.5 sm:p-3 rounded-lg sm:rounded-xl bg-white/[0.04] border border-white/10 backdrop-blur-md">
-                    <div className="flex items-center gap-1.5 sm:gap-2.5 text-[7.5px] min-[390px]:text-[9px] sm:text-[11px] font-mono text-slate-300">
-                      <span className="px-1.5 py-0.5 sm:px-2.5 sm:py-0.5 rounded bg-purple-600/40 text-purple-200 font-bold border border-purple-400/30">Mobile</span>
-                      <span className="px-1.5 py-0.5 sm:px-2.5 sm:py-0.5 rounded bg-white/5 text-slate-400">Tablet</span>
-                      <span className="px-1.5 py-0.5 sm:px-2.5 sm:py-0.5 rounded bg-white/5 text-slate-400">Web</span>
-                    </div>
-                  </div>
-                ),
-              },
-              {
-                num: "04",
-                label: "Performance Marketing",
-                href: "/services",
-                desc: "Data-driven campaigns with clear KPIs and real-time reporting.",
-                image: "/services/performance-marketing.png",
-                colSpan: "col-span-1",
-                mockup: (
-                  <div className="my-1.5 sm:my-2.5 space-y-1">
-                    <div className="px-1.5 py-0.5 sm:px-2.5 sm:py-1 rounded bg-purple-950/60 border border-purple-500/30 text-[7px] min-[390px]:text-[8.5px] sm:text-[10px] font-mono text-purple-300 flex items-center justify-between">
-                      <span className="truncate pr-0.5">AI Research</span>
-                      <span className="font-bold text-white shrink-0">STEP 1</span>
-                    </div>
-                  </div>
-                ),
-              },
-              {
-                num: "05",
-                label: "Branding & Creative",
-                href: "/services/logo-designing",
-                desc: "Logo design, brand identity, and video production.",
-                image: "/service-poster-2.png",
-                colSpan: "col-span-1",
-                mockup: (
-                  <div className="my-1.5 sm:my-2.5 flex items-center gap-1 sm:gap-1.5">
-                    <div className="w-3 h-3 sm:w-5 sm:h-5 rounded-full bg-purple-500 border border-purple-300 shadow-md" />
-                    <div className="w-3 h-3 sm:w-5 sm:h-5 rounded-full bg-fuchsia-500 border border-fuchsia-300 shadow-md" />
-                    <div className="w-3 h-3 sm:w-5 sm:h-5 rounded-full bg-indigo-500 border border-indigo-300 shadow-md" />
-                  </div>
-                ),
-              },
-              {
-                num: "06",
-                label: "RevOps Solutions",
-                href: "/services/rev-ops-solutions",
-                desc: "Revenue operations consulting to align marketing, sales, and customer success.",
-                image: "/facebook_post.png",
-                colSpan: "col-span-2",
-                mockup: (
-                  <div className="my-1.5 sm:my-2.5 p-1.5 sm:p-3 rounded-lg sm:rounded-xl bg-purple-950/30 border border-purple-500/20 backdrop-blur-md flex items-center justify-between">
-                    <div className="text-[7.5px] min-[390px]:text-[9px] sm:text-[11px] font-mono text-slate-300 truncate pr-1">Unified Sales & Marketing</div>
-                    <span className="px-1.5 py-0.5 sm:px-2.5 sm:py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[7px] min-[390px]:text-[8.5px] sm:text-[9px] font-bold font-mono uppercase shrink-0">Connected</span>
-                  </div>
-                ),
-              },
-            ].map((s, i) => (
-              <FadeUp key={i} delay={i * 0.06} className={`flex ${s.colSpan}`}>
-                <Link href={s.href} className="w-full">
-                  <div className="group relative w-full h-full rounded-xl sm:rounded-3xl overflow-hidden border border-purple-500/20 bg-[#0d0722]/90 backdrop-blur-2xl p-3 sm:p-6 shadow-xl flex flex-col justify-between transition-all duration-400 hover:border-purple-400/60 hover:shadow-[0_15px_40px_rgba(168,85,247,0.3)] cursor-pointer min-h-[170px] sm:min-h-[260px]">
-                    
-                    {/* Glowing Bottom Accent Bar */}
-                    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-1 bg-gradient-to-r from-purple-600 via-fuchsia-400 to-indigo-500 blur-sm opacity-60 group-hover:opacity-100 transition-opacity duration-400" />
-                    
-                    {/* ── CARD DEFAULT CONTENT (Compact Bento UI) ── */}
-                    <div className="relative z-10 flex flex-col justify-between h-full">
-                      <div>
-                        <div className="flex items-center justify-between mb-1.5 sm:mb-3">
-                          <span className="text-[9px] min-[390px]:text-[10px] sm:text-[11px] font-mono font-black text-purple-400 tracking-wider uppercase">
-                            0{i + 1}. SERVICE
-                          </span>
-                          <div className="w-5 h-5 sm:w-7 sm:h-7 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-purple-500 group-hover:border-purple-400 transition-all duration-300">
-                            <ArrowUpRight className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 text-purple-300 group-hover:text-white transition-colors" />
-                          </div>
-                        </div>
+          {/* Bento Box Container (Replicating exact 3D Bento Box Layout from Reference) */}
+          <div className="relative rounded-[28px] sm:rounded-[36px] bg-[#0c081d]/90 border border-purple-500/20 p-4 sm:p-7 md:p-8 backdrop-blur-2xl shadow-2xl overflow-hidden">
+            <div className="absolute -top-24 -left-24 w-[500px] h-[500px] bg-purple-600/10 blur-[150px] rounded-full pointer-events-none" />
+            <div className="absolute -bottom-24 -right-24 w-[500px] h-[500px] bg-fuchsia-600/10 blur-[150px] rounded-full pointer-events-none" />
 
-                        <h3 className="text-xs min-[390px]:text-sm sm:text-xl font-bold text-white mb-1 sm:mb-2 leading-tight group-hover:text-purple-300 transition-colors" style={{ fontFamily: "'Bricolage Grotesque', serif" }}>
-                          {s.label}
-                        </h3>
-
-                        <p className="text-slate-400 text-[8px] min-[390px]:text-[9.5px] sm:text-sm leading-tight sm:leading-relaxed mb-1 sm:mb-2 line-clamp-2">
-                          {s.desc}
-                        </p>
-
-                        {/* Embedded Bento UI Mockup / Chips */}
-                        {s.mockup}
-                      </div>
-
-                      <div className="pt-1.5 sm:pt-3 border-t border-white/10">
-                        <span className="inline-flex items-center gap-1 sm:gap-1.5 text-[8px] min-[390px]:text-[9.5px] sm:text-[11px] font-mono font-bold text-purple-400 group-hover:text-purple-300 uppercase tracking-wider">
-                          EXPLORE <ArrowRight className="w-2.5 h-2.5 sm:w-3 sm:h-3 group-hover:translate-x-1 transition-transform" />
-                        </span>
-                      </div>
-                    </div>
-
-                    {/* ── HOVER IMAGE SLIDE-UP OVERLAY (Ref Match Image 3) ── */}
-                    <div className="absolute inset-0 z-20 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5 items-stretch relative z-10">
+              
+              {/* CARD 1: Product Design & AI Strategy (Tall Left Card: 1 Col, 2 Rows) */}
+              <FadeUp delay={0.05} className="md:col-span-1 md:row-span-2 flex">
+                <Link href="/services" className="w-full">
+                  <div className="group relative w-full h-full rounded-2xl sm:rounded-3xl bg-gradient-to-b from-[#140c33]/90 via-[#0d0722]/95 to-[#080510] border border-purple-500/20 hover:border-purple-400/60 p-6 sm:p-7 flex flex-col justify-between overflow-hidden transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_20px_50px_rgba(168,85,247,0.35)] cursor-pointer min-h-[380px] md:min-h-[520px]">
+                    {/* Top 3D Asset Floating */}
+                    <div className="relative h-48 sm:h-60 flex items-center justify-center">
+                      <div className="absolute w-36 h-36 bg-purple-600/15 rounded-full blur-2xl pointer-events-none" />
                       <img
-                        src={s.image}
-                        alt={s.label}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                        src="/social-media/Zystra.png"
+                        alt="Zystra AI & Brand Strategy"
+                        className="max-h-44 sm:max-h-52 w-auto object-contain filter drop-shadow-[0_20px_35px_rgba(124,58,237,0.5)] group-hover:scale-110 group-hover:-translate-y-2 transition-transform duration-500"
                       />
-                      {/* Dark Gradient Overlay so text stays 100% legible over image */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#070412] via-[#070412]/85 to-purple-950/60" />
-
-                      {/* Content rendered on top of the sliding poster image */}
-                      <div className="absolute inset-0 p-3 sm:p-6 flex flex-col justify-between z-30">
-                        <div className="flex items-center justify-between">
-                          <span className="text-[9px] min-[390px]:text-[10px] sm:text-[11px] font-mono font-black text-purple-300 tracking-wider uppercase">
-                            0{i + 1}. SERVICE
-                          </span>
-                          <div className="w-5 h-5 sm:w-7 sm:h-7 rounded-full bg-purple-600 text-white flex items-center justify-center shadow-lg">
-                            <ArrowUpRight className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5" />
-                          </div>
-                        </div>
-
-                        <div>
-                          <h3 className="text-sm sm:text-2xl font-black text-white mb-1 leading-tight" style={{ fontFamily: "'Bricolage Grotesque', serif" }}>
-                            {s.label}
-                          </h3>
-                          <p className="text-purple-100/90 text-[8.5px] sm:text-sm leading-tight max-w-md line-clamp-2">
-                            {s.desc}
-                          </p>
-                        </div>
-
-                        <div className="pt-1.5 sm:pt-3 border-t border-white/20">
-                          <span className="inline-flex items-center gap-1 text-[8px] sm:text-[11px] font-mono font-black text-white uppercase tracking-wider">
-                            VIEW DETAILS <ArrowRight className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 text-purple-300" />
-                          </span>
-                        </div>
+                    </div>
+                    {/* Bottom Text Content */}
+                    <div>
+                      <div className="text-[10px] font-mono font-extrabold text-purple-300 tracking-widest uppercase mb-1">
+                        01 // STRATEGY & AI
+                      </div>
+                      <h3 className="text-xl sm:text-2xl font-black text-white mb-2 leading-tight group-hover:text-purple-300 transition-colors" style={{ fontFamily: "'Bricolage Grotesque', serif" }}>
+                        AI & Brand Strategy
+                      </h3>
+                      <p className="text-slate-300 text-xs sm:text-sm leading-relaxed mb-4">
+                        Crafting market intelligence, audience personas, and predictive positioning engineered for revenue growth.
+                      </p>
+                      <div className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-purple-400 group-hover:text-purple-200 uppercase tracking-wider">
+                        EXPLORE <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                       </div>
                     </div>
-
                   </div>
                 </Link>
               </FadeUp>
-            ))}
+
+              {/* CARD 2: Web & App Engineering (Wide Top Right Card: 2 Cols, 1 Row) */}
+              <FadeUp delay={0.1} className="md:col-span-2 md:row-span-1 flex">
+                <Link href="/services/web-development" className="w-full">
+                  <div className="group relative w-full h-full rounded-2xl sm:rounded-3xl bg-gradient-to-b from-[#140c33]/90 via-[#0d0722]/95 to-[#080510] border border-purple-500/20 hover:border-purple-400/60 p-6 sm:p-7 flex flex-col sm:flex-row items-center justify-between gap-4 overflow-hidden transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_20px_50px_rgba(168,85,247,0.35)] cursor-pointer min-h-[220px] sm:min-h-[250px]">
+                    {/* Left Content */}
+                    <div className="flex-1">
+                      <div className="text-[10px] font-mono font-extrabold text-purple-300 tracking-widest uppercase mb-1">
+                        02 // ENGINEERING & ADS
+                      </div>
+                      <h3 className="text-xl sm:text-2xl font-black text-white mb-2 leading-tight group-hover:text-purple-300 transition-colors" style={{ fontFamily: "'Bricolage Grotesque', serif" }}>
+                        Web & Google Ads Scaling
+                      </h3>
+                      <p className="text-slate-300 text-xs sm:text-sm leading-relaxed mb-4 max-w-md">
+                        Ultra-fast Next.js web applications, mobile platforms, and high-converting Google PPC campaign scaling.
+                      </p>
+                      <div className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-purple-400 group-hover:text-purple-200 uppercase tracking-wider">
+                        EXPLORE <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                      </div>
+                    </div>
+                    {/* Right 3D Graphic */}
+                    <div className="relative w-40 sm:w-56 h-36 sm:h-44 flex items-center justify-center shrink-0">
+                      <div className="absolute w-32 h-32 bg-purple-600/15 rounded-full blur-2xl pointer-events-none" />
+                      <img
+                        src="/social-media/googleAdds.png"
+                        alt="Google Ads Scaling"
+                        className="max-h-36 sm:max-h-44 w-auto object-contain filter drop-shadow-[0_15px_30px_rgba(124,58,237,0.5)] group-hover:scale-110 group-hover:-translate-y-1 transition-transform duration-500"
+                      />
+                    </div>
+                  </div>
+                </Link>
+              </FadeUp>
+
+              {/* CARD 3: Brand Identity (Middle Center Card: 1 Col, 1 Row) */}
+              <FadeUp delay={0.15} className="md:col-span-1 md:row-span-1 flex">
+                <Link href="/services/logo-designing" className="w-full">
+                  <div className="group relative w-full h-full rounded-2xl sm:rounded-3xl bg-gradient-to-b from-[#140c33]/90 via-[#0d0722]/95 to-[#080510] border border-purple-500/20 hover:border-purple-400/60 p-6 sm:p-7 flex flex-col justify-between overflow-hidden transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_20px_50px_rgba(168,85,247,0.35)] cursor-pointer min-h-[240px] sm:min-h-[260px]">
+                    <div>
+                      <div className="text-[10px] font-mono font-extrabold text-purple-300 tracking-widest uppercase mb-1">
+                        03 // META ADS & DESIGN
+                      </div>
+                      <h3 className="text-xl sm:text-2xl font-black text-white mb-2 leading-tight group-hover:text-purple-300 transition-colors" style={{ fontFamily: "'Bricolage Grotesque', serif" }}>
+                        Meta & Brand Identity
+                      </h3>
+                      <p className="text-slate-300 text-xs sm:text-sm leading-relaxed mb-3">
+                        Building cohesive visual identities, Facebook & Meta ad creatives that resonate.
+                      </p>
+                    </div>
+                    <div className="flex items-center justify-between pt-2">
+                      <div className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-purple-400 group-hover:text-purple-200 uppercase tracking-wider">
+                        EXPLORE <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                      </div>
+                      <img
+                        src="/social-media/meta.png"
+                        alt="Meta Ads"
+                        className="w-16 h-16 object-contain filter drop-shadow-[0_10px_20px_rgba(124,58,237,0.4)] group-hover:scale-110 transition-transform duration-500"
+                      />
+                    </div>
+                  </div>
+                </Link>
+              </FadeUp>
+
+              {/* CARD 4: Organic SEO (Middle Right Card: 1 Col, 1 Row) */}
+              <FadeUp delay={0.2} className="md:col-span-1 md:row-span-1 flex">
+                <Link href="/services/seo-optimization" className="w-full">
+                  <div className="group relative w-full h-full rounded-2xl sm:rounded-3xl bg-gradient-to-b from-[#140c33]/90 via-[#0d0722]/95 to-[#080510] border border-purple-500/20 hover:border-purple-400/60 p-6 sm:p-7 flex flex-col justify-between overflow-hidden transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_20px_50px_rgba(168,85,247,0.35)] cursor-pointer min-h-[240px] sm:min-h-[260px]">
+                    <div className="flex items-start justify-between">
+                      <div>
+                        <div className="text-[10px] font-mono font-extrabold text-purple-300 tracking-widest uppercase mb-1">
+                          04 // GOOGLE SEARCH
+                        </div>
+                        <h3 className="text-xl sm:text-2xl font-black text-white mb-2 leading-tight group-hover:text-purple-300 transition-colors" style={{ fontFamily: "'Bricolage Grotesque', serif" }}>
+                          Organic SEO
+                        </h3>
+                      </div>
+                      <img
+                        src="/social-media/google.png"
+                        alt="Google Search SEO"
+                        className="w-16 h-16 object-contain filter drop-shadow-[0_10px_20px_rgba(124,58,237,0.4)] group-hover:scale-110 transition-transform duration-500 shrink-0"
+                      />
+                    </div>
+                    <div>
+                      <p className="text-slate-300 text-xs sm:text-sm leading-relaxed mb-4">
+                        Pan-India & global Google search dominance with high-authority organic rankings.
+                      </p>
+                      <div className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-purple-400 group-hover:text-purple-200 uppercase tracking-wider">
+                        EXPLORE <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              </FadeUp>
+
+              {/* CARD 5: Performance Paid Ads (Wide Bottom Left Card: 2 Cols, 1 Row) */}
+              <FadeUp delay={0.25} className="md:col-span-2 md:row-span-1 flex">
+                <Link href="/services/social-media-marketing" className="w-full">
+                  <div className="group relative w-full h-full rounded-2xl sm:rounded-3xl bg-gradient-to-b from-[#140c33]/90 via-[#0d0722]/95 to-[#080510] border border-purple-500/20 hover:border-purple-400/60 p-6 sm:p-7 flex flex-col sm:flex-row items-center justify-between gap-4 overflow-hidden transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_20px_50px_rgba(168,85,247,0.35)] cursor-pointer min-h-[220px] sm:min-h-[250px]">
+                    {/* Left Content */}
+                    <div className="flex-1">
+                      <div className="text-[10px] font-mono font-extrabold text-purple-300 tracking-widest uppercase mb-1">
+                        05 // B2B & PERFORMANCE
+                      </div>
+                      <h3 className="text-xl sm:text-2xl font-black text-white mb-2 leading-tight group-hover:text-purple-300 transition-colors" style={{ fontFamily: "'Bricolage Grotesque', serif" }}>
+                        LinkedIn & B2B Growth
+                      </h3>
+                      <p className="text-slate-300 text-xs sm:text-sm leading-relaxed mb-4 max-w-md">
+                        High-converting B2B lead generation, LinkedIn executive branding, and performance campaigns.
+                      </p>
+                      <div className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-purple-400 group-hover:text-purple-200 uppercase tracking-wider">
+                        EXPLORE <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                      </div>
+                    </div>
+                    {/* Right 3D Graphic */}
+                    <div className="relative w-40 sm:w-56 h-36 sm:h-44 flex items-center justify-center shrink-0">
+                      <div className="absolute w-32 h-32 bg-purple-600/15 rounded-full blur-2xl pointer-events-none" />
+                      <img
+                        src="/social-media/linkedIn.png"
+                        alt="LinkedIn B2B Growth"
+                        className="max-h-36 sm:max-h-44 w-auto object-contain filter drop-shadow-[0_15px_30px_rgba(124,58,237,0.5)] group-hover:scale-110 group-hover:-translate-y-1 transition-transform duration-500"
+                      />
+                    </div>
+                  </div>
+                </Link>
+              </FadeUp>
+
+              {/* CARD 6: Social Media & Viral Content (Bottom Right Card: 1 Col, 1 Row) */}
+              <FadeUp delay={0.3} className="md:col-span-1 md:row-span-1 flex">
+                <Link href="/services" className="w-full">
+                  <div className="group relative w-full h-full rounded-2xl sm:rounded-3xl bg-gradient-to-b from-[#140c33]/90 via-[#0d0722]/95 to-[#080510] border border-purple-500/20 hover:border-purple-400/60 p-6 sm:p-7 flex flex-col justify-between overflow-hidden transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_20px_50px_rgba(168,85,247,0.35)] cursor-pointer min-h-[240px] sm:min-h-[260px]">
+                    <div>
+                      <div className="text-[10px] font-mono font-extrabold text-purple-300 tracking-widest uppercase mb-1">
+                        06 // INSTAGRAM & VIRAL
+                      </div>
+                      <h3 className="text-xl sm:text-2xl font-black text-white mb-2 leading-tight group-hover:text-purple-300 transition-colors" style={{ fontFamily: "'Bricolage Grotesque', serif" }}>
+                        Instagram & Reels
+                      </h3>
+                      <p className="text-slate-300 text-xs sm:text-sm leading-relaxed mb-3">
+                        Viral Instagram reels strategy, high-engagement storytelling, and brand amplification.
+                      </p>
+                    </div>
+                    <div className="flex items-center justify-between pt-2">
+                      <div className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-purple-400 group-hover:text-purple-200 uppercase tracking-wider">
+                        EXPLORE <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                      </div>
+                      <img
+                        src="/social-media/insta.png"
+                        alt="Instagram Growth"
+                        className="w-16 h-16 object-contain filter drop-shadow-[0_10px_20px_rgba(124,58,237,0.4)] group-hover:scale-110 transition-transform duration-500"
+                      />
+                    </div>
+                  </div>
+                </Link>
+              </FadeUp>
+
+            </div>
           </div>
         </div>
       </section>
