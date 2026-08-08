@@ -31,7 +31,7 @@ import FluidGlass from "@/components/ui/FluidGlass";
 export default function InnovationPage() {
   // Page initialization
   useEffect(() => {
-    document.documentElement.classList.remove("dark");
+    document.documentElement.classList.add("dark");
     const isTouch = typeof window !== "undefined" && ("ontouchstart" in window || navigator.maxTouchPoints > 0);
 
     const lenis = new Lenis({

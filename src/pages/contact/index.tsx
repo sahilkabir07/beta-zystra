@@ -331,7 +331,8 @@ export default function ContactPage() {
   }, [isPaused]);
 
   useEffect(() => {
-    document.documentElement.classList.remove("dark");
+    document.documentElement.classList.add("dark");
+    document.body.style.backgroundColor = "#090909";
     const lenis = new Lenis({ duration: 0.85, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), smoothWheel: true });
     let rafId: number;
     const raf = (time: number) => { lenis.raf(time); rafId = requestAnimationFrame(raf); };

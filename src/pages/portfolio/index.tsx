@@ -1559,7 +1559,7 @@ export default function PortfolioPage() {
 
   // Initialize Lenis smooth scroll (120fps fluid wheel inertia)
   useEffect(() => {
-    document.documentElement.classList.remove("dark");
+    document.documentElement.classList.add("dark");
     const isTouch = typeof window !== "undefined" && ("ontouchstart" in window || navigator.maxTouchPoints > 0);
 
     const lenis = new Lenis({

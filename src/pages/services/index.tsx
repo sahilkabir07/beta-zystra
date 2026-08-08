@@ -22,7 +22,7 @@ import LightRays from "@/components/ui/LightRays";
 export default function ServicesPage() {
   // Initialize Lenis smooth scroll
   useEffect(() => {
-    document.documentElement.classList.remove("dark");
+    document.documentElement.classList.add("dark");
     const isTouch = typeof window !== "undefined" && ("ontouchstart" in window || navigator.maxTouchPoints > 0);
 
     const lenis = new Lenis({
