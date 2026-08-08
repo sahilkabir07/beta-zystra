@@ -638,8 +638,7 @@ export default function ContactPage() {
         {/* Section Header */}
         <motion.div 
           initial={{ opacity: 0, y: 24 }} 
-          whileInView={{ opacity: 1, y: 0 }} 
-          viewport={{ once: true }} 
+          animate={{ opacity: 1, y: 0 }} 
           transition={{ duration: 0.6 }} 
           className="relative z-10 text-center mb-16"
         >
@@ -702,8 +701,7 @@ export default function ContactPage() {
               <motion.div 
                 key={i} 
                 initial={{ opacity: 0, y: 30 }} 
-                whileInView={{ opacity: 1, y: 0 }} 
-                viewport={{ once: true }} 
+                animate={{ opacity: 1, y: 0 }} 
                 transition={{ delay: i * 0.15, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                 className="relative w-[85vw] max-w-[340px] sm:w-[380px] md:w-full shrink-0 snap-center rounded-[32px] border border-purple-500/25 bg-gradient-to-b from-[#110d29]/90 via-[#0a081a]/95 to-[#0d0a22]/90 backdrop-blur-xl p-6 sm:p-8 transition-all duration-300 hover:-translate-y-2 hover:border-purple-400/70 hover:shadow-[0_20px_50px_rgba(168,85,247,0.3)] group overflow-hidden flex flex-col justify-between select-none transform-gpu"
               >
@@ -916,8 +914,7 @@ export default function ContactPage() {
               <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, amount: 0.2 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ ease: [0.16, 1, 0.3, 1], duration: 0.65, delay: 0.05 }}
                 className={`flex w-full ${card.align}`}
               >
@@ -975,8 +972,7 @@ export default function ContactPage() {
       <section className="relative z-10 py-12 sm:py-20 px-4 sm:px-8 max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, scale: 0.98 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
+          animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="relative w-full rounded-[32px] sm:rounded-[44px] bg-[#09031a]/95 border border-purple-500/30 p-8 sm:p-12 lg:p-16 overflow-hidden shadow-[0_25px_90px_rgba(110,1,156,0.35)] backdrop-blur-2xl"
         >
