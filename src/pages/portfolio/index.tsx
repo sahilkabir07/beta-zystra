@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef, memo } from "react";
 import Lenis from "lenis";
-import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useSpring, useTransform, useInView, animate } from "framer-motion";
 import { Link } from "wouter";
 import {
   X,
@@ -132,6 +132,8 @@ function ClientShowcaseModal({
             <img 
               src={client.coverImg || "/HeroBg.webp"} 
               alt={client.client} 
+              loading="lazy"
+              decoding="async"
               className="w-full h-full object-cover filter brightness-75 contrast-110" 
             />
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent" />
@@ -149,7 +151,7 @@ function ClientShowcaseModal({
               <div className="flex items-center gap-3.5">
                 <div className={`w-16 h-16 sm:w-18 sm:h-18 rounded-2xl border-2 border-purple-400 ${client.logoBg || "bg-white"} p-1 shadow-xl shrink-0 overflow-hidden flex items-center justify-center`}>
                   {client.logoImg ? (
-                    <img src={client.logoImg} alt={client.client} className={`w-full h-full object-contain ${client.logoScale || "scale-125"}`} />
+                    <img src={client.logoImg} alt={client.client} loading="lazy" decoding="async" className={`w-full h-full object-contain ${client.logoScale || "scale-125"}`} />
                   ) : (
                     <div className="w-full h-full bg-purple-950 text-purple-200 flex items-center justify-center font-black text-xl">
                       {client.initials || "Z"}
@@ -158,7 +160,7 @@ function ClientShowcaseModal({
                 </div>
                 <div>
                   <div className="flex items-center gap-2">
-                    <h2 className="text-xl sm:text-2xl font-black text-white tracking-tight">{client.client}</h2>
+                    <h2 className="text-xl sm:text-2xl font-serif font-black text-white tracking-tight">{client.client}</h2>
                     <div className="w-4 h-4 rounded-full bg-blue-500 text-white flex items-center justify-center">
                       <svg className="w-2.5 h-2.5 fill-current" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
                     </div>
@@ -335,9 +337,13 @@ const StackedCardDeckDisplay = memo(function StackedCardDeckDisplay({
         {/* Left Stacked Cards Container */}
         <div className="relative w-[95px] sm:w-[120px] h-[240px] sm:h-[270px] shrink-0 z-20 flex items-center">
           
-          {/* Card #3 (Deep Dark Purple Card) */}
-          <div
-            className="absolute top-4 left-0 w-[90px] sm:w-[112px] h-[155px] sm:h-[180px] rounded-2xl bg-gradient-to-br from-[#1b0a2e] via-[#10051e] to-[#080210] border border-white/15 shadow-2xl p-2 sm:p-2.5 flex flex-col justify-between text-white overflow-hidden transform-gpu z-0 -rotate-12 -translate-x-2.5 translate-y-2 hover:-translate-y-1 transition-transform duration-300"
+          {/* Card #3 (Deep Dark Purple Card - Back of Stack) */}
+          <motion.div
+            key={`back-card-${nextClient2?.client}`}
+            initial={{ x: 4, y: -4, scale: 1, rotate: -2, zIndex: 20 }}
+            animate={{ x: -8, y: 12, scale: 0.88, rotate: -12, zIndex: 0 }}
+            transition={{ duration: 0.36, ease: [0.16, 1, 0.3, 1] }}
+            className="absolute top-4 left-0 w-[90px] sm:w-[112px] h-[155px] sm:h-[180px] rounded-2xl bg-gradient-to-br from-[#1b0a2e] via-[#10051e] to-[#080210] border border-white/15 shadow-2xl p-2 sm:p-2.5 flex flex-col justify-between text-white overflow-hidden transform-gpu"
           >
             <div className="flex justify-between items-start opacity-70">
               <div className="w-4 h-3 rounded bg-amber-400/40 border border-amber-300/60" />
@@ -350,11 +356,15 @@ const StackedCardDeckDisplay = memo(function StackedCardDeckDisplay({
               <div className="text-[5px] sm:text-[6px] font-mono tracking-widest text-slate-400">•••• 9812</div>
               <div className="text-[6px] sm:text-[7px] font-bold truncate uppercase">{nextClient2?.client || "ZYSTRA CASE"}</div>
             </div>
-          </div>
+          </motion.div>
 
-          {/* Card #2 (Sleek Silver/White Card) */}
-          <div
-            className="absolute top-2 left-1 sm:left-1.5 w-[90px] sm:w-[112px] h-[155px] sm:h-[180px] rounded-2xl bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 border border-white/60 shadow-[0_15px_35px_rgba(0,0,0,0.5)] p-2 sm:p-2.5 flex flex-col justify-between text-slate-900 overflow-hidden transform-gpu z-10 -rotate-6 -translate-x-1 translate-y-1 hover:-translate-y-1 transition-transform duration-300"
+          {/* Card #2 (Sleek Silver/White Card - Middle of Stack) */}
+          <motion.div
+            key={`mid-card-${nextClient1?.client}`}
+            initial={{ x: -8, y: 12, scale: 0.88, rotate: -12 }}
+            animate={{ x: -2, y: 4, scale: 0.94, rotate: -6 }}
+            transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
+            className="absolute top-2 left-1 sm:left-1.5 w-[90px] sm:w-[112px] h-[155px] sm:h-[180px] rounded-2xl bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 border border-white/60 shadow-[0_15px_35px_rgba(0,0,0,0.5)] p-2 sm:p-2.5 flex flex-col justify-between text-slate-900 overflow-hidden transform-gpu z-10"
           >
             <div className="flex justify-between items-start">
               <div className="w-4 h-3 rounded bg-amber-500/80 border border-amber-600 flex items-center justify-center">
@@ -372,11 +382,25 @@ const StackedCardDeckDisplay = memo(function StackedCardDeckDisplay({
                 {nextClient1?.client || "AYURVEDA CARE"}
               </div>
             </div>
-          </div>
+          </motion.div>
 
-          {/* Card #1 (Front Zystra Purple Card) */}
-          <div
-            className="absolute top-0 left-2.5 sm:left-3 w-[92px] sm:w-[115px] h-[165px] sm:h-[190px] rounded-2xl bg-gradient-to-br from-[#c084fc] via-[#a855f7] to-[#6e019c] shadow-[0_20px_40px_rgba(168,85,247,0.45),0_0_20px_rgba(168,85,247,0.3)] p-2 sm:p-2.5 flex flex-col justify-between text-white overflow-hidden transform-gpu z-20 border border-[#e879f9] -rotate-2 translate-x-1 -translate-y-1 hover:-translate-y-2 transition-transform duration-300"
+          {/* Card #1 (Front Zystra Purple Card - Sweeps up from back over the side onto front!) */}
+          <motion.div
+            key={`front-card-${activeClient.client}`}
+            initial={{ x: -25, y: 18, scale: 0.84, rotate: -15, zIndex: 5 }}
+            animate={{ 
+              x: [-25, -28, 4], 
+              y: [18, -14, -4], 
+              scale: [0.84, 1.04, 1], 
+              rotate: [-15, -12, -2],
+              zIndex: [5, 30, 30]
+            }}
+            transition={{ 
+              duration: 0.38, 
+              ease: [0.16, 1, 0.3, 1],
+              times: [0, 0.45, 1]
+            }}
+            className="absolute top-0 left-2.5 sm:left-3 w-[92px] sm:w-[115px] h-[165px] sm:h-[190px] rounded-2xl bg-gradient-to-br from-[#c084fc] via-[#a855f7] to-[#6e019c] shadow-xl shadow-purple-950/60 p-2 sm:p-2.5 flex flex-col justify-between text-white overflow-hidden transform-gpu border border-[#e879f9]"
           >
             <div className="absolute -top-10 -right-10 w-20 h-32 bg-white/25 rotate-45 pointer-events-none blur-sm" />
 
@@ -402,224 +426,478 @@ const StackedCardDeckDisplay = memo(function StackedCardDeckDisplay({
                 VERIFIED BRAND
               </div>
             </div>
-          </div>
+          </motion.div>
 
         </div>
 
         {/* ── FOREGROUND MAIN PHONE APP MOCKUP (Slim, Ultra-Realistic Smartphone Mockup) ── */}
-        <AnimatePresence mode="popLayout">
-          <motion.div
-            key={activeClient.client}
-            initial={{ opacity: 0, scale: 0.88, y: 12 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.90, y: -12 }}
-            transition={{ type: "spring", stiffness: 420, damping: 30 }}
-            onClick={() => onOpenShowcase(activeClient)}
-            className="relative flex-1 max-w-[205px] sm:max-w-[235px] rounded-[2.4rem] bg-[#090414] border-[3.5px] border-[#a855f7]/80 p-2.5 sm:p-3 shadow-[0_25px_60px_rgba(0,0,0,0.95),0_0_40px_rgba(168,85,247,0.35)] flex flex-col justify-between text-white cursor-pointer group hover:border-[#c084fc] transition-all z-30 overflow-hidden transform-gpu"
-          >
-            {/* Screen Gloss Reflective Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent pointer-events-none z-40" />
+        <div
+          onClick={() => onOpenShowcase(activeClient)}
+          className="relative flex-1 max-w-[205px] sm:max-w-[235px] rounded-[2.4rem] bg-[#090414] border-[3.5px] border-[#a855f7]/80 p-2.5 sm:p-3 shadow-2xl shadow-purple-950/80 flex flex-col justify-between text-white cursor-pointer group hover:border-[#c084fc] transition-all z-30 overflow-hidden transform-gpu"
+        >
+          {/* Screen Gloss Reflective Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent pointer-events-none z-40" />
 
-            {/* Hardware Dynamic Island Notch & Status Bar */}
-            <div className="flex items-center justify-between text-[7px] sm:text-[8px] font-mono text-slate-300 px-0.5 mb-1.5 z-10">
-              <span className="font-extrabold text-white">9:41</span>
-              
-              {/* Dynamic Island Notch */}
-              <div className="w-14 sm:w-16 h-3 rounded-full bg-black border border-slate-800 flex items-center justify-between px-1.5 shadow-inner">
-                <div className="w-1 h-1 rounded-full bg-slate-900 border border-slate-700" />
-                <div className="w-2 h-2 rounded-full bg-[#1e1035] border border-purple-500/40 flex items-center justify-center">
-                  <div className="w-0.5 h-0.5 rounded-full bg-purple-400" />
-                </div>
-              </div>
-
-              <div className="flex items-center gap-0.5 text-white">
-                <span className="text-[6px] sm:text-[7px] font-bold">5G</span>
-                <div className="w-2.5 h-1.5 border border-white/80 rounded-[2px] p-[1px] flex items-center">
-                  <div className="w-full h-full bg-[#c084fc] rounded-[1px]" />
-                </div>
+          {/* Hardware Dynamic Island Notch & Status Bar (Persistent) */}
+          <div className="flex items-center justify-between text-[7px] sm:text-[8px] font-mono text-slate-300 px-0.5 mb-1.5 z-10">
+            <span className="font-extrabold text-white">9:41</span>
+            
+            {/* Dynamic Island Notch */}
+            <div className="w-14 sm:w-16 h-3 rounded-full bg-black border border-slate-800 flex items-center justify-between px-1.5 shadow-inner">
+              <div className="w-1 h-1 rounded-full bg-slate-900 border border-slate-700" />
+              <div className="w-2 h-2 rounded-full bg-[#1e1035] border border-purple-500/40 flex items-center justify-center">
+                <div className="w-0.5 h-0.5 rounded-full bg-purple-400" />
               </div>
             </div>
 
-            {/* Dashboard Header Bar: Brand Profile & Category */}
-            <div className="flex items-center justify-between gap-2 mb-1.5 z-10">
-              <div className="flex items-center gap-2 min-w-0">
-                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#1a0b36] border border-purple-400/50 p-0.5 flex items-center justify-center shadow-lg overflow-hidden shrink-0">
-                  {activeClient.logoImg ? (
-                    <img src={activeClient.logoImg} alt={activeClient.client} className="w-full h-full object-contain rounded-full" />
-                  ) : (
-                    <Sparkles className="w-3.5 h-3.5 text-[#c084fc]" />
-                  )}
-                </div>
-                <div className="min-w-0">
-                  <span className="text-[6px] sm:text-[7px] font-mono uppercase bg-[#250d4a] text-[#d8b4fe] px-1.5 py-0.5 rounded border border-[#a855f7]/30 font-bold block truncate max-w-[110px]">
-                    {activeClient.industry}
-                  </span>
-                  <h4 className="text-xs sm:text-sm font-black text-white truncate leading-tight font-sans mt-0.5">
-                    {activeClient.client}
-                  </h4>
-                </div>
-              </div>
-
-              {/* Action Button */}
-              <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-[#1d0b3a] border border-[#a855f7]/40 flex items-center justify-center text-[#c084fc] shadow-md group-hover:bg-[#a855f7] group-hover:text-white transition-colors shrink-0">
-                <ArrowUpRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 stroke-[2.5]" />
+            <div className="flex items-center gap-0.5 text-white">
+              <span className="text-[6px] sm:text-[7px] font-bold">5G</span>
+              <div className="w-2.5 h-1.5 border border-white/80 rounded-[2px] p-[1px] flex items-center">
+                <div className="w-full h-full bg-[#c084fc] rounded-[1px]" />
               </div>
             </div>
+          </div>
 
-            {/* ── REALISTIC MONETTO-STYLE HERO METRIC CARD ── */}
-            <div className="relative w-full bg-gradient-to-br from-[#c084fc] via-[#a855f7] to-[#6e019c] text-white rounded-2xl p-2.5 sm:p-3 shadow-[0_10px_25px_rgba(168,85,247,0.4)] my-1 overflow-hidden group-hover:scale-[1.02] transition-transform z-10">
-              <div className="flex items-center justify-between text-[7px] sm:text-[8px] font-mono font-bold uppercase tracking-wider text-purple-100">
-                <span>GROWTH IMPACT</span>
-                <span className="flex items-center gap-0.5 bg-black/40 text-purple-200 px-1.5 py-0.5 rounded-full backdrop-blur-sm">
-                  <TrendingUp className="w-2.5 h-2.5 text-purple-300" /> VERIFIED
-                </span>
-              </div>
-
-              {/* Result Value */}
-              <div className="text-sm sm:text-base font-black font-sans tracking-tight leading-tight my-1 text-white truncate">
-                {activeClient.result}
-              </div>
-
-              <div className="text-[7px] sm:text-[8px] font-mono text-purple-200 border-t border-white/20 pt-1 mt-0.5 flex justify-between items-center">
-                <span className="truncate">{activeClient.client}</span>
-                <span className="font-bold text-white">LIVE ANALYTICS</span>
-              </div>
-            </div>
-
-            {/* ── SECONDARY LAYERED POCKET CARD (Monetto Tax Pocket Style) ── */}
-            <div className="-mt-2 mx-1.5 bg-[#1f0945] border border-[#a855f7]/40 rounded-xl px-2.5 py-1 text-[7px] sm:text-[8px] font-mono text-[#e9d5ff] flex items-center justify-between shadow-md relative z-0">
-              <span className="text-purple-200 font-bold">SEO & Brand Authority</span>
-              <span className="font-mono font-extrabold text-[#c084fc]">+180% Organic</span>
-            </div>
-
-            {/* ── MOBILE BROWSER MOCKUP WITH UN-CROPPED BRAND LOGO ── */}
-            <div className="relative w-full rounded-2xl border border-purple-500/30 bg-[#120627] shrink-0 shadow-inner my-1.5 overflow-hidden z-10">
-              {/* Browser Address Bar Header */}
-              <div className="bg-[#1b0939] px-2 py-1 border-b border-purple-500/20 flex items-center justify-between text-[7px] font-mono text-purple-300">
-                <div className="flex items-center gap-1 max-w-[80%] truncate">
-                  <span className="text-purple-400">🔒</span>
-                  <span className="truncate font-bold">{activeClient.link ? activeClient.link.replace("https://", "") : `${activeClient.client.toLowerCase().replace(/\s+/g, '')}.com`}</span>
-                </div>
-                <div className="w-2 h-2 rounded-full border border-purple-400/50 flex items-center justify-center text-[5px]">↻</div>
-              </div>
-
-              {/* Uncropped Brand Logo Visual Canvas */}
-              <div className="h-20 sm:h-24 p-3 flex items-center justify-center bg-gradient-to-b from-[#120627] to-[#0a0317] relative">
-                {activeClient.logoImg ? (
-                  <img
-                    src={activeClient.logoImg}
-                    alt={activeClient.client}
-                    className="max-h-full max-w-full object-contain filter drop-shadow-[0_6px_14px_rgba(0,0,0,0.7)] group-hover:scale-105 transition-transform duration-300"
-                  />
-                ) : activeClient.initials ? (
-                  <div className="w-10 h-10 rounded-full bg-purple-900/80 border border-purple-400/40 flex items-center justify-center text-white font-black text-lg font-mono">
-                    {activeClient.initials}
+          {/* Dynamic Screen Content Wrapper with Smooth Inner Transition */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeClient.client}
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -6 }}
+              transition={{ duration: 0.18, ease: "easeOut" }}
+              className="flex-1 flex flex-col justify-between"
+            >
+              {/* Dashboard Header Bar: Brand Profile & Category */}
+              <div className="flex items-center justify-between gap-2 mb-1.5 z-10">
+                <div className="flex items-center gap-2 min-w-0">
+                  <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#1a0b36] border border-purple-400/50 p-0.5 flex items-center justify-center shadow-lg overflow-hidden shrink-0">
+                    {activeClient.logoImg ? (
+                      <img src={activeClient.logoImg} alt={activeClient.client} className="w-full h-full object-contain rounded-full" />
+                    ) : (
+                      <Sparkles className="w-3.5 h-3.5 text-[#c084fc]" />
+                    )}
                   </div>
-                ) : (
-                  <Sparkles className="w-7 h-7 text-purple-400" />
-                )}
+                  <div className="min-w-0">
+                    <span className="text-[6px] sm:text-[7px] font-mono uppercase bg-[#250d4a] text-[#d8b4fe] px-1.5 py-0.5 rounded border border-[#a855f7]/30 font-bold block truncate max-w-[110px]">
+                      {activeClient.industry}
+                    </span>
+                    <h4 className="text-xs sm:text-sm font-black text-white truncate leading-tight font-sans mt-0.5">
+                      {activeClient.client}
+                    </h4>
+                  </div>
+                </div>
 
-                {/* Corner ROI Badge */}
-                <div className="absolute bottom-1 right-1.5 bg-[#250d4a]/90 backdrop-blur-md px-1.5 py-0.5 rounded border border-[#a855f7]/40 text-[6px] font-mono font-bold text-[#e9d5ff] flex items-center gap-0.5">
-                  <Sparkles className="w-2 h-2 text-[#c084fc]" /> 4.8x ROI
+                {/* Action Button */}
+                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-[#1d0b3a] border border-[#a855f7]/40 flex items-center justify-center text-[#c084fc] shadow-md group-hover:bg-[#a855f7] group-hover:text-white transition-colors shrink-0">
+                  <ArrowUpRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 stroke-[2.5]" />
                 </div>
               </div>
-            </div>
 
-            {/* ── STRATEGY BRIEF DASHBOARD WIDGET ── */}
-            <div className="bg-[#180838] border border-white/10 rounded-xl p-2 text-xs my-0.5 z-10">
-              <div className="flex items-center justify-between mb-0.5">
-                <span className="text-[7px] font-mono uppercase tracking-wider text-purple-300 font-bold flex items-center gap-1">
-                  <span className="w-1.5 h-1.5 rounded-full bg-fuchsia-400 animate-pulse" />
-                  DELIVERABLE BRIEF
-                </span>
-                <span className="text-[6px] font-mono text-purple-400 font-bold">100% COMPLETE</span>
-              </div>
-              <p className="text-[9px] text-slate-200 font-sans line-clamp-2 leading-tight">
-                {activeClient.whatWeDid}
-              </p>
-            </div>
+              {/* ── REALISTIC MONETTO-STYLE HERO METRIC CARD ── */}
+              <div className="relative w-full bg-gradient-to-br from-[#c084fc] via-[#a855f7] to-[#6e019c] text-white rounded-2xl p-2.5 sm:p-3 shadow-[0_10px_25px_rgba(168,85,247,0.4)] my-1 overflow-hidden group-hover:scale-[1.02] transition-transform z-10">
+                <div className="flex items-center justify-between text-[7px] sm:text-[8px] font-mono font-bold uppercase tracking-wider text-purple-100">
+                  <span>GROWTH IMPACT</span>
+                  <span className="flex items-center gap-0.5 bg-black/40 text-purple-200 px-1.5 py-0.5 rounded-full backdrop-blur-sm">
+                    <TrendingUp className="w-2.5 h-2.5 text-purple-300" /> VERIFIED
+                  </span>
+                </div>
 
-            {/* ── REALISTIC iOS APP DOCK AT BOTTOM ── */}
-            <div className="mt-1 bg-[#160733]/95 backdrop-blur-md rounded-xl p-1 border border-[#a855f7]/35 flex items-center justify-between gap-1 shadow-lg z-10">
-              <div className="flex items-center gap-1.5 pl-1.5 text-purple-300">
-                <Home className="w-3 h-3 text-[#c084fc]" />
-                <Grid className="w-3 h-3 text-purple-400/60" />
+                {/* Result Value */}
+                <div className="text-sm sm:text-base font-black font-sans tracking-tight leading-tight my-1 text-white truncate">
+                  {activeClient.result}
+                </div>
+
+                <div className="text-[7px] sm:text-[8px] font-mono text-purple-200 border-t border-white/20 pt-1 mt-0.5 flex justify-between items-center">
+                  <span className="truncate">{activeClient.client}</span>
+                  <span className="font-bold text-white">LIVE ANALYTICS</span>
+                </div>
               </div>
 
-              {/* Action Button Pill */}
-              <div className="flex-1 bg-[#2b1057] hover:bg-[#a855f7] text-slate-100 hover:text-white px-2 py-1 rounded-lg text-[8px] font-mono font-bold transition-colors flex items-center justify-between gap-1 border border-[#a855f7]/40">
-                <span className="truncate">Explore Case Study</span>
-                <ArrowUpRight className="w-3 h-3 shrink-0" />
+              {/* ── SECONDARY LAYERED POCKET CARD (Monetto Tax Pocket Style) ── */}
+              <div className="-mt-2 mx-1.5 bg-[#1f0945] border border-[#a855f7]/40 rounded-xl px-2.5 py-1 text-[7px] sm:text-[8px] font-mono text-[#e9d5ff] flex items-center justify-between shadow-md relative z-0">
+                <span className="text-purple-200 font-bold">SEO & Brand Authority</span>
+                <span className="font-mono font-extrabold text-[#c084fc]">+180% Organic</span>
               </div>
-            </div>
 
-          </motion.div>
-        </AnimatePresence>
+              {/* ── MOBILE BROWSER MOCKUP WITH UN-CROPPED BRAND LOGO ── */}
+              <div className="relative w-full rounded-2xl border border-purple-500/30 bg-[#120627] shrink-0 shadow-inner my-1.5 overflow-hidden z-10">
+                {/* Browser Address Bar Header */}
+                <div className="bg-[#1b0939] px-2 py-1 border-b border-purple-500/20 flex items-center justify-between text-[7px] font-mono text-purple-300">
+                  <div className="flex items-center gap-1 max-w-[80%] truncate">
+                    <span className="text-purple-400">🔒</span>
+                    <span className="truncate font-bold">{activeClient.link ? activeClient.link.replace("https://", "") : `${activeClient.client.toLowerCase().replace(/\s+/g, '')}.com`}</span>
+                  </div>
+                  <div className="w-2 h-2 rounded-full border border-purple-400/50 flex items-center justify-center text-[5px]">↻</div>
+                </div>
+
+                {/* Uncropped Brand Logo Visual Canvas */}
+                <div className="h-20 sm:h-24 p-3 flex items-center justify-center bg-gradient-to-b from-[#120627] to-[#0a0317] relative">
+                  {activeClient.logoImg ? (
+                    <img
+                      src={activeClient.logoImg}
+                      alt={activeClient.client}
+                      className="max-h-full max-w-full object-contain filter drop-shadow-[0_6px_14px_rgba(0,0,0,0.7)] group-hover:scale-105 transition-transform duration-300"
+                    />
+                  ) : activeClient.initials ? (
+                    <div className="w-10 h-10 rounded-full bg-purple-900/80 border border-purple-400/40 flex items-center justify-center text-white font-black text-lg font-mono">
+                      {activeClient.initials}
+                    </div>
+                  ) : (
+                    <Sparkles className="w-7 h-7 text-purple-400" />
+                  )}
+
+                  {/* Corner ROI Badge */}
+                  <div className="absolute bottom-1 right-1.5 bg-[#250d4a]/90 backdrop-blur-md px-1.5 py-0.5 rounded border border-[#a855f7]/40 text-[6px] font-mono font-bold text-[#e9d5ff] flex items-center gap-0.5">
+                    <Sparkles className="w-2 h-2 text-[#c084fc]" /> 4.8x ROI
+                  </div>
+                </div>
+              </div>
+
+              {/* ── STRATEGY BRIEF DASHBOARD WIDGET ── */}
+              <div className="bg-[#180838] border border-white/10 rounded-xl p-2 text-xs my-0.5 z-10">
+                <div className="flex items-center justify-between mb-0.5">
+                  <span className="text-[7px] font-mono uppercase tracking-wider text-purple-300 font-bold flex items-center gap-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-fuchsia-400 animate-pulse" />
+                    DELIVERABLE BRIEF
+                  </span>
+                  <span className="text-[6px] font-mono text-purple-400 font-bold">100% COMPLETE</span>
+                </div>
+                <p className="text-[9px] text-slate-200 font-sans line-clamp-2 leading-tight">
+                  {activeClient.whatWeDid}
+                </p>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+
+          {/* ── REALISTIC iOS APP DOCK AT BOTTOM (Persistent) ── */}
+          <div className="mt-1 bg-[#160733]/95 backdrop-blur-md rounded-xl p-1 border border-[#a855f7]/35 flex items-center justify-between gap-1 shadow-lg z-10">
+            <div className="flex items-center gap-1.5 pl-1.5 text-purple-300">
+              <Home className="w-3 h-3 text-[#c084fc]" />
+              <Grid className="w-3 h-3 text-purple-400/60" />
+            </div>
+            {/* Action Button Pill */}
+            <div className="flex-1 bg-[#2b1057] hover:bg-[#a855f7] text-slate-100 hover:text-white px-2 py-1 rounded-lg text-[8px] font-mono font-bold transition-colors flex items-center justify-between gap-1 border border-[#a855f7]/40">
+              <span className="truncate">Explore Case Study</span>
+              <ArrowUpRight className="w-3 h-3 shrink-0" />
+            </div>
+          </div>
+
+        </div>
 
       </div>
     </div>
   );
 });
 
+// Helper function to return domain-specific hand-drawn doodle SVG icons per category
+function getDoodleIconsForGenre(genreId: string) {
+  switch (genreId) {
+    case "ayurveda":
+      return {
+        iconLeft: (
+          <svg className="w-8 h-8 text-emerald-400 stroke-[2.2] stroke-current fill-emerald-950/40 filter drop-shadow-md -rotate-12" viewBox="0 0 24 24">
+            <path d="M 12 2 C 6 8 4 14 6 20 C 12 22 18 20 22 12 C 22 6 18 2 12 2 Z M 6 20 C 10 14 14 10 22 12" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        ),
+        iconRight: (
+          <svg className="w-7 h-7 text-green-300 stroke-[2.2] stroke-current fill-green-950/40 filter drop-shadow-md rotate-12" viewBox="0 0 24 24">
+            <path d="M 12 22 V 10 M 12 10 C 12 5 7 3 2 5 C 2 10 7 12 12 10 Z M 12 10 C 12 5 17 3 22 5 C 22 10 17 12 12 10 Z" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        ),
+        iconAccent: (
+          <svg className="w-5 h-5 text-amber-300 stroke-[2.2] stroke-current fill-amber-400/30" viewBox="0 0 24 24">
+            <path d="M 12 2 L 14 9 L 21 12 L 14 15 L 12 22 L 10 15 L 3 12 L 10 9 Z" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        ),
+      };
+
+    case "medical":
+      return {
+        iconLeft: (
+          <svg className="w-7 h-7 text-rose-400 stroke-[2.2] stroke-current fill-rose-950/40 filter drop-shadow-md -rotate-6" viewBox="0 0 24 24">
+            <path d="M 9 2 H 15 V 9 H 22 V 15 H 15 V 22 H 9 V 15 H 2 V 9 H 9 Z" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        ),
+        iconRight: (
+          <svg className="w-8 h-7 text-sky-400 stroke-[2.2] stroke-current fill-none filter drop-shadow-md rotate-6" viewBox="0 0 24 24">
+            <path d="M 2 12 H 6 L 9 4 L 14 20 L 17 10 L 19 14 H 22" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        ),
+        iconAccent: (
+          <svg className="w-5 h-5 text-purple-300 stroke-[2.2] stroke-current fill-purple-950/40" viewBox="0 0 24 24">
+            <path d="M 4.5 19.5 L 19.5 4.5 M 10.5 7.5 C 7 4 4 7 7.5 10.5 L 13.5 16.5 C 17 20 20 17 16.5 13.5 Z" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        ),
+      };
+
+    case "beauty":
+      return {
+        iconLeft: (
+          <svg className="w-7 h-7 text-amber-300 stroke-[2.2] stroke-current fill-amber-950/40 filter drop-shadow-md -rotate-12" viewBox="0 0 24 24">
+            <path d="M 2 4 L 7 13 L 12 6 L 17 13 L 22 4 L 20 19 H 4 Z" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        ),
+        iconRight: (
+          <svg className="w-7 h-7 text-pink-300 stroke-[2.2] stroke-current fill-pink-950/40 filter drop-shadow-md rotate-12" viewBox="0 0 24 24">
+            <path d="M 6 3 H 18 L 22 9 L 12 21 L 2 9 Z M 2 9 H 22 M 12 21 L 9 9 M 12 21 L 15 9" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        ),
+        iconAccent: (
+          <svg className="w-5 h-5 text-fuchsia-300 stroke-[2.2] stroke-current fill-fuchsia-400/30" viewBox="0 0 24 24">
+            <path d="M 12 2 L 14 9 L 21 12 L 14 15 L 12 22 L 10 15 L 3 12 L 10 9 Z" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        ),
+      };
+
+    case "education":
+      return {
+        iconLeft: (
+          <svg className="w-8 h-7 text-indigo-400 stroke-[2.2] stroke-current fill-indigo-950/40 filter drop-shadow-md -rotate-6" viewBox="0 0 24 24">
+            <path d="M 12 2 L 2 7 L 12 12 L 22 7 Z M 6 9.5 V 16 C 6 18.5 18 18.5 18 16 V 9.5 M 22 7 V 15" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        ),
+        iconRight: (
+          <svg className="w-7 h-7 text-amber-300 stroke-[2.2] stroke-current fill-amber-950/40 filter drop-shadow-md rotate-12" viewBox="0 0 24 24">
+            <path d="M 9 18 H 15 M 10 21 H 14 M 12 2 C 7.5 2 4 5.5 4 10 C 4 13 6 15 7.5 16.5 V 18 H 16.5 V 16.5 C 18 15 20 13 20 10 C 20 5.5 16.5 2 12 2 Z" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        ),
+        iconAccent: (
+          <svg className="w-5 h-5 text-yellow-300 stroke-[2.2] stroke-current fill-yellow-400/30" viewBox="0 0 24 24">
+            <path d="M 12 2 L 14 9 L 21 12 L 14 15 L 12 22 L 10 15 L 3 12 L 10 9 Z" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        ),
+      };
+
+    case "solar":
+      return {
+        iconLeft: (
+          <svg className="w-8 h-8 text-amber-400 stroke-[2.2] stroke-current fill-amber-950/40 filter drop-shadow-md -rotate-12" viewBox="0 0 24 24">
+            <path d="M 12 17 C 14.76 17 17 14.76 17 12 C 17 9.24 14.76 7 12 7 C 9.24 7 7 9.24 7 12 C 7 14.76 9.24 17 12 17 Z M 12 2 V 4 M 12 20 V 22 M 4.22 4.22 L 5.64 5.64 M 18.36 18.36 L 19.78 19.78 M 2 12 H 4 M 20 12 H 22 M 4.22 19.78 L 5.64 18.36 M 18.36 5.64 L 19.78 4.22" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        ),
+        iconRight: (
+          <svg className="w-7 h-7 text-yellow-300 stroke-[2.2] stroke-current fill-yellow-950/40 filter drop-shadow-md rotate-12" viewBox="0 0 24 24">
+            <path d="M 13 2 L 3 14 H 12 L 11 22 L 21 10 H 12 Z" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        ),
+        iconAccent: (
+          <svg className="w-5 h-5 text-emerald-300 stroke-[2.2] stroke-current fill-emerald-400/30" viewBox="0 0 24 24">
+            <path d="M 12 2 C 6 8 4 14 6 20 C 12 22 18 20 22 12 C 22 6 18 2 12 2 Z" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        ),
+      };
+
+    case "home":
+      return {
+        iconLeft: (
+          <svg className="w-7 h-7 text-cyan-400 stroke-[2.2] stroke-current fill-cyan-950/40 filter drop-shadow-md -rotate-12" viewBox="0 0 24 24">
+            <path d="M 14.7 6.3 A 1 1 0 0 0 14 5 C 11.8 5 10 6.8 10 9 C 10 9.5 10.1 10 10.3 10.4 L 3 17.7 C 2.4 18.3 2.4 19.3 3 19.9 C 3.6 20.5 4.6 20.5 5.2 19.9 L 12.5 12.6 C 12.9 12.8 13.4 12.9 13.9 12.9 C 16.1 12.9 17.9 11.1 17.9 8.9 A 1 1 0 0 0 16.6 8.2 Z" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        ),
+        iconRight: (
+          <svg className="w-7 h-7 text-blue-300 stroke-[2.2] stroke-current fill-blue-950/40 filter drop-shadow-md rotate-6" viewBox="0 0 24 24">
+            <path d="M 3 9.5 L 12 2.5 L 21 9.5 V 20 C 21 20.5 20.5 21 20 21 H 4 C 3.5 21 3 20.5 3 20 Z M 9 21 V 12 H 15 V 21" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        ),
+        iconAccent: (
+          <svg className="w-5 h-5 text-amber-300 stroke-[2.2] stroke-current fill-amber-400/30" viewBox="0 0 24 24">
+            <path d="M 13 2 L 3 14 H 12 L 11 22 L 21 10 H 12 Z" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        ),
+      };
+
+    case "hospitality":
+      return {
+        iconLeft: (
+          <svg className="w-7 h-7 text-orange-400 stroke-[2.2] stroke-current fill-orange-950/40 filter drop-shadow-md -rotate-12" viewBox="0 0 24 24">
+            <path d="M 18 2 V 22 M 18 2 C 15.5 2 14 4 14 7 V 11 H 18 M 6 2 V 9 C 6 11 8 13 10 13 V 22 M 6 2 H 10 V 9" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        ),
+        iconRight: (
+          <svg className="w-7 h-7 text-rose-300 stroke-[2.2] stroke-current fill-rose-950/40 filter drop-shadow-md rotate-12" viewBox="0 0 24 24">
+            <path d="M 8 22 H 16 M 12 15 V 22 M 5 3 L 12 15 L 19 3 Z M 7 6 H 17" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        ),
+        iconAccent: (
+          <svg className="w-5 h-5 text-amber-300 stroke-[2.2] stroke-current fill-amber-400/30" viewBox="0 0 24 24">
+            <path d="M 12 2 L 14 9 L 21 12 L 14 15 L 12 22 L 10 15 L 3 12 L 10 9 Z" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        ),
+      };
+
+    case "real-estate":
+      return {
+        iconLeft: (
+          <svg className="w-7 h-7 text-violet-400 stroke-[2.2] stroke-current fill-violet-950/40 filter drop-shadow-md -rotate-6" viewBox="0 0 24 24">
+            <path d="M 6 22 V 2 H 18 V 22 M 10 6 H 14 M 10 10 H 14 M 10 14 H 14 M 10 18 H 14" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        ),
+        iconRight: (
+          <svg className="w-7 h-7 text-amber-300 stroke-[2.2] stroke-current fill-amber-950/40 filter drop-shadow-md rotate-12" viewBox="0 0 24 24">
+            <path d="M 21 2 L 10 13 M 15 8 L 18 11 M 12 11 L 14 13 M 7.5 10.5 C 9.5 10.5 11 12 11 14 C 11 16 9.5 17.5 7.5 17.5 C 5.5 17.5 4 16 4 14 C 4 12 5.5 10.5 7.5 10.5 Z" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        ),
+        iconAccent: (
+          <svg className="w-5 h-5 text-purple-300 stroke-[2.2] stroke-current fill-purple-400/30" viewBox="0 0 24 24">
+            <path d="M 12 2 L 14 9 L 21 12 L 14 15 L 12 22 L 10 15 L 3 12 L 10 9 Z" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        ),
+      };
+
+    case "tech":
+      return {
+        iconLeft: (
+          <svg className="w-8 h-7 text-cyan-400 stroke-[2.2] stroke-current fill-cyan-950/40 filter drop-shadow-md -rotate-6" viewBox="0 0 24 24">
+            <path d="M 16 18 L 22 12 L 16 6 M 8 6 L 2 12 L 8 18 M 14 4 L 10 20" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        ),
+        iconRight: (
+          <svg className="w-7 h-7 text-[#c084fc] stroke-[2.2] stroke-current fill-purple-950/40 filter drop-shadow-md rotate-12" viewBox="0 0 24 24">
+            <path d="M 4.5 16.5 C 3 19 3 21 3 21 C 3 21 5 21 7.5 19.5 M 12 15 L 9 12 M 15 12 L 12 9 M 14.5 2 C 8.5 2 5.5 8 5.5 8 C 5.5 8 2.5 11 2.5 13.5 C 2.5 16 4.5 17.5 7 17.5 C 9.5 17.5 12.5 14.5 12.5 14.5 C 12.5 14.5 18.5 11.5 18.5 5.5 C 18.5 3 16 2 14.5 2 Z" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        ),
+        iconAccent: (
+          <svg className="w-5 h-5 text-amber-300 stroke-[2.2] stroke-current fill-amber-400/30" viewBox="0 0 24 24">
+            <path d="M 13 2 L 3 14 H 12 L 11 22 L 21 10 H 12 Z" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        ),
+      };
+
+    case "political":
+      return {
+        iconLeft: (
+          <svg className="w-8 h-7 text-amber-400 stroke-[2.2] stroke-current fill-amber-950/40 filter drop-shadow-md -rotate-12" viewBox="0 0 24 24">
+            <path d="M 3 11 V 15 M 11 6 L 20 2 V 22 L 11 18 H 3 V 6 H 11 Z M 7 18 V 23" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        ),
+        iconRight: (
+          <svg className="w-7 h-7 text-yellow-300 stroke-[2.2] stroke-current fill-yellow-950/40 filter drop-shadow-md rotate-12" viewBox="0 0 24 24">
+            <path d="M 2 4 L 7 13 L 12 6 L 17 13 L 22 4 L 20 19 H 4 Z" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        ),
+        iconAccent: (
+          <svg className="w-5 h-5 text-amber-300 stroke-[2.2] stroke-current fill-amber-400/30" viewBox="0 0 24 24">
+            <path d="M 12 2 L 14 9 L 21 12 L 14 15 L 12 22 L 10 15 L 3 12 L 10 9 Z" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        ),
+      };
+
+    case "automotive":
+      return {
+        iconLeft: (
+          <svg className="w-8 h-7 text-indigo-400 stroke-[2.2] stroke-current fill-indigo-950/40 filter drop-shadow-md -rotate-6" viewBox="0 0 24 24">
+            <path d="M 5 17 C 3.5 17 3 15.5 3 14 L 5 9 H 19 L 21 14 C 21 15.5 20.5 17 19 17 M 7 17 A 2 2 0 1 0 7 13 A 2 2 0 1 0 7 17 Z M 17 17 A 2 2 0 1 0 17 13 A 2 2 0 1 0 17 17 Z" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        ),
+        iconRight: (
+          <svg className="w-7 h-7 text-cyan-300 stroke-[2.2] stroke-current fill-cyan-950/40 filter drop-shadow-md rotate-12" viewBox="0 0 24 24">
+            <path d="M 13 2 L 3 14 H 12 L 11 22 L 21 10 H 12 Z" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        ),
+        iconAccent: (
+          <svg className="w-5 h-5 text-[#c084fc] stroke-[2.2] stroke-current fill-purple-400/30" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M 2 12 H 22 M 12 2 C 14.5 5 16 8.5 16 12 C 16 15.5 14.5 19 12 22 C 9.5 19 8 15.5 8 12 C 8 8.5 9.5 5 12 2 Z" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        ),
+      };
+
+    default:
+      return {
+        iconLeft: (
+          <svg className="w-8 h-6 text-purple-300 stroke-[2.2] stroke-current fill-purple-900/40 filter drop-shadow-md" viewBox="0 0 40 24">
+            <path d="M 8 18 C 3 18 2 12 7 10 C 5 4 14 3 19 6 C 24 3 32 4 32 9 C 38 10 38 18 32 18 Z" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        ),
+        iconRight: (
+          <svg className="w-7 h-7 text-amber-300 stroke-[2.2] stroke-current fill-amber-950/40 filter drop-shadow-md rotate-12" viewBox="0 0 24 24">
+            <path d="M 12 2 L 14 9 L 21 12 L 14 15 L 12 22 L 10 15 L 3 12 L 10 9 Z" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        ),
+        iconAccent: (
+          <svg className="w-5 h-5 text-[#c084fc] stroke-[2.2] stroke-current fill-purple-400/30" viewBox="0 0 24 24">
+            <path d="M 12 2 L 14 9 L 21 12 L 14 15 L 12 22 L 10 15 L 3 12 L 10 9 Z" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        ),
+      };
+  }
+}
+
 const GenreOrbitCard = memo(function GenreOrbitCard({ 
   genre, 
   index, 
+  totalCount = 12,
   onOpenShowcase
 }: { 
   genre: GenreSection; 
   index: number; 
+  totalCount?: number;
   onOpenShowcase: (client: ClientItem) => void;
 }) {
+  const doodleIcons = getDoodleIconsForGenre(genre.id || genre.category);
   const [selectedClientIndex, setSelectedClientIndex] = useState(0);
   const selectedIndexRef = useRef(selectedClientIndex);
   selectedIndexRef.current = selectedClientIndex;
+  const hoveredIdxRef = useRef<number | null>(null);
 
   const badgeRefs = useRef<(HTMLDivElement | null)[]>([]);
   const cardRef = useRef<HTMLDivElement>(null);
   const selectedClient = genre.clients[selectedClientIndex] || genre.clients[0];
   const clientCount = genre.clients.length;
 
-  // Direct DOM 120fps hardware accelerated animation loop with IntersectionObserver optimization
+  const isEven = index % 2 === 0;
+  const isLastSection = index === totalCount - 1;
+
+  // Direct DOM 120fps hardware accelerated animation loop with strict IntersectionObserver optimization
   useEffect(() => {
     let animId: number;
-    let isVisible = false;
+    let isVisible = false; // Start false, only run when visible in viewport
     const startTime = performance.now();
+
+    let w = typeof window !== "undefined" ? window.innerWidth : 1200;
+    let isMobile = w < 640;
+    let rx = isMobile ? Math.min(115, Math.max(85, Math.floor((w - 70) / 2))) : w < 1440 ? 220 : 270;
+    let ry = isMobile ? 36 : w < 1440 ? 72 : 88;
+
+    const handleResize = () => {
+      w = window.innerWidth;
+      isMobile = w < 640;
+      rx = isMobile ? Math.min(115, Math.max(85, Math.floor((w - 70) / 2))) : w < 1440 ? 220 : 270;
+      ry = isMobile ? 36 : w < 1440 ? 72 : 88;
+    };
+    window.addEventListener("resize", handleResize, { passive: true });
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        const wasVisible = isVisible;
-        isVisible = entry.isIntersecting;
-
-        if (isVisible && !wasVisible) {
+        const entering = entry.isIntersecting;
+        if (entering && !isVisible) {
+          isVisible = true;
           if (animId) cancelAnimationFrame(animId);
           animId = requestAnimationFrame(updateOrbit);
-        } else if (!isVisible && animId) {
-          cancelAnimationFrame(animId);
+        } else if (!entering && isVisible) {
+          isVisible = false;
+          if (animId) cancelAnimationFrame(animId);
         }
       },
-      { rootMargin: "0px" }
+      { rootMargin: "50px", threshold: 0.05 }
     );
 
     if (cardRef.current) {
       observer.observe(cardRef.current);
     }
 
+    const tiltAngle = (-22 * Math.PI) / 180;
+    const cosA = Math.cos(tiltAngle);
+    const sinA = Math.sin(tiltAngle);
+
     const updateOrbit = (now: number) => {
       if (!isVisible) return;
 
       const elapsed = now - startTime;
-      const angle = (elapsed * 0.022) % 360;
-
-      const w = window.innerWidth;
-      const isMobile = w < 640;
-      const rx = isMobile ? 150 : w < 1440 ? 220 : 270;
-      const ry = isMobile ? 50 : w < 1440 ? 72 : 88;
-
-      const tiltAngle = (-22 * Math.PI) / 180;
-      const cosA = Math.cos(tiltAngle);
-      const sinA = Math.sin(tiltAngle);
+      const angle = (elapsed * 0.028) % 360;
       const currentSelIdx = selectedIndexRef.current;
+      const currentHoveredIdx = hoveredIdxRef.current;
 
       badgeRefs.current.forEach((el, idx) => {
         if (!el) return;
@@ -635,17 +913,27 @@ const GenreOrbitCard = memo(function GenreOrbitCard({
         const depthFactor = Math.sin(rad);
         const isFront = depthFactor > 0;
         const isSelected = idx === currentSelIdx;
+        const isHovered = idx === currentHoveredIdx;
 
-        const depthScale = isSelected ? 1.28 : 0.78 + 0.3 * ((depthFactor + 1) / 2);
-        const depthOpacity = isSelected ? 1 : 0.55 + 0.45 * ((depthFactor + 1) / 2);
+        const baseScale = isSelected ? 1.28 : 0.78 + 0.3 * ((depthFactor + 1) / 2);
+        const depthScale = isHovered ? Math.max(baseScale, 1.35) : baseScale;
+        const depthOpacity = isHovered ? 1 : isSelected ? 1 : 0.55 + 0.45 * ((depthFactor + 1) / 2);
         
-        const zIndex = isSelected 
-          ? (isFront ? 40 : 18) 
-          : (isFront ? 30 : 10);
+        const zIndex = isHovered
+          ? 50
+          : isSelected 
+            ? (isFront ? 40 : 18) 
+            : (isFront ? 30 : 10);
 
-        el.style.transform = `translate3d(${x.toFixed(2)}px, ${y.toFixed(2)}px, 0px) scale(${depthScale.toFixed(3)})`;
-        el.style.opacity = `${depthOpacity.toFixed(3)}`;
-        el.style.zIndex = `${zIndex}`;
+        el.style.transform = `translate3d(${x.toFixed(1)}px,${y.toFixed(1)}px,0px) scale(${depthScale.toFixed(2)})`;
+        el.style.opacity = `${depthOpacity.toFixed(2)}`;
+
+        // Only mutate zIndex when layer changes (eliminates 99% of GPU layer tree invalidations!)
+        const lastZ = (el as any)._lastZ;
+        if (lastZ !== zIndex) {
+          (el as any)._lastZ = zIndex;
+          el.style.zIndex = `${zIndex}`;
+        }
       });
 
       animId = requestAnimationFrame(updateOrbit);
@@ -653,213 +941,649 @@ const GenreOrbitCard = memo(function GenreOrbitCard({
 
     return () => {
       if (animId) cancelAnimationFrame(animId);
+      window.removeEventListener("resize", handleResize);
       observer.disconnect();
     };
   }, [clientCount]);
 
-  const isEven = index % 2 === 0;
-
   return (
     <div 
       ref={cardRef} 
-      className="relative w-full py-16 sm:py-24 mb-20 sm:mb-28 flex flex-col items-center justify-center border-b border-purple-950/40 last:border-b-0"
-      style={{ 
-        minHeight: "85vh",
+      className="w-full relative rounded-3xl p-4 sm:p-8 flex flex-col justify-between overflow-visible my-12 sm:my-20"
+      style={{
+        minHeight: "clamp(480px, 68vh, 750px)",
       }}
     >
-      {/* Genre Header */}
-      <div className={`relative z-10 mb-2 sm:mb-3 flex flex-col w-full max-w-7xl ${isEven ? "items-start text-left" : "items-end text-right"}`}>
-        <div className={`flex flex-col gap-1.5 max-w-3xl ${isEven ? "items-start text-left" : "items-end text-right"}`}>
-          {/* Top Pill Badge */}
-          <span className="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-[0.2em] text-purple-200 bg-purple-950/60 backdrop-blur-md px-3.5 py-1 rounded-full border border-purple-500/40 shadow-lg">
+      {/* Genre Header — PLAYFUL DOODLE STYLE */}
+      <div className={`relative z-10 mb-6 sm:mb-8 flex flex-col w-full max-w-7xl ${
+        isLastSection 
+          ? "items-center text-center mx-auto" 
+          : isEven 
+            ? "items-start text-left" 
+            : "items-end text-right"
+      }`}>
+        <div className={`flex flex-col gap-2 max-w-3xl ${
+          isLastSection 
+            ? "items-center text-center" 
+            : isEven 
+              ? "items-start text-left" 
+              : "items-end text-right"
+        }`}>
+          {/* Doodle Badge Pill */}
+          <div className="inline-flex items-center gap-1.5 text-[11px] sm:text-xs font-mono font-black uppercase tracking-wider text-purple-200 bg-purple-950/80 px-4 py-1.5 rounded-full border-2 border-dashed border-purple-400/60 shadow-[3px_3px_0px_#6e019c]">
+            <svg className="w-3.5 h-3.5 text-amber-300 stroke-[2.5] stroke-current fill-none" viewBox="0 0 24 24">
+              <path d="M 12 2 L 14 9 L 21 12 L 14 15 L 12 22 L 10 15 L 3 12 L 10 9 Z" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
             {genre.badgeText || genre.title}
-          </span>
+          </div>
 
-          {/* Headline */}
-          <h2 
-            className="text-xl sm:text-3xl md:text-4xl lg:text-3xl xl:text-4xl font-sans font-black tracking-tight text-white uppercase leading-[1.05] select-none"
-            style={{ textShadow: "0 1px 0 #cbd5e1, 0 2px 0 #94a3b8, 0 3px 0 #64748b, 0 6px 18px rgba(0,0,0,0.9)" }}
-          >
-            {genre.title}
-          </h2>
+          {/* DOODLE ART BUBBLE TITLE CONTAINER */}
+          <div className="relative inline-block mt-2 group/doodle">
 
-          {/* Subtitle */}
-          <p className="text-slate-300 text-[11px] sm:text-xs font-medium max-w-xl leading-relaxed">
-            {genre.subtitle}
-          </p>
+            {/* Hand-Drawn Floating Category-Specific Doodle Icon (Top Left - GPU CSS) */}
+            <div 
+              style={{ animation: "heroFloat1 4s ease-in-out infinite" }}
+              className="absolute -top-7 -left-9 hidden sm:block pointer-events-none"
+            >
+              {doodleIcons.iconLeft}
+            </div>
 
-          <div className={`w-24 sm:w-40 h-[2px] bg-gradient-to-r ${isEven ? "from-purple-500/80 via-purple-300 to-transparent" : "from-transparent via-purple-300 to-purple-500/80"}`} />
+            {/* Hand-Drawn Floating Category-Specific Doodle Icon (Top Right - GPU CSS) */}
+            <div 
+              style={{ animation: "heroFloat1 3.2s ease-in-out infinite reverse" }}
+              className="absolute -top-6 -right-9 hidden sm:block pointer-events-none"
+            >
+              {doodleIcons.iconRight}
+            </div>
+
+            {/* Hand-Drawn Floating Accent Doodle Icon (Bottom Right - GPU CSS) */}
+            <div 
+              style={{ animation: "spin 12s linear infinite" }}
+              className="absolute -bottom-3 -right-8 hidden sm:block pointer-events-none"
+            >
+              {doodleIcons.iconAccent}
+            </div>
+
+            {/* 3D OUTLINE DOODLE BUBBLE TITLE */}
+            <h2 
+              className="text-lg xs:text-xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl font-serif font-black tracking-wide uppercase leading-[1.1] select-none text-white relative z-10 max-w-full break-words"
+              style={{
+                WebkitTextStroke: "2px #6e019c",
+                textShadow: "3px 3px 0px #3b0057, 5px 5px 0px rgba(110, 1, 156, 0.4)",
+              }}
+            >
+              {genre.title}
+            </h2>
+
+            {/* HAND-DRAWN SQUIGGLY DOODLE UNDERLINE STROKE */}
+            <div className="mt-2.5 w-full max-w-[280px] sm:max-w-[380px] relative">
+              <svg className="w-full h-4 text-purple-400 stroke-current fill-none overflow-visible" viewBox="0 0 300 16" preserveAspectRatio="none">
+                <path d="M 4 8 Q 45 1, 90 12 T 180 8 T 296 10" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M 12 12 Q 55 5, 100 14 T 190 11 T 285 13" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" opacity="0.6" />
+              </svg>
+            </div>
+
+          </div>
         </div>
       </div>
 
       {/* Main Orbit Stage */}
-      <div className="relative z-10 w-full grid grid-cols-1 lg:grid-cols-12 gap-3 lg:gap-4 items-center flex-1 min-h-0">
-        {/* 3D Orbit Stage */}
-        <div className={`lg:col-span-7 flex flex-col items-center justify-center relative select-none ${
-          isEven ? "lg:order-1" : "lg:order-2"
-        }`}
-          style={{ minHeight: "clamp(260px, 38vh, 440px)", maxHeight: "clamp(260px, 38vh, 440px)" }}
-        >
-          {/* CENTRAL ENLARGED 3D IMAGE DISPLAY */}
-          <div className="relative z-[20] flex items-center justify-center pointer-events-none">
-            {/* Background Glow Div (GPU Accelerated, no image alpha blur) */}
-            <div className="absolute w-48 h-48 sm:w-60 sm:h-60 rounded-full bg-purple-600/25 blur-3xl pointer-events-none" />
-            
-            {genre.image ? (
-              <motion.div
-                animate={{ y: [-8, 8, -8] }}
-                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                className="relative w-52 h-52 sm:w-68 sm:h-68 md:w-76 md:h-76 rounded-3xl flex items-center justify-center group cursor-pointer z-[20] pointer-events-auto transform-gpu"
-                onClick={() => onOpenShowcase(selectedClient)}
-              >
-                <img 
-                  src={genre.image} 
-                  alt={`${genre.title} 3D`} 
-                  decoding="async"
-                  loading="eager"
-                  className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-105"
-                />
-              </motion.div>
-            ) : null}
+      {isLastSection ? (
+        <div className="relative z-10 w-full flex flex-col md:flex-row items-center justify-center gap-6 min-h-[460px] my-4">
+          {/* Stacked Cards & Phone Mockup */}
+          <div className="relative z-10 flex scale-85 sm:scale-95 lg:scale-[0.82] origin-center pointer-events-auto">
+            <StackedCardDeckDisplay 
+              clients={genre.clients}
+              selectedIndex={selectedClientIndex} 
+              onOpenShowcase={onOpenShowcase} 
+            />
           </div>
 
-          {/* REVOLVING CLIENT SATELLITE NODES */}
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            {genre.clients.map((client, idx) => {
-              const isSelected = idx === selectedClientIndex;
-              const IconComp = client.icon || Sparkles;
-
-              return (
+          {/* 3D Orbit Stage (3D Globe + Revolving Satellite Logos) */}
+          <div 
+            className="flex flex-col items-center justify-center relative select-none mx-auto z-20 w-full max-w-[550px]"
+            style={{ minHeight: "clamp(260px, 38vh, 460px)", maxHeight: "clamp(260px, 38vh, 460px)" }}
+          >
+            {/* CENTRAL ENLARGED 3D GLOBE IMAGE DISPLAY */}
+            <div className="relative z-[20] flex items-center justify-center pointer-events-none">
+              {/* Background Glow Div */}
+              <div className="absolute w-48 h-48 sm:w-60 sm:h-60 rounded-full bg-purple-600/25 blur-3xl pointer-events-none" />
+              
+              {genre.image ? (
                 <div
-                  key={client.client}
-                  ref={(el) => { badgeRefs.current[idx] = el; }}
-                  data-selected={isSelected}
-                  onClick={() => {
-                    setSelectedClientIndex(idx);
-                    onOpenShowcase(client);
-                  }}
-                  onMouseEnter={() => setSelectedClientIndex(idx)}
-                  className="absolute pointer-events-auto cursor-pointer"
-                  style={{
-                    willChange: "transform, opacity",
-                  }}
+                  style={{ animation: "heroFloat1 5s ease-in-out infinite" }}
+                  className="relative w-48 h-48 sm:w-68 sm:h-68 md:w-76 md:h-76 rounded-3xl flex items-center justify-center group cursor-pointer z-[20] pointer-events-auto transform-gpu"
+                  onClick={() => onOpenShowcase(selectedClient)}
                 >
-                  <div className="flex flex-col items-center gap-1.5 group">
-                    <div 
-                      className={`relative w-14 h-14 sm:w-18 sm:h-18 rounded-full border-2 p-0.5 flex items-center justify-center transition-all duration-150 ease-[cubic-bezier(0.16,1,0.3,1)] transform-gpu shadow-xl overflow-hidden ${
-                        isSelected
-                          ? "border-purple-300 ring-4 ring-purple-500/50 shadow-purple-500/80 scale-125 z-30"
-                          : "border-purple-500/50 hover:border-purple-300 hover:scale-115 hover:shadow-purple-500/50"
-                      } ${client.logoBg || "bg-white"}`}
-                    >
-                      {client.logoImg ? (
-                        <img 
-                          src={client.logoImg} 
-                          alt={client.client} 
-                          className={`w-full h-full object-contain rounded-full transition-transform duration-150 ease-[cubic-bezier(0.16,1,0.3,1)] ${client.logoScale || "scale-125 p-1.5"}`} 
-                        />
-                      ) : client.initials ? (
-                        <div className={`w-full h-full flex items-center justify-center font-black font-sans text-base sm:text-xl tracking-tighter ${isSelected ? "bg-[#6e019c] text-white" : "bg-purple-950 text-purple-200"}`}>
-                          {client.initials}
-                        </div>
-                      ) : (
-                        <div className={`w-full h-full flex items-center justify-center bg-white ${isSelected ? "text-purple-600 font-extrabold" : "text-purple-900"}`}>
-                          <IconComp className="w-6 h-6 sm:w-8 sm:h-8 stroke-[2.2]" />
-                        </div>
-                      )}
-                    </div>
-
-                    <span className={`text-[10px] sm:text-xs font-bold font-sans tracking-tight px-2.5 py-0.5 rounded-full backdrop-blur-md border shadow-md transition-all duration-150 whitespace-nowrap ${
-                      isSelected 
-                        ? "bg-purple-600 text-white border-purple-300 shadow-purple-500/50 scale-105" 
-                        : "bg-slate-900/95 text-purple-200 border-purple-500/50 hover:border-purple-300"
-                    }`}>
-                      {client.subLabel || client.client}
-                    </span>
-                  </div>
+                  <img 
+                    src={genre.image} 
+                    alt={`${genre.title} 3D`} 
+                    decoding="async"
+                    loading="lazy"
+                    className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-105"
+                  />
                 </div>
-              );
-            })}
+              ) : null}
+            </div>
+
+            {/* REVOLVING CLIENT SATELLITE NODES */}
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+              {genre.clients.map((client, idx) => {
+                const isSelected = idx === selectedClientIndex;
+                const IconComp = client.icon || Sparkles;
+
+                return (
+                  <div
+                    key={client.client}
+                    ref={(el) => { badgeRefs.current[idx] = el; }}
+                    data-selected={isSelected}
+                    onMouseEnter={() => {
+                      hoveredIdxRef.current = idx;
+                      if (selectedIndexRef.current !== idx) {
+                        setSelectedClientIndex(idx);
+                      }
+                    }}
+                    onMouseLeave={() => { hoveredIdxRef.current = null; }}
+                    onClick={() => {
+                      if (selectedIndexRef.current !== idx) {
+                        setSelectedClientIndex(idx);
+                      }
+                      onOpenShowcase(client);
+                    }}
+                    className="absolute pointer-events-auto cursor-pointer group"
+                    style={{
+                      willChange: "transform, opacity",
+                    }}
+                  >
+                    <div className="flex flex-col items-center gap-1 sm:gap-1.5 group">
+                      <div 
+                        className={`relative w-12 h-12 sm:w-18 sm:h-18 rounded-full border-2 p-0.5 flex items-center justify-center transform-gpu shadow-xl overflow-hidden ${
+                          isSelected
+                            ? "border-purple-300 ring-4 ring-purple-500/50 shadow-purple-500/80 z-30"
+                            : "border-purple-500/50 group-hover:border-purple-300 group-hover:shadow-purple-500/50"
+                        } ${client.logoBg || "bg-white"}`}
+                      >
+                        {client.logoImg ? (
+                          <img 
+                            src={client.logoImg} 
+                            alt={client.client} 
+                            className={`w-full h-full object-contain rounded-full ${client.logoScale || "scale-125 p-1.5"}`} 
+                          />
+                        ) : client.initials ? (
+                          <div className={`w-full h-full flex items-center justify-center font-black font-sans text-xs sm:text-xl tracking-tighter ${isSelected ? "bg-[#6e019c] text-white" : "bg-purple-950 text-purple-200"}`}>
+                            {client.initials}
+                          </div>
+                        ) : (
+                          <div className={`w-full h-full flex items-center justify-center bg-white ${isSelected ? "text-purple-600 font-extrabold" : "text-purple-900"}`}>
+                            <IconComp className="w-5 h-5 sm:w-8 sm:h-8 stroke-[2.2]" />
+                          </div>
+                        )}
+                      </div>
+
+                      <span className={`text-[9px] sm:text-xs font-bold font-sans tracking-tight px-2 py-0.5 rounded-full border shadow-md whitespace-nowrap ${
+                        isSelected 
+                          ? "bg-purple-600 text-white border-purple-300 shadow-purple-500/50" 
+                          : "bg-slate-900/95 text-purple-200 border-purple-500/50 group-hover:border-purple-300"
+                      }`}>
+                        {client.subLabel || client.client}
+                      </span>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
+      ) : (
+        <div className="relative z-10 w-full flex flex-col md:flex-row items-center justify-between gap-6 md:gap-4 flex-1 min-h-0">
+          {/* 3D Orbit Stage */}
+          <div className={`w-full md:w-7/12 flex flex-col items-center justify-center relative select-none ${
+            isEven ? "md:order-1" : "md:order-2"
+          }`}
+            style={{ minHeight: "clamp(250px, 36vh, 440px)", maxHeight: "clamp(250px, 36vh, 440px)" }}
+          >
+            {/* CENTRAL ENLARGED 3D IMAGE DISPLAY */}
+            <div className="relative z-[20] flex items-center justify-center pointer-events-none">
+              {/* Background Glow Div */}
+              <div className="absolute w-48 h-48 sm:w-60 sm:h-60 rounded-full bg-purple-600/25 blur-3xl pointer-events-none" />
+              
+              {genre.image ? (
+                <div
+                  style={{ animation: "heroFloat1 5s ease-in-out infinite" }}
+                  className="relative w-48 h-48 sm:w-68 sm:h-68 md:w-76 md:h-76 rounded-3xl flex items-center justify-center group cursor-pointer z-[20] pointer-events-auto transform-gpu"
+                  onClick={() => onOpenShowcase(selectedClient)}
+                >
+                  <img 
+                    src={genre.image} 
+                    alt={`${genre.title} 3D`} 
+                    decoding="async"
+                    loading="lazy"
+                    className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-105"
+                  />
+                </div>
+              ) : null}
+            </div>
 
-        {/* Stacked Card Deck Display (Right on even index, Left on odd index) */}
-        <div className={`lg:col-span-5 flex flex-col justify-center items-center ${
-          isEven ? "lg:order-2" : "lg:order-1"
-        }`}>
-          <StackedCardDeckDisplay 
-            clients={genre.clients}
-            selectedIndex={selectedClientIndex} 
-            onOpenShowcase={onOpenShowcase} 
-          />
+            {/* REVOLVING CLIENT SATELLITE NODES */}
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+              {genre.clients.map((client, idx) => {
+                const isSelected = idx === selectedClientIndex;
+                const IconComp = client.icon || Sparkles;
+
+                return (
+                  <div
+                    key={client.client}
+                    ref={(el) => { badgeRefs.current[idx] = el; }}
+                    data-selected={isSelected}
+                    onMouseEnter={() => {
+                      hoveredIdxRef.current = idx;
+                      if (selectedIndexRef.current !== idx) {
+                        setSelectedClientIndex(idx);
+                      }
+                    }}
+                    onMouseLeave={() => { hoveredIdxRef.current = null; }}
+                    onClick={() => {
+                      if (selectedIndexRef.current !== idx) {
+                        setSelectedClientIndex(idx);
+                      }
+                      onOpenShowcase(client);
+                    }}
+                    className="absolute pointer-events-auto cursor-pointer group"
+                    style={{
+                      willChange: "transform, opacity",
+                    }}
+                  >
+                    <div className="flex flex-col items-center gap-1 sm:gap-1.5 group">
+                      <div 
+                        className={`relative w-12 h-12 sm:w-18 sm:h-18 rounded-full border-2 p-0.5 flex items-center justify-center transform-gpu shadow-xl overflow-hidden ${
+                          isSelected
+                            ? "border-purple-300 ring-4 ring-purple-500/50 shadow-purple-500/80 z-30"
+                            : "border-purple-500/50 group-hover:border-purple-300 group-hover:shadow-purple-500/50"
+                        } ${client.logoBg || "bg-white"}`}
+                      >
+                        {client.logoImg ? (
+                          <img 
+                            src={client.logoImg} 
+                            alt={client.client} 
+                            className={`w-full h-full object-contain rounded-full ${client.logoScale || "scale-125 p-1.5"}`} 
+                          />
+                        ) : client.initials ? (
+                          <div className={`w-full h-full flex items-center justify-center font-black font-sans text-xs sm:text-xl tracking-tighter ${isSelected ? "bg-[#6e019c] text-white" : "bg-purple-950 text-purple-200"}`}>
+                            {client.initials}
+                          </div>
+                        ) : (
+                          <div className={`w-full h-full flex items-center justify-center bg-white ${isSelected ? "text-purple-600 font-extrabold" : "text-purple-900"}`}>
+                            <IconComp className="w-5 h-5 sm:w-8 sm:h-8 stroke-[2.2]" />
+                          </div>
+                        )}
+                      </div>
+
+                      <span className={`text-[9px] sm:text-xs font-bold font-sans tracking-tight px-2 py-0.5 rounded-full border shadow-md whitespace-nowrap ${
+                        isSelected 
+                          ? "bg-purple-600 text-white border-purple-300 shadow-purple-500/50" 
+                          : "bg-slate-900/95 text-purple-200 border-purple-500/50 group-hover:border-purple-300"
+                      }`}>
+                        {client.subLabel || client.client}
+                      </span>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Stacked Card Deck Display (Cards + Phone Mockup) */}
+          <div className={`w-full md:w-5/12 flex flex-col justify-center items-center scale-90 sm:scale-100 ${
+            isEven ? "md:order-2" : "md:order-1"
+          }`}>
+            <StackedCardDeckDisplay 
+              clients={genre.clients}
+              selectedIndex={selectedClientIndex} 
+              onOpenShowcase={onOpenShowcase} 
+            />
+          </div>
         </div>
-
-      </div>
+      )}
     </div>
   );
 });
 
-export default function PortfolioPage() {
-  const [activeModalClient, setActiveModalClient] = useState<ClientItem | null>(null);
-  const showcaseRef = useRef<HTMLDivElement>(null);
-  // Dense multi-colored fiber bundle matching user reference image
-  const traceStripes = [
-    // --- Warm Red / Orange / Gold Band (Left) ---
-    { color: "#cc0000", offset: -2.2, width: 0.16, opacity: 0.85 },
-    { color: "#e60000", offset: -1.9, width: 0.18, opacity: 0.95 },
-    { color: "#ff2200", offset: -1.6, width: 0.16, opacity: 0.90 },
-    { color: "#ff5500", offset: -1.3, width: 0.18, opacity: 0.95 },
-    { color: "#ff8800", offset: -1.0, width: 0.16, opacity: 0.90 },
-    { color: "#ffbb00", offset: -0.7, width: 0.18, opacity: 1.00 }, // bright gold
-    { color: "#ff1100", offset: -0.4, width: 0.16, opacity: 0.95 },
-
-    // --- Crimson & Magenta Center Band ---
-    { color: "#e60039", offset: -0.1, width: 0.18, opacity: 1.00 },
-    { color: "#ff0055", offset:  0.2, width: 0.18, opacity: 1.00 }, // hot pink
-    { color: "#cc0066", offset:  0.5, width: 0.16, opacity: 0.95 },
-    { color: "#1a0026", offset:  0.8, width: 0.14, opacity: 0.80 }, // dark gap accent
-
-    // --- Cool Violet / Blue / Cyan Band (Right) ---
-    { color: "#6600cc", offset:  1.1, width: 0.16, opacity: 0.90 },
-    { color: "#8800ff", offset:  1.4, width: 0.18, opacity: 0.95 }, // electric purple
-    { color: "#0055ff", offset:  1.7, width: 0.18, opacity: 1.00 }, // cobalt blue
-    { color: "#0099ff", offset:  2.0, width: 0.18, opacity: 0.95 }, // bright blue
-    { color: "#00ccff", offset:  2.3, width: 0.16, opacity: 0.90 }, // sky blue
-    { color: "#80e5ff", offset:  2.6, width: 0.14, opacity: 0.85 }, // ice cyan
-  ];
-
-  const traceSvgRef = useRef<SVGSVGElement>(null);
-  const traceFirstPathRef = useRef<SVGPathElement>(null);
-  const traceTotalLen = useRef(0);
-
-  const zigZagPath = "M 28,3.5 C 28,7.7 72,7.7 72,12.0 C 72,17.7 28,17.7 28,23.5 C 28,28.2 72,28.2 72,33.0 C 72,37.5 28,37.5 28,42.0 C 28,47.5 72,47.5 72,53.0 C 72,57.7 28,57.7 28,62.5 C 28,67.2 72,67.2 72,72.0 C 72,76.2 28,76.2 28,80.5 C 28,84.5 72,84.5 72,88.5 C 72,92.5 50,92.5 50,96.5";
-
-  // Smooth continuous scroll progress across the full section
-  const { scrollYProgress } = useScroll({
-    target: showcaseRef,
-    offset: ["start 35%", "end 85%"]
-  });
+// ── INTERACTIVE MESH NET CANVAS BACKGROUND COMPONENT ──
+function InteractiveMeshNet() {
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
-    document.documentElement.classList.remove("dark");
-    if (traceFirstPathRef.current && traceSvgRef.current) {
-      const len = traceFirstPathRef.current.getTotalLength();
-      traceTotalLen.current = len;
-      traceSvgRef.current.style.setProperty("--len", `${len}`);
-      traceSvgRef.current.style.setProperty("--offset", `${len}`);
-    }
+    const isMobile = window.innerWidth < 768 || ("ontouchstart" in window && navigator.maxTouchPoints > 0);
+    if (isMobile) return;
+
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    let animId: number;
+    let isVisible = true;
+    let width = (canvas.width = canvas.parentElement?.offsetWidth || window.innerWidth);
+    let height = (canvas.height = canvas.parentElement?.offsetHeight || window.innerHeight);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          isVisible = entry.isIntersecting;
+          if (isVisible && !animId) {
+            animId = requestAnimationFrame(render);
+          }
+        });
+      },
+      { threshold: 0.05 }
+    );
+    observer.observe(canvas);
+
+    const handleResize = () => {
+      if (!canvas || !canvas.parentElement) return;
+      width = canvas.width = canvas.parentElement.offsetWidth;
+      height = canvas.height = canvas.parentElement.offsetHeight;
+      initMesh();
+    };
+    window.addEventListener("resize", handleResize);
+
+    const mouse = { x: -1000, y: -1000, active: false };
+    const handleMouseMove = (e: MouseEvent) => {
+      const rect = canvas.getBoundingClientRect();
+      mouse.x = e.clientX - rect.left;
+      mouse.y = e.clientY - rect.top;
+      mouse.active = true;
+    };
+    const handleMouseLeave = () => {
+      mouse.active = false;
+    };
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    window.addEventListener("mouseleave", handleMouseLeave);
+
+    const spacing = 36;
+    let cols = 0;
+    let rows = 0;
+    let nodes: { baseX: number; baseY: number; x: number; y: number }[] = [];
+
+    const initMesh = () => {
+      nodes = [];
+      cols = Math.ceil(width / spacing) + 1;
+      rows = Math.ceil(height / spacing) + 1;
+
+      for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+          const baseX = c * spacing;
+          const baseY = r * spacing;
+          nodes.push({
+            baseX,
+            baseY,
+            x: baseX,
+            y: baseY,
+          });
+        }
+      }
+    };
+    initMesh();
+
+    const startTime = performance.now();
+
+    const render = (now: number) => {
+      if (!isVisible) {
+        animId = 0;
+        return;
+      }
+
+      const elapsed = now - startTime;
+      ctx.clearRect(0, 0, width, height);
+
+      // 1. Update node physics positions (gentle idle wave + mouse fluid mesh distortion)
+      for (let i = 0; i < nodes.length; i++) {
+        const node = nodes[i];
+
+        // Idle organic ambient wave motion across the mesh
+        const waveY = Math.sin(elapsed * 0.0016 + node.baseX * 0.008 + node.baseY * 0.008) * 5;
+        const waveX = Math.cos(elapsed * 0.0014 + node.baseX * 0.006 - node.baseY * 0.006) * 4;
+
+        let targetX = node.baseX + waveX;
+        let targetY = node.baseY + waveY;
+
+        // Fast & liquid net displacement on mouse hover
+        if (mouse.active) {
+          const dx = mouse.x - node.baseX;
+          const dy = mouse.y - node.baseY;
+          const dist = Math.hypot(dx, dy);
+
+          if (dist < 290) {
+            const force = (1 - dist / 290);
+            const ripple = Math.sin(dist * 0.032 - elapsed * 0.006) * force * 65;
+            const angle = Math.atan2(dy, dx);
+            targetX -= Math.cos(angle) * ripple;
+            targetY -= Math.sin(angle) * ripple;
+          }
+        }
+
+        // Fast & Ultra-Smooth 120fps Silk Lerp Easing Factor
+        node.x += (targetX - node.x) * 0.135;
+        node.y += (targetY - node.y) * 0.135;
+      }
+
+      // 2. Draw Mesh Net Lines (batched into single path for max performance)
+      ctx.beginPath();
+      ctx.strokeStyle = "rgba(110, 1, 156, 0.18)";
+      ctx.lineWidth = 1;
+
+      for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+          const idx = r * cols + c;
+          const node = nodes[idx];
+
+          // Horizontal right connector
+          if (c < cols - 1) {
+            const rightNode = nodes[r * cols + (c + 1)];
+            ctx.moveTo(node.x, node.y);
+            ctx.lineTo(rightNode.x, rightNode.y);
+          }
+
+          // Vertical bottom connector
+          if (r < rows - 1) {
+            const bottomNode = nodes[(r + 1) * cols + c];
+            ctx.moveTo(node.x, node.y);
+            ctx.lineTo(bottomNode.x, bottomNode.y);
+          }
+        }
+      }
+      ctx.stroke();
+
+      // 3. Draw Mesh Junction Dots
+      ctx.fillStyle = "rgba(168, 85, 247, 0.4)";
+      for (let i = 0; i < nodes.length; i += 2) {
+        const node = nodes[i];
+        ctx.beginPath();
+        ctx.arc(node.x, node.y, 1.4, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      animId = requestAnimationFrame(render);
+    };
+
+    animId = requestAnimationFrame(render);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseleave", handleMouseLeave);
+      if (animId) cancelAnimationFrame(animId);
+    };
   }, []);
 
-  // Maximum performance: 1 CSS custom property update per frame (0 JS DOM loops, 0 reflows)
-  useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    const len = traceTotalLen.current;
-    if (len > 0 && traceSvgRef.current) {
-      traceSvgRef.current.style.setProperty("--offset", `${len * (1 - latest)}`);
-    }
+  return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none z-0" />;
+}
+
+// ── ANIMATED NUMBER COUNT UP STAT COMPONENT ──
+function CountUpNumber({ 
+  value, 
+  suffix = "", 
+  decimals = 0 
+}: { 
+  value: number; 
+  suffix?: string; 
+  decimals?: number 
+}) {
+  const [displayVal, setDisplayVal] = useState("0");
+  const ref = useRef<HTMLSpanElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-20px" });
+
+  useEffect(() => {
+    if (!isInView) return;
+    const controls = animate(0, value, {
+      duration: 2.2,
+      ease: [0.16, 1, 0.3, 1],
+      onUpdate: (latest) => {
+        setDisplayVal(latest.toFixed(decimals));
+      }
+    });
+    return () => controls.stop();
+  }, [isInView, value, decimals]);
+
+  return <span ref={ref}>{displayVal}{suffix}</span>;
+}
+
+// ── DOTTED SCROLL-DRIVEN TRACE PATH COMPONENT ──
+function DottedScrollTracePath({ 
+  totalSections,
+  showcaseRef
+}: { 
+  totalSections: number;
+  showcaseRef: React.RefObject<HTMLDivElement | null>;
+}) {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768);
+  }, []);
+
+  const { scrollYProgress } = useScroll({
+    target: showcaseRef,
+    offset: ["start 75%", "end 60%"],
   });
 
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 180,
+    damping: 28,
+    mass: 0.15,
+    restDelta: 0.001,
+  });
 
+  // Build winding S-curve SVG path string connecting alternating title locations, ending in exact middle (500) over 3D Globe image
+  const { pathD, endPoint } = React.useMemo(() => {
+    if (totalSections <= 0) return { pathD: "", endPoint: { x: 500, y: 950 } };
+    const points: { x: number; y: number }[] = [];
+    const heightStep = 1000 / totalSections;
 
+    for (let i = 0; i < totalSections; i++) {
+      const y = (i + 0.5) * heightStep;
+      // Last section ends in exact horizontal center (x: 500) directly over the central 3D globe image
+      const isLast = i === totalSections - 1;
+      const x = isLast ? 500 : i % 2 === 0 ? 130 : 870;
+      points.push({ x, y });
+    }
+
+    let d = `M ${points[0].x} ${points[0].y}`;
+    for (let i = 0; i < points.length - 1; i++) {
+      const curr = points[i];
+      const next = points[i + 1];
+      const midY = (curr.y + next.y) / 2;
+      d += ` C ${curr.x} ${midY}, ${next.x} ${midY}, ${next.x} ${next.y}`;
+    }
+    return { pathD: d, endPoint: points[points.length - 1] };
+  }, [totalSections]);
+
+  if (isMobile) return null;
+
+  return (
+    <div className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-visible">
+      <svg
+        className="w-full h-full overflow-visible"
+        viewBox="0 0 1000 1000"
+        preserveAspectRatio="none"
+        fill="none"
+      >
+        <defs>
+          {/* SVG Mask: Solid white stroke expands down the path with scroll, revealing the small doodle dots! */}
+          <mask id="dotted-trace-reveal-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="1000" height="1000">
+            <motion.path
+              d={pathD}
+              stroke="white"
+              strokeWidth="50"
+              fill="none"
+              strokeLinecap="round"
+              style={{ pathLength: smoothProgress }}
+            />
+          </mask>
+        </defs>
+
+        {/* Small Doodly Dotted Line (Progressively draws dot-by-dot, ending over central 3D globe) */}
+        <path
+          d={pathD}
+          stroke="#8b5cf6"
+          strokeWidth="2.2"
+          strokeDasharray="2.5 5.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          mask="url(#dotted-trace-reveal-mask)"
+          opacity={0.92}
+        />
+
+        {/* Doodle Sparkle Target Icon right over center of 3D globe image where trace ends */}
+        {endPoint && (
+          <g transform={`translate(${endPoint.x - 12}, ${endPoint.y - 12})`}>
+            <path
+              d="M 12 2 L 14 9 L 21 12 L 14 15 L 12 22 L 10 15 L 3 12 L 10 9 Z"
+              stroke="#fbbf24"
+              strokeWidth="2"
+              fill="rgba(251, 191, 36, 0.4)"
+              mask="url(#dotted-trace-reveal-mask)"
+              style={{ transformOrigin: "12px 12px", animation: "spin 10s linear infinite" }}
+            />
+          </g>
+        )}
+      </svg>
+    </div>
+  );
+}
+
+export default function PortfolioPage() {
+  const [activeModalClient, setActiveModalClient] = useState<ClientItem | null>(null);
+  const [hoverLead, setHoverLead] = useState(false);
+  const showcaseRef = useRef<HTMLDivElement>(null);
+
+  // Initialize Lenis smooth scroll (120fps fluid wheel inertia)
+  useEffect(() => {
+    document.documentElement.classList.remove("dark");
+    const isTouch = typeof window !== "undefined" && ("ontouchstart" in window || navigator.maxTouchPoints > 0);
+
+    const lenis = new Lenis({
+      duration: 0.42,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+      wheelMultiplier: 1.25,
+      touchMultiplier: isTouch ? 0 : 1.0,
+    });
+
+    let rafId: number;
+    function raf(time: number) {
+      lenis.raf(time);
+      rafId = requestAnimationFrame(raf);
+    }
+    rafId = requestAnimationFrame(raf);
+
+    window.scrollTo(0, 0);
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      lenis.destroy();
+    };
+  }, []);
 
   const genres: GenreSection[] = [
     {
@@ -936,6 +1660,15 @@ export default function PortfolioPage() {
           result: "4.8★ rating with +300 monthly inquiries",
           logoImg: "/zystraClientLogo/Dr S Hussain.webp",
           icon: HeartHandshake
+        },
+        {
+          client: "रमण डायग्नोस्टिक सेंटर",
+          industry: "Pathology & Diagnostics",
+          whatWeDid: "Diagnostic lab local SEO, home collection booking funnel, and Google Business Profile management.",
+          result: "180% increase in monthly diagnostic test bookings",
+          logoImg: "/zystraClientLogo/raman.webp",
+          subLabel: "रमण डायग्नोस्टिक सेंटर",
+          icon: Syringe
         }
       ]
     },
@@ -1111,7 +1844,8 @@ export default function PortfolioPage() {
           industry: "AC Installation",
           whatWeDid: "Commercial & residential HVAC service branding and customer feedback loop management.",
           result: "4.9★ rating across 300+ Google reviews",
-          initials: "PC",
+          logoImg: "/zystraClientLogo/perfect-cool.png",
+          logoScale: "scale-110",
           icon: Wrench
         },
         {
@@ -1156,6 +1890,14 @@ export default function PortfolioPage() {
           result: "150+ group tour bookings confirmed",
           logoImg: "/zystraClientLogo/AnandTours.webp",
           icon: Plane
+        },
+        {
+          client: "Saanvi Human Resources",
+          industry: "Hospitality & HR Management",
+          whatWeDid: "Human resources branding, talent acquisition portal, and hospitality staffing lead generation.",
+          result: "250+ hospitality placements & corporate contracts",
+          logoImg: "/zystraClientLogo/saanvi.webp",
+          icon: UserCheck
         }
       ]
     },
@@ -1309,189 +2051,618 @@ export default function PortfolioPage() {
     <div className="min-h-screen bg-slate-950 text-slate-100 overflow-hidden font-sans selection:bg-brand-vibrant/30 selection:text-white">
       <SEO
         title="Portfolio | Brands We've Grown — Zystra"
-        description="Explore Zystra's portfolio across healthcare, beauty, solar, education & more. Real brands, real growth, powered by AI-driven marketing strategy."
+        description="Explore Zystra's portfolio across healthcare, beauty, solar, education &amp; more. Real brands, real growth, powered by AI-driven marketing strategy."
         canonicalUrl="https://zystra.in/portfolio"
         schema={seoSchema}
       />
 
       <Navbar />
 
-      {/* Decorative Ambient Blobs */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none select-none z-0">
-        <div className="absolute -top-[15%] left-[5%] w-[800px] h-[800px] bg-brand-dark/20 rounded-full blur-[180px]" />
-        <div className="absolute bottom-[25%] -right-[10%] w-[700px] h-[700px] bg-brand-vibrant/10 rounded-full blur-[160px]" />
-      </div>
+      <main className="relative z-10 pb-20 overflow-x-hidden w-full">
 
-      <main className="relative z-10 pb-20">
+        {/* ═══════════════════════════════════════════════════════════
+            HERO SECTION — FRAME 1: 100VH DEDICATED MOBILE SCREEN FRAME
+            (Only Title Pills, 4 Social Logos & Client Moving Marquee)
+        ═══════════════════════════════════════════════════════════ */}
+        <section className="relative w-full min-h-[calc(100vh-20px)] sm:min-h-0 flex flex-col justify-between bg-white overflow-hidden pt-16 sm:pt-20 pb-0 sm:pb-10">
 
-        {/* HERO SECTION WITH VIDEO BACKGROUND */}
-        <section className="relative w-full overflow-hidden pt-32 pb-20 mb-16 border-b border-purple-950/30 min-h-[520px] lg:min-h-[580px] flex items-center justify-center">
-          <div className="absolute inset-0 z-0 pointer-events-none select-none overflow-hidden bg-slate-950">
-            <video
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="absolute inset-0 w-full h-full object-cover object-[85%_center] sm:object-right-center opacity-100"
-              src="/portfolio-hero-bg.mp4"
-            />
-            <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent" />
-          </div>
+          {/* Interactive Mesh Net Canvas Background */}
+          <InteractiveMeshNet />
 
-          <div className="container mx-auto px-6 sm:px-12 max-w-7xl relative z-10 text-left">
-            <div className="max-w-4xl flex flex-col items-start gap-8">
-              
-              <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1, duration: 0.6 }}
-                className="text-5xl sm:text-7xl lg:text-8xl font-serif font-black tracking-tight leading-[1.05] text-slate-950 drop-shadow-sm text-left"
-              >
-                Brands We've Helped{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-dark via-brand-vibrant to-pink-600">
-                  Lead Their Industry
-                </span>
-              </motion.h1>
+          {/* Scattered accent dots — exact positions from reference */}
+          <div className="absolute top-20 left-10 w-3 h-3 rounded-full bg-blue-500 opacity-70" />
+          <div className="absolute top-40 left-6 w-2 h-2 rounded-full bg-blue-400 opacity-50" />
+          <div className="absolute top-28 right-14 w-3.5 h-3.5 rounded-full bg-red-400 opacity-70" />
+          <div className="absolute top-52 right-8 w-2.5 h-2.5 rounded-full bg-red-500 opacity-55" />
+          <div className="absolute bottom-44 left-14 w-2.5 h-2.5 rounded-full bg-blue-400 opacity-60" />
+          <div className="absolute bottom-28 left-8 w-1.5 h-1.5 rounded-full bg-blue-300 opacity-45" />
+          <div className="absolute bottom-36 right-20 w-3 h-3 rounded-full bg-orange-400 opacity-55" />
+          <div className="absolute top-1/2 right-6 w-2 h-2 rounded-full bg-pink-400 opacity-55" />
+          <div className="absolute bottom-20 right-4 w-4 h-4 rounded-full bg-blue-500 opacity-60" />
 
-              {/* Stats */}
+          <div className="container mx-auto px-4 sm:px-8 max-w-5xl relative z-10 my-auto">
+
+            {/* ═══ STAGGERED PILL HEADLINE BLOCK ═══ */}
+            <div className="flex flex-col gap-2.5 sm:gap-2.5 mb-5 sm:mb-9 select-none">
+
+              {/* ── ROW 1: "Brands" (white pill, Zystra purple border) + spinning text circle (top right) ── */}
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2, duration: 0.6 }}
-                className="flex flex-wrap items-center gap-8 sm:gap-12 py-2 border-y border-purple-950/30 w-full max-w-3xl"
+                transition={{ delay: 0.05, duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+                className="flex items-center gap-3 sm:gap-4 w-full"
               >
-                <div className="flex flex-col items-start">
-                  <span className="text-3xl sm:text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-slate-950 via-brand-dark to-brand-vibrant drop-shadow-sm">50+</span>
-                  <span className="text-xs font-mono text-slate-900 uppercase tracking-wider font-extrabold mt-1">Brands Scaled</span>
-                </div>
-                <div className="h-10 w-px bg-purple-900/30 hidden sm:block" />
-                <div className="flex flex-col items-start">
-                  <span className="text-3xl sm:text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-slate-950 via-brand-dark to-brand-vibrant drop-shadow-sm">10+</span>
-                  <span className="text-xs font-mono text-slate-900 uppercase tracking-wider font-extrabold mt-1">Sectors Covered</span>
-                </div>
-                <div className="h-10 w-px bg-purple-900/30 hidden sm:block" />
-                <div className="flex flex-col items-start">
-                  <span className="text-3xl sm:text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-slate-950 via-brand-dark to-brand-vibrant drop-shadow-sm">3.8x</span>
-                  <span className="text-xs font-mono text-slate-900 uppercase tracking-wider font-extrabold mt-1">Avg ROI Growth</span>
-                </div>
-                <div className="h-10 w-px bg-purple-900/30 hidden sm:block" />
-                <div className="flex flex-col items-start">
-                  <span className="text-3xl sm:text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-slate-950 via-brand-dark to-brand-vibrant drop-shadow-sm">100%</span>
-                  <span className="text-xs font-mono text-slate-900 uppercase tracking-wider font-extrabold mt-1">AI & Data Tracked</span>
+                {/* "Brands" — white pill with Zystra purple border (Exchanges to Black on hover) */}
+                <motion.div
+                  whileHover={{
+                    scale: 1.03,
+                    backgroundColor: "#09090b",
+                    color: "#ffffff",
+                    borderColor: "#a855f7",
+                    boxShadow: "0 10px 32px rgba(168, 85, 247, 0.45)"
+                  }}
+                  transition={{ duration: 0.2, ease: "easeOut" }}
+                  className="bg-white text-slate-900 shrink-0 cursor-pointer px-5 sm:px-8 py-1.5 sm:py-2.5 rounded-full border-[2.5px] border-[#6e019c] shadow-[0_4px_16px_rgba(110,1,156,0.12)]"
+                >
+                  <span
+                    style={{
+                      fontSize: "clamp(2.1rem, 7.2vw, 5.5rem)",
+                      fontWeight: 900,
+                      letterSpacing: "-0.03em",
+                      lineHeight: 1.05,
+                      fontFamily: "var(--app-font-serif)",
+                    }}
+                  >
+                    Brands
+                  </span>
+                </motion.div>
+
+                {/* Spinning text circular badge — top right corner */}
+                <div className="ml-auto shrink-0">
+                  <Link href="/contact" title="Get in touch with Zystra">
+                    <div className="relative w-18 h-18 sm:w-28 sm:h-28 md:w-34 md:h-34 cursor-pointer group">
+                      <svg
+                        style={{ animation: "spin 18s linear infinite" }}
+                        className="absolute inset-0 w-full h-full"
+                        viewBox="0 0 140 140"
+                      >
+                        <defs>
+                          <path id="textCircleTop" d="M70,14 a56,56 0 1,1 -0.001,0" />
+                        </defs>
+                        <circle cx="70" cy="70" r="56" fill="none" stroke="#a855f7" strokeWidth="1.8" strokeDasharray="5 5" />
+                        <text fontSize="9.5" fill="#6e019c" fontFamily="var(--app-font-serif)" fontWeight="900" letterSpacing="0.04em">
+                          <textPath href="#textCircleTop" startOffset="0%" textLength="348" lengthAdjust="spacingAndGlyphs">
+                            WE WORK AS YOU NEED • THINK • CODE • GROW • 
+                          </textPath>
+                        </text>
+                      </svg>
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div
+                          style={{ animation: "heroFloat1 3s ease-in-out infinite" }}
+                          className="w-8 h-8 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full bg-gradient-to-br from-purple-100 to-purple-200/80 border border-purple-300 shadow-md flex items-center justify-center cursor-pointer group-hover:bg-[#6e019c] transition-colors"
+                        >
+                          <ArrowUpRight className="w-4 h-4 sm:w-6 sm:h-6 text-[#6e019c] group-hover:text-white stroke-[3] transition-colors" />
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
                 </div>
               </motion.div>
 
-              {/* Industry Tag Chips */}
+              {/* ── ROW 2: "We've Helped" (solid Zystra Vibrant Purple pill) + eye circle + social media badge ── */}
               <motion.div
-                initial={{ opacity: 0, y: 15 }}
+                initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3, duration: 0.6 }}
-                className="w-full max-w-3xl pt-1"
+                transition={{ delay: 0.12, duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+                className="flex items-center gap-2 sm:gap-4 ml-1 sm:ml-4"
               >
-                <div className="flex flex-wrap items-center justify-start gap-2 text-xs font-mono">
-                  {["Ayurveda & Herbal", "Medical & Rehab", "Beauty & Salons", "Solar Energy", "Home Services", "Education", "Travel", "Technology", "Construction", "International"].map((industry) => (
-                    <span
-                      key={industry}
-                      className="px-3.5 py-1.5 rounded-full border border-purple-900/30 bg-slate-950/80 backdrop-blur-md text-purple-100 font-semibold hover:bg-brand-vibrant hover:text-white transition-all duration-200 shadow-md"
-                    >
-                      #{industry}
-                    </span>
-                  ))}
+                {/* "We've Helped" — Zystra Signature Vibrant Purple Fill (Exchanges to White on hover) */}
+                <motion.div
+                  whileHover={{
+                    scale: 1.03,
+                    backgroundColor: "#ffffff",
+                    color: "#6e019c",
+                    borderColor: "#6e019c",
+                    boxShadow: "0 10px 32px rgba(110,1,156,0.3)"
+                  }}
+                  transition={{ duration: 0.2, ease: "easeOut" }}
+                  className="text-white shrink-0 cursor-pointer bg-[#6e019c] px-5 sm:px-8 py-1.5 sm:py-2.5 rounded-full border-[2.5px] border-transparent shadow-[0_8px_30px_rgba(110,1,156,0.4)]"
+                >
+                  <span
+                    style={{
+                      fontSize: "clamp(2.1rem, 7.2vw, 5.5rem)",
+                      fontWeight: 900,
+                      letterSpacing: "-0.03em",
+                      lineHeight: 1.05,
+                      fontFamily: "var(--app-font-serif)",
+                    }}
+                  >
+                    We've Helped
+                  </span>
+                </motion.div>
+
+                {/* Small connector circle — white (Exchanges to Black on hover) */}
+                <motion.div
+                  whileHover={{ scale: 1.15, backgroundColor: "#09090b", borderColor: "#a855f7" }}
+                  transition={{ duration: 0.2, ease: "easeOut" }}
+                  className="rounded-full bg-white border-2 border-purple-200 flex items-center justify-center shrink-0 shadow-sm cursor-pointer w-8 h-8 sm:w-12 sm:h-12"
+                >
+                  <div
+                    className="rounded-full w-4 h-4 sm:w-6 sm:h-6"
+                    style={{
+                      background: "linear-gradient(135deg, #a855f7 0%, #6e019c 100%)"
+                    }}
+                  />
+                </motion.div>
+
+              </motion.div>
+
+              {/* ── ROW 3: Helm circle + "Lead Industry" (white pill, Zystra purple dashed border) + yellow dot ── */}
+              <motion.div
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2, duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+                className="flex items-center gap-2 sm:gap-4"
+              >
+                {/* Helm/ship-wheel badge (Exchanges to Black on hover) */}
+                <motion.div
+                  whileHover={{ scale: 1.15, rotate: 45, backgroundColor: "#09090b", borderColor: "#a855f7" }}
+                  transition={{ duration: 0.25, ease: "easeOut" }}
+                  className="rounded-full bg-white border-2 border-purple-200 flex items-center justify-center shrink-0 shadow-md cursor-pointer w-9 h-9 sm:w-16 sm:h-16 md:w-18 md:h-18"
+                >
+                  <svg viewBox="0 0 48 48" className="w-5 h-5 sm:w-8 sm:h-8" fill="none">
+                    <circle cx="24" cy="24" r="5" stroke="#6e019c" strokeWidth="2.5" fill="none"/>
+                    <circle cx="24" cy="24" r="18" stroke="#6e019c" strokeWidth="2.5" fill="none"/>
+                    {[0,45,90,135,180,225,270,315].map((deg) => (
+                      <line
+                        key={deg}
+                        x1="24" y1="6"
+                        x2="24" y2="19"
+                        stroke="#6e019c"
+                        strokeWidth="2.5"
+                        strokeLinecap="round"
+                        transform={`rotate(${deg} 24 24)`}
+                      />
+                    ))}
+                  </svg>
+                </motion.div>
+
+                {/* "Lead Industry" / "DOMINATE..." — Moving Dotted Boundary Line Pill */}
+                <motion.div
+                  onMouseEnter={() => setHoverLead(true)}
+                  onMouseLeave={() => setHoverLead(false)}
+                  whileHover={{ scale: 1.04 }}
+                  transition={{ duration: 0.18, ease: "easeOut" }}
+                  className="shrink-0 cursor-pointer relative overflow-hidden transition-all duration-200 shadow-md px-5 sm:px-8 py-1.5 sm:py-2.5 rounded-full"
+                  style={{
+                    border: hoverLead ? "2.5px solid #a855f7" : "2.5px solid transparent",
+                    background: hoverLead ? "#09090b" : "#ffffff",
+                    boxShadow: hoverLead
+                      ? "0 10px 32px rgba(168, 85, 247, 0.45)"
+                      : "0 4px 16px rgba(168,85,247,0.12)"
+                  }}
+                >
+                  {/* Continuously Moving Dotted Boundary Line (Exact Pill Boundary Geometry) */}
+                  {!hoverLead && (
+                    <svg className="absolute inset-0 w-full h-full pointer-events-none overflow-visible">
+                      <rect
+                        x="1.25"
+                        y="1.25"
+                        width="calc(100% - 2.5px)"
+                        height="calc(100% - 2.5px)"
+                        rx="48"
+                        ry="48"
+                        fill="none"
+                        stroke="#a855f7"
+                        strokeWidth="2.5"
+                        strokeDasharray="6 6"
+                        style={{ animation: "industryFlow 1.6s linear infinite" }}
+                      />
+                    </svg>
+                  )}
+
+                  <AnimatePresence mode="wait">
+                    {!hoverLead ? (
+                      <motion.span
+                        key="lead"
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -8 }}
+                        transition={{ duration: 0.15, ease: "easeOut" }}
+                        className="block text-slate-900 select-none relative z-10"
+                        style={{
+                          fontSize: "clamp(2.1rem, 7.2vw, 5.5rem)",
+                          fontWeight: 900,
+                          letterSpacing: "-0.03em",
+                          lineHeight: 1.05,
+                          fontFamily: "var(--app-font-serif)",
+                        }}
+                      >
+                        Lead Industry
+                      </motion.span>
+                    ) : (
+                      <motion.span
+                        key="dominate"
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -8 }}
+                        transition={{ duration: 0.15, ease: "easeOut" }}
+                        className="block uppercase tracking-wider select-none relative z-10"
+                        style={{
+                          fontSize: "clamp(2.1rem, 7.2vw, 5.5rem)",
+                          fontWeight: 900,
+                          letterSpacing: "0.02em",
+                          lineHeight: 1.05,
+                          fontFamily: "var(--app-font-serif)",
+                          background: "linear-gradient(135deg, #ffffff 35%, #d8b4fe 75%, #c084fc 100%)",
+                          WebkitBackgroundClip: "text",
+                          WebkitTextFillColor: "transparent"
+                        }}
+                      >
+                        DOMINATE...
+                      </motion.span>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
+
+                {/* Yellow dot */}
+                <div
+                  className="rounded-full shrink-0 w-3 h-3 sm:w-4 sm:h-4 ml-1 sm:ml-1.5"
+                  style={{
+                    background: "#fbbf24",
+                    boxShadow: "0 0 10px rgba(251,191,36,0.6)",
+                  }}
+                />
+              </motion.div>
+
+              {/* ── ROW 4: 3D Social Media Icon Circles (Alternating Black & White Backgrounds) ── */}
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                className="flex items-center gap-3 sm:gap-3 ml-2 sm:ml-20 mt-2 sm:mt-0"
+              >
+                {/* 3D Instagram Circle — Black Background -> Hover: White Background */}
+                {/* 3D Instagram Circle — Black Background -> Hover: White Background */}
+                <div
+                  style={{ animation: "heroFloat1 3.2s ease-in-out infinite" }}
+                >
+                  <motion.div
+                    whileHover={{
+                      scale: 1.14,
+                      rotate: 6,
+                      backgroundColor: "#ffffff",
+                      borderColor: "#0f172a",
+                      boxShadow: "0 12px 32px rgba(15,23,42,0.25)"
+                    }}
+                    transition={{ duration: 0.18, ease: "easeOut" }}
+                    className="rounded-full shrink-0 flex items-center justify-center p-2.5 sm:p-2.5 cursor-pointer w-15 h-15 sm:w-18 sm:h-18"
+                    style={{
+                      backgroundColor: "#09090b",
+                      border: "3px solid #6e019c",
+                      boxShadow: "0 8px 24px rgba(9,9,11,0.3)"
+                    }}
+                  >
+                    <img src="/heroBgImg/insta.png" alt="Instagram 3D" className="w-full h-full object-contain filter drop-shadow-md" />
+                  </motion.div>
+                </div>
+
+                {/* 3D Meta Circle — White Background -> Hover: Black Background */}
+                <div
+                  style={{ animation: "heroFloat1 3.5s ease-in-out infinite reverse" }}
+                >
+                  <motion.div
+                    whileHover={{
+                      scale: 1.14,
+                      rotate: -6,
+                      backgroundColor: "#09090b",
+                      borderColor: "#6e019c",
+                      boxShadow: "0 12px 32px rgba(110,1,156,0.4)"
+                    }}
+                    transition={{ duration: 0.18, ease: "easeOut" }}
+                    className="rounded-full shrink-0 flex items-center justify-center p-2.5 sm:p-2.5 cursor-pointer w-15 h-15 sm:w-18 sm:h-18"
+                    style={{
+                      backgroundColor: "#ffffff",
+                      border: "3px solid #0f172a",
+                      boxShadow: "0 8px 24px rgba(15,23,42,0.15)"
+                    }}
+                  >
+                    <img src="/heroBgImg/meta.png" alt="Meta 3D" className="w-full h-full object-contain filter drop-shadow-md" />
+                  </motion.div>
+                </div>
+
+                {/* 3D YouTube Circle — Black Background -> Hover: White Background */}
+                <div
+                  style={{ animation: "heroFloat1 3.8s ease-in-out infinite" }}
+                >
+                  <motion.div
+                    whileHover={{
+                      scale: 1.14,
+                      rotate: 6,
+                      backgroundColor: "#ffffff",
+                      borderColor: "#0f172a",
+                      boxShadow: "0 12px 32px rgba(15,23,42,0.25)"
+                    }}
+                    transition={{ duration: 0.18, ease: "easeOut" }}
+                    className="rounded-full shrink-0 flex items-center justify-center p-2.5 sm:p-2.5 cursor-pointer w-15 h-15 sm:w-18 sm:h-18"
+                    style={{
+                      backgroundColor: "#09090b",
+                      border: "3px solid #6e019c",
+                      boxShadow: "0 8px 24px rgba(9,9,11,0.3)"
+                    }}
+                  >
+                    <img src="/heroBgImg/youtube.png" alt="YouTube 3D" className="w-full h-full object-contain filter drop-shadow-md" />
+                  </motion.div>
+                </div>
+
+                {/* 3D LinkedIn Circle — White Background -> Hover: Black Background */}
+                <div
+                  style={{ animation: "heroFloat1 3.4s ease-in-out infinite reverse" }}
+                >
+                  <motion.div
+                    whileHover={{
+                      scale: 1.14,
+                      rotate: -6,
+                      backgroundColor: "#09090b",
+                      borderColor: "#6e019c",
+                      boxShadow: "0 12px 32px rgba(110,1,156,0.4)"
+                    }}
+                    transition={{ duration: 0.18, ease: "easeOut" }}
+                    className="rounded-full shrink-0 flex items-center justify-center p-2.5 sm:p-2.5 cursor-pointer w-15 h-15 sm:w-18 sm:h-18"
+                    style={{
+                      backgroundColor: "#ffffff",
+                      border: "3px solid #0f172a",
+                      boxShadow: "0 8px 24px rgba(15,23,42,0.15)"
+                    }}
+                  >
+                    <img src="/heroBgImg/linkedIn.png" alt="LinkedIn 3D" className="w-full h-full object-contain filter drop-shadow-md" />
+                  </motion.div>
                 </div>
               </motion.div>
 
             </div>
+
           </div>
+
+          {/* ═══ CLIENT LOGO MARQUEE — Pinned to Bottom of Frame 1 ═══ */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.4, duration: 0.7 }}
+            className="relative w-screen left-1/2 -translate-x-1/2 border-y border-slate-200 bg-slate-50/70 py-4 sm:py-6 mt-auto mb-0 sm:mb-14 overflow-hidden select-none"
+            style={{
+              maskImage: "linear-gradient(to right, transparent, black 4%, black 96%, transparent)",
+              WebkitMaskImage: "linear-gradient(to right, transparent, black 4%, black 96%, transparent)"
+            }}
+          >
+            <div
+              className="flex items-center gap-12 sm:gap-20 whitespace-nowrap w-max animate-marquee-gpu"
+              style={{
+                willChange: "transform",
+                transform: "translate3d(0,0,0)",
+                WebkitTransform: "translate3d(0,0,0)"
+              }}
+            >
+              {[
+                { name: "Vedikacure", style: "font-sans font-black text-slate-800 text-lg tracking-tight" },
+                { name: "Jawed Habib", style: "font-serif italic font-semibold text-slate-700 text-lg tracking-wide" },
+                { name: "Astha Solar", style: "font-mono font-black text-slate-800 text-base tracking-widest" },
+                { name: "MLA Hardev Singh", style: "font-sans font-black text-slate-900 text-base uppercase tracking-tight" },
+                { name: "AcExpert Services", style: "font-sans font-black text-slate-800 text-lg tracking-tighter" },
+                { name: "Sanatani Flavour", style: "font-sans font-extrabold text-slate-800 text-base" },
+                { name: "Home Style Studio", style: "font-mono font-black text-slate-800 text-base" },
+                { name: "M Brothers & Sons", style: "font-sans font-black text-slate-900 text-base uppercase" },
+                { name: "Vedikacure", style: "font-sans font-black text-slate-800 text-lg tracking-tight" },
+                { name: "Jawed Habib", style: "font-serif italic font-semibold text-slate-700 text-lg tracking-wide" },
+                { name: "Astha Solar", style: "font-mono font-black text-slate-800 text-base tracking-widest" },
+                { name: "MLA Hardev Singh", style: "font-sans font-black text-slate-900 text-base uppercase tracking-tight" },
+                { name: "AcExpert Services", style: "font-sans font-black text-slate-800 text-lg tracking-tighter" },
+                { name: "Sanatani Flavour", style: "font-sans font-extrabold text-slate-800 text-base" },
+                { name: "Home Style Studio", style: "font-mono font-black text-slate-800 text-base" },
+                { name: "M Brothers & Sons", style: "font-sans font-black text-slate-900 text-base uppercase" },
+              ].map((item, i) => (
+                <div key={i} className="flex items-center gap-12 sm:gap-20">
+                  <span className={`${item.style} hover:text-purple-600 transition-colors cursor-default`}>
+                    {item.name}
+                  </span>
+                  <span className="w-2 h-2 rounded-full bg-gradient-to-r from-purple-500 to-indigo-600 shrink-0 shadow-sm" />
+                </div>
+              ))}
+            </div>
+          </motion.div>
         </section>
 
-        {/* REVOLVING 3D GENRE ORBIT SHOWCASE SECTION WITH SCROLL-DRIVEN ZIG-ZAG TRACE PATH */}
-        <section ref={showcaseRef} className="container mx-auto px-6 sm:px-12 max-w-7xl mb-28 relative">
-          {/* SCROLL-DRIVEN MULTICOLOR BUNDLED TRACE — CSS Custom Property Accelerated */}
-          <div className="absolute inset-0 pointer-events-none hidden md:block z-0 overflow-visible">
-            <svg
-              ref={traceSvgRef}
-              className="w-full h-full"
-              viewBox="0 0 100 100"
-              preserveAspectRatio="none"
+        {/* ═══════════════════════════════════════════════════════════
+            HERO SECTION — FRAME 2: STATS & CTA CARDS
+            (Zystra Theme Gradient Mesh + Animated Number Counters + Mobile 2-1-1 Layout)
+        ═══════════════════════════════════════════════════════════ */}
+        <div className="container mx-auto px-4 sm:px-8 max-w-6xl relative z-10 pt-10 pb-16 sm:py-14">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-6 items-stretch"
+          >
+
+            {/* Card 1: Zystra Deep Purple Mesh Gradient Card (2x Less Time) — Mobile Line 1 (Left) */}
+            <motion.div
+              whileHover={{ y: -6, scale: 1.02 }}
+              transition={{ duration: 0.2 }}
+              className="col-span-1 relative rounded-[32px] overflow-hidden p-5 sm:p-7 bg-gradient-to-br from-[#6e019c] via-[#4c1d95] to-[#1e1b4b] text-white shadow-xl shadow-purple-950/20 flex flex-col justify-between min-h-[230px] sm:min-h-[260px] group cursor-default border border-purple-400/30"
             >
-              <defs>
-                <linearGradient id="traceRainbowGrad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#ff2d55" />
-                  <stop offset="20%" stopColor="#f4722b" />
-                  <stop offset="40%" stopColor="#f9c74f" />
-                  <stop offset="60%" stopColor="#ff006e" />
-                  <stop offset="80%" stopColor="#8338ec" />
-                  <stop offset="100%" stopColor="#3a86ff" />
-                </linearGradient>
-              </defs>
+              {/* Overlapping Glass Mesh Circles */}
+              <div className="absolute -top-6 -left-6 w-28 h-28 rounded-full bg-cyan-400/30 blur-xl pointer-events-none opacity-50" />
+              <div className="absolute -bottom-10 -right-10 w-36 h-36 rounded-full bg-purple-400/30 blur-2xl pointer-events-none opacity-40" />
 
-              {/* Ghost background track */}
-              <path
-                d={zigZagPath}
-                fill="none"
-                stroke="rgba(255,255,255,0.04)"
-                strokeWidth="3.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
+              {/* Card Top Row: 3-line wave icon + action indicator */}
+              <div className="relative z-10 flex items-center justify-between">
+                <svg className="w-5 h-4 sm:w-6 sm:h-5 text-white/90 stroke-[2.5]" viewBox="0 0 24 18" fill="none">
+                  <path d="M2 3H16M2 9H22M2 15H12" stroke="currentColor" strokeLinecap="round" />
+                </svg>
+                <div className="flex items-center gap-1">
+                  <div className="w-1.5 h-1.5 rounded-full bg-white/90" />
+                  <div className="w-1.5 h-1.5 rounded-full bg-white/90" />
+                  <div className="w-1.5 h-1.5 rounded-full bg-white/90" />
+                </div>
+              </div>
 
-              {/* Central glowing gradient path */}
-              <path
-                ref={traceFirstPathRef}
-                d={zigZagPath}
-                fill="none"
-                stroke="url(#traceRainbowGrad)"
-                strokeWidth="0.45"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                style={{
-                  strokeDasharray: "var(--len, 1000)",
-                  strokeDashoffset: "var(--offset, 1000)",
-                  willChange: "stroke-dashoffset",
-                }}
-              />
+              {/* Card Bottom-Left Content (Exact Reference Layout + Animated Counter) */}
+              <div className="relative z-10 mt-6 sm:mt-8">
+                <div className="text-4xl sm:text-6xl font-black font-sans tracking-tight text-white leading-none drop-shadow-md">
+                  <CountUpNumber value={2} suffix="x" /><span className="text-xl sm:text-2xl font-light opacity-80">°</span>
+                </div>
+                <p className="text-[10px] sm:text-xs font-mono uppercase text-purple-200 font-bold tracking-widest mt-2">
+                  Less Time
+                </p>
+                <p className="text-[11px] sm:text-sm font-semibold text-white/90 mt-1 leading-snug drop-shadow-sm">
+                  Spent on Growth-Ready Strategy
+                </p>
+              </div>
+            </motion.div>
 
-              {/* Bundled colored accent wire stripes */}
-              {traceStripes.map((stripe, i) => (
-                <path
-                  key={i}
-                  d={zigZagPath}
-                  fill="none"
-                  stroke={stripe.color}
-                  strokeWidth={stripe.width}
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeOpacity={stripe.opacity}
-                  transform={`translate(${stripe.offset}, 0)`}
-                  style={{
-                    strokeDasharray: "var(--len, 1000)",
-                    strokeDashoffset: "var(--offset, 1000)",
-                    willChange: "stroke-dashoffset",
-                  }}
-                />
-              ))}
-            </svg>
-          </div>
+            {/* Card 2: Zystra Fuchsia Purple Gradient Card (50+ Brands) — Mobile Line 1 (Right) */}
+            <motion.div
+              whileHover={{ y: -6, scale: 1.02 }}
+              transition={{ duration: 0.2 }}
+              className="col-span-1 relative rounded-[32px] overflow-hidden p-5 sm:p-7 bg-gradient-to-br from-[#a855f7] via-[#6e019c] to-[#312e81] text-white shadow-xl shadow-purple-950/20 flex flex-col justify-between min-h-[230px] sm:min-h-[260px] group cursor-default border border-purple-400/30"
+            >
+              {/* Overlapping Glass Mesh Circles */}
+              <div className="absolute -top-8 -right-8 w-32 h-32 rounded-full bg-fuchsia-400/35 blur-xl pointer-events-none opacity-50" />
+              <div className="absolute -bottom-8 -left-8 w-32 h-32 rounded-full bg-purple-300/30 blur-2xl pointer-events-none opacity-40" />
+
+              {/* Card Top Row */}
+              <div className="relative z-10 flex items-center justify-between">
+                <svg className="w-5 h-4 sm:w-6 sm:h-5 text-white/90 stroke-[2.5]" viewBox="0 0 24 18" fill="none">
+                  <path d="M2 3H16M2 9H22M2 15H12" stroke="currentColor" strokeLinecap="round" />
+                </svg>
+                <div className="flex items-center gap-1">
+                  <div className="w-1.5 h-1.5 rounded-full bg-white/90" />
+                  <div className="w-1.5 h-1.5 rounded-full bg-white/90" />
+                  <div className="w-1.5 h-1.5 rounded-full bg-white/90" />
+                </div>
+              </div>
+
+              {/* Card Bottom-Left Content */}
+              <div className="relative z-10 mt-6 sm:mt-8">
+                <div className="text-4xl sm:text-6xl font-black font-sans tracking-tight text-white leading-none drop-shadow-md">
+                  <CountUpNumber value={50} suffix="+" />
+                </div>
+                <p className="text-[10px] sm:text-xs font-mono uppercase text-purple-200 font-bold tracking-widest mt-2">
+                  Brands
+                </p>
+                <p className="text-[11px] sm:text-sm font-semibold text-white/90 mt-1 leading-snug drop-shadow-sm">
+                  Scaled Across 10+ Sectors
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Card 3: Zystra Neon Violet-to-Midnight Card (3.8x Avg ROI) — Mobile Line 2 (Centered) */}
+            <motion.div
+              whileHover={{ y: -6, scale: 1.02 }}
+              transition={{ duration: 0.2 }}
+              className="col-span-2 sm:col-span-1 max-w-[290px] sm:max-w-none mx-auto w-full relative rounded-[32px] overflow-hidden p-5 sm:p-7 bg-gradient-to-br from-[#c084fc] via-[#5b21b6] to-[#09090b] text-white shadow-xl shadow-purple-950/20 flex flex-col justify-between min-h-[230px] sm:min-h-[260px] group cursor-default border border-purple-400/30"
+            >
+              {/* Overlapping Glass Mesh Circles */}
+              <div className="absolute -top-6 -left-6 w-28 h-28 rounded-full bg-violet-300/35 blur-xl pointer-events-none opacity-50" />
+              <div className="absolute -bottom-10 -right-10 w-36 h-36 rounded-full bg-emerald-400/25 blur-2xl pointer-events-none opacity-40" />
+
+              {/* Card Top Row */}
+              <div className="relative z-10 flex items-center justify-between">
+                <svg className="w-5 h-4 sm:w-6 sm:h-5 text-white/90 stroke-[2.5]" viewBox="0 0 24 18" fill="none">
+                  <path d="M2 3H16M2 9H22M2 15H12" stroke="currentColor" strokeLinecap="round" />
+                </svg>
+                <div className="flex items-center gap-1">
+                  <div className="w-1.5 h-1.5 rounded-full bg-white/90" />
+                  <div className="w-1.5 h-1.5 rounded-full bg-white/90" />
+                  <div className="w-1.5 h-1.5 rounded-full bg-white/90" />
+                </div>
+              </div>
+
+              {/* Card Bottom-Left Content */}
+              <div className="relative z-10 mt-6 sm:mt-8">
+                <div className="text-4xl sm:text-6xl font-black font-sans tracking-tight text-white leading-none drop-shadow-md">
+                  <CountUpNumber value={3.8} decimals={1} suffix="x" />
+                </div>
+                <p className="text-[10px] sm:text-xs font-mono uppercase text-purple-200 font-bold tracking-widest mt-2">
+                  Avg ROI
+                </p>
+                <p className="text-[11px] sm:text-sm font-semibold text-white/90 mt-1 leading-snug drop-shadow-sm">
+                  Growth-Driven Performance Strategy
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Card 4: Zystra Velvet Dark Purple CTA Card — Mobile Line 3 (Full Width) */}
+            <motion.div
+              whileHover={{ y: -6, scale: 1.02 }}
+              transition={{ duration: 0.2 }}
+              className="col-span-2 sm:col-span-1 w-full relative rounded-[32px] overflow-hidden p-5 sm:p-7 bg-gradient-to-br from-[#18002a] via-[#3b0057] to-[#6e019c] text-white shadow-xl shadow-purple-950/30 flex flex-col justify-between min-h-[230px] sm:min-h-[260px] group border border-purple-400/30"
+            >
+              {/* Overlapping Glass Mesh Circles & Graphic Overlay */}
+              <div className="absolute inset-0 opacity-40 mix-blend-overlay pointer-events-none">
+                <img src="/HeroBg.webp" alt="" className="w-full h-full object-cover" />
+              </div>
+              <div className="absolute -top-8 -right-8 w-32 h-32 rounded-full bg-amber-400/25 blur-2xl pointer-events-none opacity-50" />
+
+              {/* Card Top Row */}
+              <div className="relative z-10 flex items-center justify-between">
+                <span className="inline-flex items-center gap-1.5 text-[10px] sm:text-[11px] font-mono font-black uppercase tracking-wider text-amber-300 bg-amber-950/80 px-3 py-1 rounded-full border border-amber-400/50 shadow-md">
+                  <Sparkles className="w-3 h-3 text-amber-300 fill-amber-300" />
+                  GROWTH
+                </span>
+                <div className="flex items-center gap-1">
+                  <div className="w-1.5 h-1.5 rounded-full bg-white/90" />
+                  <div className="w-1.5 h-1.5 rounded-full bg-white/90" />
+                  <div className="w-1.5 h-1.5 rounded-full bg-white/90" />
+                </div>
+              </div>
+
+              {/* Card Bottom Content */}
+              <div className="relative z-10 mt-5 sm:mt-6">
+                <h3 className="text-xs sm:text-base font-black text-white leading-snug drop-shadow-md">
+                  We Help Brands Overcome Growth Challenges — Every Single Day.
+                </h3>
+
+                <Link href="/contact" className="inline-block mt-3.5 sm:mt-4">
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.96 }}
+                    className="bg-white text-purple-950 hover:bg-purple-50 text-xs sm:text-sm font-black px-4 sm:px-5 py-2 sm:py-2.5 rounded-full shadow-lg transition-all flex items-center gap-2 border border-purple-200"
+                  >
+                    <span>Let's Talk</span>
+                    <ArrowUpRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-purple-700 stroke-[3]" />
+                  </motion.button>
+                </Link>
+              </div>
+            </motion.div>
+
+          </motion.div>
+        </div>
 
 
-          <AnimatePresence mode="popLayout">
+
+
+
+
+        {/* REVOLVING 3D GENRE ORBIT SHOWCASE SECTION */}
+        <section ref={showcaseRef} className="container mx-auto px-6 sm:px-12 max-w-7xl mb-28 relative overflow-visible">
+
+          {/* Ultra-Smooth Dotted Scroll-Driven Trace Path Winding Across All Category Headers */}
+          <DottedScrollTracePath totalSections={genres.length} showcaseRef={showcaseRef} />
+
+          <div className="space-y-4 relative z-10">
             {genres.map((genre, idx) => (
-              <motion.div
-                key={genre.id}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.4 }}
-                style={{ scrollSnapAlign: "start" }}
-              >
+              <div key={genre.id} style={{ scrollSnapAlign: "start" }}>
                 <GenreOrbitCard 
                   genre={genre} 
                   index={idx} 
+                  totalCount={genres.length}
                   onOpenShowcase={(client) => setActiveModalClient(client)}
                 />
-              </motion.div>
+              </div>
             ))}
-          </AnimatePresence>
+          </div>
         </section>
 
         {/* FINAL CTA SECTION - PERFECTLY ADJUSTED INTO FRAME */}
@@ -1539,18 +2710,22 @@ export default function PortfolioPage() {
                     />
                     <text className="text-[9.5px] font-mono uppercase tracking-[0.22em] fill-purple-200 font-bold">
                       <textPath href="#circleTextPath">
-                        • LET'S TALK • BUILD & SCALE • GET AUDIT NOW 
+                        • LET'S TALK • BUILD & SCALE • CALL NOW 
                       </textPath>
                     </text>
                   </svg>
                 </div>
 
-                {/* Center Action Button (Perfectly Centered inside Ring) */}
-                <Link href="/#contact">
-                  <div className="absolute inset-0 m-auto w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-white text-purple-950 flex items-center justify-center shadow-xl hover:scale-110 transition-transform duration-300 cursor-pointer group z-20">
-                    <ArrowRight className="w-6 h-6 text-purple-950 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                {/* Center Action Button (Redirects to WhatsApp) */}
+                <a
+                  href="https://wa.me/916200048924?text=Hi%20Zystra%20team,%20I'd%20like%20to%20connect%20with%20you."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <div className="absolute inset-0 m-auto w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-xl hover:scale-110 transition-transform duration-300 cursor-pointer group z-20" title="Call Now on WhatsApp">
+                    <ArrowRight className="w-6 h-6 text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                   </div>
-                </Link>
+                </a>
               </div>
             </div>
 
@@ -1580,37 +2755,31 @@ export default function PortfolioPage() {
                     <stop offset="70%" stopColor="#c084fc" />
                     <stop offset="100%" stopColor="#a855f7" />
                   </linearGradient>
+
+                  {/* Fixed Curved ribbon path */}
+                  <path 
+                    id="ribbonWavePath" 
+                    d="M -300 90 C 150 160, 450 20, 700 90 C 950 160, 1250 20, 1700 90" 
+                  />
                 </defs>
 
-                {/* Sine Wave Ribbon Track Path - Extended Edge to Edge */}
-                <path 
-                  id="ribbonWavePath" 
-                  d="M -150,90 C 250,160 450,25 700,90 C 950,155 1150,25 1550,90" 
-                  stroke="url(#waveRibbonGrad)" 
-                  strokeWidth="38" 
-                  fill="none"
-                />
+                {/* Thick Gradient Ribbon Strip — STATIONARY FRAME */}
+                <use href="#ribbonWavePath" stroke="url(#waveRibbonGrad)" strokeWidth="38" fill="none" />
 
                 {/* Inner Ribbon Border Outline */}
-                <path 
-                  d="M -150,90 C 250,160 450,25 700,90 C 950,155 1150,25 1550,90" 
-                  stroke="#ffffff" 
-                  strokeWidth="2" 
-                  strokeOpacity="0.4" 
-                  fill="none"
-                />
+                <use href="#ribbonWavePath" stroke="#ffffff" strokeWidth="2" strokeOpacity="0.4" fill="none" />
 
-                {/* Animated Marquee Text Path along the Ribbon */}
-                <text className="text-[12px] font-mono font-black uppercase fill-white tracking-[0.25em]">
+                {/* Continuous Curved Text Flow — TEXT MOVES INSIDE STATIONARY FRAME */}
+                <text className="text-[12px] font-mono font-black uppercase fill-white tracking-[0.25em]" dy="4" textRendering="geometricPrecision">
                   <textPath href="#ribbonWavePath" startOffset="0%">
                     <animate 
                       attributeName="startOffset" 
                       from="0%" 
                       to="-50%" 
-                      dur="18s" 
+                      dur="20s" 
                       repeatCount="indefinite" 
                     />
-                    ★ ZYSTRA PORTFOLIO ★ 35+ BRANDS GROWN ★ 13+ INDUSTRIES ★ INDIA & INTERNATIONAL ★ AI-POWERED GROWTH ★ ZYSTRA PORTFOLIO ★ 35+ BRANDS GROWN ★ 13+ INDUSTRIES ★ INDIA & INTERNATIONAL ★
+                    ★ ZYSTRA PORTFOLIO ★ 35+ BRANDS GROWN ★ 13+ INDUSTRIES ★ INDIA &amp; INTERNATIONAL ★ AI-POWERED GROWTH ★ ZYSTRA PORTFOLIO ★ 35+ BRANDS GROWN ★ 13+ INDUSTRIES ★ INDIA &amp; INTERNATIONAL ★ AI-POWERED GROWTH ★ ZYSTRA PORTFOLIO ★ 35+ BRANDS GROWN ★ 13+ INDUSTRIES ★ INDIA &amp; INTERNATIONAL ★ AI-POWERED GROWTH ★
                   </textPath>
                 </text>
               </svg>
@@ -1627,6 +2796,26 @@ export default function PortfolioPage() {
       />
 
       <Footer />
+      <style dangerouslySetInnerHTML={{
+        __html: `
+          @keyframes heroFloat1 {
+            0%, 100% { transform: translateY(-6px) rotate(-2deg); }
+            50% { transform: translateY(8px) rotate(2deg); }
+          }
+          @media (max-width: 768px) {
+            .backdrop-blur-xl,
+            .backdrop-blur-2xl,
+            .backdrop-blur-3xl,
+            .backdrop-blur-lg,
+            .backdrop-blur-md,
+            .backdrop-blur-sm,
+            .backdrop-blur {
+              backdrop-filter: none !important;
+              -webkit-backdrop-filter: none !important;
+            }
+          }
+        `
+      }} />
     </div>
   );
 }

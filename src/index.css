@@ -235,11 +235,22 @@
   * {
     @apply border-border;
   }
+  html {
+    overflow-x: auto;
+  }
   body {
     @apply font-sans antialiased bg-background text-foreground;
+    overflow-x: auto;
   }
   h1, h2, h3, h4, h5, h6 {
     @apply font-sans;
+  }
+}
+
+/* On laptop/desktop only — prevent layout collapse below design width */
+@media (min-width: 1024px) {
+  html, body {
+    min-width: 1024px;
   }
 }
 
@@ -279,11 +290,35 @@ html.lenis, html.lenis body {
   pointer-events: none;
 }
 
-@keyframes marquee {
+@keyframes marquee-gpu {
   0% {
-    transform: translateX(0%);
+    transform: translate3d(0, 0, 0);
   }
   100% {
-    transform: translateX(-50%);
+    transform: translate3d(-50%, 0, 0);
   }
 }
+
+.animate-marquee-gpu {
+  animation: marquee-gpu 28s linear infinite;
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
+}
+
+@keyframes ribbonGpuFlow {
+  0% {
+    transform: translate3d(0%, 0, 0);
+  }
+  100% {
+    transform: translate3d(-25%, 0, 0);
+  }
+}
+
+.animate-ribbon-gpu {
+  animation: ribbonGpuFlow 25s linear infinite;
+  will-change: transform;
+  transform-box: fill-box;
+  transform: translate3d(0, 0, 0);
+}
+

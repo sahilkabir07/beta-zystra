@@ -1,12 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import Lenis from "lenis";
-import { motion, useScroll, useTransform, useInView, useMotionValue, useSpring } from "framer-motion";
+import { motion, useScroll, useTransform, useInView, useMotionValue, useSpring, useMotionValueEvent } from "framer-motion";
 import { Link } from "wouter";
 import { ArrowRight, ArrowUpRight, Phone, Sparkles, Rocket, Globe, Award, MessageSquare } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import SEO from "@/components/shared/SEO";
 import DoodleSocialArrow from "@/components/shared/DoodleSocialArrow";
+import AboutInteractiveBg from "@/components/ui/AboutInteractiveBg";
 
 function AnimatedStatNumber({ value, triggerKey = 0 }: { value: string; triggerKey?: number }) {
   const ref = useRef<HTMLSpanElement>(null);
@@ -316,13 +317,13 @@ function StatCard({ stat, index }: { stat: any; index: number }) {
 
 function LineReveal({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const inView = useInView(ref, { once: true, margin: "-20px" });
   return (
     <div ref={ref} className={`overflow-hidden ${className}`}>
       <motion.div
         initial={{ y: "110%", opacity: 0 }}
         animate={inView ? { y: "0%", opacity: 1 } : {}}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay }}
+        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay }}
         style={{ willChange: "transform, opacity" }}
       >
         {children}
@@ -333,13 +334,13 @@ function LineReveal({ children, delay = 0, className = "" }: { children: React.R
 
 function FadeUp({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
+  const inView = useInView(ref, { once: true, margin: "-20px" });
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 25 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay }}
+      transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1], delay }}
       className={className}
       style={{ willChange: "transform, opacity" }}
     >
@@ -436,104 +437,386 @@ function IdentityCard({ card }: { card: any }) {
   );
 }
 
-function HexagonHoneycombSection() {
-  const cardsData = [
-    {
-      id: "ai-strategy",
-      code: "AI-01",
-      badge: "1. ZYSTRA AI",
-      sticker: "ZYSTRA",
-      tag: "AI & PREDICTIVE ANALYTICS",
-      title: "AI STRATEGY",
-      subtitle: "AI-Powered Market Intelligence & Predictive Consumer Analytics",
-      image: "/social-media/Zystra.png",
-      link: "/services",
-      rotation: "transform -rotate-3 hover:rotate-0",
-    },
-    {
-      id: "performance",
-      code: "ADS-02",
-      badge: "1. GOOGLE ADS",
-      sticker: "GROWTH",
-      tag: "PAID ADS & SCALING",
-      title: "PERFORMANCE",
-      subtitle: "10x ROI-Focused Paid Ads & High-Converting Campaign Scaling",
-      image: "/social-media/googleAdds.png",
-      link: "/services",
-      rotation: "transform rotate-3 hover:rotate-0",
-    },
-    {
-      id: "web-tech",
-      code: "DEV-03",
-      badge: "1. META ADS",
-      sticker: "SYSTEMS",
-      tag: "WEB & APP ARCHITECTURE",
-      title: "WEB & TECH",
-      subtitle: "Ultra-Fast Modern Web Apps, Mobile Systems & AI Platforms",
-      image: "/social-media/meta.png",
-      link: "/services",
-      rotation: "transform -rotate-2 hover:rotate-0",
-    },
-    {
-      id: "organic-seo",
-      code: "SEO-04",
-      badge: "1. SEARCH",
-      sticker: "DOMINANCE",
-      tag: "PAN-INDIA & GLOBAL SEO",
-      title: "ORGANIC SEO",
-      subtitle: "Dominate Google Search with High-Authority organic rankings",
-      image: "/social-media/google.png",
-      link: "/services",
-      rotation: "transform rotate-4 hover:rotate-0",
-    },
-    {
-      id: "social-media",
-      code: "SOC-05",
-      badge: "1. INSTAGRAM",
-      sticker: "VIRAL",
-      tag: "VIRAL CONTENT & ENGAGEMENT",
-      title: "SOCIAL MEDIA",
-      subtitle: "Viral Content Strategy & High-Engagement Brand Storytelling",
-      image: "/social-media/insta.png",
-      link: "/services",
-      rotation: "transform -rotate-3 hover:rotate-0",
-    },
-    {
-      id: "video-growth",
-      code: "VID-06",
-      badge: "1. YOUTUBE",
-      sticker: "REACH",
-      tag: "VIDEO & CHANNEL GROWTH",
-      title: "YOUTUBE & REELS",
-      subtitle: "High-Impact Video Creative, Shorts & Brand Amplification",
-      image: "/social-media/youtube.png",
-      link: "/services",
-      rotation: "transform rotate-3 hover:rotate-0",
-    },
-  ];
+const TEAM_CARDS = [
+  {
+    id: "graphic",
+    name: "BARKAT ALI",
+    role: "Graphic Designer",
+    watermark: "GRAPHIC DESIGNER",
+    image: "/team/Graphic.webp",
+    video: "/team/GraphicDesigner.mp4",
+    startTime: 2.5,
+    bgGradient: "from-purple-400 via-purple-500 to-purple-600",
+    textColor: "text-purple-950",
+    watermarkColor: "text-purple-950",
+    badgeBg: "bg-purple-950/90 text-purple-300 border-purple-500/30",
+    colSpan: "md:col-span-1",
+    videoPos: "object-top",
+    videoScale: "scale-100 origin-top",
+  },
+  {
+    id: "developer",
+    name: "SAHIL KABIR",
+    role: "Developer & Tech Lead",
+    watermark: "DEVELOPER & TECH LEAD",
+    image: "/team/Developer.webp",
+    video: "/team/Developer.mp4",
+    startTime: 2.5,
+    bgGradient: "from-sky-400 via-sky-500 to-sky-600",
+    textColor: "text-sky-950",
+    watermarkColor: "text-sky-950",
+    badgeBg: "bg-sky-950/90 text-sky-300 border-sky-500/30",
+    colSpan: "md:col-span-1",
+    videoPos: "object-top",
+    videoScale: "scale-100 origin-top",
+  },
+  {
+    id: "social_media",
+    name: "SHAKRA SAJDA",
+    role: "Social Media Manager",
+    watermark: "SOCIAL MEDIA MANAGER",
+    image: "/team/socialmediamanager.webp",
+    video: "/team/SocialMediaManager.mp4",
+    startTime: 2.5,
+    bgGradient: "from-rose-400 via-pink-500 to-rose-600",
+    textColor: "text-rose-950",
+    watermarkColor: "text-rose-950",
+    badgeBg: "bg-rose-950/90 text-rose-300 border-rose-500/30",
+    colSpan: "md:col-span-1",
+    videoPos: "object-top",
+    videoScale: "scale-100 origin-top",
+  },
+  {
+    id: "video_editor",
+    name: "RITESH",
+    role: "Video Editor",
+    watermark: "VIDEO EDITOR",
+    image: "/team/video.webp",
+    video: "/team/VideoEditor.mp4",
+    startTime: 2.5,
+    bgGradient: "from-emerald-400 via-teal-500 to-emerald-600",
+    textColor: "text-emerald-950",
+    watermarkColor: "text-emerald-950",
+    badgeBg: "bg-emerald-950/90 text-emerald-300 border-emerald-500/30",
+    colSpan: "md:col-span-1",
+    videoPos: "object-top",
+    videoScale: "scale-[1.42] origin-top translate-y-2",
+    imagePos: "object-top",
+    imageScale: "scale-[1.42] origin-top translate-y-2",
+  },
+  {
+    id: "manager",
+    name: "MD SAMEER",
+    role: "Chief Operations Manager",
+    watermark: "CHIEF OPERATIONS MANAGER",
+    image: "/team/Manager.webp",
+    video: "/team/Manager.mp4",
+    startTime: 2.5,
+    bgGradient: "from-amber-400 via-amber-500 to-amber-600",
+    textColor: "text-amber-950",
+    watermarkColor: "text-amber-950",
+    badgeBg: "bg-amber-950/90 text-amber-300 border-amber-500/30",
+    colSpan: "md:col-span-2 max-w-2xl mx-auto w-full",
+    videoPos: "object-top",
+    videoScale: "scale-100 origin-top",
+  },
+  {
+    id: "ceo",
+    name: "EHTESHAM AHMAD",
+    role: "Founder & CEO",
+    watermark: "FOUNDER & CEO",
+    image: "/team/CEO.webp",
+    video: "/team/CEO.mp4",
+    startTime: 2.5,
+    bgGradient: "from-[#2A0845] via-[#7B1FA2] to-[#E91E63]",
+    textColor: "text-white",
+    watermarkColor: "text-white",
+    badgeBg: "bg-gradient-to-r from-fuchsia-950/95 via-purple-950/95 to-rose-950/95 text-fuchsia-200 border-fuchsia-400/50 shadow-2xl",
+    colSpan: "md:col-span-2 w-full",
+    videoPos: "object-top",
+    videoScale: "scale-[1.38] origin-top translate-y-2",
+    imagePos: "object-top",
+    imageScale: "scale-[1.38] origin-top translate-y-2",
+  },
+];
+
+function TeamCardItem({ card, idx }: { card: (typeof TEAM_CARDS)[0]; idx: number }) {
+  const [isHovered, setIsHovered] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [hasAutoPlayedMobile, setHasAutoPlayedMobile] = useState(false);
+  const [isMobileVideoActive, setIsMobileVideoActive] = useState(false);
+
+  const [imgError, setImgError] = useState((card as any).isPlaceholder ?? false);
+  const [videoError, setVideoError] = useState((card as any).isPlaceholder ?? false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const startTime = card.startTime ?? 2.5;
+  const isCeo = card.id === "ceo";
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  // IntersectionObserver for Mobile: 1-time autoplay when card is centered in mobile viewport
+  useEffect(() => {
+    if (!isMobile || hasAutoPlayedMobile || !cardRef.current) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !hasAutoPlayedMobile) {
+            setHasAutoPlayedMobile(true);
+            setIsMobileVideoActive(true);
+            if (videoRef.current && !videoError) {
+              videoRef.current.currentTime = startTime;
+              videoRef.current.play().catch(() => {
+                setVideoError(true);
+                setIsMobileVideoActive(false);
+              });
+            }
+          }
+        });
+      },
+      { threshold: 0.6 }
+    );
+
+    observer.observe(cardRef.current);
+    return () => observer.disconnect();
+  }, [isMobile, hasAutoPlayedMobile, startTime, videoError]);
+
+  const handleMouseEnter = () => {
+    if (isMobile) return;
+    setIsHovered(true);
+    if (videoRef.current && !videoError) {
+      if (videoRef.current.currentTime < startTime) {
+        videoRef.current.currentTime = startTime;
+      }
+      videoRef.current.play().catch(() => {
+        setVideoError(true);
+      });
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (isMobile) return;
+    setIsHovered(false);
+    if (videoRef.current && !videoError) {
+      videoRef.current.pause();
+      videoRef.current.currentTime = startTime;
+    }
+  };
+
+  const handleCardClick = () => {
+    if (!isMobile) return;
+
+    if (isMobileVideoActive) {
+      setIsMobileVideoActive(false);
+      if (videoRef.current) {
+        videoRef.current.pause();
+        videoRef.current.currentTime = startTime;
+      }
+    } else {
+      setIsMobileVideoActive(true);
+      if (videoRef.current && !videoError) {
+        videoRef.current.currentTime = startTime;
+        videoRef.current.play().catch(() => {
+          setVideoError(true);
+          setIsMobileVideoActive(false);
+        });
+      }
+    }
+  };
+
+  const handleEnded = () => {
+    if (isMobile) {
+      setIsMobileVideoActive(false);
+      if (videoRef.current) {
+        videoRef.current.pause();
+        videoRef.current.currentTime = startTime;
+      }
+    } else {
+      if (videoRef.current && !videoError) {
+        videoRef.current.currentTime = startTime;
+        videoRef.current.play().catch(() => {});
+      }
+    }
+  };
+
+  const showVideo = isMobile ? isMobileVideoActive : isHovered;
 
   return (
-    <section className="relative py-24 sm:py-36 overflow-hidden" style={{ background: "#080510" }}>
-      {/* Background Ambient Radial Glows */}
-      <div className="absolute inset-0 pointer-events-none opacity-20" style={{ backgroundImage: "radial-gradient(circle at 50% 50%, rgba(168, 85, 247, 0.15) 1px, transparent 1px)", backgroundSize: "32px 32px" }} />
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[850px] h-[550px] bg-purple-600/15 blur-[160px] rounded-full pointer-events-none z-0" />
-      <div className="absolute bottom-10 right-10 w-[500px] h-[500px] bg-purple-600/15 blur-[150px] rounded-full pointer-events-none z-0" />
+    <FadeUp key={card.id} delay={idx * 0.1} className={card.colSpan}>
+      <div
+        ref={cardRef}
+        onClick={handleCardClick}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        className={`group relative rounded-[32px] sm:rounded-[40px] overflow-hidden p-5 sm:p-7 flex flex-col justify-between ${
+          isCeo ? "min-h-[500px] sm:min-h-[560px] border border-white/20 shadow-2xl" : "min-h-[480px] sm:min-h-[540px]"
+        } bg-gradient-to-br ${card.bgGradient} shadow-2xl transition-all duration-500 hover:shadow-[0_30px_70px_rgba(0,0,0,0.5)] cursor-pointer select-none`}
+      >
+        {/* ANIMATED GIANT BACKGROUND MARQUEE TEXT (100% Seamless Infinite Track) */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none select-none z-0 flex flex-col justify-center gap-3">
+          {/* Top Row Marquee (Moving Left Seamlessly) */}
+          <div className="flex w-fit whitespace-nowrap overflow-hidden">
+            <div
+              className="flex shrink-0 items-center gap-8 text-6xl sm:text-7xl md:text-8xl font-black uppercase tracking-tighter animate-marquee-gpu pr-8"
+              style={{ fontFamily: "'Bricolage Grotesque', sans-serif" }}
+            >
+              {Array.from({ length: 8 }).map((_, i) => (
+                <span
+                  key={i}
+                  className={`${card.watermarkColor} shrink-0 transition-opacity duration-500 ${
+                    showVideo ? "opacity-65" : "opacity-30"
+                  }`}
+                >
+                  {card.watermark} •
+                </span>
+              ))}
+            </div>
+          </div>
 
-      {/* Large Watermark Text Background */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden opacity-[0.03]">
-        <span className="text-[25vw] font-black text-white tracking-tighter uppercase font-mono">
-          ZYSTRA
-        </span>
+          {/* Bottom Row Marquee (Moving Right Seamlessly) */}
+          <div className="flex w-fit whitespace-nowrap overflow-hidden">
+            <div
+              className="flex shrink-0 items-center gap-8 text-6xl sm:text-7xl md:text-8xl font-black uppercase tracking-tighter animate-marquee-gpu pl-8"
+              style={{ fontFamily: "'Bricolage Grotesque', sans-serif", animationDirection: "reverse" }}
+            >
+              {Array.from({ length: 8 }).map((_, i) => (
+                <span
+                  key={i}
+                  className={`${card.watermarkColor} shrink-0 transition-opacity duration-500 ${
+                    showVideo ? "opacity-65" : "opacity-30"
+                  }`}
+                >
+                  {card.watermark} •
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* FULL CARD HOVER VIDEO (Spans Entire Card Frame Edge-to-Edge) */}
+        {!videoError && (
+          <video
+            ref={videoRef}
+            src={`${card.video}#t=${startTime}`}
+            muted
+            onEnded={handleEnded}
+            onError={() => setVideoError(true)}
+            playsInline
+            preload="none"
+            className={`absolute inset-0 w-full h-full object-cover ${card.videoPos ?? "object-top"} ${card.videoScale ?? "scale-100 origin-top"} z-10 transition-opacity duration-500 ${
+              showVideo ? "opacity-100" : "opacity-0 pointer-events-none"
+            }`}
+          />
+        )}
+
+        {/* Dark Top & Bottom Vignette Overlays when Video Plays for High Contrast Badges */}
+        <div className={`absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-black/60 via-black/20 to-transparent pointer-events-none z-15 transition-opacity duration-500 ${showVideo && !videoError ? "opacity-100" : "opacity-0"}`} />
+        <div className={`absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/80 via-black/30 to-transparent pointer-events-none z-15 transition-opacity duration-500 ${showVideo && !videoError ? "opacity-100" : "opacity-0"}`} />
+
+        {/* TOP CORNER / TOP CENTER ROLE LABEL */}
+        <div className={`relative z-20 flex items-center ${isCeo ? "justify-center pt-1" : "justify-between"}`}>
+          <span className={`font-mono font-extrabold uppercase transition-all duration-300 border flex items-center gap-2 ${
+            isCeo
+              ? "text-xs sm:text-sm tracking-widest px-5 py-2 rounded-full bg-black/60 text-white border-white/30 shadow-md backdrop-blur-md font-sans"
+              : showVideo
+              ? "text-[11px] tracking-widest px-3.5 py-1.5 rounded-full bg-black/50 text-white border-white/20 backdrop-blur-md"
+              : "text-[11px] tracking-widest px-3.5 py-1.5 rounded-full bg-black/10 text-black/80 border-black/10 backdrop-blur-md"
+          }`}>
+            {isCeo && <span className="text-sm">👑</span>}
+            {showVideo && !videoError && !isCeo && <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />}
+            <span>{card.role}</span>
+          </span>
+        </div>
+
+        {/* PORTRAIT IMAGE OR PLACEHOLDER AVATAR */}
+        <div className="relative z-10 flex-1 flex items-center justify-center pt-4 my-2 overflow-hidden pointer-events-none">
+          {!imgError ? (
+            <img
+              src={card.image}
+              alt={card.name}
+              onError={() => setImgError(true)}
+              className={`${
+                isCeo ? "max-h-[340px] sm:max-h-[400px]" : "max-h-[300px] sm:max-h-[360px]"
+              } w-auto max-w-full object-contain ${card.imagePos ?? "object-bottom"} ${card.imageScale ?? "scale-100 origin-bottom"} filter drop-shadow-[0_20px_30px_rgba(0,0,0,0.3)] transition-all duration-300 ${
+                showVideo && !videoError ? "opacity-0" : "opacity-100"
+              }`}
+            />
+          ) : (
+            <div className="flex flex-col items-center justify-center my-auto py-8 text-center">
+              <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-black/20 backdrop-blur-md border border-white/25 flex items-center justify-center shadow-xl mb-4 group-hover:scale-105 transition-transform duration-300">
+                <span className="text-3xl sm:text-4xl font-black text-white/90 tracking-widest font-sans">
+                  {card.name.split(" ").map(n => n[0]).join("")}
+                </span>
+              </div>
+              <span className="text-[10px] font-mono font-bold tracking-widest uppercase px-3.5 py-1.5 rounded-full bg-black/30 text-white/90 border border-white/20 backdrop-blur-md">
+                MEDIA PLACEHOLDER
+              </span>
+            </div>
+          )}
+          {!imgError && (
+            <div className={`absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black/30 to-transparent pointer-events-none z-10 transition-opacity duration-300 ${showVideo && !videoError ? "opacity-0" : "opacity-100"}`} />
+          )}
+        </div>
+
+        {/* CARD BOTTOM INFO BADGE */}
+        <div className="relative z-20 mt-auto pt-2">
+          <div className={`flex items-center justify-between px-5 py-3.5 rounded-2xl ${
+            isCeo
+              ? "bg-slate-950/90 text-white border border-white/20 shadow-md"
+              : card.badgeBg
+          } backdrop-blur-xl border transition-transform duration-300 group-hover:translate-y-[-2px]`}>
+            <div>
+              <h3 className={`font-black tracking-tight font-sans ${isCeo ? "text-base sm:text-lg text-white flex items-center gap-2" : "text-sm sm:text-base"}`}>
+                {card.name} {isCeo && <span className="text-amber-400 text-sm">★</span>}
+              </h3>
+              <p className={`text-[10px] sm:text-xs font-mono uppercase tracking-wider ${isCeo ? "text-amber-300 font-bold" : "opacity-80"}`}>
+                {isCeo ? "FOUNDER & CHIEF EXECUTIVE OFFICER" : card.role}
+              </p>
+            </div>
+            <div className={`w-9 h-9 rounded-full ${isCeo ? "bg-amber-400/20 text-amber-300 border border-amber-400/50" : "bg-white/10"} flex items-center justify-center font-mono font-bold text-xs shrink-0 shadow-md`}>
+              →
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </FadeUp>
+  );
+}
+
+function TeamScrollRevealSection() {
+  return (
+    <section className="relative py-20 sm:py-32 bg-[#080510] overflow-hidden">
+      <AboutInteractiveBg />
+
+      {/* Ambient Glows */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] rounded-full bg-purple-700/10 blur-[140px]" />
+        <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] rounded-full bg-indigo-600/10 blur-[120px]" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-[5vw] relative z-10">
+      {/* Dot grid texture */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-[0.03]"
+        style={{ backgroundImage: "radial-gradient(circle, #a855f7 1px, transparent 1px)", backgroundSize: "32px 32px" }}
+      />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-16 relative z-10">
         
         {/* Section Header */}
         <div className="mb-14 sm:mb-20 text-center max-w-3xl mx-auto flex flex-col items-center">
           <FadeUp>
-            <div className="inline-flex items-center gap-2.5 px-4.5 py-1.5 rounded-full border border-purple-500/30 bg-purple-500/10 text-purple-300 text-xs font-mono tracking-[0.2em] uppercase mb-4">
+            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-purple-500/30 bg-purple-500/10 text-purple-300 text-xs font-mono tracking-[0.2em] uppercase mb-4">
               <span className="w-2 h-2 rounded-full bg-purple-400 animate-pulse" />
-              OUR IDENTITY
+              THE TEAM BEHIND ZYSTRA
             </div>
           </FadeUp>
 
@@ -553,18 +836,22 @@ function HexagonHoneycombSection() {
           </FadeUp>
         </div>
 
-        {/* 3x2 Bento Grid - Replicating Polaroid/HUD Card UI with Zystra Purple Theme */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 pt-4">
-          {cardsData.map((card, idx) => (
-            <FadeUp key={card.id} delay={idx * 0.08} className="h-full">
-              <IdentityCard card={card} />
-            </FadeUp>
-          ))}
+        {/* 2X2 VIBRANT CARD GRID (REFERENCE INSPIRED DESIGN) */}
+        <div className="relative max-w-5xl mx-auto">
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+            {TEAM_CARDS.map((card, idx) => (
+              <TeamCardItem key={card.id} card={card} idx={idx} />
+            ))}
+          </div>
+
         </div>
+
       </div>
     </section>
   );
 }
+
 
 function ArcCardItem({
   card,
@@ -726,7 +1013,7 @@ function ArcPrinciplesSection() {
       }, 140);
     };
 
-    el.addEventListener("wheel", handleWheel, { passive: false });
+    el.addEventListener("wheel", handleWheel, { passive: true });
     return () => {
       el.removeEventListener("wheel", handleWheel);
       clearTimeout(snapTimeout);
@@ -735,6 +1022,7 @@ function ArcPrinciplesSection() {
 
   return (
     <section className="py-20 md:py-28 relative overflow-hidden" style={{ background: "#080510" }}>
+      <AboutInteractiveBg />
       {/* Background Ambient Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[550px] bg-purple-600/20 blur-[150px] rounded-full pointer-events-none" />
 
@@ -872,12 +1160,14 @@ const MONO      = "'DM Mono', monospace";
 export default function AboutUsPage() {
   useEffect(() => {
     document.documentElement.classList.remove("dark");
+    const isTouch = typeof window !== "undefined" && ("ontouchstart" in window || navigator.maxTouchPoints > 0);
+
     const lenis = new Lenis({
-      duration: 0.75,
+      duration: 0.55,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
-      wheelMultiplier: 1.0,
-      touchMultiplier: 1.0,
+      wheelMultiplier: 1.15,
+      touchMultiplier: isTouch ? 0 : 1.0,
     });
     let rafId: number;
     function raf(time: number) { lenis.raf(time); rafId = requestAnimationFrame(raf); }
@@ -915,9 +1205,10 @@ export default function AboutUsPage() {
       ══════════════════════════════════════════════════════════════════════╗ */}
       <section
         ref={heroRef}
-        className="relative w-full flex flex-col justify-between"
+        className="relative w-full flex flex-col justify-between overflow-hidden"
         style={{ minHeight: "100vh", background: "#080510", willChange: "transform" }}
       >
+        <AboutInteractiveBg particleCount={60} />
         {/* ── Halftone dot texture ── */}
         <div
           className="absolute inset-0 pointer-events-none"
@@ -946,7 +1237,7 @@ export default function AboutUsPage() {
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
-            background: "radial-gradient(ellipse 80% 80% at 50% -10%, rgba(51,1,90,0.35) 0%, rgba(8,5,16,0.95) 75%)",
+            background: "radial-gradient(ellipse 80% 80% at 50% -10%, rgba(51,1,90,0.35) 0%, rgba(8,5,16,0.35) 75%)",
           }}
         />
 
@@ -965,9 +1256,9 @@ export default function AboutUsPage() {
 
         {/* ══════════════════════════════════════════════════════════════════
             MAIN CONTAINER: Content on LEFT, Astronaut Image on RIGHT
-            Proper gap from top header (pt-16 sm:pt-20) and proper side margins
+            Proper gap from top header (pt-32 sm:pt-36 lg:pt-28) to prevent navbar overlap on mobile
         ══════════════════════════════════════════════════════════════════ */}
-        <div className="relative z-20 w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-12 pt-16 sm:pt-20 md:pt-24 pb-10 flex-1 flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
+        <div className="relative z-20 w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-12 pt-32 sm:pt-36 lg:pt-28 pb-10 flex-1 flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
           
           {/* ── LEFT COLUMN: Text Content & Headlines ── */}
           <motion.div
@@ -1112,19 +1403,16 @@ export default function AboutUsPage() {
 
           {/* ── RIGHT COLUMN: Astronaut Image ── */}
           <motion.div
-            className="w-full lg:w-[42%] flex items-center justify-end relative select-none mt-6 sm:mt-10 lg:mt-12 lg:pr-4"
+            className="w-full lg:w-[42%] flex items-center justify-center lg:justify-end relative select-none mt-2 sm:mt-6 lg:mt-12 lg:pr-4"
             style={{ y: heroY, opacity: heroOpacity, willChange: "transform, opacity", transform: "translate3d(0,0,0)" }}
             initial={{ opacity: 0, scale: 0.92, x: 30 }}
             animate={{ opacity: 1, scale: 1, x: 0 }}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
           >
 
-
-            <motion.div
-              animate={{ y: [0, -16, 0] }}
-              transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
-              className="relative flex justify-end items-center w-full z-20 lg:translate-x-10"
-              style={{ willChange: "transform" }}
+            <div
+              className="relative flex justify-center lg:justify-end items-center w-full z-20"
+              style={{ animation: "heroFloat1 5.5s ease-in-out infinite", willChange: "transform" }}
             >
               {/* Soft purple glow backdrop (GPU accelerated blur) */}
               <div
@@ -1140,17 +1428,16 @@ export default function AboutUsPage() {
                 src="/astronaut-hero.png"
                 alt="Zystra — Taking your business to new heights"
                 draggable={false}
+                className="w-auto max-w-[260px] sm:max-w-[320px] md:max-w-[360px] lg:max-w-[400px] mx-auto lg:mx-0 object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.5)]"
                 style={{
-                  width: "100%",
-                  maxWidth: "400px",
                   height: "auto",
                   transform: "translateZ(0)",
-                  maskImage: "radial-gradient(ellipse 90% 92% at 50% 50%, black 55%, transparent 100%)",
-                  WebkitMaskImage: "radial-gradient(ellipse 90% 92% at 50% 50%, black 55%, transparent 100%)",
+                  maskImage: "radial-gradient(ellipse 92% 94% at 50% 50%, black 65%, transparent 100%)",
+                  WebkitMaskImage: "radial-gradient(ellipse 92% 94% at 50% 50%, black 65%, transparent 100%)",
                   willChange: "transform",
                 }}
               />
-            </motion.div>
+            </div>
           </motion.div>
         </div>
       </section>
@@ -1158,18 +1445,22 @@ export default function AboutUsPage() {
 
       {/* MARQUEE */}
       <div className="relative py-5 overflow-hidden border-y border-white/[0.06]" style={{ background: "#0d0a1a" }}>
-        <motion.div className="flex gap-12 whitespace-nowrap" animate={{ x: ["0%", "-50%"] }} transition={{ duration: 22, repeat: Infinity, ease: "linear" }} style={{ willChange: "transform" }}>
+        <div className="flex gap-12 whitespace-nowrap animate-marquee-gpu w-max">
           {[...marqueeItems, ...marqueeItems, ...marqueeItems, ...marqueeItems].map((item, i) => (
             <span key={i} className="flex items-center gap-8 text-xs font-bold tracking-[0.2em] uppercase text-white/30" style={{ fontFamily: MONO }}>
               {item}
               <span className="w-1 h-1 rounded-full bg-purple-500/50 shrink-0" />
             </span>
           ))}
-        </motion.div>
+        </div>
       </div>
+
+      {/* TEAM SCROLL REVEAL */}
+      <TeamScrollRevealSection />
 
       {/* OUR STORY */}
       <section className="relative py-20 md:py-28 overflow-hidden" style={{ background: "#080510" }}>
+        <AboutInteractiveBg />
         {/* Halftone Dot Patterns (Top-Left & Bottom-Right of Section) */}
         <div
           className="absolute top-0 left-0 w-80 h-80 opacity-20 pointer-events-none"
@@ -1252,6 +1543,7 @@ export default function AboutUsPage() {
 
       {/* STATS SECTION - GLASSMORPHISM NEON CARDS */}
       <section className="relative py-20 md:py-28 overflow-hidden" style={{ background: "#080510" }}>
+        <AboutInteractiveBg />
         {/* Background glow effects */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[300px] bg-purple-600/10 blur-[140px] rounded-full pointer-events-none" />
 
@@ -1299,8 +1591,7 @@ export default function AboutUsPage() {
         </div>
       </section>
 
-      {/* WHO WE ARE - HEXAGON HONEYCOMB MATRIX */}
-      <HexagonHoneycombSection />
+      {/* WHO WE ARE - removed: now handled by TeamScrollRevealSection above */}
 
       {/* OUR PRINCIPLES - ARC FAN CAROUSEL */}
       <ArcPrinciplesSection />
@@ -1309,6 +1600,7 @@ export default function AboutUsPage() {
           WHY ZYSTRA / OUR ADVANTAGE - PREMIUM FUTURISTIC SHOWCASE (Ref Inspired)
       ══════════════════════════════════════════════════════════════════════ */}
       <section id="why-zystra" className="relative py-28 md:py-40 overflow-hidden" style={{ background: "#080510" }}>
+        <AboutInteractiveBg />
         {/* Ambient Radial Background Glows & Grid */}
         <div className="absolute inset-0 pointer-events-none opacity-20" style={{ backgroundImage: "radial-gradient(circle at 50% 50%, rgba(168, 85, 247, 0.15) 1px, transparent 1px)", backgroundSize: "32px 32px" }} />
         <div className="absolute top-1/3 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-purple-600/15 blur-[160px] rounded-full pointer-events-none z-0" />
@@ -1359,10 +1651,9 @@ export default function AboutUsPage() {
               <div className="absolute w-[280px] sm:w-[380px] h-[280px] sm:h-[380px] rounded-full border border-dashed border-indigo-500/30 pointer-events-none" />
               <div className="absolute inset-0 bg-gradient-to-tr from-purple-600/30 via-fuchsia-500/20 to-transparent blur-[60px] rounded-full pointer-events-none" />
 
-              {/* Mobile Image Container with Smooth Floating Motion */}
-              <motion.div
-                animate={{ y: [-12, 12] }}
-                transition={{ duration: 6, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
+              {/* Mobile Image Container with Smooth Floating Motion (GPU CSS) */}
+              <div
+                style={{ animation: "heroFloat1 6s ease-in-out infinite", willChange: "transform" }}
                 className="relative z-10 max-w-[360px] sm:max-w-[440px] md:max-w-[480px] w-full flex justify-center"
               >
                 <img
@@ -1370,7 +1661,7 @@ export default function AboutUsPage() {
                   alt="Zystra Mobile Marketing & Social Feed App Showcase"
                   className="w-full h-auto object-contain filter drop-shadow-[0_30px_60px_rgba(110,1,156,0.35)]"
                 />
-              </motion.div>
+              </div>
             </div>
 
           </div>
@@ -1549,8 +1840,9 @@ export default function AboutUsPage() {
       </section>
 
       {/* SERVICES BENTO GRID - EVERYTHING UNDER ONE ROOF */}
-      <section className="py-24 md:py-36 border-t border-white/[0.06]" style={{ background: "#080510" }}>
-        <div className="max-w-7xl mx-auto px-6 sm:px-[5vw]">
+      <section className="relative overflow-hidden py-24 md:py-36 border-t border-white/[0.06]" style={{ background: "#080510" }}>
+        <AboutInteractiveBg />
+        <div className="max-w-7xl mx-auto px-6 sm:px-[5vw] relative z-10">
           {/* Center-Aligned Header */}
           <div className="mb-16 sm:mb-20 text-center max-w-4xl mx-auto flex flex-col items-center">
             <FadeUp>
@@ -1780,6 +2072,7 @@ export default function AboutUsPage() {
 
       {/* BOTTOM CTA SECTION (Zystra Dark Glass Theme) */}
       <section className="relative overflow-hidden py-24 sm:py-36" style={{ background: "#080510" }}>
+        <AboutInteractiveBg />
         {/* Ambient Glow background */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] pointer-events-none opacity-20 blur-[150px] rounded-full bg-purple-600" />
         <div className="absolute inset-0 pointer-events-none opacity-[0.03]" style={{ backgroundImage: "radial-gradient(circle, #a855f7 1px, transparent 1px)", backgroundSize: "32px 32px" }} />
@@ -1842,6 +2135,24 @@ export default function AboutUsPage() {
       </section>
 
       <Footer />
+      <style dangerouslySetInnerHTML={{
+        __html: `
+          @keyframes heroFloat1 {
+            0%, 100% { transform: translateY(-6px) rotate(-2deg); }
+            50% { transform: translateY(8px) rotate(2deg); }
+          }
+          @media (max-width: 768px) {
+            .backdrop-blur-xl,
+            .backdrop-blur-2xl,
+            .backdrop-blur-3xl,
+            .backdrop-blur-lg,
+            .backdrop-blur-md {
+              backdrop-filter: none !important;
+              -webkit-backdrop-filter: none !important;
+            }
+          }
+        `
+      }} />
     </div>
   );
 }

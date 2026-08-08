@@ -5,9 +5,9 @@ import { Rocket } from "@/components/shared/Icons";
 const steps = [
   {
     step: "01",
-    title: "Free Digital Audit",
-    tagline: "ANALYSIS & AUDITING",
-    desc: "We review your current website, SEO health, social presence, and ad performance — and show you exactly where the gaps are. No cost. No commitment.",
+    title: "Direct Strategy Call",
+    tagline: "STRATEGIC CONSULTATION",
+    desc: "We review your current website, SEO health, social presence, and ad performance — and show you exactly where the gaps are. No commitment.",
     image: "/audit_step.png",
     color: "from-cyan-400 to-teal-500",
     glowColor: "rgba(6, 182, 212, 0.4)",
@@ -115,19 +115,16 @@ export default function HowWeWork() {
                 strokeWidth="8"
                 strokeLinecap="round"
               />
-              {/* Animated Center Dash flow */}
-              <motion.path
+              {/* Animated Center Dash flow (GPU CSS) */}
+              <path
                 d="M 50 6 C 50 40, 25 60, 25 100 C 25 200, 75 200, 75 300 C 75 400, 25 400, 25 500 C 25 600, 75 600, 75 700 C 75 750, 50 760, 50 794"
                 fill="none"
                 stroke="#7c3aed"
                 strokeWidth="3.5"
                 strokeDasharray="8 8"
                 strokeLinecap="round"
-                animate={{ strokeDashoffset: [0, -32] }}
-                transition={{
-                  repeat: Infinity,
-                  ease: "linear",
-                  duration: 2.2
+                style={{
+                  animation: "howWeWorkDash 2.2s linear infinite"
                 }}
               />
 
@@ -228,6 +225,14 @@ export default function HowWeWork() {
           </div>
         </div>
       </div>
+      <style dangerouslySetInnerHTML={{
+        __html: `
+          @keyframes howWeWorkDash {
+            0% { stroke-dashoffset: 0; }
+            100% { stroke-dashoffset: -32; }
+          }
+        `
+      }} />
     </section>
   );
 }

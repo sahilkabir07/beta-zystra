@@ -2,6 +2,9 @@ import { Switch, Route, Router as WouterRouter } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import BackToTop from "@/components/ui/BackToTop";
+import ZystraChatbot from "@/components/ui/ZystraChatbot";
+import NetflixPreloader from "@/components/ui/NetflixPreloader";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/home";
 import ServicesPage from "@/pages/services";
@@ -30,9 +33,12 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
+        <NetflixPreloader />
         <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
           <Router />
         </WouterRouter>
+        <ZystraChatbot />
+        <BackToTop />
         <Toaster />
       </TooltipProvider>
     </QueryClientProvider>
@@ -40,3 +46,4 @@ function App() {
 }
 
 export default App;
+

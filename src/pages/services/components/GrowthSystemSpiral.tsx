@@ -132,10 +132,9 @@ export default function GrowthSystemSpiral() {
                       <div className="absolute inset-x-0 top-0 h-[1.5px] bg-gradient-to-r from-transparent via-white/70 to-transparent" />
                       <div className="absolute inset-x-0 bottom-0 h-[1.5px] bg-gradient-to-r from-transparent via-black/60 to-transparent" />
 
-                      {/* Moving Shiny Beam */}
-                      <motion.div
-                        animate={{ x: ["-100%", "200%"] }}
-                        transition={{ duration: 3, repeat: Infinity, ease: "linear", repeatDelay: 1 }}
+                      {/* Moving Shiny Beam (GPU CSS) */}
+                      <div
+                        style={{ animation: "shinyBeam 4s linear infinite" }}
                         className="absolute inset-y-0 w-16 bg-gradient-to-r from-transparent via-white/25 to-transparent transform -skew-x-12"
                       />
 
@@ -182,8 +181,15 @@ export default function GrowthSystemSpiral() {
             #Let'sGrowTogether
           </span>
         </div>
-
       </div>
+      <style dangerouslySetInnerHTML={{
+        __html: `
+          @keyframes shinyBeam {
+            0% { transform: translateX(-100%) skewX(-12deg); }
+            100% { transform: translateX(300%) skewX(-12deg); }
+          }
+        `
+      }} />
     </section>
   );
 }

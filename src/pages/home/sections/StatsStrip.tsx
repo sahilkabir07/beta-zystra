@@ -12,15 +12,13 @@ interface AnimatedCounterProps {
 
 function AnimatedCounter({ value, prefix = "", suffix = "", decimals = 0 }: AnimatedCounterProps) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: false, margin: "-100px" });
-  const springValue = useSpring(0, { bounce: 0, duration: 2000 });
+  const isInView = useInView(ref, { once: true, margin: "-40px" });
+  const springValue = useSpring(0, { bounce: 0, duration: 1500 });
   const [displayValue, setDisplayValue] = useState(0);
 
   useEffect(() => {
     if (isInView) {
       springValue.set(value);
-    } else {
-      springValue.set(0);
     }
   }, [isInView, value, springValue]);
 
@@ -42,7 +40,7 @@ export default function StatsStrip() {
     hidden: {},
     visible: {
       transition: {
-        staggerChildren: 0.12,
+        staggerChildren: 0.08,
       }
     }
   };
@@ -55,59 +53,60 @@ export default function StatsStrip() {
       scale: 1,
       transition: {
         type: "spring" as const,
-        stiffness: 100,
-        damping: 15
+        stiffness: 140,
+        damping: 18
       }
     }
   };
 
   return (
-    <section className="py-12 sm:py-20 lg:pt-56 lg:pb-40 border-y border-slate-100 bg-white relative">
-      {/* Background abstract element to highlight the grid layout */}
-      <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[radial-gradient(#6e019c_1px,transparent_1px)] [background-size:16px_16px]" />
+    <section className="py-12 sm:py-20 lg:pt-56 lg:pb-40 border-y border-slate-100 bg-white relative overflow-hidden select-none">
+      {/* Background Dot Pattern */}
+      <div className="absolute inset-0 opacity-[0.035] pointer-events-none bg-[radial-gradient(#6e019c_1.5px,transparent_1.5px)] [background-size:20px_20px]" />
 
       <div className="container mx-auto px-4 sm:px-6 max-w-7xl lg:max-w-[1400px] relative z-10">
         <motion.div 
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: false, margin: "-100px" }}
-          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 lg:gap-4 items-stretch"
+          viewport={{ once: true, margin: "-40px" }}
+          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 lg:gap-5 items-stretch"
         >
-          {/* Card 1: Conversions (Mint Lavender) */}
+          {/* Card 1: Conversions (Lavender Glass Card) */}
           <div className="translate-y-0 lg:translate-y-[15px] flex">
             <motion.div 
               variants={cardVariants}
-              className="relative p-4 sm:p-5 rounded-2xl bg-gradient-to-br from-[#f3e8ff] via-[#f3e8ff] to-[#e9d5ff] border border-purple-200/50 shadow-[0_15px_30px_rgba(147,51,234,0.04)] hover:shadow-[0_20px_40px_rgba(147,51,234,0.08)] hover:-translate-y-1 transition-all duration-300 w-full flex flex-col justify-between min-h-[160px] sm:min-h-[185px] overflow-hidden group"
+              whileHover={{ y: -10, scale: 1.03, transition: { type: "spring", stiffness: 350, damping: 22 } }}
+              className="relative p-5 rounded-3xl bg-gradient-to-br from-[#f5ebff] via-[#eee0ff] to-[#e4cbff] border border-purple-300/60 shadow-[0_20px_45px_rgba(147,51,234,0.12),0_4px_12px_rgba(0,0,0,0.03)] hover:shadow-[0_30px_60px_rgba(147,51,234,0.22)] transition-all duration-300 w-full flex flex-col justify-between min-h-[165px] sm:min-h-[190px] overflow-hidden group cursor-pointer"
             >
-              {/* Natural glossy shine overlay */}
-              <div className="absolute inset-0 pointer-events-none bg-gradient-to-tr from-transparent via-white/[0.25] to-transparent opacity-85" />
-              <div className="absolute inset-0 pointer-events-none border border-t-white/40 border-l-white/40 border-b-transparent border-r-transparent rounded-2xl" />
+              {/* Realistic Glass Edge Bevel Highlight */}
+              <div className="absolute inset-0 pointer-events-none border-t border-l border-white/80 rounded-3xl" />
+              <div className="absolute top-0 right-0 w-28 h-28 bg-white/30 rounded-bl-full pointer-events-none blur-xl group-hover:scale-125 transition-transform duration-500" />
               
               <div className="flex items-start justify-between w-full relative z-10">
                 <div className="text-2xl sm:text-3xl font-sans font-black text-purple-950 tracking-tight leading-none">
                   <AnimatedCounter value={3.8} decimals={1} suffix=" M" />
                 </div>
-                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-purple-900 text-white flex items-center justify-center shadow-md group-hover:scale-105 transition-transform shrink-0 ml-1">
+                <div className="w-8 h-8 rounded-full bg-purple-900 text-white flex items-center justify-center shadow-lg group-hover:rotate-45 transition-transform duration-300 shrink-0 ml-1">
                   <ArrowUpRight className="w-4 h-4 sm:w-4.5 sm:h-4.5" strokeWidth={2.5} />
                 </div>
               </div>
               <div className="mt-4 sm:mt-8 relative z-10">
-                <h4 className="text-[10px] sm:text-xs font-bold text-purple-900 font-sans uppercase tracking-wider">Conversions</h4>
-                <p className="text-[10px] sm:text-[11px] text-purple-800 font-semibold font-sans mt-0.5 sm:mt-1">21% More than last month</p>
+                <h4 className="text-[10px] sm:text-xs font-black text-purple-900 font-sans uppercase tracking-wider">Conversions</h4>
+                <p className="text-[10px] sm:text-[11px] text-purple-800 font-bold font-sans mt-0.5 sm:mt-1">21% More than last month</p>
               </div>
             </motion.div>
           </div>
 
-          {/* Card 2: New Orders (Matte Black with Purple Accent) */}
+          {/* Card 2: New Orders (Tactile Dark Card) */}
           <div className="translate-y-5 lg:translate-y-[65px] flex">
             <motion.div 
               variants={cardVariants}
-              className="relative p-4 sm:p-5 rounded-2xl bg-gradient-to-br from-[#1c1c20] via-[#121214] to-[#0b0b0d] border border-zinc-800/80 shadow-[0_15px_30px_rgba(0,0,0,0.15)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.25)] hover:-translate-y-1 transition-all duration-300 w-full flex flex-col justify-between min-h-[160px] sm:min-h-[185px] overflow-hidden group"
+              whileHover={{ y: -10, scale: 1.03, transition: { type: "spring", stiffness: 350, damping: 22 } }}
+              className="relative p-5 rounded-3xl bg-gradient-to-br from-[#1a1a1e] via-[#111114] to-[#09090b] border border-white/10 shadow-[0_20px_45px_rgba(0,0,0,0.35),0_8px_16px_rgba(0,0,0,0.2)] hover:shadow-[0_30px_60px_rgba(110,1,156,0.3)] transition-all duration-300 w-full flex flex-col justify-between min-h-[165px] sm:min-h-[190px] overflow-hidden group cursor-pointer"
             >
-              {/* Natural glossy shine overlay */}
-              <div className="absolute inset-0 pointer-events-none bg-gradient-to-tr from-transparent via-white/[0.04] to-transparent" />
-              <div className="absolute inset-0 pointer-events-none border border-t-white/[0.08] border-l-white/[0.08] border-b-transparent border-r-transparent rounded-2xl" />
+              {/* Realistic Glass Edge Bevel Highlight */}
+              <div className="absolute inset-0 pointer-events-none border-t border-l border-white/15 rounded-3xl" />
               
               <div className="flex items-start justify-between w-full relative z-10">
                 <div>
@@ -116,25 +115,24 @@ export default function StatsStrip() {
                     <AnimatedCounter value={3.2} decimals={1} suffix=" k" />
                   </div>
                 </div>
-                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-[#8d00cb] text-white flex items-center justify-center shadow-md group-hover:scale-105 transition-transform shrink-0 ml-1">
+                <div className="w-8 h-8 rounded-2xl bg-[#8d00cb] text-white flex items-center justify-center shadow-lg shadow-purple-600/40 group-hover:rotate-45 transition-transform duration-300 shrink-0 ml-1">
                   <ArrowUpRight className="w-4 h-4 sm:w-4.5 sm:h-4.5" strokeWidth={2.5} />
                 </div>
               </div>
               <div className="mt-4 sm:mt-8 relative z-10">
-                <p className="text-[10px] sm:text-xs text-[#a855f7] font-bold font-sans">33% More than last month</p>
+                <p className="text-[10px] sm:text-xs text-[#b967ff] font-extrabold font-sans">33% More than last month</p>
               </div>
             </motion.div>
           </div>
 
-          {/* Card 3: Bounce Rate (Glossy Black with Purple Accent) */}
+          {/* Card 3: Bounce Rate (Glossy Obsidian Card) */}
           <div className="translate-y-0 lg:translate-y-[15px] flex">
             <motion.div 
               variants={cardVariants}
-              className="relative p-4 sm:p-5 rounded-2xl bg-gradient-to-br from-[#1c1c20] via-[#121214] to-[#0b0b0d] border border-zinc-800/80 shadow-[0_15px_30px_rgba(0,0,0,0.15)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.25)] hover:-translate-y-1 transition-all duration-300 w-full flex flex-col justify-between min-h-[160px] sm:min-h-[185px] overflow-hidden group"
+              whileHover={{ y: -10, scale: 1.03, transition: { type: "spring", stiffness: 350, damping: 22 } }}
+              className="relative p-5 rounded-3xl bg-gradient-to-br from-[#1a1a1e] via-[#111114] to-[#09090b] border border-white/10 shadow-[0_20px_45px_rgba(0,0,0,0.35),0_8px_16px_rgba(0,0,0,0.2)] hover:shadow-[0_30px_60px_rgba(168,85,247,0.25)] transition-all duration-300 w-full flex flex-col justify-between min-h-[165px] sm:min-h-[190px] overflow-hidden group cursor-pointer"
             >
-              {/* Natural glossy shine overlay */}
-              <div className="absolute inset-0 pointer-events-none bg-gradient-to-tr from-transparent via-white/[0.05] to-transparent" />
-              <div className="absolute inset-0 pointer-events-none border border-t-white/[0.08] border-l-white/[0.08] border-b-transparent border-r-transparent rounded-2xl" />
+              <div className="absolute inset-0 pointer-events-none border-t border-l border-white/15 rounded-3xl" />
               
               <div className="flex items-start justify-between w-full relative z-10">
                 <div>
@@ -143,7 +141,7 @@ export default function StatsStrip() {
                     <AnimatedCounter value={21} suffix="%" />
                   </div>
                 </div>
-                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-zinc-850 text-[#a855f7] flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform shrink-0 ml-1">
+                <div className="w-8 h-8 rounded-full bg-white/10 text-[#a855f7] flex items-center justify-center shadow-md group-hover:rotate-45 transition-transform duration-300 shrink-0 ml-1">
                   <ArrowUpRight className="w-4 h-4 sm:w-4.5 sm:h-4.5" strokeWidth={2.5} />
                 </div>
               </div>
@@ -153,15 +151,14 @@ export default function StatsStrip() {
             </motion.div>
           </div>
 
-          {/* Card 4: Subscriptions (Glossy Black with Purple Accent) */}
+          {/* Card 4: Subscriptions (Dark Tactile Card) */}
           <div className="translate-y-5 lg:-translate-y-[35px] flex">
             <motion.div 
               variants={cardVariants}
-              className="relative p-4 sm:p-5 rounded-2xl bg-gradient-to-br from-[#1c1c20] via-[#121214] to-[#0b0b0d] border border-zinc-800/80 shadow-[0_15px_30px_rgba(0,0,0,0.15)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.25)] hover:-translate-y-1 transition-all duration-300 w-full flex flex-col justify-between min-h-[160px] sm:min-h-[185px] overflow-hidden group"
+              whileHover={{ y: -10, scale: 1.03, transition: { type: "spring", stiffness: 350, damping: 22 } }}
+              className="relative p-5 rounded-3xl bg-gradient-to-br from-[#1a1a1e] via-[#111114] to-[#09090b] border border-white/10 shadow-[0_20px_45px_rgba(0,0,0,0.35),0_8px_16px_rgba(0,0,0,0.2)] hover:shadow-[0_30px_60px_rgba(147,51,234,0.25)] transition-all duration-300 w-full flex flex-col justify-between min-h-[165px] sm:min-h-[190px] overflow-hidden group cursor-pointer"
             >
-              {/* Natural glossy shine overlay */}
-              <div className="absolute inset-0 pointer-events-none bg-gradient-to-tr from-transparent via-white/[0.05] to-transparent" />
-              <div className="absolute inset-0 pointer-events-none border border-t-white/[0.08] border-l-white/[0.08] border-b-transparent border-r-transparent rounded-2xl" />
+              <div className="absolute inset-0 pointer-events-none border-t border-l border-white/15 rounded-3xl" />
               
               <div className="flex items-start justify-between w-full relative z-10">
                 <div>
@@ -170,8 +167,8 @@ export default function StatsStrip() {
                     <AnimatedCounter value={3.4} decimals={1} suffix=" k" />
                   </div>
                 </div>
-                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border border-purple-500/30 text-purple-400 flex items-center justify-center group-hover:scale-105 transition-transform shrink-0 ml-1">
-                  <TrendingUp className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                <div className="w-8 h-8 rounded-full border border-purple-500/40 bg-purple-500/10 text-purple-300 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shrink-0 ml-1">
+                  <TrendingUp className="w-4 h-4" />
                 </div>
               </div>
               <div className="mt-4 sm:mt-8 relative z-10">
@@ -180,23 +177,22 @@ export default function StatsStrip() {
             </motion.div>
           </div>
 
-          {/* Card 5: New Users (Vibrant Purple Brand Gradient) */}
+          {/* Card 5: New Users (Vibrant Purple Brand Gradient Card) */}
           <div className="translate-y-0 lg:-translate-y-[85px] flex">
             <motion.div 
               variants={cardVariants}
-              className="relative p-4 sm:p-5 rounded-2xl bg-gradient-to-br from-[#8d00cb] via-[#7e02b2] to-[#6e019c] border border-purple-450/30 shadow-[0_15px_30px_rgba(110,1,156,0.06)] hover:shadow-[0_20px_40px_rgba(110,1,156,0.12)] hover:-translate-y-1 transition-all duration-300 w-full flex flex-col justify-between min-h-[160px] sm:min-h-[185px] overflow-hidden group text-white"
+              whileHover={{ y: -10, scale: 1.03, transition: { type: "spring", stiffness: 350, damping: 22 } }}
+              className="relative p-5 rounded-3xl bg-gradient-to-br from-[#9a0ce2] via-[#7e02b2] to-[#5b0182] border border-white/20 shadow-[0_20px_45px_rgba(110,1,156,0.35),0_8px_16px_rgba(0,0,0,0.15)] hover:shadow-[0_30px_60px_rgba(110,1,156,0.5)] transition-all duration-300 w-full flex flex-col justify-between min-h-[165px] sm:min-h-[190px] overflow-hidden group text-white cursor-pointer"
             >
-              {/* Natural glossy shine overlay */}
-              <div className="absolute inset-0 pointer-events-none bg-gradient-to-tr from-transparent via-white/[0.18] to-transparent opacity-85" />
-              <div className="absolute inset-0 pointer-events-none border border-t-white/40 border-l-white/40 border-b-transparent border-r-transparent rounded-2xl" />
+              <div className="absolute inset-0 pointer-events-none border-t border-l border-white/40 rounded-3xl" />
               
               <div className="flex items-start justify-between w-full relative z-10">
                 <div>
-                  <h4 className="text-[10px] sm:text-xs font-bold font-sans uppercase tracking-wider">New Users</h4>
+                  <h4 className="text-[10px] sm:text-xs font-black font-sans uppercase tracking-wider">New Users</h4>
                   <p className="text-[9px] sm:text-[10px] text-purple-100/90 font-medium font-sans mt-0.5">28% more than last month</p>
                 </div>
-                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-white/20 text-white flex items-center justify-center shadow-sm shrink-0 ml-1">
-                  <Users className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                <div className="w-8 h-8 rounded-2xl bg-white/20 backdrop-blur-md text-white flex items-center justify-center shadow-md shrink-0 ml-1 group-hover:scale-110 transition-transform duration-300">
+                  <Users className="w-4 h-4" />
                 </div>
               </div>
               <div className="flex justify-end w-full mt-4 sm:mt-8 relative z-10">
@@ -207,27 +203,26 @@ export default function StatsStrip() {
             </motion.div>
           </div>
 
-          {/* Card 6: AI-Based (Premium White) */}
+          {/* Card 6: AI-Based (Tactile White Glass Card) */}
           <div className="translate-y-5 lg:-translate-y-[135px] flex">
             <motion.div 
               variants={cardVariants}
-              className="relative p-4 sm:p-5 rounded-2xl bg-gradient-to-br from-white via-white to-slate-50 border border-slate-200 shadow-[0_15px_30px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-300 w-full flex flex-col justify-between min-h-[160px] sm:min-h-[185px] overflow-hidden group"
+              whileHover={{ y: -10, scale: 1.03, transition: { type: "spring", stiffness: 350, damping: 22 } }}
+              className="relative p-5 rounded-3xl bg-gradient-to-br from-white via-white to-slate-100 border border-slate-200/80 shadow-[0_20px_45px_rgba(0,0,0,0.08),0_8px_16px_rgba(0,0,0,0.03)] hover:shadow-[0_30px_60px_rgba(110,1,156,0.15)] transition-all duration-300 w-full flex flex-col justify-between min-h-[165px] sm:min-h-[190px] overflow-hidden group cursor-pointer"
             >
-              {/* Natural glossy shine overlay */}
-              <div className="absolute inset-0 pointer-events-none bg-gradient-to-tr from-transparent via-white/50 to-transparent" />
-              <div className="absolute inset-0 pointer-events-none border border-t-white border-l-white border-b-transparent border-r-transparent rounded-2xl" />
+              <div className="absolute inset-0 pointer-events-none border-t border-l border-white rounded-3xl" />
               
               <div className="flex items-start justify-between w-full relative z-10">
-                <div />
-                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-[#6e019c] text-white flex items-center justify-center shadow-md group-hover:scale-105 transition-transform shrink-0 ml-1">
+                <div>
+                  <h3 className="text-lg sm:text-2xl font-black font-sans text-slate-900 leading-none">AI-Based.</h3>
+                  <span className="text-[10px] sm:text-xs font-bold text-purple-600 font-mono tracking-widest uppercase mt-1 block">APPROACH.</span>
+                </div>
+                <div className="w-8 h-8 rounded-2xl bg-purple-900 text-white flex items-center justify-center shadow-md group-hover:rotate-45 transition-transform duration-300 shrink-0 ml-1">
                   <ArrowUpRight className="w-4 h-4 sm:w-4.5 sm:h-4.5" strokeWidth={2.5} />
                 </div>
               </div>
               <div className="mt-4 sm:mt-8 relative z-10">
-                <h3 className="text-xl sm:text-2xl font-sans font-black text-slate-900 tracking-tight leading-none">
-                  AI-Based.
-                </h3>
-                <p className="text-[9px] sm:text-[10px] font-black text-[#6e019c] font-sans uppercase tracking-widest mt-1.5 sm:mt-2">Approach.</p>
+                <p className="text-[10px] sm:text-[11px] text-slate-500 font-sans">Precision growth engines</p>
               </div>
             </motion.div>
           </div>

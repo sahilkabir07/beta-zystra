@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Star, Quote, ArrowUpRight } from "lucide-react";
+import { Star, Flag, Clock, Bookmark, ArrowRight } from "lucide-react";
 
 export default function Testimonials() {
   const testimonials = [
@@ -9,156 +9,161 @@ export default function Testimonials() {
       role: "Founder, Raj Retail",
       location: "Patna",
       initial: "R",
+      avatarBg: "from-purple-600 to-violet-600",
+      bannerBg: "from-purple-900 via-indigo-900 to-slate-950",
       metric: "5-6x",
-      metricLabel: "Daily Leads Boost",
+      metricLabel: "Leads Boost",
+      duration: "3 Months",
+      rating: "5.0",
       quote: "Zystra completely transformed our online presence. Within 3 months, our Google rankings jumped and we started getting 5–6 leads daily from our website.",
       tag: "SEO & Lead Gen",
-      glowColor: "rgba(168, 85, 247, 0.15)"
+      isDark: true
     },
     {
       name: "Sanjana Singh",
       role: "Marketing Head, Bihar D2C",
       location: "Bihar",
       initial: "S",
+      avatarBg: "from-fuchsia-600 to-purple-600",
+      bannerBg: "from-violet-900 via-fuchsia-900 to-purple-950",
       metric: "2.5x",
-      metricLabel: "Meta Ads ROI Boost",
+      metricLabel: "ROI Boost",
+      duration: "1 Month",
+      rating: "5.0",
       quote: "Their Meta Ads team is outstanding. Our Facebook ad cost-per-lead dropped by 60% in the first month of working with them.",
       tag: "Paid Advertising",
-      glowColor: "rgba(236, 72, 153, 0.15)"
+      isDark: true
     },
     {
       name: "Dr. Vikas Prasad",
       role: "Director, Prasad Health",
       location: "Gola Road",
       initial: "V",
+      avatarBg: "from-indigo-600 to-blue-600",
+      bannerBg: "from-slate-950 via-purple-950 to-indigo-950",
       metric: "+150%",
-      metricLabel: "Patient Enquiries",
+      metricLabel: "Enquiries",
+      duration: "6 Months",
+      rating: "5.0",
       quote: "Finally a digital agency that understands the Bihar market. They don't just run ads — they think like our business partner.",
       tag: "Brand Scaling",
-      glowColor: "rgba(99, 102, 241, 0.15)"
+      isDark: true
     }
   ];
 
   return (
-    <section className="py-24 sm:py-32 bg-white border-t border-slate-100 relative overflow-hidden">
-      {/* Decorative background grids & blurred blobs */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none select-none -z-10">
-        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full bg-purple-200/20 blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] rounded-full bg-indigo-100/30 blur-3xl" />
-        {/* Modern Dot Matrix Background */}
-        <div 
-          className="absolute inset-0 opacity-[0.4]" 
-          style={{ 
-            backgroundImage: "radial-gradient(#e2e8f0 1.5px, transparent 1.5px)", 
-            backgroundSize: "24px 24px" 
-          }} 
-        />
-      </div>
+    <section className="py-20 sm:py-28 bg-[#09031a] border-t border-purple-900/30 relative overflow-hidden text-white">
+      {/* Decorative Background Lighting */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[500px] bg-purple-600/10 rounded-full blur-[120px] pointer-events-none" />
 
-      <div className="container mx-auto px-6 max-w-7xl relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 max-w-7xl relative z-10">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-20 relative">
-
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-black text-slate-900 mb-6 tracking-tight leading-[1.15]">
-            Where Strategy Meets <span className="bg-gradient-to-r from-brand-vibrant via-brand-medium to-brand-dark bg-clip-text text-transparent">Real Growth</span>
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <span className="inline-block px-4 py-1.5 rounded-full bg-purple-950/80 border border-purple-500/30 text-xs font-mono font-bold uppercase tracking-widest text-purple-300 mb-4">
+            CLIENT REVIEWS & RESULTS
+          </span>
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-serif font-black text-white mb-5 tracking-tight leading-tight">
+            Where Strategy Meets <span className="bg-gradient-to-r from-purple-400 via-fuchsia-400 to-violet-300 bg-clip-text text-transparent">Real Growth</span>
           </h2>
-          <p className="text-slate-500 text-base sm:text-lg leading-relaxed max-w-xl mx-auto font-normal">
+          <p className="text-slate-300 text-sm sm:text-base leading-relaxed max-w-xl mx-auto font-normal">
             We don't just deliver campaigns; we deliver business transformation. See how our clients scale their reach.
           </p>
         </div>
 
-        {/* Testimonials Horizontal Carousel on Mobile / 3-Col Grid on Desktop */}
-        <div className="flex overflow-x-auto snap-x snap-mandatory gap-5 pb-8 px-2 scrollbar-none lg:grid lg:grid-cols-3 lg:gap-8 max-w-6xl mx-auto pt-4 lg:overflow-visible lg:px-0 lg:pb-0">
+        {/* ── REVIEWS CARDS GRID (Pure CSS Gradient Cards matching Profile UI) ── */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto">
           {testimonials.map((t, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.35, delay: i * 0.08, ease: "easeOut" }}
-              whileHover={{ y: -8 }}
-              className="snap-center min-w-[285px] max-w-[315px] sm:min-w-[340px] w-full flex-shrink-0 lg:min-w-0 lg:max-w-none lg:flex-shrink relative group cursor-pointer"
+              transition={{ duration: 0.5, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+              className="rounded-[28px] overflow-hidden border border-white/10 bg-[#121216] shadow-[0_20px_50px_rgba(0,0,0,0.8)] hover:border-purple-500/40 transition-all duration-300 hover:-translate-y-2 cursor-pointer group"
             >
-              {/* Dynamic Glow Background Effect on Hover */}
-              <div 
-                className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-2xl -z-10"
-                style={{ backgroundColor: t.glowColor }}
-              />
-
-              {/* Main Glassmorphic Testimonial Card */}
-              <div className="h-full bg-white/80 backdrop-blur-md rounded-3xl p-6 sm:p-10 border border-slate-200/80 shadow-[0_10px_30px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_40px_rgba(110,1,156,0.06)] hover:border-purple-200/80 transition-all duration-300 flex flex-col justify-between relative overflow-hidden">
+              {/* Top Banner Gradient with Category Pill Tag */}
+              <div className={`relative h-28 w-full bg-gradient-to-r ${t.bannerBg} overflow-hidden p-4`}>
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-white/10 via-transparent to-transparent pointer-events-none" />
                 
-                {/* Floating Metric Badge */}
-                <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/[0.03] rounded-bl-full -z-10 transition-all duration-500 group-hover:scale-110" />
+                {/* Top-Right Category Badge */}
+                <div className="absolute top-3.5 right-3.5 px-3 py-1 rounded-full bg-black/40 border border-white/20 backdrop-blur-md text-[11px] font-mono font-bold text-white flex items-center gap-1.5 shadow-sm">
+                  <span className="w-2 h-2 rounded-full bg-purple-400 animate-pulse" />
+                  <span>{t.tag}</span>
+                </div>
+              </div>
 
-                {/* Top Section */}
-                <div>
-                  <div className="flex items-center justify-between mb-6 sm:mb-8">
-                    {/* Star Rating & Category Tag */}
-                    <div>
-                      <span className="inline-block px-2.5 py-1 rounded-md bg-slate-100 text-slate-600 text-[10px] font-mono font-bold tracking-wider uppercase mb-1.5">
-                        {t.tag}
-                      </span>
-                      <div className="flex gap-1 text-amber-400 mt-1">
-                        {[...Array(5)].map((_, idx) => (
-                          <Star key={idx} className="w-3.5 h-3.5 fill-current" />
-                        ))}
-                      </div>
+              {/* Card Body Container */}
+              <div className="p-5 sm:p-6 pt-0 relative">
+                {/* Overlapping Avatar Initials Badge */}
+                <div className="flex items-end justify-between mb-4">
+                  <div className="relative -mt-8 z-10">
+                    <div className={`w-16 h-16 rounded-full border-4 border-[#121216] bg-gradient-to-tr ${t.avatarBg} shadow-lg flex items-center justify-center text-white text-2xl font-black font-mono`}>
+                      {t.initial}
                     </div>
-
-                    {/* Quote Icon Accent */}
-                    <Quote className="w-7 h-7 sm:w-8 sm:h-8 text-purple-100 group-hover:text-purple-200/80 transition-colors duration-300" />
                   </div>
 
-                  {/* Main Metric Callout */}
-                  <div className="mb-5 sm:mb-6">
-                    <span className="text-3xl sm:text-5xl font-mono font-black bg-gradient-to-r from-brand-vibrant to-purple-600 bg-clip-text text-transparent">
-                      {t.metric}
-                    </span>
-                    <span className="block text-[11px] sm:text-xs font-mono font-bold text-slate-400 uppercase tracking-widest mt-1">
-                      {t.metricLabel}
-                    </span>
-                  </div>
+                  {/* Bookmark Button */}
+                  <button className="w-9 h-9 rounded-full bg-white/10 text-slate-300 group-hover:bg-purple-600 group-hover:text-white flex items-center justify-center transition-colors">
+                    <Bookmark className="w-4 h-4" />
+                  </button>
+                </div>
 
-                  {/* Client Quote */}
-                  <p className="font-sans text-slate-600 text-xs sm:text-[15px] leading-relaxed mb-6 sm:mb-8 relative z-10 italic">
-                    "{t.quote}"
+                {/* Name & Title */}
+                <div className="mb-4">
+                  <h3 className="text-lg sm:text-xl font-black tracking-tight font-sans text-white">
+                    {t.name}
+                  </h3>
+                  <p className="text-xs font-mono font-medium text-slate-400">
+                    {t.role}
                   </p>
                 </div>
 
-                {/* Bottom Section: Client Details */}
-                <div className="pt-5 border-t border-slate-100 flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    {/* Avatar Initials with custom premium gradients */}
-                    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-gradient-to-tr from-brand-vibrant to-purple-600 flex items-center justify-center text-white font-mono font-bold text-xs sm:text-sm shadow-sm">
-                      {t.initial}
+                {/* Quote Paragraph */}
+                <p className="text-xs sm:text-sm leading-relaxed mb-5 italic font-sans text-slate-300/90">
+                  "{t.quote}"
+                </p>
+
+                {/* Stats Row */}
+                <div className="grid grid-cols-3 gap-2 py-3 px-2 rounded-2xl mb-5 text-center border bg-white/[0.03] border-white/10 text-slate-300">
+                  {/* Rating */}
+                  <div className="flex flex-col items-center">
+                    <div className="flex items-center gap-1 text-xs font-bold text-amber-400">
+                      <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                      <span>{t.rating}</span>
                     </div>
-                    <div>
-                      <h4 className="font-sans font-bold text-slate-800 text-xs sm:text-sm uppercase tracking-wide">
-                        {t.name}
-                      </h4>
-                      <p className="text-[10px] sm:text-[11px] text-slate-400 font-mono">
-                        {t.role}
-                      </p>
-                    </div>
+                    <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider mt-0.5">Rating</span>
                   </div>
 
-                  {/* Verified Story Action Link */}
-                  <div className="flex items-center gap-0.5 text-purple-600 group-hover:text-purple-700 text-xs font-mono font-bold tracking-wider opacity-60 group-hover:opacity-100 transition-all duration-300">
-                    <span>CASE</span>
-                    <ArrowUpRight className="w-3.5 h-3.5" />
+                  {/* Metric Result */}
+                  <div className="flex flex-col items-center border-x border-white/10">
+                    <div className="flex items-center gap-1 text-xs font-extrabold text-purple-400">
+                      <Flag className="w-3.5 h-3.5 text-purple-400" />
+                      <span>{t.metric}</span>
+                    </div>
+                    <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider mt-0.5">{t.metricLabel}</span>
+                  </div>
+
+                  {/* Duration */}
+                  <div className="flex flex-col items-center">
+                    <div className="flex items-center gap-1 text-xs font-bold text-purple-300">
+                      <Clock className="w-3.5 h-3.5 text-purple-300" />
+                      <span>{t.duration}</span>
+                    </div>
+                    <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider mt-0.5">Timeframe</span>
                   </div>
                 </div>
+
+                {/* Bottom Action Button */}
+                <button
+                  onClick={() => window.location.href = "/contact"}
+                  className="w-full py-3 px-4 rounded-2xl font-bold text-xs sm:text-sm tracking-wide transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-md bg-gradient-to-r from-purple-600 via-violet-600 to-indigo-600 text-white shadow-purple-600/30 hover:shadow-purple-600/50 hover:scale-[1.02]"
+                >
+                  <span>Get In Touch</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
               </div>
             </motion.div>
           ))}
-        </div>
-
-        {/* Mobile Swipe Hint Dots (visible only on screens smaller than lg) */}
-        <div className="flex lg:hidden items-center justify-center gap-2 mt-4">
-          <span className="w-6 h-1.5 rounded-full bg-brand-vibrant" />
-          <span className="w-1.5 h-1.5 rounded-full bg-purple-300" />
-          <span className="w-1.5 h-1.5 rounded-full bg-purple-300" />
         </div>
       </div>
     </section>

@@ -74,11 +74,11 @@ export default function WhatWeDo() {
     },
     {
       title: "Experience Before You Pay",
-      value: "Free Initial Audit & Digital Review",
+      value: "Direct Call Consultation & Strategy",
       icon: Gift,
-      desc: "We believe in earning your trust first. That's why we offer a review of your current digital presence before you commit — completely free.",
+      desc: "We believe in earning your trust first. That's why we offer a direct consultation to review your digital presence before you commit — completely free.",
       logoText: "zystra trust",
-      badges: ["FREE AUDIT", "ZERO RISK"],
+      badges: ["CALL NOW", "ZERO RISK"],
       bannerText: "TRUST FIRST",
       bgColor: "#ffffff",
       titleColor: "text-slate-900",
@@ -533,24 +533,14 @@ export default function WhatWeDo() {
                   y: 0,
                   rotate: diff.rotate
                 }}
-                viewport={{ once: true, margin: "-80px" }}
-                onAnimationComplete={() => setAnimatedCards(prev => ({ ...prev, [idx]: true }))}
-                transition={
-                  animatedCards[idx]
-                    ? {
-                        type: "spring",
-                        stiffness: 450,
-                        damping: 30,
-                        mass: 0.35
-                      }
-                    : {
-                        type: "spring",
-                        stiffness: 400,
-                        damping: 28,
-                        mass: 0.4,
-                        delay: idx * 0.03
-                      }
-                }
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{
+                  type: "spring",
+                  stiffness: 400,
+                  damping: 28,
+                  mass: 0.35,
+                  delay: idx * 0.03
+                }}
                 whileHover={isDesktop ? { 
                   rotate: 0,
                   scale: 1.06, 

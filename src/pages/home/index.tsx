@@ -6,7 +6,7 @@ import Hero from "./sections/Hero";
 import StatsStrip from "./sections/StatsStrip";
 import Marquee from "./sections/Marquee";
 import WhatWeDo from "./sections/WhatWeDo";
-import ScrollTimelineShowcase from "./sections/ScrollTimelineShowcase";
+import ScrollExpandShowcase from "./sections/ScrollExpandShowcase";
 import Services from "./sections/Services";
 import WhyChoose from "./sections/WhyChoose";
 import Industries from "./sections/Industries";
@@ -16,15 +16,20 @@ import CTA from "./sections/CTA";
 import Footer from "@/components/layout/Footer";
 
 export default function Home() {
-  // Initialize Lenis smooth scroll
+  // Initialize Lenis smooth scroll (smoothWheel on desktop, native 120Hz momentum on touch devices)
   useEffect(() => {
+    const isTouch = typeof window !== "undefined" && ("ontouchstart" in window || navigator.maxTouchPoints > 0);
+
     const lenis = new Lenis({
-      duration: 1.1,
+      duration: 0.7,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
-      wheelMultiplier: 1.15,
-      touchMultiplier: 1.4,
+      wheelMultiplier: 1.25,
+      touchMultiplier: isTouch ? 0 : 1.0,
+      infinite: false,
     });
+
+    (window as any).lenis = lenis;
 
     let rafId: number;
     function raf(time: number) {
@@ -36,6 +41,7 @@ export default function Home() {
     return () => {
       cancelAnimationFrame(rafId);
       lenis.destroy();
+      delete (window as any).lenis;
     };
   }, []);
 
@@ -48,7 +54,7 @@ export default function Home() {
         <StatsStrip />
         <Marquee />
         <WhatWeDo />
-        <ScrollTimelineShowcase />
+        <ScrollExpandShowcase />
         <Services />
         <WhyChoose />
         <Industries />

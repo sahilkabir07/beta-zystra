@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { motion, useScroll, useTransform, useSpring, useMotionValueEvent, AnimatePresence } from "framer-motion";
+import { motion, useScroll, useTransform, useMotionValueEvent, AnimatePresence } from "framer-motion";
 import { TrendingUp, Heart, MessageCircle } from "lucide-react";
 
 const CAPTIONS = [
@@ -56,14 +56,52 @@ function ScrollNumber({ value, formatter }: ScrollNumberProps) {
   return <span ref={ref}>{formatter(value.get())}</span>;
 }
 
+const BAR_HEIGHTS = [40, 65, 50, 80, 70, 95, 120, 105, 140, 160, 185, 220];
+
+function DashboardBars({ progress }: { progress: any }) {
+  const b0 = useTransform(progress, [0.00, 0.35], [0.1, 1]);
+  const b1 = useTransform(progress, [0.03, 0.38], [0.1, 1]);
+  const b2 = useTransform(progress, [0.06, 0.41], [0.1, 1]);
+  const b3 = useTransform(progress, [0.09, 0.44], [0.1, 1]);
+  const b4 = useTransform(progress, [0.12, 0.47], [0.1, 1]);
+  const b5 = useTransform(progress, [0.15, 0.50], [0.1, 1]);
+  const b6 = useTransform(progress, [0.18, 0.53], [0.1, 1]);
+  const b7 = useTransform(progress, [0.21, 0.56], [0.1, 1]);
+  const b8 = useTransform(progress, [0.24, 0.59], [0.1, 1]);
+  const b9 = useTransform(progress, [0.27, 0.62], [0.1, 1]);
+  const b10 = useTransform(progress, [0.30, 0.65], [0.1, 1]);
+  const b11 = useTransform(progress, [0.33, 0.68], [0.1, 1]);
+
+  const barTransforms = [b0, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11];
+
+  return (
+    <div className="flex-1 flex items-end justify-between gap-1 sm:gap-1.5 mt-3 sm:mt-5">
+      {BAR_HEIGHTS.map((val, idx) => (
+        <div key={idx} className="flex-1 bg-indigo-50 rounded-t-md flex items-end h-full">
+          <motion.div
+            style={{
+              scaleY: barTransforms[idx],
+              originY: 1,
+              height: `${(val / 220) * 100}%`
+            }}
+            className="w-full bg-gradient-to-t from-brand-vibrant via-brand-medium to-brand-dark rounded-t-md shadow-sm"
+          />
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export default function ScrollTimelineShowcase() {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start start", "end end"],
+    offset: ["start end", "end start"],
   });
 
-  const [windowWidth, setWindowWidth] = useState(1200);
+  const [windowWidth, setWindowWidth] = useState(() =>
+    typeof window !== "undefined" ? window.innerWidth : 1200
+  );
   const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
@@ -79,121 +117,94 @@ export default function ScrollTimelineShowcase() {
 
   const dashMaxScale = isMobile ? 0.75 : isTablet ? 0.85 : isLaptop ? 0.88 : 1.0;
 
-  // Direct scrollYProgress for instant, silky 120 FPS Lenis scroll response
-  const smoothProgress = scrollYProgress;
+  const [currentStep, setCurrentStep] = useState(0);
 
-  const [currentStep, setCurrentStep] = useState(-1);
+  // Drive animations 100% directly from native scrollYProgress as section scrolls into view
+  const p = scrollYProgress;
 
-  useMotionValueEvent(smoothProgress, "change", (p: number) => {
-    let step = -1;
-    if (p < 0.18) step = -1; // Hide title until section is pinned in view
-    else if (p < 0.45) step = 0; // LIVE ANALYTICS ENGINE (Dashboard phase)
-    else if (p < 0.62) step = 1; // 01 / DYNAMIC SOCIAL FEED
-    else if (p < 0.76) step = 2; // 02 / METRIC-DRIVEN ASSETS
-    else if (p < 0.88) step = 3; // 03 / ORGANIC AUDIENCE REACH
-    else step = 4; // 04 / AMPLIFIED ENGAGEMENT
-
-    setCurrentStep(step);
+  // Caption step update
+  useMotionValueEvent(p, "change", (latest: number) => {
+    if (latest < 0.25) {
+      setCurrentStep(0);
+    } else if (latest < 0.40) {
+      setCurrentStep(1);
+    } else if (latest < 0.55) {
+      setCurrentStep(2);
+    } else if (latest < 0.70) {
+      setCurrentStep(3);
+    } else {
+      setCurrentStep(4);
+    }
   });
 
-  // Central Mockup Animations
-  const scale = useTransform(smoothProgress,
-    [0, 0.25, 0.35, 0.52],
-    [0.8 * dashMaxScale, dashMaxScale, dashMaxScale, 0.5 * dashMaxScale]
+  // Dashboard zoom + slide: smooth in-view transform
+  const scale = useTransform(
+    p,
+    [0.10, 0.40, 0.90],
+    [0.65 * dashMaxScale, dashMaxScale, dashMaxScale]
   );
-
-  const y = useTransform(smoothProgress,
-    [0, 0.25, 0.35, 0.52],
-    [isMobile ? 70 : 100, isMobile ? 15 : 25, isMobile ? 15 : 25, isMobile ? -500 : -700]
+  const y = useTransform(
+    p,
+    [0.10, 0.40, 0.90],
+    [isMobile ? 30 : 50, isMobile ? -65 : -110, isMobile ? -65 : -110]
   );
-
-  const rotateX = useTransform(smoothProgress,
-    [0, 0.25, 0.35, 0.52],
-    [isMobile ? 0 : 15, 0, 0, isMobile ? 0 : -10]
+  const rotateX = useTransform(
+    p,
+    [0.10, 0.40],
+    [isMobile ? 0 : 15, 0]
   );
+  const dashOpacity = useTransform(p, [0.08, 0.20], [0.3, 1.0]);
 
-  const dashOpacity = useTransform(smoothProgress, [0.0, 0.35, 0.52], [1.0, 1.0, 0.0]);
-
-  // 3D Math for Carousel Cards
+  // Card 3D rotation: Moves smoothly while section scrolls through viewport
   const getCardTransform = (progress: number, index: number) => {
-    const start = 0.50;
-    const end = 0.98;
+    const start = 0.15;
+    const end = 0.85;
 
-    // Normalized carousel rotation progress (0 to 1)
     let t = 0;
     if (progress > start) {
       t = Math.min(1, (progress - start) / (end - start));
     }
 
-    // Total sweep: rotate by -270 degrees (3/4 of a circle) so cards 0, 1, 2, 3 rotate to front.
     const baseRotation = t * -270;
     const cardAngle = baseRotation + index * 90;
     const rad = (cardAngle * Math.PI) / 180;
 
-    // Responsive radii - calibrated for maximum card size on mobile without screen overflow
-    const radiusX = isMobile ? 105 : isTablet ? 170 : 300;
-    const radiusZ = isMobile ? 35 : isTablet ? 70 : 130;
+    const radiusX = isMobile ? 100 : isTablet ? 170 : 270;
+    const radiusZ = isMobile ? 35 : isTablet ? 65 : 120;
+    const tiltY = isMobile ? 6 : isTablet ? 10 : 14;
 
-    // Tilt the circle slightly towards the camera for premium look
-    const tiltY = isMobile ? 10 : isTablet ? 16 : 24;
-
-    // X, Y, Z coordinates
     const x = radiusX * Math.sin(rad);
     const z = radiusZ * Math.cos(rad);
 
-    // Y center offset shifts the carousel from below the frame into center frame
-    let centerY = 0;
-    if (progress < 0.40) {
-      centerY = isMobile ? 350 : 500;
-    } else if (progress < 0.50) {
-      const tCenter = (progress - 0.40) / (0.50 - 0.40);
-      const startVal = isMobile ? 350 : 500;
-      const endVal = isMobile ? 80 : 120;
-      centerY = startVal + tCenter * (endVal - startVal);
-    } else {
-      centerY = isMobile ? 80 : 120;
-    }
-    const y = centerY - tiltY * Math.cos(rad);
+    const centerY = isMobile ? 135 : isTablet ? 165 : 195;
+    const cardY = centerY - tiltY * Math.cos(rad);
 
-    const cosVal = Math.cos(rad); // 1 is front, -1 is back
-    const normDepth = (cosVal + 1) / 2; // 0 to 1
+    const cosVal = Math.cos(rad);
+    const normDepth = (cosVal + 1) / 2;
+    const cardScale = (isMobile ? 0.62 : 0.58) + (isMobile ? 0.28 : 0.32) * normDepth;
 
-    // Style mappings - prominent mobile scale
-    const scale = (isMobile ? 0.68 : 0.62) + (isMobile ? 0.30 : 0.35) * normDepth;
-
-    // Opacity transitions
-    let opacity = 0.15 + 0.85 * normDepth;
-    if (progress < 0.40) {
-      opacity = 0;
-    } else if (progress < start) {
-      // Fade in carousel as it slides into center frame
-      const fadeInFactor = (progress - 0.40) / (start - 0.40);
-      opacity = opacity * fadeInFactor;
+    let opacity = 1.0;
+    if (progress < start) {
+      opacity = Math.max(0.2, progress / start);
     }
 
-    // Face direction: use sine function to create a 3D curves sway without mirroring
-    const rotateY = -25 * Math.sin(rad);
-
-    // Banking angle (roll tilt) as cards swing around sides
-    const rotateZ = -8 * Math.sin(rad);
-
+    const rotateY = -22 * Math.sin(rad);
+    const rotateZ = -6 * Math.sin(rad);
     const zIndex = Math.round(10 + 40 * normDepth);
 
-    return { x, y, z, scale, opacity, rotateY, rotateZ, zIndex };
+    return { x, y: cardY, z, scale: cardScale, opacity, rotateY, rotateZ, zIndex };
   };
 
-  // Setup motion transformations for each card
   const useCardTransform = (index: number) => {
-    const x = useTransform(smoothProgress, (p: number) => getCardTransform(p, index).x);
-    const y = useTransform(smoothProgress, (p: number) => getCardTransform(p, index).y);
-    const z = useTransform(smoothProgress, (p: number) => getCardTransform(p, index).z);
-    const scale = useTransform(smoothProgress, (p: number) => getCardTransform(p, index).scale);
-    const opacity = useTransform(smoothProgress, (p: number) => getCardTransform(p, index).opacity);
-    const rotateY = useTransform(smoothProgress, (p: number) => getCardTransform(p, index).rotateY);
-    const rotateZ = useTransform(smoothProgress, (p: number) => getCardTransform(p, index).rotateZ);
-    const zIndex = useTransform(smoothProgress, (p: number) => getCardTransform(p, index).zIndex);
-
-    return { x, y, z, scale, opacity, rotateY, rotateZ, zIndex };
+    const x      = useTransform(p, (v: number) => getCardTransform(v, index).x);
+    const cy     = useTransform(p, (v: number) => getCardTransform(v, index).y);
+    const z      = useTransform(p, (v: number) => getCardTransform(v, index).z);
+    const cs     = useTransform(p, (v: number) => getCardTransform(v, index).scale);
+    const op     = useTransform(p, (v: number) => getCardTransform(v, index).opacity);
+    const rotY   = useTransform(p, (v: number) => getCardTransform(v, index).rotateY);
+    const rotZ   = useTransform(p, (v: number) => getCardTransform(v, index).rotateZ);
+    const zi     = useTransform(p, (v: number) => getCardTransform(v, index).zIndex);
+    return { x, y: cy, z, scale: cs, opacity: op, rotateY: rotY, rotateZ: rotZ, zIndex: zi };
   };
 
   const card0 = useCardTransform(0);
@@ -201,26 +212,12 @@ export default function ScrollTimelineShowcase() {
   const card2 = useCardTransform(2);
   const card3 = useCardTransform(3);
 
-  // Captions Transitions mapping to scrollProgress (strictly non-overlapping thresholds)
-  const captionOpacity0 = useTransform(smoothProgress, [0.0, 0.25, 0.35], [1, 1, 0]);
-  const captionOpacity1 = useTransform(smoothProgress, [0.40, 0.44, 0.52, 0.56], [0, 1, 1, 0]);
-  const captionOpacity2 = useTransform(smoothProgress, [0.58, 0.62, 0.69, 0.73], [0, 1, 1, 0]);
-  const captionOpacity3 = useTransform(smoothProgress, [0.75, 0.79, 0.86, 0.90], [0, 1, 1, 0]);
-  const captionOpacity4 = useTransform(smoothProgress, [0.92, 0.96], [0, 1]);
-
-  const captionY0 = useTransform(captionOpacity0, [0, 1], [15, 0]);
-  const captionY1 = useTransform(captionOpacity1, [0, 1], [15, 0]);
-  const captionY2 = useTransform(captionOpacity2, [0, 1], [15, 0]);
-  const captionY3 = useTransform(captionOpacity3, [0, 1], [15, 0]);
-  const captionY4 = useTransform(captionOpacity4, [0, 1], [15, 0]);
-
-  // Metric updates tied to scroll
-  const reachVal = useTransform(smoothProgress, [0.0, 0.32], [18450, 1400000]);
-  const convVal = useTransform(smoothProgress, [0.0, 0.32], [1.4, 19.2]);
+  const reachVal = useTransform(p, [0.1, 0.8], [18450, 1400000]);
+  const convVal  = useTransform(p, [0.1, 0.8], [1.4, 19.2]);
 
   return (
-    <section id="showcase" ref={containerRef} className="relative h-[280vh] bg-transparent">
-      <div className="sticky top-0 h-screen w-full flex flex-col justify-center items-center overflow-hidden">
+    <section id="showcase" ref={containerRef} className="relative min-h-[110vh] py-12 sm:py-20 bg-transparent flex flex-col justify-center items-center overflow-hidden">
+      <div className="relative w-full h-[620px] sm:h-[680px] flex flex-col justify-center items-center overflow-hidden">
         {/* Soft Radial Gradients (Optimized with radial gradients, no filters) */}
         <div className="absolute inset-0 opacity-45 pointer-events-none">
           <div 
@@ -243,11 +240,10 @@ export default function ScrollTimelineShowcase() {
             rotateX,
             opacity: dashOpacity,
             transformStyle: "preserve-3d",
-            perspective: 1000,
             willChange: "transform, opacity",
             zIndex: isHovered ? 50 : 20
           }}
-          className="relative w-[90%] max-w-[850px] h-[370px] sm:h-[460px] md:h-[520px] rounded-3xl bg-white shadow-[0_30px_100px_rgba(0,0,0,0.08)] border border-slate-200 p-3 sm:p-5 flex flex-col transition-shadow duration-300 hover:shadow-[0_45px_120px_rgba(110,1,156,0.15)]"
+          className="relative w-[92%] max-w-[760px] h-[240px] sm:h-[290px] md:h-[320px] rounded-3xl bg-white shadow-[0_30px_100px_rgba(0,0,0,0.08)] border border-slate-200 p-3 sm:p-4 flex flex-col transition-shadow duration-300 hover:shadow-[0_45px_120px_rgba(110,1,156,0.15)]"
         >
 
           {/* Mock Browser Topbar */}
@@ -301,28 +297,7 @@ export default function ScrollTimelineShowcase() {
                   <span>LIVE TRAFFIC FLOW</span>
                   <span className="text-brand-vibrant hidden sm:inline">SCROLL DOWN TO PROGRESS</span>
                 </div>
-                <div className="flex-1 flex items-end justify-between gap-1 sm:gap-1.5 mt-3 sm:mt-5">
-                  {[40, 65, 50, 80, 70, 95, 120, 105, 140, 160, 185, 220].map((val, idx) => {
-                    const barProgress = idx / 12;
-                    const scaleY = useTransform(
-                      scrollYProgress,
-                      [barProgress * 0.45, barProgress * 0.45 + 0.35],
-                      [0.05, 1]
-                    );
-                    return (
-                      <div key={idx} className="flex-1 bg-indigo-50 rounded-t-md flex items-end h-full">
-                        <motion.div
-                          style={{
-                            scaleY,
-                            originY: 1,
-                            height: `${(val / 220) * 100}%`
-                          }}
-                          className="w-full bg-gradient-to-t from-brand-vibrant via-brand-medium to-brand-dark rounded-t-md shadow-sm"
-                        />
-                      </div>
-                    );
-                  })}
-                </div>
+                <DashboardBars progress={p} />
               </div>
             </div>
           </div>
@@ -601,22 +576,22 @@ export default function ScrollTimelineShowcase() {
           </motion.div>
         </div>
 
-        {/* Single Active Caption Overlay - Zero Overlapping Guaranteed */}
-        <div className="absolute top-20 sm:top-28 left-0 w-full text-center z-40 pointer-events-none px-4 sm:px-6 flex justify-center">
+        {/* Single Active Caption Overlay - Placed above the Analytical Board UI */}
+        <div className="absolute top-14 sm:top-16 left-0 w-full text-center z-40 pointer-events-none px-4 sm:px-6 flex justify-center">
           <AnimatePresence mode="wait">
             {currentStep >= 0 && (
               <motion.div
                 key={currentStep}
-                initial={{ opacity: 0, y: 10 }}
+                initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
+                exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.22, ease: "easeOut" }}
                 className="w-full max-w-md"
               >
-                <h3 className="text-xl sm:text-2xl md:text-3xl font-serif font-black text-slate-900 tracking-tight">
+                <h3 className="text-base sm:text-xl md:text-2xl font-serif font-black text-slate-900 tracking-tight">
                   {CAPTIONS[currentStep].title}
                 </h3>
-                <p className="text-slate-500 max-w-md mx-auto mt-1.5 sm:mt-2 text-xs sm:text-sm leading-relaxed px-2">
+                <p className="text-slate-500 max-w-md mx-auto mt-1 text-xs sm:text-sm leading-relaxed px-2 hidden sm:block">
                   {CAPTIONS[currentStep].desc}
                 </p>
               </motion.div>

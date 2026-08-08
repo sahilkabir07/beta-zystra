@@ -159,7 +159,7 @@ export default function Services() {
               transition={{ duration: 0.4, delay: i * 0.06 }}
               className="snap-center min-w-[265px] max-w-[285px] w-full flex-shrink-0 md:min-w-0 md:max-w-none md:flex-shrink"
             >
-              <Link href={s.link} className="w-full block">
+              <Link href="/services" className="w-full block">
                 <motion.div
                   initial="initial"
                   whileHover="hover"

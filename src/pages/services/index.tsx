@@ -23,13 +23,14 @@ export default function ServicesPage() {
   // Initialize Lenis smooth scroll
   useEffect(() => {
     document.documentElement.classList.remove("dark");
+    const isTouch = typeof window !== "undefined" && ("ontouchstart" in window || navigator.maxTouchPoints > 0);
 
     const lenis = new Lenis({
       duration: 1.1,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
       wheelMultiplier: 1.15,
-      touchMultiplier: 1.4,
+      touchMultiplier: isTouch ? 0 : 1.0,
     });
 
     let rafId: number;
@@ -120,14 +121,13 @@ export default function ServicesPage() {
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-[#7059f6]/15 rounded-full blur-[160px] pointer-events-none" />
 
             {/* Main Interactive Canvas with Dual Spinning Circular Text Rings */}
-            <div className="relative w-full max-w-5xl flex-1 flex items-center justify-between gap-4 px-2 sm:px-6">
+            <div className="relative w-full max-w-5xl flex-1 flex flex-col md:flex-row items-center justify-between gap-6 md:gap-4 px-2 sm:px-6 py-4">
 
-              {/* ── LEFT SPINNING CIRCULAR TEXT-PATH RING WITH "WE HAVE" IN CENTER ── */}
-              <div className="relative z-30 hidden md:flex items-center justify-center">
-                <motion.div
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
-                  className="w-56 h-56 lg:w-72 lg:h-72 flex items-center justify-center transform-gpu"
+              {/* ── LEFT SPINNING CIRCULAR TEXT-PATH RING WITH "WE HAVE" IN CENTER (GPU CSS) ── */}
+              <div className="relative z-30 flex items-center justify-center">
+                <div
+                  style={{ animation: "spin 12s linear infinite" }}
+                  className="w-44 h-44 sm:w-56 sm:h-56 lg:w-72 lg:h-72 flex items-center justify-center transform-gpu"
                 >
                   <svg className="w-full h-full drop-shadow-[0_0_18px_rgba(168,85,247,0.45)]" viewBox="0 0 200 200">
                     <path
@@ -143,37 +143,35 @@ export default function ServicesPage() {
                       </textPath>
                     </text>
                   </svg>
-                </motion.div>
+                </div>
                 {/* Static Glowing Center Title (Bigger Stacked 2 Lines) */}
                 <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none leading-tight gap-0.5">
-                  <span className="text-2xl sm:text-3xl lg:text-4xl font-sans font-[900] uppercase tracking-[0.15em] text-white drop-shadow-[0_0_25px_rgba(168,85,247,1)]">
+                  <span className="text-xl sm:text-3xl lg:text-4xl font-sans font-[900] uppercase tracking-[0.15em] text-white drop-shadow-[0_0_25px_rgba(168,85,247,1)]">
                     WE
                   </span>
-                  <span className="text-2xl sm:text-3xl lg:text-4xl font-sans font-[900] uppercase tracking-[0.15em] text-white drop-shadow-[0_0_25px_rgba(168,85,247,1)]">
+                  <span className="text-xl sm:text-3xl lg:text-4xl font-sans font-[900] uppercase tracking-[0.15em] text-white drop-shadow-[0_0_25px_rgba(168,85,247,1)]">
                     HAVE
                   </span>
                 </div>
               </div>
 
-              {/* CENTER 3D SHARPENER IMAGE GRAPHIC */}
-              <motion.div
-                animate={{ y: [0, -8, 0] }}
-                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                className="relative z-20 flex-1 max-w-[380px] sm:max-w-[440px] lg:max-w-[480px] flex justify-center mx-auto"
+              {/* CENTER 3D SHARPENER IMAGE GRAPHIC (GPU CSS) */}
+              <div
+                style={{ animation: "heroFloat1 6s ease-in-out infinite" }}
+                className="relative z-20 flex-1 max-w-[280px] sm:max-w-[440px] lg:max-w-[480px] flex justify-center mx-auto"
               >
                 <img
                   src="/services-bottom-image.webp"
                   alt="Built for Every Industry — Proven Across Many"
-                  className="w-full h-auto max-h-[440px] sm:max-h-[500px] object-contain filter drop-shadow-[0_30px_70px_rgba(112,89,246,0.55)] transform-gpu rounded-3xl"
+                  className="w-full h-auto max-h-[360px] sm:max-h-[500px] object-contain filter drop-shadow-[0_30px_70px_rgba(112,89,246,0.55)] transform-gpu rounded-3xl"
                 />
-              </motion.div>
+              </div>
 
-              {/* ── RIGHT SPINNING CIRCULAR TEXT-PATH RING WITH "WORKED WITH" IN CENTER ── */}
-              <div className="relative z-30 hidden md:flex items-center justify-center">
-                <motion.div
-                  animate={{ rotate: -360 }}
-                  transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
-                  className="w-56 h-56 lg:w-72 lg:h-72 flex items-center justify-center transform-gpu"
+              {/* ── RIGHT SPINNING CIRCULAR TEXT-PATH RING WITH "WORKED WITH" IN CENTER (GPU CSS) ── */}
+              <div className="relative z-30 flex items-center justify-center">
+                <div
+                  style={{ animation: "spin 12s linear infinite reverse" }}
+                  className="w-44 h-44 sm:w-56 sm:h-56 lg:w-72 lg:h-72 flex items-center justify-center transform-gpu"
                 >
                   <svg className="w-full h-full drop-shadow-[0_0_18px_rgba(168,85,247,0.45)]" viewBox="0 0 200 200">
                     <path
@@ -189,13 +187,13 @@ export default function ServicesPage() {
                       </textPath>
                     </text>
                   </svg>
-                </motion.div>
+                </div>
                 {/* Static Glowing Center Title (Bigger Stacked 2 Lines) */}
                 <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none leading-tight gap-0.5">
-                  <span className="text-xl sm:text-2xl lg:text-3xl font-sans font-[900] uppercase tracking-[0.15em] text-white drop-shadow-[0_0_25px_rgba(168,85,247,1)]">
+                  <span className="text-lg sm:text-2xl lg:text-3xl font-sans font-[900] uppercase tracking-[0.15em] text-white drop-shadow-[0_0_25px_rgba(168,85,247,1)]">
                     WORKED
                   </span>
-                  <span className="text-xl sm:text-2xl lg:text-3xl font-sans font-[900] uppercase tracking-[0.15em] text-white drop-shadow-[0_0_25px_rgba(168,85,247,1)]">
+                  <span className="text-lg sm:text-2xl lg:text-3xl font-sans font-[900] uppercase tracking-[0.15em] text-white drop-shadow-[0_0_25px_rgba(168,85,247,1)]">
                     WITH
                   </span>
                 </div>

@@ -246,35 +246,35 @@ export default function UnifiedEcosystem() {
           </AnimatePresence>
         </div>
 
-        {/* 2. COMPACT 3D MECHANICAL KEYCAPS GRID (FIT IN ONE FRAME) */}
-        <div className="flex flex-col gap-3 max-w-5xl mx-auto w-full">
+        {/* 2. COMPACT 3D MECHANICAL KEYCAPS HOUSING BED (100% IN-FRAME MOBILE & WEB KEYBOARD) */}
+        <div className="flex flex-col gap-2 sm:gap-3 max-w-5xl mx-auto w-full">
           
           {/* ROW 1: F1 - F5 KEYS */}
-          <div className="grid grid-cols-2 sm:grid-cols-5 gap-2.5">
+          <div className="grid grid-cols-5 gap-1 sm:gap-2.5 w-full">
             {serviceKeys.slice(0, 5).map((service) => {
               const isActive = activeKeyId === service.id;
               const IconComp = service.icon;
               return (
-                <div key={service.id} className="p-[2px] bg-[#07080b] rounded-xl shadow-inner">
+                <div key={service.id} className="p-[1px] sm:p-[2px] bg-[#07080b] rounded-lg sm:rounded-xl shadow-inner">
                   <button
                     onClick={() => setActiveKeyId(service.id)}
-                    className={`w-full group relative rounded-lg p-2.5 transition-all duration-75 flex flex-col justify-between text-left cursor-pointer outline-none select-none ${
+                    className={`w-full group relative rounded-md sm:rounded-lg p-1 sm:p-2.5 transition-all duration-75 flex flex-col justify-between text-left cursor-pointer outline-none select-none ${
                       isActive
-                        ? "translate-y-[3px] bg-gradient-to-b from-[#6e019c] to-[#4c016c] text-white border-t border-t-purple-300 border-b border-b-[#2a013d] shadow-[inset_0_2px_4px_rgba(0,0,0,0.6)]"
-                        : "bg-gradient-to-b from-[#242738] via-[#1d1f2d] to-[#151722] hover:from-[#2a2e42] text-slate-200 border-t border-t-slate-400/30 border-b-[4px] border-b-[#08090c] border-x border-x-slate-700/30 shadow-sm active:translate-y-[3px] active:border-b"
+                        ? "translate-y-[2px] sm:translate-y-[3px] bg-gradient-to-b from-[#6e019c] to-[#4c016c] text-white border-t border-t-purple-300 border-b border-b-[#2a013d] shadow-[inset_0_2px_4px_rgba(0,0,0,0.6)]"
+                        : "bg-gradient-to-b from-[#242738] via-[#1d1f2d] to-[#151722] hover:from-[#2a2e42] text-slate-200 border-t border-t-slate-400/30 border-b-[3px] sm:border-b-[4px] border-b-[#08090c] border-x border-x-slate-700/30 shadow-sm active:translate-y-[2px] active:border-b"
                     }`}
-                    style={{ minHeight: "72px" }}
+                    style={{ minHeight: "52px" }}
                   >
                     <div className="flex items-center justify-between w-full mb-0.5">
-                      <span className={`text-[9px] font-mono font-black px-1.5 py-0.5 rounded ${
+                      <span className={`text-[7px] sm:text-[9px] font-mono font-black px-1 py-0.2 rounded ${
                         isActive ? "bg-white/20 text-white" : "bg-black/50 text-purple-300 border border-white/5"
                       }`}>
                         {service.keyLegend}
                       </span>
-                      <IconComp className={`w-3.5 h-3.5 ${isActive ? "text-white" : "text-slate-400 group-hover:text-purple-300"}`} />
+                      <IconComp className={`w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 ${isActive ? "text-white" : "text-slate-400 group-hover:text-purple-300"}`} />
                     </div>
 
-                    <span className="text-[11px] font-mono font-bold uppercase tracking-tight leading-tight truncate">
+                    <span className="text-[7.5px] sm:text-[10.5px] font-mono font-bold uppercase tracking-tighter sm:tracking-tight leading-tight truncate">
                       {service.shortLabel}
                     </span>
                   </button>
@@ -284,31 +284,31 @@ export default function UnifiedEcosystem() {
           </div>
 
           {/* ROW 2: TAB - FN KEYS */}
-          <div className="grid grid-cols-2 sm:grid-cols-6 gap-2.5">
+          <div className="grid grid-cols-6 gap-1 sm:gap-2.5 w-full">
             {serviceKeys.slice(5, 11).map((service) => {
               const isActive = activeKeyId === service.id;
               const IconComp = service.icon;
               return (
-                <div key={service.id} className="p-[2px] bg-[#07080b] rounded-xl shadow-inner">
+                <div key={service.id} className="p-[1px] sm:p-[2px] bg-[#07080b] rounded-lg sm:rounded-xl shadow-inner">
                   <button
                     onClick={() => setActiveKeyId(service.id)}
-                    className={`w-full group relative rounded-lg p-2.5 transition-all duration-75 flex flex-col justify-between text-left cursor-pointer outline-none select-none ${
+                    className={`w-full group relative rounded-md sm:rounded-lg p-1 sm:p-2.5 transition-all duration-75 flex flex-col justify-between text-left cursor-pointer outline-none select-none ${
                       isActive
-                        ? "translate-y-[3px] bg-gradient-to-b from-[#6e019c] to-[#4c016c] text-white border-t border-t-purple-300 border-b border-b-[#2a013d] shadow-[inset_0_2px_4px_rgba(0,0,0,0.6)]"
-                        : "bg-gradient-to-b from-[#242738] via-[#1d1f2d] to-[#151722] hover:from-[#2a2e42] text-slate-200 border-t border-t-slate-400/30 border-b-[4px] border-b-[#08090c] border-x border-x-slate-700/30 shadow-sm active:translate-y-[3px] active:border-b"
+                        ? "translate-y-[2px] sm:translate-y-[3px] bg-gradient-to-b from-[#6e019c] to-[#4c016c] text-white border-t border-t-purple-300 border-b border-b-[#2a013d] shadow-[inset_0_2px_4px_rgba(0,0,0,0.6)]"
+                        : "bg-gradient-to-b from-[#242738] via-[#1d1f2d] to-[#151722] hover:from-[#2a2e42] text-slate-200 border-t border-t-slate-400/30 border-b-[3px] sm:border-b-[4px] border-b-[#08090c] border-x border-x-slate-700/30 shadow-sm active:translate-y-[2px] active:border-b"
                     }`}
-                    style={{ minHeight: "72px" }}
+                    style={{ minHeight: "52px" }}
                   >
                     <div className="flex items-center justify-between w-full mb-0.5">
-                      <span className={`text-[9px] font-mono font-black px-1.5 py-0.5 rounded ${
+                      <span className={`text-[7px] sm:text-[9px] font-mono font-black px-1 py-0.2 rounded ${
                         isActive ? "bg-white/20 text-white" : "bg-black/50 text-purple-300 border border-white/5"
                       }`}>
                         {service.keyLegend}
                       </span>
-                      <IconComp className={`w-3.5 h-3.5 ${isActive ? "text-white" : "text-slate-400 group-hover:text-purple-300"}`} />
+                      <IconComp className={`w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 ${isActive ? "text-white" : "text-slate-400 group-hover:text-purple-300"}`} />
                     </div>
 
-                    <span className="text-[11px] font-mono font-bold uppercase tracking-tight leading-tight truncate">
+                    <span className="text-[7.5px] sm:text-[10.5px] font-mono font-bold uppercase tracking-tighter sm:tracking-tight leading-tight truncate">
                       {service.shortLabel}
                     </span>
                   </button>
@@ -318,33 +318,33 @@ export default function UnifiedEcosystem() {
           </div>
 
           {/* ROW 3: COMPACT MECHANICAL SPACEBAR KEYCAP */}
-          <div className="pt-1">
-            <div className="p-[2px] bg-[#07080b] rounded-xl shadow-inner">
+          <div className="pt-0.5 sm:pt-1 w-full">
+            <div className="p-[1px] sm:p-[2px] bg-[#07080b] rounded-lg sm:rounded-xl shadow-inner">
               <button
                 onClick={() => setActiveKeyId("COMMAND_ZYSTRA")}
-                className={`w-full group relative rounded-lg h-12 sm:h-13 px-5 sm:px-8 transition-all duration-75 flex items-center justify-between cursor-pointer outline-none select-none ${
+                className={`w-full group relative rounded-md sm:rounded-lg h-9 sm:h-13 px-2 sm:px-8 transition-all duration-75 flex items-center justify-between cursor-pointer outline-none select-none ${
                   activeKeyId === "COMMAND_ZYSTRA"
-                    ? "translate-y-[3px] bg-gradient-to-r from-[#6e019c] via-[#561d9a] to-[#450163] text-white border-t border-t-purple-300 border-b border-b-[#240134] shadow-[inset_0_2px_4px_rgba(0,0,0,0.6)]"
-                    : "bg-gradient-to-r from-[#2c134d] via-[#210c3d] to-[#17072c] hover:from-[#36185f] text-white border-t border-t-purple-400/40 border-b-[4px] border-b-[#0b0317] border-x border-x-purple-500/20 shadow-sm active:translate-y-[3px] active:border-b"
+                    ? "translate-y-[2px] sm:translate-y-[3px] bg-gradient-to-r from-[#6e019c] via-[#561d9a] to-[#450163] text-white border-t border-t-purple-300 border-b border-b-[#240134] shadow-[inset_0_2px_4px_rgba(0,0,0,0.6)]"
+                    : "bg-gradient-to-r from-[#2c134d] via-[#210c3d] to-[#17072c] hover:from-[#36185f] text-white border-t border-t-purple-400/40 border-b-[3px] sm:border-b-[4px] border-b-[#0b0317] border-x border-x-purple-500/20 shadow-sm active:translate-y-[2px] active:border-b"
                 }`}
               >
-                <div className="flex items-center gap-2">
-                  <span className="w-2 h-1 bg-purple-400/50 rounded-sm" />
-                  <span className="text-[10px] font-mono font-black tracking-widest px-2 py-0.5 rounded bg-black/50 border border-white/10 text-purple-300">
+                <div className="flex items-center gap-1 sm:gap-2">
+                  <span className="w-1 sm:w-2 h-1 bg-purple-400/50 rounded-sm" />
+                  <span className="text-[7.5px] sm:text-[9.5px] font-mono font-black tracking-widest px-1 sm:px-2 py-0.5 rounded bg-black/50 border border-white/10 text-purple-300">
                     ⌘ SPACEBAR
                   </span>
                 </div>
 
-                <span className="hidden md:block font-mono text-[11px] font-black uppercase tracking-[0.2em] text-white text-center">
+                <span className="font-mono text-[7.5px] sm:text-[10.5px] font-black uppercase tracking-wider text-white text-center truncate px-1">
                   ZYSTRA UNIFIED FULL-STACK ECOSYSTEM
                 </span>
 
-                <div className="flex items-center gap-2">
-                  <span className="text-[11px] font-mono font-bold text-purple-200 hidden sm:inline uppercase">
+                <div className="flex items-center gap-1 sm:gap-2">
+                  <span className="text-[8px] sm:text-[10.5px] font-mono font-bold text-purple-200 hidden sm:inline uppercase">
                     FULL ECOSYSTEM
                   </span>
-                  <ArrowRight className="w-3.5 h-3.5 text-purple-300 group-hover:translate-x-1 transition-transform" />
-                  <span className="w-2 h-1 bg-purple-400/50 rounded-sm" />
+                  <ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-purple-300 group-hover:translate-x-1 transition-transform" />
+                  <span className="w-1 sm:w-2 h-1 bg-purple-400/50 rounded-sm" />
                 </div>
               </button>
             </div>

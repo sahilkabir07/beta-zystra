@@ -1,6 +1,189 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { Sparkles } from "lucide-react";
+
+function ServicesHeroInteractiveBg() {
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+
+  useEffect(() => {
+    const isMobile = window.innerWidth < 768 || ("ontouchstart" in window && navigator.maxTouchPoints > 0);
+    if (isMobile) return;
+
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    let animationFrameId: number;
+    let isVisible = true;
+    let parent = canvas.parentElement;
+    let width = (canvas.width = parent?.offsetWidth || window.innerWidth);
+    let height = (canvas.height = parent?.offsetHeight || window.innerHeight);
+
+    // Pause when offscreen for 120 FPS performance
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          isVisible = entry.isIntersecting;
+          if (isVisible && !animationFrameId) {
+            animationFrameId = requestAnimationFrame(render);
+          }
+        });
+      },
+      { threshold: 0.05 }
+    );
+    observer.observe(canvas);
+
+    const handleResize = () => {
+      if (!canvas || !canvas.parentElement) return;
+      width = canvas.width = canvas.parentElement.offsetWidth;
+      height = canvas.height = canvas.parentElement.offsetHeight;
+      initGrid();
+    };
+    window.addEventListener("resize", handleResize);
+
+    const mouse = { x: -1000, y: -1000, active: false };
+
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!canvas) return;
+      const rect = canvas.getBoundingClientRect();
+      const mouseX = e.clientX - rect.left;
+      const mouseY = e.clientY - rect.top;
+
+      if (mouseX >= 0 && mouseX <= rect.width && mouseY >= 0 && mouseY <= rect.height) {
+        mouse.x = mouseX;
+        mouse.y = mouseY;
+        mouse.active = true;
+      } else {
+        mouse.active = false;
+      }
+    };
+
+    const handleMouseLeave = () => {
+      mouse.active = false;
+    };
+
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    window.addEventListener("mouseleave", handleMouseLeave);
+
+    const spacing = 26;
+    interface Node {
+      baseX: number;
+      baseY: number;
+      x: number;
+      y: number;
+      radius: number;
+      alpha: number;
+      isAccent: boolean;
+    }
+
+    let grid: Node[] = [];
+
+    const initGrid = () => {
+      grid = [];
+      const cols = Math.ceil(width / spacing) + 1;
+      const rows = Math.ceil(height / spacing) + 1;
+
+      for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+          const baseX = c * spacing;
+          const baseY = r * spacing;
+          grid.push({
+            baseX,
+            baseY,
+            x: baseX,
+            y: baseY,
+            radius: 1.2,
+            alpha: 0.25,
+            isAccent: (r * cols + c) % 17 === 0,
+          });
+        }
+      }
+    };
+
+    initGrid();
+
+    const startTime = performance.now();
+
+    const render = (now: number) => {
+      if (!isVisible) {
+        animationFrameId = 0;
+        return;
+      }
+
+      const elapsed = now - startTime;
+      ctx.clearRect(0, 0, width, height);
+
+      const maxDist = 220;
+
+      for (let i = 0; i < grid.length; i++) {
+        const node = grid[i];
+
+        // 1. Subtle Sine Wave Drift
+        const waveY = Math.sin(elapsed * 0.0018 + node.baseX * 0.01 + node.baseY * 0.01) * 3;
+        let targetX = node.baseX;
+        let targetY = node.baseY + waveY;
+        let targetRadius = 1.2;
+        let targetAlpha = 0.25;
+
+        // 2. Interactive Cursor Radial Displacement & Glow Activation
+        if (mouse.active) {
+          const dx = mouse.x - node.baseX;
+          const dy = mouse.y - node.baseY;
+          const dist = Math.hypot(dx, dy);
+
+          if (dist < maxDist) {
+            const force = 1 - dist / maxDist;
+            const ripple = Math.sin(dist * 0.03 - elapsed * 0.005) * force * 24;
+            const angle = Math.atan2(dy, dx);
+
+            targetX -= Math.cos(angle) * (ripple + force * 16);
+            targetY -= Math.sin(angle) * (ripple + force * 16);
+            targetRadius = 1.2 + force * 2.8;
+            targetAlpha = 0.25 + force * 0.75;
+          }
+        }
+
+        // Smooth Lerp Physics
+        node.x += (targetX - node.x) * 0.08;
+        node.y += (targetY - node.y) * 0.08;
+        node.radius += (targetRadius - node.radius) * 0.1;
+        node.alpha += (targetAlpha - node.alpha) * 0.1;
+
+        // Render Node
+        if (node.isAccent) {
+          ctx.fillStyle = `rgba(217, 70, 239, ${node.alpha * 1.2})`;
+          ctx.font = `${Math.round(node.radius * 3 + 6)}px monospace`;
+          ctx.fillText("+", node.x - 3, node.y + 3);
+        } else {
+          ctx.fillStyle = `rgba(168, 85, 247, ${node.alpha})`;
+          ctx.beginPath();
+          ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+
+      animationFrameId = requestAnimationFrame(render);
+    };
+
+    animationFrameId = requestAnimationFrame(render);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseleave", handleMouseLeave);
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
+    };
+  }, []);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      className="absolute inset-0 w-full h-full pointer-events-none z-0"
+    />
+  );
+}
 
 export default function ServicesHero() {
 
@@ -22,18 +205,12 @@ export default function ServicesHero() {
     <section className="relative w-full overflow-hidden select-none">
       {/* Outer Wrapper with height constrained to ONE FRAME */}
       <div className="relative min-h-[85vh] lg:min-h-[88vh] max-h-[960px] flex flex-col justify-between pt-16 sm:pt-20 pb-0 bg-[#090314] text-white">
-        {/* Ambient Glows & Grid Pattern using Zystra Brand Colors */}
+        {/* Ambient Glows & Interactive Grid Canvas using Zystra Brand Colors */}
         <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
           {/* Zystra Brand Colors: Dark Purple #33015a & Vibrant Purple #6e019c */}
           <div className="absolute -top-24 right-1/4 w-[600px] h-[600px] bg-[#6e019c]/35 rounded-full blur-[160px]" />
           <div className="absolute bottom-0 left-10 w-[500px] h-[500px] bg-[#33015a]/50 rounded-full blur-[140px]" />
-          <div 
-            className="absolute inset-0 opacity-25"
-            style={{
-              backgroundImage: "radial-gradient(#a855f7 1.2px, transparent 1.2px)",
-              backgroundSize: "26px 26px"
-            }}
-          />
+          <ServicesHeroInteractiveBg />
         </div>
 
         {/* Main Content Hero Canvas — FITS PROPERLY IN ONE FRAME */}

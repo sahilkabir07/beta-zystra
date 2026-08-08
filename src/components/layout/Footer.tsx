@@ -200,9 +200,9 @@ export default function Footer() {
                 <Phone className="w-4 h-4 text-purple-400 group-hover:scale-105 transition-transform shrink-0" />
                 <span>+91 6200048924</span>
               </a>
-              <a href="mailto:zystrawebtech@gmail.com" className="hover:text-white flex items-center gap-2.5 transition-colors group">
+              <a href="mailto:info@zystra.in" className="hover:text-white flex items-center gap-2.5 transition-colors group">
                 <Mail className="w-4 h-4 text-purple-400 group-hover:scale-105 transition-transform shrink-0" />
-                <span className="truncate">zystrawebtech@gmail.com</span>
+                <span className="truncate">info@zystra.in</span>
               </a>
               <div className="flex items-start gap-2.5 text-slate-400">
                 <MapPin className="w-4 h-4 text-purple-400 shrink-0 mt-0.5" />

@@ -172,7 +172,7 @@ export default function Industries() {
                     />
                   )}
                   {/* Base connecting line */}
-                  <motion.line
+                  <line
                     x1="500"
                     y1="375"
                     x2={card.x}
@@ -186,13 +186,8 @@ export default function Industries() {
                     }
                     strokeWidth={isHovered ? "3.5" : "2"}
                     strokeDasharray="6 6"
-                    animate={{
-                      strokeDashoffset: isFlowing ? [0, -24] : [0, 0]
-                    }}
-                    transition={{
-                      repeat: Infinity,
-                      ease: "linear",
-                      duration: isHovered ? 0.8 : isHubHovered ? 1.2 : 3
+                    style={{
+                      animation: isFlowing ? `industryFlow ${isHovered ? 0.8 : 2}s linear infinite` : "none"
                     }}
                   />
                 </g>
@@ -210,18 +205,10 @@ export default function Industries() {
             }}
             className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 sm:w-40 sm:h-40 lg:w-52 lg:h-52 rounded-full border-[3px] sm:border-[5px] lg:border-[6px] border-white shadow-[0_10px_35px_rgba(110,1,156,0.22)] bg-gradient-to-tr from-brand-dark via-brand-medium to-brand-vibrant flex flex-col items-center justify-center text-center p-2 sm:p-5 lg:p-6 text-white z-20 cursor-pointer select-none"
           >
-            {/* Animated Ripples */}
-            <motion.div
-              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-28 h-28 sm:w-44 sm:h-44 lg:w-56 lg:h-56 rounded-full bg-brand-vibrant/5 -z-10"
-              animate={{
-                scale: [1, 1.35],
-                opacity: [0.5, 0]
-              }}
-              transition={{
-                duration: 3,
-                repeat: Infinity,
-                ease: "easeOut"
-              }}
+            {/* Animated Ripples (GPU CSS) */}
+            <div
+              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-28 h-28 sm:w-44 sm:h-44 lg:w-56 lg:h-56 rounded-full bg-brand-vibrant/10 -z-10 animate-ping pointer-events-none"
+              style={{ animationDuration: "3s" }}
             />
 
             <Network className="w-4 h-4 sm:w-6 sm:h-6 lg:w-8 lg:h-8 mb-0.5 sm:mb-2 text-white/95 animate-pulse" />
@@ -311,6 +298,14 @@ export default function Industries() {
           })}
         </div>
       </div>
+      <style dangerouslySetInnerHTML={{
+        __html: `
+          @keyframes industryFlow {
+            0% { stroke-dashoffset: 0; }
+            100% { stroke-dashoffset: -24; }
+          }
+        `
+      }} />
     </section>
   );
 }

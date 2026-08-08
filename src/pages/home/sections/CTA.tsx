@@ -1,137 +1,141 @@
 import React from "react";
 import { Link } from "wouter";
 import { 
+  Search, 
   Phone, 
   ArrowRight, 
   ShieldCheck, 
   MapPin, 
-  Zap,
-  Instagram,
-  Facebook,
-  Linkedin,
-  Youtube,
-  Megaphone,
-  Send
+  Zap, 
+  Sparkles, 
+  Home as HomeIcon, 
+  Grid, 
+  Settings, 
+  User,
+  Rocket
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function CTA() {
   return (
-    <section id="contact" className="py-28 sm:py-36 bg-white relative overflow-hidden">
-      {styleBlock}
+    <section id="contact" className="py-20 sm:py-32 bg-[#09031a] relative overflow-hidden text-white">
+      {/* Decorative Lighting Flares */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-purple-600/10 rounded-full blur-[140px] pointer-events-none" />
 
-      {/* Outer Section Glow Blobs (Optimized with radial gradients, no performance-heavy blur filters) */}
-      <div 
-        className="absolute top-0 right-0 w-[500px] h-[500px] pointer-events-none -z-10 opacity-85"
-        style={{
-          background: "radial-gradient(circle, rgba(110, 1, 156, 0.06) 0%, rgba(110, 1, 156, 0) 70%)"
-        }}
-      />
-      <div 
-        className="absolute bottom-0 left-0 w-[500px] h-[500px] pointer-events-none -z-10 opacity-85"
-        style={{
-          background: "radial-gradient(circle, rgba(86, 29, 154, 0.06) 0%, rgba(86, 29, 154, 0) 70%)"
-        }}
-      />
-
-      <div className="container mx-auto px-6 max-w-5xl relative z-10">
-        {/* Asymmetrical Custom Liquid Card with native GPU hover transition (no JS Framer Motion runtime) */}
-        <div 
-          className="w-full rounded-[3.5rem_9rem_3.5rem_9rem] bg-gradient-to-tr from-brand-dark via-brand-medium to-brand-vibrant text-white p-10 sm:p-16 md:p-20 relative overflow-hidden shadow-[0_25px_60px_rgba(110,1,156,0.22)] border-4 border-white select-none group transition-transform duration-300 ease-out hover:-translate-y-1 will-change-transform"
-        >
+      <div className="container mx-auto px-4 sm:px-6 max-w-6xl relative z-10">
+        {/* ── 3D CLAYMORPHIC / NEUMORPHIC DASHBOARD CARD CONTAINER (Matches Screenshot 1 Layout) ── */}
+        <div className="w-full rounded-[36px] sm:rounded-[48px] bg-gradient-to-br from-[#4a398c] via-[#3a2979] to-[#26175e] p-6 sm:p-10 md:p-14 border-4 border-[#614fa8] shadow-[0_30px_90px_rgba(0,0,0,0.85)] relative overflow-hidden select-none">
           
-          {/* Internal Glowing Lighting Flares (Optimized with radial gradients, no filters) */}
-          <div 
-            className="absolute top-0 left-0 w-96 h-96 pointer-events-none"
-            style={{
-              background: "radial-gradient(circle, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0) 70%)",
-              transform: "translate(-50%, -50%)"
-            }}
-          />
-          <div 
-            className="absolute bottom-0 right-0 w-96 h-96 pointer-events-none"
-            style={{
-              background: "radial-gradient(circle, rgba(110, 1, 156, 0.45) 0%, rgba(110, 1, 156, 0) 70%)",
-              transform: "translate(33%, 33%)"
-            }}
-          />
-          
-          {/* High-performance Static Asymmetrical Outline Path */}
-          <div className="absolute inset-2 border border-dashed border-white/10 rounded-[3.1rem_8.6rem_3.1rem_8.6rem] pointer-events-none z-0 hidden sm:block" />
+          {/* Subtle Neumorphic Light Highlights */}
+          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-white/30 to-transparent pointer-events-none" />
 
-          {/* Floating Social Media & Marketing Background Elements - Pure GPU CSS Animations */}
-          <div className="absolute top-12 left-12 sm:left-16 text-white/5 group-hover:text-white/8 pointer-events-none z-0 transition-colors duration-300 animate-float-instagram">
-            <Instagram className="w-12 h-12 sm:w-16 sm:h-16" />
-          </div>
-          <div className="absolute bottom-16 left-8 sm:left-12 text-white/5 group-hover:text-white/8 pointer-events-none z-0 transition-colors duration-300 animate-float-facebook">
-            <Facebook className="w-10 h-10 sm:w-12 sm:h-12" />
-          </div>
-          <div className="absolute top-16 right-12 sm:right-20 text-white/5 group-hover:text-white/8 pointer-events-none z-0 transition-colors duration-300 animate-float-linkedin">
-            <Linkedin className="w-12 h-12 sm:w-16 sm:h-16" />
-          </div>
-          <div className="absolute bottom-20 right-8 sm:right-16 text-white/5 group-hover:text-white/8 pointer-events-none z-0 transition-colors duration-300 animate-float-youtube">
-            <Youtube className="w-12 h-12 sm:w-14 sm:h-14" />
-          </div>
-          <div className="absolute top-[35%] left-[25%] text-white/[0.03] pointer-events-none z-0 hidden md:block animate-float-megaphone">
-            <Megaphone className="w-8 h-8" />
-          </div>
-          <div className="absolute bottom-[30%] right-[25%] text-white/[0.03] pointer-events-none z-0 hidden md:block animate-float-send">
-            <Send className="w-8 h-8" />
-          </div>
+          {/* ── MAIN CONTENT GRID: Left Title + Right Floating Dark Card ── */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-10 mt-4 sm:mt-6">
+            
+            {/* Left Column: Display Headline & Action Pills */}
+            <div className="lg:col-span-6 flex flex-col justify-between">
+              <div>
+                <span className="inline-block text-[11px] sm:text-xs font-mono font-bold uppercase tracking-widest text-purple-300 mb-3">
+                  CHALLENGE UI · GROWTH ENGINE
+                </span>
+                
+                <h2 className="text-3xl sm:text-5xl font-serif font-black text-white tracking-tight leading-[1.12] mb-6">
+                  Ready to Escape the <br />
+                  <span className="bg-gradient-to-r from-purple-200 via-fuchsia-200 to-white bg-clip-text text-transparent">
+                    Digital Competition?
+                  </span>
+                </h2>
+              </div>
 
-          <div className="relative z-10 text-center max-w-3xl mx-auto">
-            {/* Title with theme-aligned Purple/White gradient */}
-            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-serif font-black text-white mb-6 tracking-tight leading-[1.1] select-text">
-              Ready to Escape the <br />
-              <span className="bg-gradient-to-r from-purple-300 via-purple-100 to-white bg-clip-text text-transparent">Digital Competition?</span>
-            </h2>
-
-            <p className="text-purple-100 text-sm sm:text-lg mb-10 max-w-xl mx-auto leading-relaxed font-normal select-text">
-              Whether you are a local business looking to dominate your city or a startup ready to scale nationally — Zystra has the strategy, technology, and team to make it happen. Let's build something remarkable together.
-            </p>
-
-            {/* Glowing Action Buttons */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md mx-auto">
-              <Link href="/contact" className="w-full sm:w-auto">
-                <Button 
-                  size="lg" 
-                  className="w-full sm:w-auto rounded-full h-14 px-8 bg-white text-brand-dark font-black hover:bg-slate-50 shadow-[0_8px_20px_rgba(255,255,255,0.2)] hover:shadow-[0_12px_28px_rgba(255,255,255,0.35)] transition-all duration-300 hover:scale-105 active:scale-95 flex items-center justify-center gap-2 border border-white/10" 
-                  data-testid="button-ignite"
+              {/* Bottom Action Button (CALL NOW Only) */}
+              <div className="flex items-center gap-3 mt-4">
+                <a
+                  href="https://wa.me/916200048924?text=Hi%20Zystra%20team,%20I'd%20like%20to%20connect%20with%20you."
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  Get Your Free Digital Audit
-                  <ArrowRight className="w-4 h-4 text-brand-dark" />
-                </Button>
-              </Link>
-              <a href="tel:+916200048924" className="w-full sm:w-auto">
-                <Button 
-                  size="lg" 
-                  variant="outline" 
-                  className="w-full sm:w-auto rounded-full h-14 px-8 border-white/20 hover:border-white text-white hover:bg-white/10 font-bold transition-all duration-300 hover:scale-105 active:scale-95 flex items-center justify-center gap-2"
-                >
-                  <Phone className="w-4 h-4" /> 
-                  Call: +91 6200048924
-                </Button>
-              </a>
+                  <Button className="rounded-full px-7 py-3 h-12 bg-[#25D366] hover:bg-[#20ba5a] text-white font-extrabold shadow-lg transition-transform duration-200 hover:scale-105 active:scale-95 text-xs sm:text-sm flex items-center gap-2">
+                    <Zap className="w-4 h-4 fill-current" />
+                    CALL NOW
+                  </Button>
+                </a>
+              </div>
             </div>
 
-            {/* Horizontal Trust Info Badges */}
-            <div className="mt-12 pt-8 border-t border-white/10 flex flex-wrap items-center justify-center gap-y-3 gap-x-6 sm:gap-x-8 text-[10px] sm:text-xs font-mono tracking-wider text-purple-200/90 select-none">
+            {/* Right Column: Floating Dark Raised Card with 3D Element Notch */}
+            <div className="lg:col-span-6 relative">
+              
+              {/* 3D Floating Rocket / Astronaut Element on Top-Right Corner */}
+              <div className="absolute -top-10 -right-4 sm:-top-12 sm:right-2 z-30 pointer-events-none animate-bounce" style={{ animationDuration: "3s" }}>
+                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-tr from-purple-500 to-fuchsia-400 p-3 shadow-[0_15px_35px_rgba(168,85,247,0.5)] border-2 border-white flex items-center justify-center rotate-12">
+                  <Rocket className="w-9 h-9 text-white drop-shadow-md" />
+                </div>
+              </div>
+
+              {/* Floating Dark Raised Card */}
+              <div className="w-full rounded-[28px] sm:rounded-[34px] bg-[#1a0f44] border-2 border-[#4c3993] p-6 sm:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.6)] relative z-20">
+                <div className="flex items-center gap-2 mb-4">
+                  <Sparkles className="w-4 h-4 text-purple-400" />
+                  <h3 className="text-xs sm:text-sm font-mono font-bold uppercase tracking-widest text-purple-200">
+                    ZYSTRA GROWTH SYSTEM...
+                  </h3>
+                </div>
+
+                <p className="text-slate-200 text-xs sm:text-sm leading-relaxed font-sans font-normal mb-6">
+                  Whether you are a local business looking to dominate your city or a startup ready to scale nationally — Zystra has the strategy, technology, and team to make it happen. Let's build something remarkable together.
+                </p>
+
+                {/* Internal Card Action Link */}
+                <Link href="/contact" className="inline-flex items-center gap-2 text-xs font-mono font-bold text-purple-300 hover:text-white transition-colors group">
+                  <span>START YOUR CAMPAIGN</span>
+                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </div>
+            </div>
+          </div>
+
+          {/* ── BOTTOM DOCK TOOLBAR (Matches Screenshot 1 Bottom Dock Icons) ── */}
+          <div className="pt-6 border-t border-[#524194] flex flex-wrap items-center justify-between gap-4">
+            
+            {/* Trust Tags */}
+            <div className="flex flex-wrap items-center gap-4 text-[10px] sm:text-xs font-mono text-purple-200/90">
               <span className="flex items-center gap-1.5">
                 <ShieldCheck className="w-3.5 h-3.5 text-purple-300" />
-                RESPONSE WITHIN 24 HOURS
+                RESPONSE WITHIN 24H
               </span>
-              <span className="hidden sm:inline text-white/30">•</span>
               <span className="flex items-center gap-1.5">
                 <MapPin className="w-3.5 h-3.5 text-purple-300" />
-                BASED IN PATNA, BIHAR
+                PATNA, BIHAR
               </span>
-              <span className="hidden sm:inline text-white/30">•</span>
               <span className="flex items-center gap-1.5">
                 <Zap className="w-3.5 h-3.5 text-purple-300" />
-                SERVING CLIENTS PAN-INDIA
+                PAN-INDIA
               </span>
             </div>
+
+            {/* Bottom Floating Icon Dock (Exact Match to Screenshot 1 Bottom Dock Icons) */}
+            <div className="flex items-center gap-2 p-1.5 rounded-2xl bg-[#221356] border border-[#524194] shadow-md">
+              <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="w-9 h-9 rounded-xl bg-[#39267a] hover:bg-purple-600 text-white flex items-center justify-center transition-colors">
+                <HomeIcon className="w-4 h-4" />
+              </button>
+              <Link href="/services">
+                <button className="w-9 h-9 rounded-xl bg-[#39267a] hover:bg-purple-600 text-white flex items-center justify-center transition-colors">
+                  <Grid className="w-4 h-4" />
+                </button>
+              </Link>
+              <Link href="/portfolio">
+                <button className="w-9 h-9 rounded-xl bg-[#39267a] hover:bg-purple-600 text-white flex items-center justify-center transition-colors">
+                  <Settings className="w-4 h-4" />
+                </button>
+              </Link>
+              <Link href="/contact">
+                <button className="w-9 h-9 rounded-xl bg-[#39267a] hover:bg-purple-600 text-white flex items-center justify-center transition-colors">
+                  <User className="w-4 h-4" />
+                </button>
+              </Link>
+            </div>
           </div>
+
         </div>
       </div>
     </section>
