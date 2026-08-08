@@ -30,8 +30,9 @@ export default function ServicesPage() {
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
       wheelMultiplier: 1.15,
-      touchMultiplier: isTouch ? 0 : 1.0,
+      touchMultiplier: 1.0,
     });
+    lenis.scrollTo(0, { immediate: true });
 
     let rafId: number;
     function raf(time: number) {

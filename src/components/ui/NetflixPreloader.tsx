@@ -2,10 +2,16 @@ import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function GeminiPreloader() {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(() => {
+    if (typeof window !== "undefined") {
+      return !sessionStorage.getItem("zystra_intro_shown");
+    }
+    return true;
+  });
   const [phase, setPhase] = useState<"ignite" | "morph" | "reveal" | "exit">("ignite");
 
   useEffect(() => {
+    if (!isLoading) return;
     // Fast, ultra-smooth luxury timeline (~1.5s total)
     const t1 = setTimeout(() => setPhase("morph"), 300);    // 0.30s: Fluid organic Star rotation
     const t2 = setTimeout(() => setPhase("reveal"), 800);   // 0.80s: Titanium ZYSTRA wordmark emerges
@@ -21,7 +27,7 @@ export default function GeminiPreloader() {
       clearTimeout(t3);
       clearTimeout(t4);
     };
-  }, []);
+  }, [isLoading]);
 
   const handleQuickSkip = () => {
     setPhase("exit");

@@ -333,11 +333,17 @@ export default function ContactPage() {
   useEffect(() => {
     document.documentElement.classList.add("dark");
     document.body.style.backgroundColor = "#090909";
+    
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+
     const lenis = new Lenis({ duration: 0.85, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), smoothWheel: true });
+    lenis.scrollTo(0, { immediate: true });
+
     let rafId: number;
     const raf = (time: number) => { lenis.raf(time); rafId = requestAnimationFrame(raf); };
     rafId = requestAnimationFrame(raf);
-    window.scrollTo(0, 0);
     return () => { cancelAnimationFrame(rafId); lenis.destroy(); };
   }, []);
 
