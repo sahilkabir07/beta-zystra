@@ -141,46 +141,42 @@ export default function Navbar() {
             </Link>
           </div>
 
-          {/* Interactive Morphing Hamburger Trigger Button */}
+          {/* Interactive Morphing Hamburger Trigger Button (GPU accelerated) */}
           <div className="flex items-center md:hidden">
             <button
               onClick={(e) => { e.stopPropagation(); setMobileMenuOpen(!mobileMenuOpen); }}
-              className="relative w-10 h-10 rounded-full bg-[#120b2e]/90 hover:bg-[#6e019c]/40 border border-purple-500/40 shadow-[0_0_20px_rgba(110,1,156,0.35)] text-white transition-all duration-200 active:scale-90 flex items-center justify-center cursor-pointer group"
+              className="relative w-10 h-10 rounded-full bg-[#120b2e]/95 border border-purple-500/40 shadow-[0_0_15px_rgba(110,1,156,0.3)] text-white active:scale-90 flex items-center justify-center cursor-pointer group touch-manipulation transform-gpu transition-transform duration-150"
               aria-label="Toggle Menu"
             >
               <div className="relative w-4.5 h-3.5 flex flex-col justify-between items-center transform-gpu">
-                <span className={`w-4.5 h-0.5 bg-white rounded-full transition-all duration-300 transform-gpu ${mobileMenuOpen ? "rotate-45 translate-y-[6px] bg-purple-300" : ""}`} />
-                <span className={`w-3.5 h-0.5 bg-purple-300 rounded-full transition-all duration-200 self-end ${mobileMenuOpen ? "opacity-0 translate-x-2" : "group-hover:w-4.5"}`} />
-                <span className={`w-4.5 h-0.5 bg-white rounded-full transition-all duration-300 transform-gpu ${mobileMenuOpen ? "-rotate-45 -translate-y-[6px] bg-purple-300" : ""}`} />
+                <span className={`w-4.5 h-0.5 bg-white rounded-full transition-transform duration-250 ease-out transform-gpu ${mobileMenuOpen ? "rotate-45 translate-y-[6px] bg-purple-300" : ""}`} />
+                <span className={`w-3.5 h-0.5 bg-purple-300 rounded-full transition-opacity duration-150 self-end ${mobileMenuOpen ? "opacity-0" : ""}`} />
+                <span className={`w-4.5 h-0.5 bg-white rounded-full transition-transform duration-250 ease-out transform-gpu ${mobileMenuOpen ? "-rotate-45 -translate-y-[6px] bg-purple-300" : ""}`} />
               </div>
             </button>
           </div>
         </div>
       </header>
 
-      {/* Super Smooth & Fast Mobile Menu Drawer Overlay */}
+      {/* Hardware-Accelerated 120fps Mobile Menu Drawer Overlay */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.18 }}
-            className="fixed inset-0 bg-black/75 backdrop-blur-xl z-50 flex justify-end"
+            transition={{ duration: 0.18, ease: "easeOut" }}
+            className="fixed inset-0 bg-black/65 z-50 flex justify-end touch-none"
             onClick={() => setMobileMenuOpen(false)}
           >
             <motion.div
               initial={{ x: "100%" }}
-              animate={{ x: 0 }}
+              animate={{ x: "0%" }}
               exit={{ x: "100%" }}
-              transition={{ type: "spring", damping: 32, stiffness: 420, mass: 0.7 }}
-              className="w-full max-w-[340px] sm:max-w-sm bg-[#09031a]/95 border-l border-purple-500/25 h-full shadow-[0_0_60px_rgba(0,0,0,0.9)] p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden select-none backdrop-blur-2xl"
+              transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+              className="w-full max-w-[320px] sm:max-w-sm bg-[#0c0624] border-l border-purple-500/30 h-full shadow-[-10px_0_40px_rgba(0,0,0,0.8)] p-6 sm:p-8 flex flex-col justify-between relative overflow-y-auto select-none transform-gpu will-change-transform"
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Background ambient glow inside sidebar */}
-              <div className="absolute -top-20 -right-20 w-64 h-64 bg-purple-600/20 rounded-full blur-3xl pointer-events-none" />
-              <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-violet-600/15 rounded-full blur-3xl pointer-events-none" />
-
               <div className="relative z-10">
                 {/* Header */}
                 <div className="flex items-center justify-between mb-8 pb-4 border-b border-white/10">
@@ -193,7 +189,7 @@ export default function Navbar() {
 
                   <button
                     onClick={() => setMobileMenuOpen(false)}
-                    className="w-8.5 h-8.5 rounded-full bg-white/10 hover:bg-purple-600/40 border border-white/15 flex items-center justify-center text-white/70 hover:text-white transition-all active:scale-90 cursor-pointer"
+                    className="w-8.5 h-8.5 rounded-full bg-white/10 active:bg-purple-600/40 border border-white/15 flex items-center justify-center text-white/80 active:scale-90 cursor-pointer touch-manipulation transition-transform"
                     aria-label="Close menu"
                   >
                     <X className="w-4 h-4" />
@@ -201,7 +197,7 @@ export default function Navbar() {
                 </div>
 
                 {/* Nav Links */}
-                <nav className="flex flex-col gap-2.5">
+                <nav className="flex flex-col gap-2">
                   {navItems.map((item, idx) => {
                     const isActive =
                       (item.label === "Services" && location === "/services") ||
@@ -212,62 +208,57 @@ export default function Navbar() {
                       (item.label === "Home" && location === "/");
 
                     return (
-                      <motion.div
-                        key={item.label}
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: idx * 0.025 + 0.04, duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                      >
+                      <div key={item.label}>
                         <Link
                           href={item.href}
                           onClick={() => setMobileMenuOpen(false)}
-                          className={`relative group flex items-center justify-between px-4 py-3 rounded-2xl transition-all duration-150 active:scale-[0.98] ${
+                          className={`relative flex items-center justify-between px-4 py-3 rounded-2xl transition-colors duration-100 active:scale-[0.98] touch-manipulation ${
                             isActive
-                              ? "bg-gradient-to-r from-purple-600/90 to-violet-600/90 text-white font-bold border border-purple-400/40 shadow-[0_4px_25px_rgba(110,1,156,0.5)]"
-                              : "text-slate-200 hover:text-white hover:bg-white/10 border border-transparent"
+                              ? "bg-gradient-to-r from-purple-600 to-violet-600 text-white font-bold border border-purple-400/40 shadow-[0_4px_20px_rgba(110,1,156,0.4)]"
+                              : "text-slate-200 active:bg-white/15 border border-transparent"
                           }`}
                         >
                           <div className="flex items-center gap-3">
-                            <span className={`text-[11px] font-mono font-bold ${isActive ? "text-purple-200" : "text-purple-400/60 group-hover:text-purple-300"}`}>
+                            <span className={`text-[11px] font-mono font-bold ${isActive ? "text-purple-200" : "text-purple-400/70"}`}>
                               0{idx + 1}
                             </span>
                             <span className="text-base font-bold tracking-wide font-sans">{item.label}</span>
                           </div>
-                          <ChevronRight className={`w-4 h-4 transition-transform group-hover:translate-x-1 ${isActive ? "text-white" : "text-white/40"}`} />
+                          <ChevronRight className={`w-4 h-4 ${isActive ? "text-white" : "text-white/40"}`} />
                         </Link>
-                      </motion.div>
+                      </div>
                     );
                   })}
                 </nav>
               </div>
 
               {/* Bottom Quick Contact & CTA Footer */}
-              <div className="relative z-10 pt-5 border-t border-white/10 flex flex-col gap-4">
+              <div className="relative z-10 pt-5 border-t border-white/10 flex flex-col gap-4 mt-auto">
                 <Link
                   href="/contact"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-purple-600 via-violet-600 to-purple-600 text-white font-bold text-sm tracking-wide text-center shadow-[0_0_25px_rgba(110,1,196,0.5)] active:scale-95 transition-all flex items-center justify-center gap-2"
+                  className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-purple-600 via-violet-600 to-purple-600 text-white font-bold text-sm tracking-wide text-center shadow-[0_0_25px_rgba(110,1,196,0.5)] active:scale-95 transition-transform flex items-center justify-center gap-2 touch-manipulation"
                 >
                   <span>Start Your Project</span>
                   <ArrowRight className="w-4 h-4" />
                 </Link>
 
                 <div className="flex items-center justify-between px-1 text-[11px] font-mono text-purple-300/80">
-                  <a href="mailto:info@zystra.in" className="hover:text-white transition-colors">info@zystra.in</a>
-                  <a href="tel:+916200048924" className="hover:text-white transition-colors">+91 62000 48924</a>
+                  <a href="mailto:info@zystra.in" className="active:text-white transition-colors">info@zystra.in</a>
+                  <a href="tel:+916200048924" className="active:text-white transition-colors">+91 62000 48924</a>
                 </div>
 
-                <div className="flex items-center justify-center gap-5 pt-1 text-white/50 border-t border-white/5">
-                  <a href="https://www.instagram.com/zystra_web_tech/" target="_blank" rel="noopener noreferrer" className="hover:text-pink-400 transition-colors p-1">
+                <div className="flex items-center justify-center gap-5 pt-1 text-white/60 border-t border-white/5">
+                  <a href="https://www.instagram.com/zystra_web_tech/" target="_blank" rel="noopener noreferrer" className="active:text-pink-400 p-1">
                     <Instagram className="w-4 h-4" />
                   </a>
-                  <a href="https://www.linkedin.com/company/zystra-webtech/" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition-colors p-1">
+                  <a href="https://www.linkedin.com/company/zystra-webtech/" target="_blank" rel="noopener noreferrer" className="active:text-blue-400 p-1">
                     <Linkedin className="w-4 h-4" />
                   </a>
-                  <a href="https://twitter.com/Zystra_Web_Tech" target="_blank" rel="noopener noreferrer" className="hover:text-sky-400 transition-colors p-1">
+                  <a href="https://twitter.com/Zystra_Web_Tech" target="_blank" rel="noopener noreferrer" className="active:text-sky-400 p-1">
                     <Twitter className="w-4 h-4" />
                   </a>
-                  <a href="https://www.facebook.com/profile.php?id=61571699426971" target="_blank" rel="noopener noreferrer" className="hover:text-blue-500 transition-colors p-1">
+                  <a href="https://www.facebook.com/profile.php?id=61571699426971" target="_blank" rel="noopener noreferrer" className="active:text-blue-500 p-1">
                     <Facebook className="w-4 h-4" />
                   </a>
                 </div>
