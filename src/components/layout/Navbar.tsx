@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link, useLocation } from "wouter";
-import { ChevronRight, ChevronDown, Menu } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { ChevronRight, ChevronDown, X, ArrowRight, Instagram, Linkedin, Twitter, Facebook } from "lucide-react";
 
 export default function Navbar() {
   const [location] = useLocation();
@@ -142,105 +141,137 @@ export default function Navbar() {
             </Link>
           </div>
 
+          {/* Interactive Morphing Hamburger Trigger Button */}
           <div className="flex items-center md:hidden">
             <button
-              onClick={(e) => { e.stopPropagation(); setMobileMenuOpen(true); }}
-              className="p-2 focus:outline-none rounded-full bg-slate-900 text-white hover:bg-[#6e019c] border border-purple-500/30 shadow-md transition-all duration-200 active:scale-95 flex items-center justify-center cursor-pointer"
+              onClick={(e) => { e.stopPropagation(); setMobileMenuOpen(!mobileMenuOpen); }}
+              className="relative w-10 h-10 rounded-full bg-[#120b2e]/90 hover:bg-[#6e019c]/40 border border-purple-500/40 shadow-[0_0_20px_rgba(110,1,156,0.35)] text-white transition-all duration-200 active:scale-90 flex items-center justify-center cursor-pointer group"
               aria-label="Toggle Menu"
             >
-              <Menu className="w-4 h-4 text-white" />
+              <div className="relative w-4.5 h-3.5 flex flex-col justify-between items-center transform-gpu">
+                <span className={`w-4.5 h-0.5 bg-white rounded-full transition-all duration-300 transform-gpu ${mobileMenuOpen ? "rotate-45 translate-y-[6px] bg-purple-300" : ""}`} />
+                <span className={`w-3.5 h-0.5 bg-purple-300 rounded-full transition-all duration-200 self-end ${mobileMenuOpen ? "opacity-0 translate-x-2" : "group-hover:w-4.5"}`} />
+                <span className={`w-4.5 h-0.5 bg-white rounded-full transition-all duration-300 transform-gpu ${mobileMenuOpen ? "-rotate-45 -translate-y-[6px] bg-purple-300" : ""}`} />
+              </div>
             </button>
           </div>
         </div>
       </header>
 
-      {/* Mobile Menu Drawer Overlay */}
+      {/* Super Smooth & Fast Mobile Menu Drawer Overlay */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-slate-900/40 backdrop-blur-md z-50 flex justify-end"
+            transition={{ duration: 0.18 }}
+            className="fixed inset-0 bg-black/75 backdrop-blur-xl z-50 flex justify-end"
             onClick={() => setMobileMenuOpen(false)}
           >
             <motion.div
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
-              transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="w-full max-w-sm bg-white h-full shadow-2xl p-6 flex flex-col justify-between"
+              transition={{ type: "spring", damping: 32, stiffness: 420, mass: 0.7 }}
+              className="w-full max-w-[340px] sm:max-w-sm bg-[#09031a]/95 border-l border-purple-500/25 h-full shadow-[0_0_60px_rgba(0,0,0,0.9)] p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden select-none backdrop-blur-2xl"
               onClick={(e) => e.stopPropagation()}
             >
-              <div>
-                <div className="flex items-center justify-between mb-12">
-                  <Link href="/" className="flex items-center gap-2" onClick={() => setMobileMenuOpen(false)}>
-                    <img src="/zystra-logo.jpg" alt="Zystra Logo" className="h-8 w-auto rounded" />
-                    <span className="text-xl font-bold tracking-tight text-slate-900 font-serif">
-                      ZYSTRA<span className="text-brand-medium">.</span>
+              {/* Background ambient glow inside sidebar */}
+              <div className="absolute -top-20 -right-20 w-64 h-64 bg-purple-600/20 rounded-full blur-3xl pointer-events-none" />
+              <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-violet-600/15 rounded-full blur-3xl pointer-events-none" />
+
+              <div className="relative z-10">
+                {/* Header */}
+                <div className="flex items-center justify-between mb-8 pb-4 border-b border-white/10">
+                  <Link href="/" className="flex items-center gap-2.5" onClick={() => setMobileMenuOpen(false)}>
+                    <img src="/zystra-logo.jpg" alt="Zystra Logo" className="h-8 w-auto rounded border border-purple-400/30" />
+                    <span className="text-xl font-bold tracking-tight text-white font-serif">
+                      ZYSTRA<span className="text-purple-400">.</span>
                     </span>
                   </Link>
+
                   <button
                     onClick={() => setMobileMenuOpen(false)}
-                    className="p-2 text-slate-500 hover:text-slate-900 border border-slate-100 rounded-full"
+                    className="w-8.5 h-8.5 rounded-full bg-white/10 hover:bg-purple-600/40 border border-white/15 flex items-center justify-center text-white/70 hover:text-white transition-all active:scale-90 cursor-pointer"
+                    aria-label="Close menu"
                   >
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                    </svg>
+                    <X className="w-4 h-4" />
                   </button>
                 </div>
 
-                <nav className="flex flex-col gap-5">
+                {/* Nav Links */}
+                <nav className="flex flex-col gap-2.5">
                   {navItems.map((item, idx) => {
-                     const isActive = 
-                       (item.label === "Services" && location === "/services") || 
-                       (item.label === "Innovation" && location === "/innovation") || 
-                       (item.label === "Portfolio" && location === "/portfolio") || 
-                       (item.label === "About" && location === "/about") || 
-                       (item.label === "Contact" && location === "/contact") || 
-                       (item.label === "Home" && location === "/");
-                    const linkClasses = `text-xl font-semibold transition-colors border-b border-slate-50 pb-2 flex justify-between items-center ${
-                      isActive ? "text-brand-vibrant" : "text-slate-950 hover:text-brand-vibrant"
-                    }`;
-
-                    if (item.isLink) {
-                      return (
-                        <motion.div
-                          key={item.label}
-                          initial={{ opacity: 0, x: 20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: idx * 0.05 }}
-                        >
-                          <Link
-                            href={item.href}
-                            onClick={() => setMobileMenuOpen(false)}
-                            className={linkClasses}
-                          >
-                            {item.label}
-                            <ChevronRight className="w-4 h-4 text-slate-350" />
-                          </Link>
-                        </motion.div>
-                      );
-                    }
+                    const isActive =
+                      (item.label === "Services" && location === "/services") ||
+                      (item.label === "Innovation" && location === "/innovation") ||
+                      (item.label === "Portfolio" && location === "/portfolio") ||
+                      (item.label === "About" && location === "/about") ||
+                      (item.label === "Contact" && location === "/contact") ||
+                      (item.label === "Home" && location === "/");
 
                     return (
-                      <motion.a
+                      <motion.div
                         key={item.label}
                         initial={{ opacity: 0, x: 20 }}
                         animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: idx * 0.05 }}
-                        href={item.href}
-                        onClick={() => setMobileMenuOpen(false)}
-                        className={linkClasses}
+                        transition={{ delay: idx * 0.025 + 0.04, duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
                       >
-                        {item.label}
-                        <ChevronRight className="w-4 h-4 text-slate-350" />
-                      </motion.a>
+                        <Link
+                          href={item.href}
+                          onClick={() => setMobileMenuOpen(false)}
+                          className={`relative group flex items-center justify-between px-4 py-3 rounded-2xl transition-all duration-150 active:scale-[0.98] ${
+                            isActive
+                              ? "bg-gradient-to-r from-purple-600/90 to-violet-600/90 text-white font-bold border border-purple-400/40 shadow-[0_4px_25px_rgba(110,1,156,0.5)]"
+                              : "text-slate-200 hover:text-white hover:bg-white/10 border border-transparent"
+                          }`}
+                        >
+                          <div className="flex items-center gap-3">
+                            <span className={`text-[11px] font-mono font-bold ${isActive ? "text-purple-200" : "text-purple-400/60 group-hover:text-purple-300"}`}>
+                              0{idx + 1}
+                            </span>
+                            <span className="text-base font-bold tracking-wide font-sans">{item.label}</span>
+                          </div>
+                          <ChevronRight className={`w-4 h-4 transition-transform group-hover:translate-x-1 ${isActive ? "text-white" : "text-white/40"}`} />
+                        </Link>
+                      </motion.div>
                     );
                   })}
                 </nav>
               </div>
 
+              {/* Bottom Quick Contact & CTA Footer */}
+              <div className="relative z-10 pt-5 border-t border-white/10 flex flex-col gap-4">
+                <Link
+                  href="/contact"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-purple-600 via-violet-600 to-purple-600 text-white font-bold text-sm tracking-wide text-center shadow-[0_0_25px_rgba(110,1,196,0.5)] active:scale-95 transition-all flex items-center justify-center gap-2"
+                >
+                  <span>Start Your Project</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+
+                <div className="flex items-center justify-between px-1 text-[11px] font-mono text-purple-300/80">
+                  <a href="mailto:info@zystra.in" className="hover:text-white transition-colors">info@zystra.in</a>
+                  <a href="tel:+916200048924" className="hover:text-white transition-colors">+91 62000 48924</a>
+                </div>
+
+                <div className="flex items-center justify-center gap-5 pt-1 text-white/50 border-t border-white/5">
+                  <a href="https://www.instagram.com/zystra_web_tech/" target="_blank" rel="noopener noreferrer" className="hover:text-pink-400 transition-colors p-1">
+                    <Instagram className="w-4 h-4" />
+                  </a>
+                  <a href="https://www.linkedin.com/company/zystra-webtech/" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition-colors p-1">
+                    <Linkedin className="w-4 h-4" />
+                  </a>
+                  <a href="https://twitter.com/Zystra_Web_Tech" target="_blank" rel="noopener noreferrer" className="hover:text-sky-400 transition-colors p-1">
+                    <Twitter className="w-4 h-4" />
+                  </a>
+                  <a href="https://www.facebook.com/profile.php?id=61571699426971" target="_blank" rel="noopener noreferrer" className="hover:text-blue-500 transition-colors p-1">
+                    <Facebook className="w-4 h-4" />
+                  </a>
+                </div>
+              </div>
             </motion.div>
           </motion.div>
         )}
